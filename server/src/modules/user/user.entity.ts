@@ -1,0 +1,75 @@
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  Index,
+  OneToOne,
+  BeforeInsert,
+  BeforeUpdate,
+} from 'typeorm';
+import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { IsEmail } from 'class-validator';
+import { UserProfile } from '../profile/profile.entity';
+import { Exclude } from 'class-transformer';
+import * as bcrypt from 'bcryptjs';
+
+@InputType('InputSignin', { isAbstract: true })
+@ObjectType()
+@Entity()
+export class User {
+  @Field(() => ID)
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Field((type) => String, { nullable: true })
+  @Column({ length: 30 })
+  username!: string;
+
+  @Field((type) => String)
+  @Exclude()
+  @Column({ length: 200 })
+  password!: string;
+
+  @Field((type) => String, { nullable: true })
+  @Index()
+  @IsEmail()
+  @Column({ length: 200, default: null })
+  email!: string;
+
+  @Field((type) => Boolean)
+  @Column({ default: false })
+  email_verified!: boolean;
+
+  @Field((type) => UserProfile, { nullable: true })
+  @OneToOne((type) => UserProfile, (profile) => profile.user)
+  profile?: UserProfile;
+
+  @Field((type) => Date)
+  @Column('timestampz')
+  @CreateDateColumn()
+  created_at!: Date;
+
+  @Field((type) => Date)
+  @Column('timestamptz')
+  @UpdateDateColumn()
+  updated_at!: Date;
+
+  static async comparePassword(PreEncryptionPassword, EncryptedPassword) {
+    return bcrypt.compareSync(PreEncryptionPassword, EncryptedPassword);
+  }
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword(): Promise<void> {
+    const salt = await bcrypt.genSalt();
+    if (!/^\$2a\$\d+\$/.test(this.password)) {
+      this.password = await bcrypt.hash(this.password, salt);
+    }
+  }
+
+  async checkPassword(plainPassword: string): Promise<boolean> {
+    return await bcrypt.compare(plainPassword, this.password);
+  }
+}
