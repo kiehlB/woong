@@ -10,6 +10,8 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Tag } from '../tag/tag.entity';
+import { Comments } from '../comment/comment.entity';
 
 @ObjectType()
 @Entity()
@@ -63,4 +65,13 @@ export class Post {
   @Column('timestamptz')
   @UpdateDateColumn()
   updated_at!: Date;
+
+  @Field((type) => [Tag], { nullable: true })
+  @ManyToMany(() => Tag, (tag) => tag.posts, { cascade: true })
+  @JoinTable()
+  tags!: Tag[];
+
+  @Field((type) => Comments)
+  @OneToMany((type) => Comments, (comment) => comment.post)
+  comment!: Comments[];
 }

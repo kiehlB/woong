@@ -46,4 +46,14 @@ export class PostResolver {
   findAllPost(): Promise<Post[]> {
     return this.postService.findAll();
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => CreatePostResponse)
+  async createPost(
+    @Args('input') post: CreatePostRequest,
+  ): Promise<CreatePostResponse> {
+    const saveProfile = await this.postService.createPost(post);
+
+    return saveProfile;
+  }
 }
