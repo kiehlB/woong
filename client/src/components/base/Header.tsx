@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import Sidebar from "./Sidebar";
 import HeaderMenuItems from "./HeaderMenuItem";
+import HeaderTopicItem from "./HeaderTopicItem";
 
 export type HeaderProps = {};
 
@@ -151,7 +152,7 @@ const MenuItems = [
 const HeaderTopicItems = [
   {
     id: 1,
-    titile: "React",
+    title: "React Js",
   },
   {
     id: 2,
@@ -236,10 +237,10 @@ function Header({}: HeaderProps) {
               </svg>
 
               <div className='absolute mt-5 '>
-                <div className='group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[10px] after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute '>
-                  <div className='grid grid-cols-2 p-4  '>
+                <div className='group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 '>
+                  <div className='grid grid-cols-2 p-4'>
                     {MenuItems.map((e) => (
-                      <div key={e.id} className=' '>
+                      <div key={e.id}>
                         <HeaderMenuItems {...e} />
                       </div>
                     ))}
@@ -248,19 +249,51 @@ function Header({}: HeaderProps) {
               </div>
             </div>
 
-            <div className=' mr-8 '>
-              <span className=''>See All Post</span>
+            <div className='mr-8'>
+              <div>
+                <a>
+                  <svg className='icon-arrow before'>
+                    <use xlinkHref='#arrow' />
+                  </svg>
+                  <span className='label'>See All Posts</span>
+                  <svg className='icon-arrow after'>
+                    <use xlinkHref='#arrow' />
+                  </svg>
+                </a>
+                <svg style={{ display: "none" }}>
+                  <defs>
+                    <symbol id='arrow' viewBox='0 0 35 15'>
+                      <title>Arrow</title>
+                      <path d='M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z ' />
+                    </symbol>
+                  </defs>
+                </svg>
+              </div>
             </div>
-            <div className='flex w-32 items-center'>
-              <div className='mr-3'>Topics</div>
-              <svg
-                viewBox='0 0 8 4'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='currentColor'
-                className='w-3 h-2'
-              >
-                <path d='M0.666672 0.666626L4 3.99996L7.33334 0.666626H0.666672Z' />
-              </svg>
+            <div className='w-32'>
+              <div className='group flex items-center'>
+                <div className='mr-2'>Topics</div>
+                <svg
+                  viewBox='0 0 8 4'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='currentColor'
+                  className='  w-3 h-2 '
+                >
+                  <path d='M0.666672 0.666626L4 3.99996L7.33334 0.666626H0.666672Z' />
+                </svg>
+
+                <div className='absolute mt-[20rem]   h-72'>
+                  <div className=' group-hover:block  hidden    relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[6px] after:absolute after:left-1.5 '>
+                    <div className='grid grid-cols-3  pl-4 pr-4 pt-6 mb-2'>
+                      {HeaderTopicItems.map((e) => (
+                        <div key={e.id}>
+                          <HeaderTopicItem {...e} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

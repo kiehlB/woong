@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export type MenuItemProps = {
+export type NavMenuItemProps = {
   id: any;
   text: any;
   icon: any;
@@ -25,7 +25,7 @@ const variants = {
 
 const colors = ["#fef6e4", "#f582ae", "#8bd3dd", "#b8c1ec", "#ff8906"];
 
-function MenuItem({ id, text, icon }: MenuItemProps) {
+function NavMenuItem({ id, text, icon }: NavMenuItemProps) {
   const style = { border: `3px solid ${colors[id]}` };
 
   return (
@@ -45,4 +45,4 @@ function MenuItem({ id, text, icon }: MenuItemProps) {
   );
 }
 
-export default MenuItem;
+export default NavMenuItem;

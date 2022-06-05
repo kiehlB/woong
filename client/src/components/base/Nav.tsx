@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import MenuItem from "./MenuItem";
+import NavMenuItem from "./NavMenuItem";
 
 export type NavigationProps = {};
 
@@ -24,7 +24,7 @@ function Navigation({}: NavigationProps) {
   return (
     <motion.ul variants={variants}>
       {Items.map((item) => (
-        <MenuItem
+        <NavMenuItem
           id={item.id}
           key={item.id}
           text={item.text}

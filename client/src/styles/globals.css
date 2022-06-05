@@ -11,6 +11,79 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+a {
+  border: 4px solid #fff;
+  color: #fff;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+
+  margin: auto;
+  padding: 12px 32px 12px 82px;
+  position: relative;
+  text-decoration: none;
+}
+
+a .label,
+a .icon-arrow {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  perspective: 1000;
+}
+
+a .label {
+  display: inline-block;
+  transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+a .icon-arrow {
+  fill: #fff;
+  height: 15px;
+  top: 17px;
+  transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1),
+    opacity 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+  width: 35px;
+}
+
+a .icon-arrow.before {
+  left: 32px;
+  margin-right: 15px;
+  position: absolute;
+  transform-origin: left center;
+}
+
+a .icon-arrow.after {
+  margin-left: 15px;
+  opacity: 0;
+  position: absolute;
+  right: 32px;
+  transform: translateX(75%) scaleX(0.1);
+  transform-origin: right center;
+}
+
+a:hover .label {
+  transform: translateX(-52px);
+}
+
+a:hover .icon-arrow.before {
+  opacity: 0;
+  transform: translateX(-75%) scaleX(0.1);
+}
+
+a:hover .icon-arrow.after {
+  opacity: 1;
+  transform: translateX(0) scaleX(1);
+}
+
+a:active {
+  border-color: #fd6154;
+  color: #fd6154;
+}
+
+a:active .icon-arrow {
+  fill: #fd6154;
+}
+
 nav {
   position: absolute;
   top: 0;
