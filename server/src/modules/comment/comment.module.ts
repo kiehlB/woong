@@ -16,4 +16,4 @@ import { CommentService } from './comment.service';
   ],
   providers: [CommentService, CommentResolver],
 })
-export class CommentsModule {}
+export class CommentModule {}

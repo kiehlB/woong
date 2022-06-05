@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Post } from './Post.entity';
+import { Post } from './post.entity';
 import { CreatePostRequest } from './dto/createPost.dto';
 
 @Injectable()
@@ -25,16 +25,15 @@ export class PostService {
 
     return posts;
   }
-  async createPost(postArgs: CreatePostRequest) {
-    const { title, content, cover } = postArgs;
+  async createPost(user, post) {
+    const postsRepo = await this.PostRepository;
 
-    const post = new Post();
+    const newUserProfile = await postsRepo.create({
+      title: post,
+    });
 
-    post.title = title;
-    post.content = content;
-    post.cover = cover;
-    await this.PostRepository.save(post);
+    await postsRepo.save(newUserProfile);
 
-    return post;
+    return newUserProfile;
   }
 }

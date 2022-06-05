@@ -28,14 +28,11 @@ import { PostService } from './post.service';
 import { CreatePostRequest, CreatePostResponse } from './dto/createPost.dto';
 import { Post } from './post.entity';
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
+import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
 
-@Resolver((of) => Post)
+@Resolver()
 export class PostResolver {
-  constructor(
-    private readonly postService: PostService,
-    private readonly jwtService: JwtService,
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly postService: PostService) {}
 
   @Query(() => [Post])
   findPost(args): Promise<Post> {
@@ -48,11 +45,12 @@ export class PostResolver {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Mutation(() => CreatePostResponse)
+  @Mutation(() => Post)
   async createPost(
+    @CurrentUser() user: TokenUser,
     @Args('input') post: CreatePostRequest,
-  ): Promise<CreatePostResponse> {
-    const saveProfile = await this.postService.createPost(post);
+  ) {
+    const saveProfile = await this.postService.createPost(user, post.title);
 
     return saveProfile;
   }

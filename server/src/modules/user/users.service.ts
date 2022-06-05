@@ -1,11 +1,8 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ConfigService } from '@nestjs/config';
-import { Repository, MoreThanOrEqual, FindManyOptions, In } from 'typeorm';
+import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { GetUserinfoRequest } from './dto/getUserInfo.dto';
-import { UserProfile } from '../profile/profile.entity';
-import { UserProfileService } from '../profile/profile.service';
 
 @Injectable()
 export class UserService {

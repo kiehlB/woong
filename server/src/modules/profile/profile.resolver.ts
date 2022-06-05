@@ -1,12 +1,4 @@
-import {
-  HttpStatus,
-  HttpCode,
-  Request,
-  UseGuards,
-  UseInterceptors,
-  HttpException,
-  ClassSerializerInterceptor,
-} from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   Resolver,
@@ -15,8 +7,6 @@ import {
   Args,
   Context,
   Info,
-  ResolveField,
-  Parent,
 } from '@nestjs/graphql';
 import { UserProfile } from './profile.entity';
 import { UserProfileService } from './profile.service';
@@ -35,7 +25,7 @@ export class ProfileResolver {
   async createAndUpdateProfile(
     @CurrentUser() user: TokenUser,
     @Args('input') bio: CreateProfileRequest,
-  ): Promise<ProfileResponse> {
+  ) {
     const saveProfile = await this.profileService.createAndUpdateProfile(
       user,
       bio,

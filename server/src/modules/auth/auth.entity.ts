@@ -2,12 +2,6 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  Index,
-  OneToOne,
-  BeforeInsert,
-  BeforeUpdate,
   JoinColumn,
   ManyToOne,
 } from 'typeorm';

@@ -2,7 +2,6 @@ import { Resolver, Mutation, Args, Context } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { SigninRequest, SigninResponse } from './dto/signin.dto';
-import { User } from '../user/user.entity';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
 import { AuthService } from './auth.service';

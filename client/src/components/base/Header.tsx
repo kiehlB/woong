@@ -199,7 +199,6 @@ function Header({}: HeaderProps) {
                     width='105.008'
                     height='42.2'
                     filterUnits='userSpaceOnUse'
-                    color-interpolation-filters='sRGB'
                   >
                     <feFlood flood-opacity='0' result='BackgroundImageFix' />
                     <feGaussianBlur in='BackgroundImage' stdDeviation='2' />

@@ -30,11 +30,10 @@ export class RegisterResponse {
   username: string;
 
   @Field()
-  @IsString()
   @IsNotEmpty()
   email: string;
 
-  @Field((type) => String, { nullable: true })
-  @IsString()
-  password: string;
+  @Field()
+  @IsNotEmpty()
+  email_verified: boolean;
 }

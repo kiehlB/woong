@@ -2,6 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Comments {
+  created_at: DateTime!
+  deleted: Boolean
+  has_replies: Boolean
+  id: Int
+  likes: Float
+  post_id: String
+  reply: String
+  text: String
+  updated_at: DateTime!
+  user: User
+  user_id: String
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -20,8 +34,18 @@ input InputSignin {
 
 type Mutation {
   createAndUpdateProfile(input: createProfile!): ProfileResponse!
+  createPost(input: craeteArtice!): Post!
   register(input: registerInput!): RegisterResponse!
   signin(input: InputSignin!): SigninResponse!
+}
+
+type Post {
+  comments: Comments!
+  created_at: DateTime!
+  id: Int
+  likes: Int
+  title: String
+  updated_at: DateTime!
 }
 
 type ProfileResponse {
@@ -30,6 +54,9 @@ type ProfileResponse {
 }
 
 type Query {
+  findAllComments: [Comments!]!
+  findAllPost: [Post!]!
+  findPost: [Post!]!
   getAllUser: [User!]
   getUser(input: getUserInfo!): GetUserInfoResponse!
   whoAmI: GetUserInfoResponse!
@@ -37,8 +64,8 @@ type Query {
 
 type RegisterResponse {
   email: String!
+  email_verified: Boolean!
   id: Int!
-  password: String
   username: String!
 }
 
@@ -67,6 +94,10 @@ type UserProfile {
   id: Int
   updated_at: DateTime!
   user: User
+}
+
+input craeteArtice {
+  title: String!
 }
 
 input createProfile {

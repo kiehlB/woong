@@ -12,7 +12,6 @@ import {
 import { Tag } from '../tag/tag.entity';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { User } from '../user/user.entity';
-import { Post } from '../Post/Post.entity';
 
 @ObjectType()
 @Entity()
@@ -29,9 +28,9 @@ export class PostLike {
   @Column('uuid')
   post_id!: string;
 
-  @ManyToOne((type) => Post, { cascade: true, eager: true })
-  @JoinColumn({ name: 'post_id' })
-  post!: Post;
+  // @ManyToOne((type) => Post)
+  // @JoinColumn({ name: 'post_id' })
+  // post!: Post;
 
   @ManyToOne((type) => User, { cascade: true, eager: true })
   @JoinColumn({ name: 'user_id' })

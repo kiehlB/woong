@@ -14,6 +14,11 @@ import { createUsersLoader } from './modules/user/users.loader';
 import { UserProfileService } from './modules/profile/profile.service';
 import { createUserProfileLoader } from './modules/profile/profile.loader';
 
+import { PostModule } from './modules/post/post.module';
+import { CommentModule } from './modules/comment/comment.module';
+import { Post } from './modules/post/post.entity';
+import { Comments } from './modules/comment/comment.entity';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env'] }),
@@ -22,7 +27,7 @@ import { createUserProfileLoader } from './modules/profile/profile.loader';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
-        entities: [User, UserProfile, Auth],
+        entities: [User, UserProfile, Post, Comments],
         host: configService.get('DB_HOST'),
         port: configService.get<number>('DB_PORT'),
         username: configService.get('DB_USER'),
@@ -30,13 +35,23 @@ import { createUserProfileLoader } from './modules/profile/profile.loader';
         database: configService.get('DB_DATABASE'),
         // url: process.env.CLEARDB_DATABASE_URL,
         synchronize: true,
-        autoSchemaSync: true,
+        autoLoadEntities: true,
+        // autoSchemaSync: true,
         // dropSchema: true,
       }),
     }),
     GraphQLModule.forRootAsync({
       driver: ApolloDriver,
-      imports: [UserModule, UserProfileModule, AuthModule],
+      imports: [
+        UserModule,
+        UserProfileModule,
+        AuthModule,
+        PostModule,
+        CommentModule,
+        // PostLikeModule,
+        // TagModule,
+        // ScoreModule,
+      ],
       useFactory: (
         usersService: UserService,
         userProfileService: UserProfileService,

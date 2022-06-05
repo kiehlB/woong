@@ -13,7 +13,6 @@ import {
 import { Tag } from '../tag/tag.entity';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { User } from '../user/user.entity';
-import { Post } from '../post/post.entity';
 
 @ObjectType()
 @Entity()
@@ -46,9 +45,9 @@ export class PostScore {
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
-  @ManyToOne((type) => Post)
-  @JoinColumn({ name: 'post_id' })
-  post!: Post;
+  // @ManyToOne((type) => Post)
+  // @JoinColumn({ name: 'post_id' })
+  // post!: Post;
 
   @Field((type) => Date)
   @Column('timestampz')

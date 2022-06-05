@@ -67,9 +67,8 @@ export class Comments {
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
-  @ManyToOne((type) => Post, (post) => post.comment)
-  @JoinColumn({ name: 'post_id' })
-  post!: Post;
+  @ManyToOne((type) => Post, (post) => post.comments)
+  post: Post;
 
-  subcomments!: Comment[];
+  subcomments!: Comments[];
 }

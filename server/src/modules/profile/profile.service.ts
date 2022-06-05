@@ -17,13 +17,11 @@ export class UserProfileService {
   async createAndUpdateProfile(user, bio) {
     const profile = await this.profileRepository;
 
-    const newBio = new UserProfile();
-    newBio.bio = bio.bio;
-    newBio.id = user.id;
+    const newUserProfile = await profile.create({ id: user.id, bio: bio.bio });
 
-    await profile.save(newBio);
+    await profile.save(newUserProfile);
 
-    return newBio;
+    return newUserProfile;
   }
 
   async getUsersByIds(ids: readonly number[]) {

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '../auth/auth.module';
+import { PostLikeModule } from '../postLike/postLike.module';
 import { UserModule } from '../user/user.module';
 import { Post } from './Post.entity';
 import { PostResolver } from './post.resolver';
