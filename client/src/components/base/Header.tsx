@@ -7,6 +7,7 @@ import Link from "next/link";
 import Sidebar from "./Sidebar";
 import HeaderMenuItems from "./HeaderMenuItem";
 import HeaderTopicItem from "./HeaderTopicItem";
+import { useState } from "react";
 
 export type HeaderProps = {};
 
@@ -169,9 +170,15 @@ const HeaderTopicItems = [
 ];
 
 function Header({}: HeaderProps) {
+  const [yo, SetYO] = useState(true);
+
+  const a = () => {
+    SetYO(false);
+  };
+
   return (
     <>
-      <div className='flex items-center h-16 bg-black text-white pr-6 pl-6 justify-between font-ibm-plex'>
+      <div className='flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between font-ibm-plex'>
         <div className='flex items-center'>
           <Link href='/'>
             <div className='cursor-pointer flex items-center'>
@@ -201,7 +208,7 @@ function Header({}: HeaderProps) {
                     height='42.2'
                     filterUnits='userSpaceOnUse'
                   >
-                    <feFlood flood-opacity='0' result='BackgroundImageFix' />
+                    <feFlood floodOpacity='0' result='BackgroundImageFix' />
                     <feGaussianBlur in='BackgroundImage' stdDeviation='2' />
                     <feComposite
                       in2='SourceAlpha'
@@ -270,9 +277,9 @@ function Header({}: HeaderProps) {
                 </svg>
               </div>
             </div>
-            <div className='w-32'>
-              <div className='group flex items-center'>
-                <div className='mr-2'>Topics</div>
+            <div className='w-32  '>
+              <div className='group flex items-center  '>
+                <div className='mr-2 font-medium'>Topics</div>
                 <svg
                   viewBox='0 0 8 4'
                   xmlns='http://www.w3.org/2000/svg'
@@ -282,9 +289,9 @@ function Header({}: HeaderProps) {
                   <path d='M0.666672 0.666626L4 3.99996L7.33334 0.666626H0.666672Z' />
                 </svg>
 
-                <div className='absolute mt-[20rem]   h-72'>
-                  <div className=' group-hover:block  hidden    relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[6px] after:absolute after:left-1.5 '>
-                    <div className='grid grid-cols-3  pl-4 pr-4 pt-6 mb-2'>
+                <div className='absolute mt-[19rem]    h-72   '>
+                  <div className=' group-hover:block  hidden    relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[0px] after:absolute after:left-1.5 '>
+                    <div className='grid grid-cols-3  pl-4 pr-4 pt-10 mb-2'>
                       {HeaderTopicItems.map((e) => (
                         <div key={e.id}>
                           <HeaderTopicItem {...e} />
@@ -299,10 +306,23 @@ function Header({}: HeaderProps) {
         </div>
 
         <div className='flex flex-end items-center'>
-          <BiSearchAlt size='25' />
-
-          <div className='ml-8 mxl:hidden'>Login</div>
-          <div className='ml-8 mxl:hidden'>Register</div>
+          <header>
+            <input type='text' />
+            <div className='close'>
+              <span className='front' />
+              <span className='back' />
+            </div>
+          </header>
+          <div className='ml-8 mxl:hidden text-sm font-medium'>Log In</div>
+          <div
+            className='flex  text-sm items-center ml-8 mxl:hidden text-black px-4  font-medium  rounded h-8 '
+            style={{
+              backgroundImage:
+                "linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)",
+            }}
+          >
+            Register
+          </div>
           <div className='ml-8 mxl:hidden'>
             <MdOutlineDarkMode size='25' />
           </div>
@@ -310,7 +330,6 @@ function Header({}: HeaderProps) {
             <AiOutlineGlobal size='25' />
           </div>
         </div>
-        <Sidebar />
       </div>
     </>
   );

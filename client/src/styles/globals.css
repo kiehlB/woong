@@ -4,8 +4,11 @@
 
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
 
-body {
+body,
+html #root {
   padding: 0;
+
+  min-height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -84,18 +87,78 @@ a:active .icon-arrow {
   fill: #fd6154;
 }
 
-nav {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 300px;
+header {
+  position: relative;
+  margin: 0 auto;
+}
+input:focus {
+  width: 200px;
+  height: 40px;
+  border-radius: 40px;
+  padding: 0 20px;
+  line-height: 2em;
+  font-weight: 100;
+  font-size: 12px;
+  cursor: auto;
 }
 
-.navbar {
+input {
+  float: right;
+  border: 3px solid #fff;
+  outline: none;
+  width: 15px;
+  cursor: pointer;
+
+  -webkit-transition: 0.2s all ease-in;
+  -moz-transition: 0.2s all ease-in;
+  transition: 0.2s all ease-in;
+  height: 15px;
+  color: #fff;
+  border-radius: 40px;
+  background: none;
+  font-size: 0;
+}
+.close span {
+  width: 3px;
+  height: 12px;
+  border-radius: 2px;
+  background: #fff;
+  display: inline-block;
+}
+
+.front {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 300px;
+  right: 24px;
+  top: 13px;
+  transform: rotate(-45deg);
+  opacity: 0;
+  animation-delay: 2s;
+  -webkit-transition: 0.2s all ease-in;
+  -moz-transition: 0.2s all ease-in;
+  transition: 0.2s all ease-in;
+}
+
+.back {
+  position: absolute;
+  right: -2px;
+  top: 10px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  transition: 0.2s all ease-in;
+}
+
+input:focus + div .front {
+  opacity: 1;
+  -webkit-transition-delay: 0.2s;
+  -moz-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+input:focus + div .back {
+  right: 24px;
+  top: 13px;
 }
