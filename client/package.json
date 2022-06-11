@@ -9,10 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.6",
     "@headlessui/react": "^1.6.2",
     "@heroicons/react": "^1.0.6",
+    "@types/lodash": "^4.14.182",
     "autoprefixer": "^10.4.7",
+    "deepmerge": "^4.2.2",
     "framer-motion": "^6.3.4",
+    "graphql": "^16.5.0",
+    "lodash": "4.17.20",
     "next": "12.1.6",
     "node-sass": "^7.0.1",
     "postcss": "^8.4.14",

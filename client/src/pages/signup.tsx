@@ -21,9 +21,9 @@ const githubIcon = () => {
       >
         <path
           fill='#ffffff'
-          fill-rule='evenodd'
+          fillRule='evenodd'
           d='M6.69 15.944c0 .08-.093.145-.21.145-.133.012-.226-.053-.226-.145 0-.081.093-.146.21-.146.12-.012.226.053.226.146zm-1.255-.182c-.028.08.053.173.174.198.105.04.226 0 .25-.081.024-.08-.053-.173-.174-.21-.104-.028-.221.012-.25.093zm1.783-.068c-.117.028-.198.104-.186.197.012.08.117.133.238.105.117-.028.198-.105.186-.186-.012-.076-.121-.129-.238-.116zM9.87.242C4.278.242 0 4.488 0 10.08c0 4.471 2.815 8.298 6.835 9.645.516.093.697-.226.697-.488 0-.25-.012-1.63-.012-2.476 0 0-2.822.605-3.415-1.202 0 0-.46-1.173-1.121-1.475 0 0-.924-.633.064-.621 0 0 1.004.08 1.557 1.04.883 1.557 2.363 1.109 2.94.843.092-.645.354-1.093.645-1.36-2.255-.25-4.529-.576-4.529-4.455 0-1.109.307-1.665.952-2.375-.105-.262-.448-1.342.105-2.738C5.56 4.157 7.5 5.51 7.5 5.51a9.474 9.474 0 0 1 2.532-.344c.86 0 1.726.117 2.533.343 0 0 1.939-1.355 2.782-1.089.552 1.4.21 2.476.105 2.738.645.714 1.04 1.27 1.04 2.375 0 3.891-2.375 4.202-4.63 4.456.372.319.686.923.686 1.87 0 1.36-.012 3.041-.012 3.372 0 .262.186.58.698.488C17.266 18.379 20 14.552 20 10.08 20 4.488 15.464.24 9.871.24zM3.919 14.149c-.052.04-.04.133.029.21.064.064.157.093.21.04.052-.04.04-.133-.029-.21-.064-.064-.157-.092-.21-.04zm-.435-.326c-.028.052.012.117.093.157.064.04.145.028.173-.028.028-.053-.012-.117-.093-.158-.08-.024-.145-.012-.173.029zm1.306 1.435c-.064.053-.04.174.053.25.092.093.21.105.262.04.052-.052.028-.173-.053-.25-.088-.092-.21-.104-.262-.04zm-.46-.593c-.064.04-.064.146 0 .238.065.093.174.133.226.093.065-.053.065-.157 0-.25-.056-.093-.16-.133-.225-.08z'
-          clip-rule='evenodd'
+          clipRule='evenodd'
         />
       </mask>
       <g mask='url(#github)'>
@@ -61,13 +61,59 @@ const googleIcon = () => {
   );
 };
 
+const eye = () => {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+      fill='none'
+      className='w-4 h-4  '
+    >
+      <path
+        fill-rule='evenodd'
+        clip-rule='evenodd'
+        d='M2.94 5.06l16 16 2.12-2.12-2.446-2.447L23 12l-5.555-5.69a7.566 7.566 0 00-9.883-.87L5.06 2.94 2.939 5.06zm6.747 2.506a5 5 0 016.747 6.747L9.687 7.566z'
+        fill='rgb(183, 189, 198)'
+      ></path>
+      <path
+        d='M1 12l2.29-2.346 10.198 10.198a7.574 7.574 0 01-6.933-2.162L1 12z'
+        fill='rgb(183, 189, 198)'
+      ></path>
+    </svg>
+  );
+};
 function SignUp({}: SignUpProps) {
   return (
     <div className='flex flex-col h-full'>
       <Header />
+      <div className='bg-[#FEF6D8] '>
+        <div className='flex justify-center items-center  h-10'>
+          <svg
+            width='24px'
+            height='24px'
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 24 24'
+            fill='#0ECB81'
+            color='#0ECB81'
+            className='mr-1'
+          >
+            <path
+              fill-rule='evenodd'
+              clip-rule='evenodd'
+              d='M7 8v2H5v11h14V10h-2V8A5 5 0 007 8zm7.5 2V8a2.5 2.5 0 00-5 0v2h5zm-1 8v-5h-3v5h3z'
+              fill='currentColor'
+            ></path>
+          </svg>
+          <div className='flex text-xs'>
+            <div className='font-medium'>URL verification:&nbsp;</div>
+            <div className='text-[#0ECB81]'> https:// </div>
+            <div className='text-[#1E2329]'>woongblog.io</div>
+          </div>
+        </div>
+      </div>
       <div className='flex flex-1'>
         <div className='w-full flex justify-center items-center'>
-          <div className='flex  flex-col   h-3/5 w-[45%]   '>
+          <div className='flex  flex-col   h-[70%] w-[45%]   '>
             <div className='flex justify-between  '>
               <div className='flex flex-col'>
                 <div className='font-semibold  text-3xl leading-10 text-[#1E2329]'>
@@ -77,9 +123,29 @@ function SignUp({}: SignUpProps) {
                   By creating an account you agree to our Terms and Conditions
                   and Data Protection Guidelines.
                 </div>
-                <div className='flex justify-center items-center font-medium bg-[#EAECEF] rounded mt-8 text-[#1E2329]  px-6 py-3 w-[24rem]'>
-                  Sign up with phone or email
-                </div>
+                <form className='mt-4'>
+                  <div className='mb-1 text-[#1e2329] text-sm'>Email</div>
+                  <div className='flex border-[1px] border-[#EAECEF] items-center'>
+                    <input
+                      type='text'
+                      name='name'
+                      style={{ borderRight: "none" }}
+                      className='  h-12 rounded py-3 text-[#1e2329]  w-[22rem] focus:border-[#f0b90b] focus:outline-none px-3 '
+                    />
+
+                    {eye()}
+                  </div>
+                  <div className='mb-1 text-[#1e2329] text-sm'>Password</div>
+                  <input
+                    type='text'
+                    name='name'
+                    className='border-[1px] border-[#EAECEF] h-12 rounded py-3 text-[#1e2329]  w-[24rem]  focus:border-[#f0b90b] focus:outline-none px-3  '
+                  />
+
+                  <div className='flex bg-[#fcd435] rounded text-[#202630] mt-6  h-12 w-[24rem] justify-center items-center font-medium  '>
+                    Reigster
+                  </div>
+                </form>
                 <div className='flex mt-2 items-center my-4 w-[24rem] justify-between'>
                   <div className='w-[136px] h-[1px] bg-[#EAECEF] '></div>
                   <div>or</div>

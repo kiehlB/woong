@@ -307,7 +307,7 @@ function Header({}: HeaderProps) {
 
         <div className='flex flex-end items-center'>
           <header>
-            <input type='text' />
+            <input type='text' className='input' />
             <div className='close'>
               <span className='front' />
               <span className='back' />

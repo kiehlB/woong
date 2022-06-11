@@ -91,7 +91,7 @@ header {
   position: relative;
   margin: 0 auto;
 }
-input:focus {
+.input:focus {
   width: 200px;
   height: 40px;
   border-radius: 40px;
@@ -102,7 +102,7 @@ input:focus {
   cursor: auto;
 }
 
-input {
+.input {
   float: right;
   border: 3px solid #fff;
   outline: none;
@@ -148,7 +148,7 @@ input {
   transition: 0.2s all ease-in;
 }
 
-input:focus + div .front {
+.input:focus + div .front {
   opacity: 1;
   -webkit-transition-delay: 0.2s;
   -moz-transition-delay: 0.2s;
@@ -158,7 +158,7 @@ input:focus + div .front {
   transform: rotate(45deg);
 }
 
-input:focus + div .back {
+.input:focus + div .back {
   right: 24px;
   top: 13px;
 }
