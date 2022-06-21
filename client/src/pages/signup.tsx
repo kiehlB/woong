@@ -116,10 +116,10 @@ function SignUp({}: SignUpProps) {
           <div className='flex  flex-col   h-[70%] w-[45%]   '>
             <div className='flex justify-between  '>
               <div className='flex flex-col'>
-                <div className='font-semibold  text-3xl leading-10 text-[#1E2329]'>
+                <div className='font-semibold  text-3xl leading-10 text-[#1E2329] font-lato'>
                   Welcome to WoongBlog!
                 </div>
-                <div className='text-sm font-normal text-[#474D57] mt-4 w-[24rem] '>
+                <div className='text-sm font-normal text-[#474D57] mt-4 w-[24rem] font-lato'>
                   By creating an account you agree to our Terms and Conditions
                   and Data Protection Guidelines.
                 </div>
@@ -170,16 +170,6 @@ function SignUp({}: SignUpProps) {
           </div>
         </div>
       </div>
-
-      <style global jsx>{`
-        html,
-        body,
-        body > div:first-child,
-        div#__next,
-        div#__next > div {
-          height: 100%;
-        }
-      `}</style>
     </div>
   );
 }
