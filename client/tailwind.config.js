@@ -48,6 +48,7 @@ module.exports = {
       ibm: ["IBM Plex Sans", "sans-serif"],
       fas: ["Fascinate", "cursive"],
       Nunito: ["Nunito Sans", "sans-serif"],
+      main: ["Bebas Neue", "cursive"],
     },
 
     keyframes: {

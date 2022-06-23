@@ -16,6 +16,16 @@ html #root {
   margin: 0;
 }
 
+@font-face {
+  font-family: "Custom1";
+  src: url("/font/NewTegomin-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Custom2";
+  src: url("/font/Nosifer-Regular.ttf");
+}
+
 a {
   border: 4px solid #fff;
   color: #fff;

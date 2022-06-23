@@ -65,12 +65,6 @@ const HeaderTopicItems = [
 ];
 
 function Header({}: HeaderProps) {
-  const [yo, SetYO] = useState(true);
-
-  const a = () => {
-    SetYO(false);
-  };
-
   return (
     <div className='flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between'>
       <div className='flex items-center'>

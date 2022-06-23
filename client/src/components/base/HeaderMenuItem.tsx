@@ -7,7 +7,7 @@ export type HeaderMenuItemsProps = {
 
 function HeaderMenuItems({ title, svg, subTitle }: HeaderMenuItemsProps) {
   return (
-    <div className='p-4 hover:bg-[#FAFAFA] rounded-lg font-sans'>
+    <div className='p-4 hover:bg-[#FAFAFA] rounded-lg'>
       <div className='flex items-center'>
         <div className='bg-[#FAFAFA] p-2 mr-4 rounded-lg'>{svg}</div>
         <div className='flex flex-col '>
