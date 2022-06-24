@@ -77,7 +77,7 @@ function Header({}: HeaderProps) {
         <div className='flex items-center mxl:hidden'>
           <div className='group w-6  mr-8 ml-8'>
             <MenuIcon />
-            <div className='absolute mt-5 bg-white'>
+            <nav className='absolute mt-5 bg-white'>
               <div className='group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 '>
                 <ul className='grid grid-cols-2 p-4'>
                   {MenuItems.map((e) => (
@@ -87,7 +87,7 @@ function Header({}: HeaderProps) {
                   ))}
                 </ul>
               </div>
-            </div>
+            </nav>
           </div>
 
           <div className='mr-8'>
@@ -117,7 +117,7 @@ function Header({}: HeaderProps) {
               <div className='mr-2 font-medium'>Tags</div>
               <ArrowDownIcon />
             </div>
-            <div className='absolute mt-5 bg-white'>
+            <nav className='absolute mt-5 bg-white'>
               <div className='group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 '>
                 <ul className='grid grid-cols-3  pl-4 pr-4  pt-4 mb-2 '>
                   {HeaderTopicItems.map((e) => (
@@ -127,7 +127,7 @@ function Header({}: HeaderProps) {
                   ))}
                 </ul>
               </div>
-            </div>
+            </nav>
           </div>
         </div>
       </div>
