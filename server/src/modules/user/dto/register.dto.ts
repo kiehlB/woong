@@ -6,11 +6,6 @@ export class RegisterRequest {
   @Field()
   @IsString()
   @IsNotEmpty()
-  username: string;
-
-  @Field()
-  @IsString()
-  @IsNotEmpty()
   password: string;
 
   @Field()
@@ -23,11 +18,6 @@ export class RegisterRequest {
 export class RegisterResponse {
   @Field(() => Int)
   id: number;
-
-  @Field()
-  @IsString()
-  @IsNotEmpty()
-  username: string;
 
   @Field()
   @IsNotEmpty()

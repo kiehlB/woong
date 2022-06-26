@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const loginMutation = gql`
   mutation Login($email: String!, $password: String!) {
@@ -11,8 +11,8 @@ export const loginMutation = gql`
 `;
 
 export const registerMutation = gql`
-  mutation Register($username: String!, $email: String!, $password: String!) {
-    register(username: $username, email: $email, password: $password) {
+  mutation Register($input: registerInput!) {
+    register(input: $input) {
       id
     }
   }

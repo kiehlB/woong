@@ -66,7 +66,6 @@ type RegisterResponse {
   email: String!
   email_verified: Boolean!
   id: Int!
-  username: String!
 }
 
 type SigninResponse {
@@ -112,5 +111,4 @@ input getUserInfo {
 input registerInput {
   email: String!
   password: String!
-  username: String!
 }

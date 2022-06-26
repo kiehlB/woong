@@ -1,17 +1,17 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 import {
   ApolloClient,
   HttpLink,
   InMemoryCache,
   from,
   NormalizedCacheObject,
-} from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
-import { concatPagination } from "@apollo/client/utilities";
-import merge from "deepmerge";
-import isEqual from "lodash/isEqual";
+} from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
+import { concatPagination } from '@apollo/client/utilities';
+import merge from 'deepmerge';
+import isEqual from 'lodash/isEqual';
 
-export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
+export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -19,20 +19,21 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
       console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
     );
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
+console.log(errorLink);
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/graphql", // Server URL (must be absolute)
-  credentials: "include", // Additional fetch() options like `credentials` or `headers`
+  uri: 'http://localhost:4000/graphql', // Server URL (must be absolute)
+  credentials: 'include', // Additional fetch() options like `credentials` or `headers`
 });
 
 function createApolloClient() {
   return new ApolloClient({
-    ssrMode: typeof window === "undefined",
+    ssrMode: typeof window === 'undefined',
     link: from([errorLink, httpLink]),
     cache: new InMemoryCache({
       typePolicies: {
@@ -60,9 +61,7 @@ export function initializeApollo(initialState = null) {
       // combine arrays using object equality (like in sets)
       arrayMerge: (destinationArray, sourceArray) => [
         ...sourceArray,
-        ...destinationArray.filter((d) =>
-          sourceArray.every((s) => !isEqual(d, s))
-        ),
+        ...destinationArray.filter(d => sourceArray.every(s => !isEqual(d, s))),
       ],
     });
 
@@ -70,7 +69,7 @@ export function initializeApollo(initialState = null) {
     _apolloClient.cache.restore(data);
   }
   // For SSG and SSR always create a new Apollo Client
-  if (typeof window === "undefined") return _apolloClient;
+  if (typeof window === 'undefined') return _apolloClient;
   // Create the Apollo Client once in the client
   if (!apolloClient) apolloClient = _apolloClient;
 
@@ -79,7 +78,7 @@ export function initializeApollo(initialState = null) {
 
 export function addApolloState(
   client: { cache: { extract: () => any } },
-  pageProps: { props: { [x: string]: any } }
+  pageProps: { props: { [x: string]: any } },
 ) {
   if (pageProps?.props) {
     pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();

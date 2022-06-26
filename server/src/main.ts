@@ -16,6 +16,11 @@ const PORT = process.env.PORT || 4000;
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  }); //http://localhost:3000/ http://www.nestblog.gq
+
   if (prod) {
     app.use(helmet());
     app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));

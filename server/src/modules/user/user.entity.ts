@@ -24,8 +24,8 @@ export class User {
   id: number;
 
   @Field((type) => String, { nullable: true })
-  @Column({ length: 30 })
-  username!: string;
+  @Column({ length: 30, nullable: true })
+  username?: string;
 
   @Field((type) => String, { nullable: true })
   @Exclude()

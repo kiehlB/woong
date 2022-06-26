@@ -46,17 +46,17 @@ export class UserService {
   }
 
   async createUser(user: Partial<User>): Promise<User> {
-    const { username, password } = user;
+    const { email, password } = user;
 
-    if (!username || !password) {
+    if (!email || !password) {
       throw new HttpException(
-        'Please enter your username and password',
+        'Please enter your email and password',
         HttpStatus.BAD_REQUEST,
       );
     }
 
     const existUser = await this.userRepository.findOne({
-      where: { username },
+      where: { email },
     });
 
     if (existUser) {
