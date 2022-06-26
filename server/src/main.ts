@@ -8,6 +8,7 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { ErrorsInterceptor } from './interceptors/exception.interceptor';
 
 const prod = process.env.NODE_ENV === 'production';
 const PORT = process.env.PORT || 4000;
@@ -25,7 +26,11 @@ async function bootstrap() {
 
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  app.useGlobalInterceptors(new TimeoutInterceptor(), new LoggingInterceptor());
+  app.useGlobalInterceptors(
+    new TimeoutInterceptor(),
+    new LoggingInterceptor(),
+    // new ErrorsInterceptor(),
+  );
 
   app.useGlobalPipes(
     new ValidationPipe({

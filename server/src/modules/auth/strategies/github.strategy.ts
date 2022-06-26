@@ -28,6 +28,7 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
   ) {
     try {
       Logger.log(`GitHub UserProfile`, 'Auth');
+
       const jsonProfile = (profile && profile._json) || {};
       const userProfile = {
         userId: profile.id || jsonProfile.id,
@@ -40,6 +41,7 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
       };
 
       const oauthResponse = await this.authService.validateOAuthLogin(
+        accessToken,
         userProfile,
         'github',
       );

@@ -8,7 +8,7 @@ interface AuthSocialButtonGroupProps {
 
 const AuthSocialButtonGroup = ({ currentPath }: AuthSocialButtonGroupProps) => {
   return (
-    <div>
+    <div className='px-1'>
       <AuthSocialButton
         provider='github'
         tabIndex={4}

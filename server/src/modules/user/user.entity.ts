@@ -27,10 +27,10 @@ export class User {
   @Column({ length: 30 })
   username!: string;
 
-  @Field((type) => String)
+  @Field((type) => String, { nullable: true })
   @Exclude()
-  @Column({ length: 200 })
-  password!: string;
+  @Column({ length: 200, nullable: true })
+  password?: string;
 
   @Field((type) => String, { nullable: true })
   @Index()
@@ -38,7 +38,7 @@ export class User {
   @Column({ length: 200, default: null })
   email!: string;
 
-  @Field((type) => Boolean)
+  @Field((type) => Boolean, { nullable: true })
   @Column({ default: false })
   email_verified!: boolean;
 
@@ -46,12 +46,12 @@ export class User {
   @OneToOne((type) => UserProfile, (profile) => profile.user)
   profile?: UserProfile;
 
-  @Field((type) => Date)
+  @Field((type) => Date, { nullable: true })
   @Column('timestampz')
   @CreateDateColumn()
   created_at!: Date;
 
-  @Field((type) => Date)
+  @Field((type) => Date, { nullable: true })
   @Column('timestamptz')
   @UpdateDateColumn()
   updated_at!: Date;
@@ -63,9 +63,11 @@ export class User {
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword(): Promise<void> {
-    const salt = await bcrypt.genSalt();
-    if (!/^\$2a\$\d+\$/.test(this.password)) {
-      this.password = await bcrypt.hash(this.password, salt);
+    if (this.password) {
+      const salt = await bcrypt.genSalt();
+      if (!/^\$2a\$\d+\$/.test(this.password)) {
+        this.password = await bcrypt.hash(this.password, salt);
+      }
     }
   }
 

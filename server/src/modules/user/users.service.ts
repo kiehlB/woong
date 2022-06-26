@@ -65,6 +65,7 @@ export class UserService {
 
     const newUser = await this.userRepository.create(user);
     await this.userRepository.save(newUser);
+
     return newUser;
   }
 

@@ -29,7 +29,7 @@ type GetUserInfoResponse {
 
 input InputSignin {
   email: String
-  password: String!
+  password: String
 }
 
 type Mutation {
@@ -74,13 +74,13 @@ type SigninResponse {
 }
 
 type User {
-  created_at: DateTime!
+  created_at: DateTime
   email: String
-  email_verified: Boolean!
+  email_verified: Boolean
   id: ID!
-  password: String!
+  password: String
   profile: UserProfile
-  updated_at: DateTime!
+  updated_at: DateTime
   username: String
 }
 

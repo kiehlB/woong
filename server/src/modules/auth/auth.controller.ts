@@ -45,9 +45,9 @@ export class AuthController {
   githubLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
     if (jwt) {
-      res.redirect(`${authConfig.callbackSuccessUrl}?code=${jwt}`);
+      res.redirect(`http://localhost:3000`);
     } else {
-      res.redirect(authConfig.callbackFailureUrl);
+      res.redirect('http://localhost:3000/signup');
     }
   }
 

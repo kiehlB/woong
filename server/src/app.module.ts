@@ -18,6 +18,7 @@ import { PostModule } from './modules/post/post.module';
 import { CommentModule } from './modules/comment/comment.module';
 import { Post } from './modules/post/post.entity';
 import { Comments } from './modules/comment/comment.entity';
+import SocialUser from './modules/auth/socialUser.entity';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { Comments } from './modules/comment/comment.entity';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
-        entities: [User, UserProfile, Post, Comments],
+        entities: [User, UserProfile, Post, Comments, SocialUser],
         host: configService.get('DB_HOST'),
         port: configService.get<number>('DB_PORT'),
         username: configService.get('DB_USER'),

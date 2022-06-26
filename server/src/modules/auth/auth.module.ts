@@ -9,6 +9,10 @@ import { AuthResolver } from './auth.resolver';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthService } from './auth.service';
+import SocialUser from './socialUser.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Auth } from './auth.entity';
+import { User } from '../user/user.entity';
 
 dotenv.config();
 
@@ -19,7 +23,12 @@ const jwtModule = JwtModule.register({
 });
 
 @Module({
-  imports: [passModule, jwtModule, forwardRef(() => UserModule)],
+  imports: [
+    TypeOrmModule.forFeature([SocialUser, User]),
+    passModule,
+    jwtModule,
+    forwardRef(() => UserModule),
+  ],
   controllers: [AuthController],
   providers: [
     AuthService,

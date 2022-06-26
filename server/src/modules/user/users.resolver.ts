@@ -8,7 +8,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { UserService } from './users.service';
 import { User } from './user.entity';
 import { CurrentUser, TokenUser } from '../../decorator/auth-user.decorator';
@@ -22,6 +22,7 @@ import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
 import { UserProfileService } from '../profile/profile.service';
 import { UserProfile } from '../profile/profile.entity';
 import DataLoader from 'dataloader';
+import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
 
 @Resolver((of) => User)
 export class UserResolver {

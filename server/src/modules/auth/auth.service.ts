@@ -9,31 +9,51 @@ import authConfig from './auth-config.development.template';
 import { UserService } from '../user/users.service';
 import { User } from '../user/user.entity';
 import { TokenUser } from 'src/decorator/auth-user.decorator';
+import { getRepository, Repository } from 'typeorm';
+import SocialUser from './socialUser.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AuthService {
-  private readonly JWT_SECRET_KEY = authConfig.jwtSecretKey;
+  private readonly JWT_SECRET_KEY = process.env.jwtSecretKey;
 
   constructor(
+    @InjectRepository(SocialUser)
+    private socialUserRepository: Repository<SocialUser>,
     private readonly userService: UserService,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+
     private jwtService: JwtService,
   ) {}
 
   async validateOAuthLogin(
+    accessToken,
     userProfile: any,
     provider: string,
   ): Promise<{ jwt: string; user: User }> {
     try {
+      const userRepo = await this.userRepository;
+
       let existingUser = await this.userService.findOne(userProfile.email);
-      if (!existingUser) {
-        existingUser = await this.userService.create({
-          ...userProfile,
-        });
-      }
+
+      // existingUser = await this.userService.create({
+      //   id:userProfile.id,
+      //   email:userProfile.email,
+      //   username:userProfile.username
+      // });
+
+      const newUser = await userRepo.create({
+        email: userProfile.email,
+        username: userProfile.username,
+      });
+
+      await userRepo.save(newUser);
 
       const { email } = existingUser;
+
       const signingPayload = { email };
-      const jwt: string = sign(signingPayload, this.JWT_SECRET_KEY, {
+      const jwt: string = sign(signingPayload, process.env.jwtSecretKey, {
         expiresIn: 3600,
       });
       return { jwt, user: existingUser };

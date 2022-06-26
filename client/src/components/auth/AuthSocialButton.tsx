@@ -1,6 +1,7 @@
 import * as React from "react";
 import GithubIcon from "../../static/svg/github-icon";
 import GoogleIcon from "../../static/svg/google-icon";
+import { motion } from "framer-motion";
 
 interface AuthSocialButtonProps {
   provider: "google" | "github";
@@ -38,15 +39,17 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
 
   return (
     <>
-      <div
-        className='flex bg-white rounded text-[#202630] border-[1px] h-12 w-[24rem] justify-center items-center font-medium '
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.8 }}
+        className='flex bg-white rounded text-[#202630] border-[1px] h-12  justify-center items-center font-medium mt-4 cursor-pointer'
         tabIndex={tabIndex}
       >
         <div className='px-4'>
           <Icon />
         </div>
         Continue with Github
-      </div>
+      </motion.div>
     </>
   );
 };
