@@ -21,6 +21,8 @@ export class AuthResolver {
 
     res.cookie('auth-cookie', token, {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      secure: false,
+      httpOnly: false,
     });
 
     return { token };

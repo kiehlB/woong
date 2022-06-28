@@ -49,10 +49,7 @@ export class UserService {
     const { email, password } = user;
 
     if (!email || !password) {
-      throw new HttpException(
-        'Please enter your email and password',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new Error('이메일과 비밀번호를 입력해 주세요!');
     }
 
     const existUser = await this.userRepository.findOne({
@@ -60,7 +57,10 @@ export class UserService {
     });
 
     if (existUser) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        '이메일이 이미 존재합니다!',
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     const newUser = await this.userRepository.create(user);

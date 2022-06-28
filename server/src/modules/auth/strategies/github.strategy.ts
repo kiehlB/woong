@@ -21,6 +21,7 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
 
   async validate(
     req: any,
+
     accessToken: string,
     refreshToken: string,
     profile: any,
@@ -45,6 +46,7 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
         userProfile,
         'github',
       );
+
       done(null, {
         ...JSON.parse(JSON.stringify(oauthResponse.user)),
         jwt: oauthResponse.jwt,

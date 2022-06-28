@@ -1,7 +1,7 @@
-import { motion, useCycle } from "framer-motion";
-import MenuToggle from "../common/FramerMenuToggle";
-import FloatingHeader from "./FloatingHeader";
-import Header from "./Header";
+import { motion, useCycle } from 'framer-motion';
+import MenuToggle from '../common/FramerMenuToggle';
+import FloatingHeader from './FloatingHeader';
+import Header from './Header';
 
 export type PageTemplateProps = {
   children: React.ReactNode;

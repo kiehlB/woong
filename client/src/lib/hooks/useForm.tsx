@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from "react";
+import { useCallback, useReducer } from 'react';
 
 function reducer(state, action) {
   return {
@@ -9,11 +9,11 @@ function reducer(state, action) {
 export default function useForm(initialForm) {
   const [state, dispatch] = useReducer(reducer, initialForm);
   const handleChange = useCallback(
-    (e) => {
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       e.persist();
       dispatch(e.target);
     },
-    [state]
+    [state],
   );
 
   return [state, handleChange];

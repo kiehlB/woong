@@ -44,7 +44,15 @@ export class AuthController {
   @UseGuards(AuthGuard('github'))
   githubLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
+
     if (jwt) {
+      console.log(jwt);
+      res.cookie('auth-cookie', jwt, {
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+        secure: false,
+        httpOnly: false,
+      });
+
       res.redirect(`http://localhost:3000`);
     } else {
       res.redirect('http://localhost:3000/signup');
@@ -59,7 +67,16 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   googleLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
+
+    console.log('dasdasd', jwt);
     if (jwt) {
+      console.log(jwt);
+      res.cookie('auth-cookie', jwt, {
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+        secure: false,
+        httpOnly: false,
+      });
+
       res.redirect(`${authConfig.callbackSuccessUrl}?code=${jwt}`);
     } else {
       res.redirect(authConfig.callbackFailureUrl);

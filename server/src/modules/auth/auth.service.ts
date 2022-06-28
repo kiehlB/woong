@@ -43,19 +43,23 @@ export class AuthService {
       //   username:userProfile.username
       // });
 
-      const newUser = await userRepo.create({
-        email: userProfile.email,
-        username: userProfile.username,
-      });
+      if (!existingUser) {
+        const newUser = await userRepo.create({
+          email: userProfile.email,
+          username: userProfile.username,
+        });
 
-      await userRepo.save(newUser);
+        await userRepo.save(newUser);
+      }
 
-      const { email } = existingUser;
+      const { email } = userProfile.email;
 
       const signingPayload = { email };
+
       const jwt: string = sign(signingPayload, process.env.jwtSecretKey, {
         expiresIn: 3600,
       });
+
       return { jwt, user: existingUser };
     } catch (err) {
       throw new InternalServerErrorException('validateOAuthLogin', err.message);

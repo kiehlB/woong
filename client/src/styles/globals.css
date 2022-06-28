@@ -1,14 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=The+Nautigal&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fascinate&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+ 
 
 body,
 html #root {
@@ -26,7 +24,7 @@ html #root {
   src: url("/font/Nosifer-Regular.ttf");
 }
 
-a {
+.link_a {
   border: 4px solid #fff;
   color: #fff;
   display: inline-block;
@@ -39,19 +37,19 @@ a {
   text-decoration: none;
 }
 
-a .label,
-a .icon-arrow {
+div .label,
+div .icon-arrow {
   backface-visibility: hidden;
   transform: translateZ(0);
   perspective: 1000;
 }
 
-a .label {
+div .label {
   display: inline-block;
   transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-a .icon-arrow {
+div .icon-arrow {
   fill: #fff;
   height: 15px;
   top: 17px;
@@ -91,12 +89,12 @@ a:hover .icon-arrow.after {
 }
 
 a:active {
-  border-color: #fd6154;
-  color: #fd6154;
+  border-color: #fcd435;
+  color: #fcd435;
 }
 
 a:active .icon-arrow {
-  fill: #fd6154;
+  fill: #fcd435;
 }
 
 .search {

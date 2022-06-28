@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
 export default function useInput(defaultValue: string) {
   const [input, setInput] = useState(defaultValue);
@@ -6,12 +6,8 @@ export default function useInput(defaultValue: string) {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setInput(e.target.value);
     },
-    []
+    [],
   );
-  const onReset = useCallback(() => setInput(""), []);
-  return [input, onChange, onReset] as [
-    string,
-    typeof onChange,
-    typeof onReset
-  ];
+  const onReset = useCallback(() => setInput(''), []);
+  return [input, onChange, onReset] as [string, typeof onChange, typeof onReset];
 }

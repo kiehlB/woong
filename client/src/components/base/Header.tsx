@@ -1,46 +1,45 @@
-import Image from "next/image";
-import { BiSearchAlt } from "react-icons/bi";
-import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
-import { AiOutlineGlobal } from "react-icons/ai";
-import Link from "next/link";
-import HeaderMenuItems from "./HeaderMenuItem";
-import HeaderTopicItem from "./HeaderTopicItem";
-import { useState } from "react";
-import ReactIcon from "../../static/svg/react-icon";
-import NodeIcon from "../../static/svg/node-icon";
-import JavascriptIcon from "../../static/svg/javascript-icon";
-import CssIcon from "../../static/svg/css-icon";
-import LogoIcon from "../../static/svg/logo-icon";
-import MenuIcon from "../../static/svg/menu-icon";
-import ArrowDownIcon from "../../static/svg/arrowDown-icon";
+import Image from 'next/image';
+import { BiSearchAlt } from 'react-icons/bi';
+import { MdOutlineDarkMode, MdDarkMode } from 'react-icons/md';
+import { AiOutlineGlobal } from 'react-icons/ai';
+import Link from 'next/link';
+import HeaderMenuItems from './HeaderMenuItem';
+import HeaderTopicItem from './HeaderTopicItem';
+import { useState } from 'react';
+import ReactIcon from '../../static/svg/react-icon';
+import NodeIcon from '../../static/svg/node-icon';
+import JavascriptIcon from '../../static/svg/javascript-icon';
+import CssIcon from '../../static/svg/css-icon';
+import LogoIcon from '../../static/svg/logo-icon';
+import MenuIcon from '../../static/svg/menu-icon';
+import ArrowDownIcon from '../../static/svg/arrowDown-icon';
 
 export type HeaderProps = {};
 
 const MenuItems = [
   {
     id: 1,
-    title: "React",
-    subTitle: "A JavaScript library for building user interfaces",
+    title: 'React',
+    subTitle: 'A JavaScript library for building user interfaces',
     svg: <ReactIcon />,
   },
   {
     id: 2,
-    title: "Node Js",
-    subTitle: "JavaScript runtime built on Chrome V8 JavaScript engine.",
+    title: 'Node Js',
+    subTitle: 'JavaScript runtime built on Chrome V8 JavaScript engine.',
     svg: <NodeIcon />,
   },
   {
     id: 3,
-    title: "Javascript",
-    subTitle:
-      "just-in-time compiled programming language with first-class functions",
+    title: 'Javascript',
+    subTitle: 'just-in-time compiled programming language with first-class functions',
     svg: <JavascriptIcon />,
   },
   {
     id: 4,
-    title: "Css",
+    title: 'Css',
     subTitle:
-      "stylesheet language used to describe the presentation of a document written in HTML or XML",
+      'stylesheet language used to describe the presentation of a document written in HTML or XML',
     svg: <CssIcon />,
   },
 ];
@@ -48,39 +47,39 @@ const MenuItems = [
 const HeaderTopicItems = [
   {
     id: 1,
-    title: "React Js",
+    title: 'React Js',
   },
   {
     id: 2,
-    title: "Node Js",
+    title: 'Node Js',
   },
   {
     id: 3,
-    title: "Javascript",
+    title: 'Javascript',
   },
   {
     id: 4,
-    title: "Css",
+    title: 'Css',
   },
 ];
 
 function Header({}: HeaderProps) {
   return (
-    <div className='flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between'>
-      <div className='flex items-center'>
-        <Link href='/'>
-          <div className='cursor-pointer flex items-center'>
+    <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between ">
+      <div className="flex items-center">
+        <Link href="/">
+          <div className="cursor-pointer flex items-center">
             <LogoIcon />
           </div>
         </Link>
 
-        <div className='flex items-center mxl:hidden'>
-          <div className='group w-6  mr-8 ml-8'>
+        <div className="flex items-center mxl:hidden">
+          <div className="group w-6  mr-8 ml-8">
             <MenuIcon />
-            <nav className='absolute mt-5 bg-white'>
-              <div className='group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 '>
-                <ul className='grid grid-cols-2 p-4'>
-                  {MenuItems.map((e) => (
+            <nav className="absolute mt-5 bg-white">
+              <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
+                <ul className="grid grid-cols-2 p-4">
+                  {MenuItems.map(e => (
                     <li key={e.id}>
                       <HeaderMenuItems {...e} />
                     </li>
@@ -90,37 +89,37 @@ function Header({}: HeaderProps) {
             </nav>
           </div>
 
-          <div className='mr-8'>
+          <div className="mr-8">
             <div>
-              <a>
-                <svg className='icon-arrow before'>
-                  <use xlinkHref='#arrow' />
+              <a className="link_a">
+                <svg className="icon-arrow before">
+                  <use xlinkHref="#arrow" />
                 </svg>
-                <span className='label'>See All Posts</span>
-                <svg className='icon-arrow after'>
-                  <use xlinkHref='#arrow' />
+                <span className="label  font-Cabin  font-medium">See All Posts</span>
+                <svg className="icon-arrow after">
+                  <use xlinkHref="#arrow" />
                 </svg>
               </a>
-              <svg style={{ display: "none" }}>
+              <svg style={{ display: 'none' }}>
                 <defs>
-                  <symbol id='arrow' viewBox='0 0 35 15'>
+                  <symbol id="arrow" viewBox="0 0 35 15">
                     <title>Arrow</title>
-                    <path d='M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z ' />
+                    <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z " />
                   </symbol>
                 </defs>
               </svg>
             </div>
           </div>
 
-          <div className='group'>
-            <div className='flex items-center'>
-              <div className='mr-2 font-medium'>Tags</div>
+          <div className="group">
+            <div className="flex items-center">
+              <div className="mr-2   font-Cabin  font-medium">Tags</div>
               <ArrowDownIcon />
             </div>
-            <nav className='absolute mt-5 bg-white'>
-              <div className='group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 '>
-                <ul className='grid grid-cols-3  pl-4 pr-4  pt-4 mb-2 '>
-                  {HeaderTopicItems.map((e) => (
+            <nav className="absolute mt-5 bg-white">
+              <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
+                <ul className="grid grid-cols-3  pl-4 pr-4  pt-4 mb-2 ">
+                  {HeaderTopicItems.map(e => (
                     <li key={e.id}>
                       <HeaderTopicItem {...e} />
                     </li>
@@ -132,29 +131,34 @@ function Header({}: HeaderProps) {
         </div>
       </div>
 
-      <div className='flex flex-end items-center'>
-        <div className='search'>
-          <input type='text' className='input' />
-          <div className='close'>
-            <span className='front' />
-            <span className='back' />
+      <div className="flex flex-end items-center">
+        <div className="search">
+          <input type="text" className="input" />
+          <div className="close">
+            <span className="front" />
+            <span className="back" />
           </div>
         </div>
-        <div className='ml-8 mxl:hidden text-sm font-medium'>Log In</div>
-        <div
-          className='flex  text-sm items-center ml-8 mxl:hidden text-black px-4  font-medium  rounded h-8 '
-          style={{
-            backgroundImage:
-              "linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)",
-          }}
-        >
-          Register
+        <Link href="/signin">
+          <div className="ml-8 mxl:hidden text-sm  cursor-pointer  font-Cabin  font-medium">
+            Login
+          </div>
+        </Link>
+        <Link href="/signup">
+          <div
+            className="flex cursor-pointer  text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
+            style={{
+              backgroundImage:
+                'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',
+            }}>
+            Register
+          </div>
+        </Link>
+        <div className="ml-8 mxl:hidden">
+          <MdOutlineDarkMode size="25" />
         </div>
-        <div className='ml-8 mxl:hidden'>
-          <MdOutlineDarkMode size='25' />
-        </div>
-        <div className='ml-8 mxl:hidden'>
-          <AiOutlineGlobal size='25' />
+        <div className="ml-8 mxl:hidden">
+          <AiOutlineGlobal size="25" />
         </div>
       </div>
     </div>

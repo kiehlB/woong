@@ -6,35 +6,31 @@ import { motion } from 'framer-motion';
 import useRegister from './hooks/useRegister';
 
 export interface AuthFormProps {
-  loading?: boolean;
-  onToggleMode?: () => void;
-  onSendAuthEmail?: (email: string) => void;
-  registered?: boolean | null;
-  currentPath?: string;
-  email?: string;
-  password?: string;
+  inputs: any;
+  handleChange: any;
+  handleSubmit: any;
+  authError: any;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
-  onToggleMode,
-  onSendAuthEmail,
-  loading,
-  registered,
-  currentPath,
-  email,
-  password,
+  inputs,
+  handleChange,
+  handleSubmit,
+  authError,
 }) => {
-  const { inputs, handleChange, handleSubmit, registerError } = useRegister();
-
-  console.log(registerError);
-
   return (
     <>
+      <div className="mt-2 text-xs text-red-600 mlg:text-center">
+        {authError?.graphQLErrors.map(({ message }, i) => (
+          <span key={i}>* {message}</span>
+        ))}
+      </div>
       <form className="mt-8 px-1" onSubmit={handleSubmit}>
         <div className="flex items-center">
           <div className="form">
             <input
               type="text"
+              id="email"
               name="email"
               className="form__input"
               autoComplete="off"
@@ -72,7 +68,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.8 }}
-          className="flex bg-[#fcd435] rounded text-[#202630] mt-6  h-12   justify-center items-center font-medium  font-main tracking-widest w-full ">
+          className="flex bg-[#fcd435] rounded text-[#202630] mt-6  h-12   justify-center items-center      tracking-widest w-full ">
           Reigster
         </motion.button>
       </form>
@@ -86,4 +82,4 @@ const AuthForm: React.FC<AuthFormProps> = ({
   );
 };
 
-export default AuthForm;
+export default React.memo(AuthForm);
