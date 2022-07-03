@@ -2,12 +2,14 @@
   "name": "nestclient",
   "version": "0.1.0",
   "private": true,
+  
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+   
   "dependencies": {
     "@apollo/client": "^3.6.6",
     "@headlessui/react": "^1.6.2",
@@ -23,10 +25,12 @@
     "next": "12.1.6",
     "node-sass": "^7.0.1",
     "postcss": "^8.4.14",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
     "react-spring": "^9.4.5",
+    "suneditor": "^2.43.13",
+    "suneditor-react": "^3.4.0",
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {

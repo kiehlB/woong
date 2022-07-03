@@ -30,10 +30,13 @@ export const getUsersQuery = gql`
 `;
 
 export const meQuery = gql`
-  query Me {
-    me {
-      id
-      username
+  query WhoAmI {
+    whoAmI {
+      error
+      ok
+      user {
+        id
+      }
     }
   }
 `;

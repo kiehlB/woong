@@ -10,6 +10,7 @@ export interface AuthFormProps {
   handleChange: any;
   handleSubmit: any;
   authError: any;
+  auth: string;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
@@ -17,6 +18,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   handleChange,
   handleSubmit,
   authError,
+  auth,
 }) => {
   return (
     <>
@@ -38,9 +40,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               value={inputs?.email}
               onChange={handleChange}
             />
-            <label
-              htmlFor="email"
-              className="form__label text-zinc-400 font-semibold  font-lato ">
+            <label htmlFor="email" className="form__label text-zinc-400    font-Roboto  ">
               Email
             </label>
           </div>
@@ -60,7 +60,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             />
             <label
               htmlFor="password"
-              className="form__label    text-zinc-400 font-semibold  font-lato">
+              className="form__label    text-zinc-400  font-Roboto ">
               Password
             </label>
           </div>
@@ -68,13 +68,13 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.8 }}
-          className="flex bg-[#fcd435] rounded text-[#202630] mt-6  h-12   justify-center items-center      tracking-widest w-full ">
-          Reigster
+          className="flex bg-[#fcd435] rounded text-[#202630] mt-6  h-12   justify-center items-center  font-Cabin   tracking-widest w-full ">
+          {auth}
         </motion.button>
       </form>
       <div className="flex mt-4 items-center  justify-between px-1">
         <div className="w-[136px] h-[1px] bg-[#EAECEF] "></div>
-        <div className="text-[#707a8a] font-semibold">Or</div>
+        <div className="text-[#707a8a]  font-Roboto">Or</div>
         <div className="w-[136px] h-[1px] bg-[#EAECEF] "></div>
       </div>
       <AuthSocialButtonGroup />

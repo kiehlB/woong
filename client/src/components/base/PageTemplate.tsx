@@ -11,7 +11,7 @@ function PageTemplate({ children }: PageTemplateProps) {
   return (
     <>
       <Header />
-      <FloatingHeader />
+      {/* <FloatingHeader /> */}
       {children}
     </>
   );

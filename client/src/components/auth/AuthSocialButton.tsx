@@ -43,7 +43,7 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.8 }}
-        className="flex bg-white rounded text-[#202630] border-[1px] h-12  justify-center items-center  mt-4 cursor-pointer  font-lato font-semibold"
+        className="flex bg-white rounded text-[#202630] border-[1px] h-12  justify-center items-center  mt-4 cursor-pointer   font-Roboto"
         tabIndex={tabIndex}>
         <div className="px-4">
           <Icon />

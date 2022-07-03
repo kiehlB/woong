@@ -29,7 +29,8 @@ export class PostService {
     const postsRepo = await this.PostRepository;
 
     const newUserProfile = await postsRepo.create({
-      title: post,
+      title: post.title,
+      body: post.body,
     });
 
     await postsRepo.save(newUserProfile);

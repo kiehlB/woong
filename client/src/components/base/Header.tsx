@@ -13,6 +13,7 @@ import CssIcon from '../../static/svg/css-icon';
 import LogoIcon from '../../static/svg/logo-icon';
 import MenuIcon from '../../static/svg/menu-icon';
 import ArrowDownIcon from '../../static/svg/arrowDown-icon';
+import useGetUser from '../auth/hooks/useWhoAmI';
 
 export type HeaderProps = {};
 
@@ -64,6 +65,8 @@ const HeaderTopicItems = [
 ];
 
 function Header({}: HeaderProps) {
+  const { loading, error, getUser, logoutButton } = useGetUser();
+
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between ">
       <div className="flex items-center">
@@ -139,9 +142,10 @@ function Header({}: HeaderProps) {
             <span className="back" />
           </div>
         </div>
+
         <Link href="/signin">
           <div className="ml-8 mxl:hidden text-sm  cursor-pointer  font-Cabin  font-medium">
-            Login
+            {!loading && getUser?.whoAmI?.ok ? '' : 'Login'}
           </div>
         </Link>
         <Link href="/signup">
@@ -151,7 +155,7 @@ function Header({}: HeaderProps) {
               backgroundImage:
                 'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',
             }}>
-            Register
+            {!loading && getUser?.whoAmI?.ok ? 'Logout' : 'Register'}
           </div>
         </Link>
         <div className="ml-8 mxl:hidden">

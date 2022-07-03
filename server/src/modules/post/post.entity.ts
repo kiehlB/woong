@@ -25,6 +25,10 @@ export class Post {
   @Column()
   title: string;
 
+  @Field((type) => String, { nullable: true })
+  @Column()
+  body: string;
+
   @Field((type) => Int, { nullable: true })
   @Column({ type: 'int', default: 0 })
   likes!: number;

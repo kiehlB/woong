@@ -15,9 +15,9 @@ function Signin({}: SigninProps) {
         <div className="flex justify-center items-center  h-10 shadow">
           <SslIcon />
           <div className="flex text-xs">
-            <div className="font-medium">URL verification:&nbsp;</div>
-            <div className="text-[#0ECB81]"> https:// </div>
-            <div className="text-[#1E2329]">woongblog.io</div>
+            <div className="font-medium font-Roboto">URL verification:&nbsp;</div>
+            <div className="text-[#0ECB81] font-Roboto"> https:// </div>
+            <div className="text-[#1E2329] font-Roboto">woongblog.io</div>
           </div>
         </div>
       </div>
@@ -27,6 +27,7 @@ function Signin({}: SigninProps) {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           authError={loginError}
+          auth="Login"
         />
       </Auth>
     </PageTemplate>

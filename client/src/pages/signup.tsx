@@ -16,6 +16,7 @@ function SignUp({}: SignUpProps) {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           authError={registerError}
+          auth="Register"
         />
       </Auth>
     </PageTemplate>

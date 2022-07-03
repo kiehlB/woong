@@ -9,12 +9,16 @@ import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { ErrorsInterceptor } from './interceptors/exception.interceptor';
+import * as bodyParser from 'body-parser';
 
 const prod = process.env.NODE_ENV === 'production';
 const PORT = process.env.PORT || 4000;
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
   app.enableCors({
     origin: 'http://localhost:3000',
@@ -27,7 +31,6 @@ async function bootstrap() {
   }
 
   app.use(cookieParser());
-  app.enableCors();
 
   app.useGlobalFilters(new HttpExceptionFilter());
 

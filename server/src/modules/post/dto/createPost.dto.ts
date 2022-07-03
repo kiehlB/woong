@@ -12,6 +12,10 @@ export class CreatePostRequest {
   @Field((type) => String)
   @IsString()
   title?: string;
+
+  @Field((type) => String)
+  @IsString()
+  body?: string;
 }
 
 @ObjectType()
