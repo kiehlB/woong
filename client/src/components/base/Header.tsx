@@ -116,7 +116,7 @@ function Header({}: HeaderProps) {
 
           <div className="group">
             <div className="flex items-center">
-              <div className="mr-2   font-Cabin  font-medium">Tags</div>
+              <div className="mr-2 font-Cabin  font-medium">Tags</div>
               <ArrowDownIcon />
             </div>
             <nav className="absolute mt-5 bg-white">
@@ -131,6 +131,7 @@ function Header({}: HeaderProps) {
               </div>
             </nav>
           </div>
+          <div className="ml-8">Glossaries</div>
         </div>
       </div>
 

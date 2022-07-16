@@ -9,7 +9,7 @@ function reducer(state, action) {
 export default function useForm(initialForm) {
   const [state, dispatch] = useReducer(reducer, initialForm);
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (e: angeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       e.persist();
       dispatch(e.target);
     },
