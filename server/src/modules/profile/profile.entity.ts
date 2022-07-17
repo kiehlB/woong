@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
-import { User } from '../user/user.entity';
+import { User } from '../user/entitiy/user.entity';
 
 @ObjectType()
 @Entity()
@@ -22,8 +22,13 @@ export class UserProfile {
   @Column()
   bio: string;
 
+  @Field((type) => String, { nullable: true })
+  @Column()
+  user_id!: string;
+
   @Field((type) => User, { nullable: true })
   @OneToOne((type) => User, (user: User) => user.profile)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @Field((type) => Date)

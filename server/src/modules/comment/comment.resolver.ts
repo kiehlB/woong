@@ -19,7 +19,6 @@ import {
   Int,
 } from '@nestjs/graphql';
 import { Comments } from './comment.entity';
-import { User } from '../user/user.entity';
 import { CurrentUser } from 'src/decorator/auth-user.decorator';
 import { CommentService } from './comment.service';
 import { CreateCommentRequest } from './dto/createComment.dto';

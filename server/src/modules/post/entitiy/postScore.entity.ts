@@ -10,16 +10,16 @@ import {
   JoinColumn,
   Index,
 } from 'typeorm';
-import { Tag } from '../tag/tag.entity';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
-import { User } from '../user/user.entity';
+import { User } from 'src/modules/user/entitiy/user.entity';
+import { Post } from './post.entity';
 
 @ObjectType()
 @Entity()
 export class PostScore {
   @Field(() => Int, { nullable: true })
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Field(() => String, { nullable: true })
   @Column({ length: 255 })
@@ -45,9 +45,9 @@ export class PostScore {
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
-  // @ManyToOne((type) => Post)
-  // @JoinColumn({ name: 'post_id' })
-  // post!: Post;
+  @ManyToOne((type) => Post)
+  @JoinColumn({ name: 'post_id' })
+  post!: Post;
 
   @Field((type) => Date)
   @Column('timestampz')

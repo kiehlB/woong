@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 
 import { TagService } from './tag.service';
-import { Tag } from './tag.entity';
 
 import {
   Resolver,
@@ -24,6 +23,7 @@ import {
 } from '@nestjs/graphql';
 import { CreateTagRequest } from './dto/createTag.dto';
 import { FindTagRequest } from './dto/findTag.dto';
+import { Tag } from './entity/tag.entity';
 
 @Resolver((of) => Tag)
 export class TagResolver {

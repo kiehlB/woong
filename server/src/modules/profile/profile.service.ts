@@ -3,9 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { Repository, MoreThanOrEqual, FindManyOptions, In } from 'typeorm';
 import { UserProfile } from './profile.entity';
-import { User } from '../user/user.entity';
-import { TokenUser } from 'src/decorator/auth-user.decorator';
-import { UserService } from '../user/users.service';
 
 @Injectable()
 export class UserProfileService {
@@ -17,7 +14,11 @@ export class UserProfileService {
   async createAndUpdateProfile(user, bio) {
     const profile = await this.profileRepository;
 
-    const newUserProfile = await profile.create({ id: user.id, bio: bio.bio });
+    const newUserProfile = await profile.create({
+      id: user.id,
+      bio: bio.bio,
+      user_id: user.id,
+    });
 
     await profile.save(newUserProfile);
 

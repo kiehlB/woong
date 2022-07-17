@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 import SocialUser from './socialUser.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Auth } from './auth.entity';
-import { User } from '../user/user.entity';
+import { User } from '../user/entitiy/user.entity';
 
 dotenv.config();
 

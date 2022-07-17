@@ -58,7 +58,7 @@ type Query {
   findAllComments: [Comments!]!
   findAllPost: [Post!]!
   findPost: [Post!]!
-  getAllUser: [User!]
+  getAllUser: [GetUserInfoResponse!]
   getUser(input: getUserInfo!): GetUserInfoResponse!
   whoAmI: GetUserInfoResponse!
 }
@@ -94,6 +94,7 @@ type UserProfile {
   id: Int
   updated_at: DateTime!
   user: User
+  user_id: String
 }
 
 input craeteArtice {

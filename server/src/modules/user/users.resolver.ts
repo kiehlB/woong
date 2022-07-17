@@ -10,7 +10,7 @@ import {
 } from '@nestjs/graphql';
 import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { UserService } from './users.service';
-import { User } from './user.entity';
+
 import { CurrentUser, TokenUser } from '../../decorator/auth-user.decorator';
 import {
   GetUserinfoRequest,
@@ -22,7 +22,7 @@ import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
 import { UserProfileService } from '../profile/profile.service';
 import { UserProfile } from '../profile/profile.entity';
 import DataLoader from 'dataloader';
-import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
+import { User } from './entitiy/user.entity';
 
 @Resolver((of) => User)
 export class UserResolver {
@@ -37,11 +37,11 @@ export class UserResolver {
     return { ok: true, user };
   }
 
-  @Query(() => [User], { nullable: true })
-  async getAllUser() {
+  @Query(() => [GetUserInfoResponse], { nullable: true })
+  async getAllUser(): Promise<GetUsersInfoResponse> {
     const users = await this.usersService.getAllUser();
 
-    return users;
+    return { ok: true, users };
   }
 
   @Query(() => GetUserInfoResponse)

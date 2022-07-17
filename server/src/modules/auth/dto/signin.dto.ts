@@ -1,6 +1,6 @@
 import { ObjectType, InputType, PickType, Field } from '@nestjs/graphql';
 import { IsNotEmpty } from 'class-validator';
-import { User } from 'src/modules/user/user.entity';
+import { User } from '../../user/entitiy/user.entity';
 
 @InputType('InputSignin')
 export class SigninRequest extends PickType(User, ['email', 'password']) {}

@@ -23,7 +23,7 @@ export const ListTrail: React.FC<ListTrailProps> = ({
   });
 
   return (
-    <>
+    <div className="flex flex-wrap">
       {trail.map((style, index) => {
         return (
           <C key={index} style={style} {...setItemContainerProps(index)}>
@@ -31,6 +31,6 @@ export const ListTrail: React.FC<ListTrailProps> = ({
           </C>
         );
       })}
-    </>
+    </div>
   );
 };

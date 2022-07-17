@@ -18,7 +18,6 @@ import {
   Context,
   Int,
 } from '@nestjs/graphql';
-import { User } from '../user/user.entity';
 import { Follow } from './follower.entity';
 import { FollowerService } from './follower.service';
 

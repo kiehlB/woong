@@ -1,11 +1,8 @@
-import Image from 'next/image';
-import { BiSearchAlt } from 'react-icons/bi';
 import { MdOutlineDarkMode, MdDarkMode } from 'react-icons/md';
 import { AiOutlineGlobal } from 'react-icons/ai';
 import Link from 'next/link';
 import HeaderMenuItems from './HeaderMenuItem';
 import HeaderTopicItem from './HeaderTopicItem';
-import { useState } from 'react';
 import ReactIcon from '../../static/svg/react-icon';
 import NodeIcon from '../../static/svg/node-icon';
 import JavascriptIcon from '../../static/svg/javascript-icon';

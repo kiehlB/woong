@@ -7,11 +7,12 @@ import { JwtService } from '@nestjs/jwt';
 import { sign } from 'jsonwebtoken';
 import authConfig from './auth-config.development.template';
 import { UserService } from '../user/users.service';
-import { User } from '../user/user.entity';
 import { TokenUser } from 'src/decorator/auth-user.decorator';
-import { getRepository, Repository } from 'typeorm';
-import SocialUser from './socialUser.entity';
+import { Repository } from 'typeorm';
+
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '../user/entitiy/user.entity';
+import SocialUser from './entitiy/socialUser.entity';
 
 @Injectable()
 export class AuthService {

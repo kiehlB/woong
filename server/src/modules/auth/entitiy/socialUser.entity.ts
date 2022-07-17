@@ -1,4 +1,5 @@
 import { Field, Int } from '@nestjs/graphql';
+import { User } from '../../user/entitiy/user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -8,7 +9,6 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../user/user.entity';
 
 @Entity('social_user', {
   synchronize: true,

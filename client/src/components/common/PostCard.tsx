@@ -38,7 +38,9 @@ function PostCard({}: PostCardProps) {
           const article = a[index];
           return (
             <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
-              <a className="text-black" aria-label={article.title}>
+              <a
+                className="text-black  flex  border-2 w-96 flex-wrap"
+                aria-label={article.title}>
                 {article.title}
               </a>
             </Link>

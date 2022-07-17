@@ -19,7 +19,7 @@ import {
   Int,
 } from '@nestjs/graphql';
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
-import { User } from '../user/user.entity';
+
 import { PostLike } from './PostLike.entity';
 import { PostLikeService } from './postLike.service';
 

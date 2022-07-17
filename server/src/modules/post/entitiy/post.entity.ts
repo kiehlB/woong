@@ -10,16 +10,19 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { Tag } from '../tag/tag.entity';
-import { Comments } from '../comment/comment.entity';
-import { PostLike } from '../postLike/postLike.entity';
+import { Tag } from 'src/modules/tag/entity/tag.entity';
+import { Comments } from 'src/modules/comment/comment.entity';
 
 @ObjectType()
 @Entity()
 export class Post {
   @Field(() => Int, { nullable: true })
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
+
+  @Field((type) => String, { nullable: true })
+  @Column({ length: 255, nullable: true, type: 'varchar' })
+  thumbnail!: string | null;
 
   @Field((type) => String, { nullable: true })
   @Column()
@@ -43,10 +46,10 @@ export class Post {
   @UpdateDateColumn()
   updated_at!: Date;
 
-  // @Field((type) => [Tag], { nullable: true })
-  // @ManyToMany(() => Tag, (tag) => tag.posts, { cascade: true })
-  // @JoinTable()
-  // tags!: Tag[];
+  @Field((type) => [Tag], { nullable: true })
+  @ManyToMany(() => Tag, (tag) => tag.posts, { cascade: true })
+  @JoinTable()
+  tags!: Tag[];
 
   @Field((type) => Comments)
   @OneToMany((type) => Comments, (comments) => comments.post)

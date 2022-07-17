@@ -1,6 +1,7 @@
 import * as DataLoader from 'dataloader';
 import { mapFromArray } from '../../common/utils/normalize';
-import { Tag } from './tag.entity';
+import { Tag } from './entity/tag.entity';
+
 import { TagService } from './tag.service';
 
 export function createTagsLoader(tagsService: TagService) {

@@ -10,7 +10,6 @@ import {
 } from '@nestjs/graphql';
 import { UserProfile } from './profile.entity';
 import { UserProfileService } from './profile.service';
-import { User } from '../user/user.entity';
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
 import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
 import { CreateProfileRequest } from './dto/createProfile.dto';

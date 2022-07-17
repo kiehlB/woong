@@ -6,7 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { User } from '../user/user.entity';
+import { User } from '../../user/entitiy/user.entity';
 
 @InputType('InputSignin', { isAbstract: true })
 @ObjectType()

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './modules/user/user.entity';
+
 import { UserModule } from './modules/user/user.module';
 import { ApolloDriver } from '@nestjs/apollo';
 import { UserProfileModule } from './modules/profile/profile.module';
@@ -19,6 +19,7 @@ import { CommentModule } from './modules/comment/comment.module';
 import { Post } from './modules/post/post.entity';
 import { Comments } from './modules/comment/comment.entity';
 import SocialUser from './modules/auth/socialUser.entity';
+import { User } from './modules/user/entitiy/user.entity';
 
 @Module({
   imports: [

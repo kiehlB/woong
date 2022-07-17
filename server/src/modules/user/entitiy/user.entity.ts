@@ -9,11 +9,12 @@ import {
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
-import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
-import { UserProfile } from '../profile/profile.entity';
+
 import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcryptjs';
+import { UserProfile } from 'src/modules/profile/profile.entity';
 
 @InputType('InputSignin', { isAbstract: true })
 @ObjectType()

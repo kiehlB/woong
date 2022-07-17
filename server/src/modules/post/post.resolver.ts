@@ -22,13 +22,13 @@ import {
   Int,
 } from '@nestjs/graphql';
 
-import { User } from '../user/user.entity';
 import { UserService } from '../user/users.service';
 import { PostService } from './post.service';
 import { CreatePostRequest, CreatePostResponse } from './dto/createPost.dto';
-import { Post } from './post.entity';
+
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
 import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
+import { Post } from './entitiy/post.entity';
 
 @Resolver()
 export class PostResolver {

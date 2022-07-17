@@ -10,7 +10,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
-import { User } from '../user/user.entity';
+import { User } from '../user/entitiy/user.entity';
 
 @ObjectType()
 @Entity()
