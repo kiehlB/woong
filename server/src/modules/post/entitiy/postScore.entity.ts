@@ -27,12 +27,12 @@ export class PostScore {
 
   @Field(() => String, { nullable: true })
   @Index()
-  @Column('uuid')
+  @Column()
   user_id!: string;
 
   @Field(() => String, { nullable: true })
   @Index()
-  @Column('uuid')
+  @Column()
   post_id!: string;
 
   @Field(() => Int, { nullable: true })

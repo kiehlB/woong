@@ -44,14 +44,14 @@ export class PostResolver {
     return this.postService.findAll();
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Post)
   async createPost(
     @CurrentUser() user: TokenUser,
     @Args('input') post: CreatePostRequest,
-  ) {
-    const saveProfile = await this.postService.createPost(user, post);
+  ): Promise<Post> {
+    const savePost = await this.postService.createPost(user, post);
 
-    return saveProfile;
+    return savePost;
   }
 }

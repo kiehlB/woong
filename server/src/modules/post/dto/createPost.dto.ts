@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 
-@InputType('craeteArtice')
+@InputType('craetePost')
 export class CreatePostRequest {
   @Field((type) => String)
   @IsString()
@@ -16,6 +16,14 @@ export class CreatePostRequest {
   @Field((type) => String)
   @IsString()
   body?: string;
+
+  @Field((type) => String)
+  @IsString()
+  thumbnail?: string;
+
+  @Field((type) => [String])
+  @IsString()
+  tags?: string;
 }
 
 @ObjectType()

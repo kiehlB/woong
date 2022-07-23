@@ -34,7 +34,7 @@ input InputSignin {
 
 type Mutation {
   createAndUpdateProfile(input: createProfile!): ProfileResponse!
-  createPost(input: craeteArtice!): Post!
+  createPost(input: craetePost!): Post!
   register(input: registerInput!): RegisterResponse!
   signin(input: InputSignin!): SigninResponse!
 }
@@ -45,6 +45,8 @@ type Post {
   created_at: DateTime!
   id: Int
   likes: Int
+  tags: [Tag!]
+  thumbnail: String
   title: String
   updated_at: DateTime!
 }
@@ -73,6 +75,14 @@ type SigninResponse {
   token: String!
 }
 
+type Tag {
+  created_at: DateTime!
+  id: Int!
+  name: [String!]!
+  name_filtered: String!
+  updated_at: DateTime!
+}
+
 type User {
   created_at: DateTime
   email: String
@@ -97,8 +107,10 @@ type UserProfile {
   user_id: String
 }
 
-input craeteArtice {
+input craetePost {
   body: String!
+  tags: [String!]!
+  thumbnail: String!
   title: String!
 }
 

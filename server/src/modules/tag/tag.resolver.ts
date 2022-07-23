@@ -29,10 +29,10 @@ import { Tag } from './entity/tag.entity';
 export class TagResolver {
   constructor(private readonly tagService: TagService) {}
 
-  @Mutation(() => Tag)
-  createTag(@Args('input') tag: CreateTagRequest): Promise<Tag> {
-    return this.tagService.create(tag);
-  }
+  // @Mutation(() => Tag)
+  // createTag(@Args('input') tag: CreateTagRequest): Promise<Tag> {
+  //   return this.tagService.create(tag);
+  // }
 
   // @ResolveField('post', () => Post)
   // async getPosts(

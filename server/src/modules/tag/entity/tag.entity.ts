@@ -9,9 +9,9 @@ import {
   ManyToOne,
   JoinColumn,
   RelationId,
+  Index,
 } from 'typeorm';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
-import { Post } from '../../post/entitiy/post.entity';
 
 @ObjectType()
 @Entity()
@@ -20,22 +20,14 @@ export class Tag {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Field((type) => String)
+  @Field((type) => [String])
   @Column({ length: 200 })
-  label: string;
+  name: string;
 
   @Field((type) => String)
-  @Column({ length: 200 })
-  value: string;
-
-  @Field((type) => Number)
-  @RelationId((tags: Tag) => tags.posts)
-  post_id!: number;
-
-  @Field((type) => Post)
-  @ManyToOne(() => Post, (post) => post.tags)
-  @JoinColumn({ name: 'post_id' })
-  posts: Post[];
+  @Index()
+  @Column({ length: 255 })
+  name_filtered!: string;
 
   @Field((type) => Date)
   @Column('timestampz')

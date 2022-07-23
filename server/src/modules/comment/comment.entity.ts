@@ -11,8 +11,9 @@ import {
 } from 'typeorm';
 
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
-import { Post } from '../post/post.entity';
+
 import { User } from '../user/entitiy/user.entity';
+import { Post } from '../post/entitiy/post.entity';
 
 @ObjectType()
 @Entity()

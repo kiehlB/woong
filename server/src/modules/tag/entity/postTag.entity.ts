@@ -15,20 +15,20 @@ import { Field, Int } from '@nestjs/graphql';
 import { Post } from '../../post/entitiy/post.entity';
 
 @Entity('posts_tags', {
-  synchronize: false,
+  synchronize: true,
 })
 export default class PostsTags {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Index()
+  @Field((type) => Number, { nullable: true })
   @Column()
-  post_id!: string;
+  post_id!: number;
 
-  @Index()
+  @Field((type) => Number, { nullable: true })
   @Column()
-  tag_id!: string;
+  tag_id!: number;
 
   @Column('timestampz')
   @CreateDateColumn()

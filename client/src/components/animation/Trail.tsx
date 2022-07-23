@@ -5,6 +5,7 @@ interface ListTrailProps {
   length: number;
   options: Record<string, unknown>;
   element?: string;
+  css?: string;
   setItemContainerProps?: (index: number) => Record<string, unknown>;
   renderItem: (index: number) => React.ReactNode;
 }
@@ -12,7 +13,8 @@ interface ListTrailProps {
 export const ListTrail: React.FC<ListTrailProps> = ({
   length,
   options,
-  element = 'li',
+  css,
+  element = 'div',
   setItemContainerProps = () => ({}),
   renderItem,
 }) => {
@@ -23,7 +25,7 @@ export const ListTrail: React.FC<ListTrailProps> = ({
   });
 
   return (
-    <div className="flex flex-wrap">
+    <div className={css}>
       {trail.map((style, index) => {
         return (
           <C key={index} style={style} {...setItemContainerProps(index)}>

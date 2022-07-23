@@ -8,7 +8,7 @@ import { ApolloDriver } from '@nestjs/apollo';
 import { UserProfileModule } from './modules/profile/profile.module';
 import { UserProfile } from './modules/profile/profile.entity';
 import { AuthModule } from './modules/auth/auth.module';
-import { Auth } from './modules/auth/auth.entity';
+
 import { UserService } from './modules/user/users.service';
 import { createUsersLoader } from './modules/user/users.loader';
 import { UserProfileService } from './modules/profile/profile.service';
@@ -16,10 +16,15 @@ import { createUserProfileLoader } from './modules/profile/profile.loader';
 
 import { PostModule } from './modules/post/post.module';
 import { CommentModule } from './modules/comment/comment.module';
-import { Post } from './modules/post/post.entity';
+
 import { Comments } from './modules/comment/comment.entity';
-import SocialUser from './modules/auth/socialUser.entity';
 import { User } from './modules/user/entitiy/user.entity';
+import { Post } from './modules/post/entitiy/post.entity';
+import SocialUser from './modules/auth/entitiy/socialUser.entity';
+import PostsTags from './modules/tag/entity/postTag.entity';
+import { Tag } from './modules/tag/entity/tag.entity';
+import PostRead from './modules/post/entitiy/postRead.entitiy';
+import { PostScore } from './modules/post/entitiy/postScore.entity';
 
 @Module({
   imports: [
@@ -29,7 +34,17 @@ import { User } from './modules/user/entitiy/user.entity';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
-        entities: [User, UserProfile, Post, Comments, SocialUser],
+        entities: [
+          User,
+          UserProfile,
+          Post,
+          Comments,
+          SocialUser,
+          PostsTags,
+          PostRead,
+          PostScore,
+          Tag,
+        ],
         host: configService.get('DB_HOST'),
         port: configService.get<number>('DB_PORT'),
         username: configService.get('DB_USER'),

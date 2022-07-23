@@ -11,13 +11,6 @@ export class TagService {
   ) {}
 
   async create(tag: Partial<Tag>): Promise<Tag> {
-    const { label } = tag;
-    const existTag = await this.tagRepository.findOne({ where: { label } });
-
-    if (existTag) {
-      throw new HttpException('Tag already exists', HttpStatus.BAD_REQUEST);
-    }
-
     const newTag = await this.tagRepository.create(tag);
     await this.tagRepository.save(newTag);
     return newTag;

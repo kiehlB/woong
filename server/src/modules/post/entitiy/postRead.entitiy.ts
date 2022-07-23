@@ -22,14 +22,14 @@ export default class PostRead {
   id: number;
 
   @Index()
-  @Column('uuid', {
+  @Column({
     nullable: true,
   })
-  fk_user_id!: string | null;
+  user_id!: string | null;
 
   @Index()
-  @Column('uuid')
-  fk_post_id!: string;
+  @Column()
+  post_id!: string;
 
   @Index()
   @Column({ length: 255 })

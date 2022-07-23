@@ -1,53 +1,24 @@
 import { ListTrail } from '../animation/Trail';
 import Link from 'next/link';
 
-export type PostCardProps = {};
+export type PostCardProps = {
+  article: any;
+};
 
-const a = [
-  {
-    id: 1,
-    title: '1',
-  },
-  {
-    id: 1,
-    title: '1',
-  },
-  { id: 1, title: '1' },
-  {
-    id: 1,
-    title: '1',
-  },
-  { id: 1, title: '1' },
-  { id: 1, title: '1' },
-  { id: 1, title: '1' },
-  { id: 1, title: '1' },
-  { id: 1, title: '1' },
-];
-function PostCard({}: PostCardProps) {
+function PostCard({ article }: PostCardProps) {
   return (
-    <div>
-      <ListTrail
-        length={a.length}
-        options={{
-          opacity: 1,
-          height: 48,
-          x: 0,
-          from: { opacity: 0, height: 0, x: -20 },
-        }}
-        renderItem={index => {
-          const article = a[index];
-          return (
-            <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
-              <a
-                className="text-black  flex  border-2 w-96 flex-wrap"
-                aria-label={article.title}>
-                {article.title}
-              </a>
-            </Link>
-          );
-        }}
-      />
-    </div>
+    <a className="text-black" aria-label={article.title}>
+      <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/76b56862bbb4490d84dc71f32f909174.png" />
+      <div> {article.title}</div>
+      <div> {article.title}</div>
+      <div> {article.title}</div>
+      <div> {article.title}</div>
+      <div> {article.title}</div>
+      <div> {article.title}</div>
+      <div> {article.title}</div>
+      <div> {article.title}</div>
+      <div> {article.title}</div>
+    </a>
   );
 }
 

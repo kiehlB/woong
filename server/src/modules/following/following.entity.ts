@@ -9,7 +9,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Tag } from '../tag/tag.entity';
+
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { User } from '../user/entitiy/user.entity';
 

@@ -172,3 +172,7 @@ a:active .icon-arrow {
   right: 24px;
   top: 13px;
 }
+
+ul {
+  list-style-type: none;
+}
