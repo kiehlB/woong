@@ -13,10 +13,10 @@ interface ListTrailProps {
 export const ListTrail: React.FC<ListTrailProps> = ({
   length,
   options,
-  css,
   element = 'div',
   setItemContainerProps = () => ({}),
   renderItem,
+  css,
 }) => {
   const C = (animated as any)[element];
   const trail = useTrail(length, {

@@ -1,14 +1,11 @@
 import * as React from 'react';
-import useInputs from '../../lib/hooks/useInputs';
-import EyeIcon from '../../static/svg/eye-icon';
-import GithubIcon from '../../static/svg/github-icon';
-import GoogleIcon from '../../static/svg/google-icon';
 
 export interface AuthProps {
-  children: React.ReactNode;
+  form: React.ReactNode;
+  bottom: React.ReactNode;
 }
 
-const Auth: React.FC<AuthProps> = ({ children }) => {
+const Auth: React.FC<AuthProps> = ({ form, bottom }) => {
   return (
     <div className="flex flex-1 h-full">
       <div className="w-full flex justify-center items-center ">
@@ -22,10 +19,11 @@ const Auth: React.FC<AuthProps> = ({ children }) => {
                 By creating an account you agree to our Terms and Conditions and Data
                 Protection Guidelines.
               </h2>
-              {children}
+              {form}
             </div>
             <img src="auth.svg" width="300px" className=" mlg:hidden" />
           </div>
+          {bottom}
         </div>
       </div>
     </div>

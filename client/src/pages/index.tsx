@@ -9,16 +9,32 @@ import Main from '../components/main';
 import useGetPosts from '../components/main/hooks/usegetPosts';
 import Link from 'next/link';
 import PostTitle from '../components/common/PostTitle';
+import { useIntersectionObserver } from '../lib/hooks/useIntersectionObserver';
+import { useInView } from 'framer-motion';
+import SvgCard from '../components/common/SvgCard';
+import Swing from '../static/svg/swing';
+import Bicycle from '../static/svg/bicycle';
+
+function Section({ children }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <section ref={ref}>
+      <div>{children}</div>
+    </section>
+  );
+}
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
-
-  if (loading) return <div></div>;
+  const ref = useRef(null);
+  const isInView = useInView(ref);
 
   const a = [
     {
       id: 1,
-      title: '1',
+      title: 'What Is PAX Gold (PAXG)?',
     },
     {
       id: 2,
@@ -36,28 +52,26 @@ const Home: NextPage = () => {
     { id: 9, title: '1' },
   ];
 
+  console.log(isInView);
   return (
     <>
       <PageTemplate>
         <Main />
+
         <div className="w-[71rem] mx-auto  mxl:w-[80%]">
-          <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
-
-          {/* <div className="grid  grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2 ">
-            {a.map(e => {
-              return (
-                <div key={e.id} className="border-2">
-                  <PostCard article={e} />
-                </div>
-              );
-            })}
-          </div> */}
-
           <div className="py-[3.5rem]">
             <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
 
-            <ListTrail
-              css="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2"
+            <div className="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2">
+              {a?.map(e => (
+                <div data-aos="fade-down" className=" shadow-lg rounded-xl">
+                  <PostCard article={e} />
+                </div>
+              ))}
+            </div>
+
+            {/* <ListTrail
+              css="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2 "
               length={a.length}
               options={{
                 opacity: 1,
@@ -67,22 +81,109 @@ const Home: NextPage = () => {
               renderItem={index => {
                 const article = a[index];
                 return (
-                  <div className="border-2 rounded-2xl">
-                    <Link
-                      href={`/article/[id]`}
-                      as={`/article/${article.id}`}
-                      scroll={false}>
-                      <PostCard article={article} />
-                    </Link>
-                  </div>
+                  <Link
+                    href={`/article/[id]`}
+                    as={`/article/${article.id}`}
+                    scroll={false}>
+                    <Section>
+                      <div className="border-2 rounded-2xl">
+                        <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/76b56862bbb4490d84dc71f32f909174.png" />
+                        {article.title}
+                      </div>
+                    </Section>
+                  </Link>
                 );
               }}
-            />
+            /> */}
+          </div>
+
+          <div className="border-2 grid  grid-cols-2 gap-8">
+            <div className="border-2 border-red-500 ">
+              <div>Earn crypto by learning about blockchain</div>
+              <div>
+                Build your blockchain knowledge, complete quizzes, and earn free crypto.
+              </div>
+              <div>Get Start</div>
+            </div>
+            <Swing />
           </div>
         </div>
+
+        <Bicycle />
       </PageTemplate>
     </>
   );
 };
 
 export default Home;
+
+{
+  /* <div>
+<div className="bats">
+  <div className="bat">
+    <div className="bat__head">
+      <div className="bat__eye" />
+      <div className="bat__eye" />
+    </div>
+    <div className="bat__wing" />
+    <div className="bat__wing" />
+  </div>
+  <div className="bat">
+    <div className="bat__head">
+      <div className="bat__eye" />
+      <div className="bat__eye" />
+    </div>
+    <div className="bat__wing" />
+    <div className="bat__wing" />
+  </div>
+  <div className="bat">
+    <div className="bat__head">
+      <div className="bat__eye" />
+      <div className="bat__eye" />
+    </div>
+    <div className="bat__wing" />
+    <div className="bat__wing" />
+  </div>
+  <div className="bat">
+    <div className="bat__head">
+      <div className="bat__eye" />
+      <div className="bat__eye" />
+    </div>
+    <div className="bat__wing" />
+    <div className="bat__wing" />
+  </div>
+  <div className="bat">
+    <div className="bat__head">
+      <div className="bat__eye" />
+      <div className="bat__eye" />
+    </div>
+    <div className="bat__wing" />
+    <div className="bat__wing" />
+  </div>
+  <div className="bat">
+    <div className="bat__head">
+      <div className="bat__eye" />
+      <div className="bat__eye" />
+    </div>
+    <div className="bat__wing" />
+    <div className="bat__wing" />
+  </div>
+  <div className="bat">
+    <div className="bat__head">
+      <div className="bat__eye" />
+      <div className="bat__eye" />
+    </div>
+    <div className="bat__wing" />
+    <div className="bat__wing" />
+  </div>
+  <div className="bat">
+    <div className="bat__head">
+      <div className="bat__eye" />
+      <div className="bat__eye" />
+    </div>
+    <div className="bat__wing" />
+    <div className="bat__wing" />
+  </div>
+</div>
+</div> */
+}

@@ -5,8 +5,22 @@ import type { AppProps } from 'next/app';
 import { useApollo } from '../lib/apolloClient';
 import { ApolloProvider } from '@apollo/client';
 
+import AOS from 'aos';
+
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
+
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
+
+  useEffect(() => {
+    AOS.init({
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50,
+    });
+  }, []);
+
   return (
     <>
       <ApolloProvider client={apolloClient}>

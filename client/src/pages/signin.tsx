@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import Auth from '../components/auth/Auth';
 import AuthForm from '../components/auth/AuthForm';
 import useLogin from '../components/auth/hooks/useLogin';
 import PageTemplate from '../components/base/PageTemplate';
+import Arrow from '../static/svg/arrow-icon';
 import SslIcon from '../static/svg/ssl-icon';
 
 export type SigninProps = {};
@@ -21,15 +23,25 @@ function Signin({}: SigninProps) {
           </div>
         </div>
       </div>
-      <Auth>
-        <AuthForm
-          inputs={inputs}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          authError={loginError}
-          auth="Login"
-        />
-      </Auth>
+      <Auth
+        form={
+          <AuthForm
+            inputs={inputs}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            authError={loginError}
+            auth="Login"
+            isRegister="Register now"
+            linkTo=""
+          />
+        }
+        bottom={
+          <div className="flex mt-6 items-center text-[0.875rem] font-medium font-Cabin text-[#C99400] ml-1 cursor-pointer">
+            <Link href="/signup"> Register now</Link>
+            <Arrow />
+          </div>
+        }
+      />
     </PageTemplate>
   );
 }

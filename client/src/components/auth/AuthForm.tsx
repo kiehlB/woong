@@ -11,6 +11,8 @@ export interface AuthFormProps {
   handleSubmit: any;
   authError: any;
   auth: string;
+  isRegister: string;
+  linkTo: string;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
@@ -19,6 +21,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
   handleSubmit,
   authError,
   auth,
+  isRegister,
+  linkTo,
 }) => {
   return (
     <>
