@@ -11,16 +11,22 @@ const SunEditor = dynamic(() => import('suneditor-react'), {
 });
 
 const WriteMarkdownEditor = props => {
-  const edtiorRef = useRef<SunEditorCore>();
+  const edtiorRef = useRef<any>();
 
   const { createPost } = useEditor();
 
+  console.log(edtiorRef);
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(edtiorRef?.current?.getContents(false));
+
     createPost({
       variables: {
-        input: { title: 'zzzz', body: edtiorRef?.current?.getContents(false) },
+        input: {
+          title: 'zzzz',
+          body: edtiorRef?.current?.getContents(false),
+          thumbnail: 'asdsad',
+          tags: ['dasd'],
+        },
       },
     });
   };

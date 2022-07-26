@@ -1,11 +1,17 @@
 import { ListTrail } from '../animation/Trail';
 import Link from 'next/link';
 
+interface InputProps {
+  id: number;
+  title: string;
+}
+
 export type PostCardProps = {
-  article: any;
+  article: InputProps;
 };
 
 function PostCard({ article }: PostCardProps) {
+  console.log(article);
   return (
     // <div data-aos="fade-down">
     <a className="text-black" aria-label={article.title}>

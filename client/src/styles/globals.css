@@ -389,7 +389,11 @@ ul {
   }
 }
 
-
+/* .sun-editor-editable .se-component {
+  display: inline-block;
+} */
+ 
+ 
  
 #wheel-right,
 #left-wheel {

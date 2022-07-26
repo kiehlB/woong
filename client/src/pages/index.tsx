@@ -14,6 +14,11 @@ import { useInView } from 'framer-motion';
 import SvgCard from '../components/common/SvgCard';
 import Swing from '../static/svg/swing';
 import Bicycle from '../static/svg/bicycle';
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2,
+} from 'react-html-parser';
 
 function Section({ children }) {
   const ref = useRef(null);
@@ -28,6 +33,8 @@ function Section({ children }) {
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
+
+  console.log(data);
   const ref = useRef(null);
   const isInView = useInView(ref);
 
@@ -52,9 +59,11 @@ const Home: NextPage = () => {
     { id: 9, title: '1' },
   ];
 
-  console.log(isInView);
   return (
     <>
+      {/* {data?.findAllPost?.map(e => (
+        <div dangerouslySetInnerHTML={{ __html: e.body }} />
+      ))} */}
       <PageTemplate>
         <Main />
 
@@ -69,32 +78,6 @@ const Home: NextPage = () => {
                 </div>
               ))}
             </div>
-
-            {/* <ListTrail
-              css="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2 "
-              length={a.length}
-              options={{
-                opacity: 1,
-                x: 0,
-                from: { opacity: 0, x: -20 },
-              }}
-              renderItem={index => {
-                const article = a[index];
-                return (
-                  <Link
-                    href={`/article/[id]`}
-                    as={`/article/${article.id}`}
-                    scroll={false}>
-                    <Section>
-                      <div className="border-2 rounded-2xl">
-                        <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/76b56862bbb4490d84dc71f32f909174.png" />
-                        {article.title}
-                      </div>
-                    </Section>
-                  </Link>
-                );
-              }}
-            /> */}
           </div>
 
           <div className="border-2 grid  grid-cols-2 gap-8">
@@ -186,4 +169,32 @@ export default Home;
   </div>
 </div>
 </div> */
+}
+
+{
+  /* <ListTrail
+              css="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2 "
+              length={a.length}
+              options={{
+                opacity: 1,
+                x: 0,
+                from: { opacity: 0, x: -20 },
+              }}
+              renderItem={index => {
+                const article = a[index];
+                return (
+                  <Link
+                    href={`/article/[id]`}
+                    as={`/article/${article.id}`}
+                    scroll={false}>
+                    <Section>
+                      <div className="border-2 rounded-2xl">
+                        <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/76b56862bbb4490d84dc71f32f909174.png" />
+                        {article.title}
+                      </div>
+                    </Section>
+                  </Link>
+                );
+              }}
+            /> */
 }

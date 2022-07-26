@@ -5,11 +5,18 @@ import AuthSocialButtonGroup from './AuthSocialButtonGroup';
 import { motion } from 'framer-motion';
 import useRegister from './hooks/useRegister';
 
+import { ApolloError, type ServerError } from '@apollo/client';
+
+interface inputProps {
+  password: string | number | readonly string[];
+  email: string | number | readonly string[];
+}
+
 export interface AuthFormProps {
-  inputs: any;
-  handleChange: any;
-  handleSubmit: any;
-  authError: any;
+  inputs: inputProps;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  authError: ApolloError;
   auth: string;
   isRegister: string;
   linkTo: string;
@@ -21,8 +28,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
   handleSubmit,
   authError,
   auth,
-  isRegister,
-  linkTo,
 }) => {
   return (
     <>

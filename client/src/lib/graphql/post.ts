@@ -1,10 +1,8 @@
 import gql from 'graphql-tag';
 
 export const Create_Post = gql`
-  mutation CreatePost($input: craeteArtice!) {
+  mutation CreatePost($input: createPost!) {
     createPost(input: $input) {
-      id
-      title
       body
     }
   }

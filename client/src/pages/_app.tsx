@@ -4,6 +4,7 @@ import '../styles/authInput.scss';
 import type { AppProps } from 'next/app';
 import { useApollo } from '../lib/apolloClient';
 import { ApolloProvider } from '@apollo/client';
+import { NextSeo } from 'next-seo';
 
 import AOS from 'aos';
 
@@ -23,6 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <NextSeo title="Woong blog" description="welcome to woong blog!" canonical="/" />
       <ApolloProvider client={apolloClient}>
         <Component {...pageProps} />
       </ApolloProvider>
