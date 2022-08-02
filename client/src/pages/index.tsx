@@ -93,6 +93,13 @@ const Home: NextPage = () => {
         </div>
 
         <Bicycle />
+
+        <div className="bg-[#14151A]">
+          <div className="text-white">Topics : </div>
+          <div className="text-[#aeb4bc]"> {a?.map(e => e.title)}</div>
+          <div>Difficulty:</div>
+          <div> {a?.map(e => e.title)}</div>
+        </div>
       </PageTemplate>
     </>
   );

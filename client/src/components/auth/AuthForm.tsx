@@ -5,7 +5,7 @@ import AuthSocialButtonGroup from './AuthSocialButtonGroup';
 import { motion } from 'framer-motion';
 import useRegister from './hooks/useRegister';
 
-import { ApolloError, type ServerError } from '@apollo/client';
+import { ApolloError } from '@apollo/client';
 
 interface inputProps {
   password: string | number | readonly string[];
