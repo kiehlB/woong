@@ -1,13 +1,10 @@
 import '../styles/globals.css';
 import '../styles/authInput.scss';
-
 import type { AppProps } from 'next/app';
 import { useApollo } from '../lib/apolloClient';
 import { ApolloProvider } from '@apollo/client';
 import { NextSeo } from 'next-seo';
-
 import AOS from 'aos';
-
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 

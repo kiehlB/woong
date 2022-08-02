@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback, useRef, useState } from "react";
-import { getScrollTop } from "../../lib/utils";
-import Header from "./Header";
+import React, { useEffect, useCallback, useRef, useState } from 'react';
+import { getScrollTop } from '../../lib/utils';
+import Header from './Header';
 
 export type FloatingHeaderProps = {};
 
@@ -16,16 +16,16 @@ function FloatingHeader(props: FloatingHeaderProps) {
   }, []);
 
   const prevScrollTop = useRef(0);
-  const direction = useRef<"UP" | "DOWN">("DOWN");
+  const direction = useRef<'UP' | 'DOWN'>('DOWN');
   const transitionPoint = useRef(0);
 
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
-    const nextDirection = prevScrollTop.current > scrollTop ? "UP" : "DOWN";
+    const nextDirection = prevScrollTop.current > scrollTop ? 'UP' : 'DOWN';
 
     if (
-      direction.current === "DOWN" &&
-      nextDirection === "UP" &&
+      direction.current === 'DOWN' &&
+      nextDirection === 'UP' &&
       transitionPoint.current - scrollTop < 0
     ) {
       setVisible(true);
@@ -33,8 +33,8 @@ function FloatingHeader(props: FloatingHeaderProps) {
     }
 
     if (
-      direction.current === "UP" &&
-      nextDirection === "DOWN" &&
+      direction.current === 'UP' &&
+      nextDirection === 'DOWN' &&
       scrollTop - transitionPoint.current < -1 * height
     ) {
       transitionPoint.current = scrollTop + height;
@@ -44,37 +44,34 @@ function FloatingHeader(props: FloatingHeaderProps) {
       setVisible(false);
     }
 
-    setMarginTop(
-      Math.min(0, -1 * height + transitionPoint.current - scrollTop)
-    );
+    setMarginTop(Math.min(0, -1 * height + transitionPoint.current - scrollTop));
 
     direction.current = nextDirection;
     prevScrollTop.current = scrollTop;
   }, [height]);
 
   useEffect(() => {
-    document.addEventListener("scroll", onScroll);
+    document.addEventListener('scroll', onScroll);
     return () => {
-      document.removeEventListener("scroll", onScroll);
+      document.removeEventListener('scroll', onScroll);
     };
   }, [onScroll]);
 
   return (
     <div
-      className='fixed top-0 w-full z-10 shadow'
+      className="fixed top-0 w-full z-10 shadow"
       style={
         visible
           ? {
               marginTop: marginTop,
-              display: "block",
+              display: 'block',
             }
           : {
               marginTop: -1 * height,
               opacity: 0,
             }
       }
-      ref={blockRef}
-    >
+      ref={blockRef}>
       <Header />
     </div>
   );

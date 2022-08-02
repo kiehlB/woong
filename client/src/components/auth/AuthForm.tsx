@@ -3,7 +3,6 @@ import useInputs from '../../lib/hooks/useInputs';
 import EyeIcon from '../../static/svg/eye-icon';
 import AuthSocialButtonGroup from './AuthSocialButtonGroup';
 import { motion } from 'framer-motion';
-import useRegister from './hooks/useRegister';
 
 import { ApolloError } from '@apollo/client';
 
