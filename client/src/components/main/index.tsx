@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { createMachine, interpret } from 'xstate';
 import { useSpring, animated } from 'react-spring';
+import { Button } from '../common/Button';
 
 export type MainProps = {};
 
@@ -45,11 +46,11 @@ function Main() {
   toggleService.send('TOGGLE');
 
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-2 font-Roboto">
       <div className="pt-[6rem] max-w-[35.5rem] ml-auto pr-[2rem] pl-[1rem] ">
-        <h1 className="font-semibold text-[#14151A]">LEARN ALL ABOUT</h1>
+        <h1 className="font-medium text-[#14151A]">LEARN ALL ABOUT</h1>
 
-        <div className="text-[4rem] mb-[1rem] font-semibold w-[80%] text-[#14151A] leading-[4.5rem]">
+        <div className="text-[4rem] mb-[1rem] font-medium w-[80%] text-[#14151A] leading-[4.5rem]">
           Learn Web & Security
         </div>
 
@@ -60,7 +61,9 @@ function Main() {
           understand mining or a veteran looking to develop a trading strategy, we've got
           you covered.
         </div>
-        <div>Start here</div>
+        <Button size="medium" variant="secondary" className="font-Roboto text-sm">
+          Start here
+        </Button>
       </div>
 
       <div className="bg-[#F5F5F5]">
@@ -74,15 +77,22 @@ function Main() {
               const rect = ref.current.getBoundingClientRect();
               set(calc(e.clientX, e.clientY, rect));
             }}>
-            <div className=" text-[#14151A] font-semibold  uppercase mb-[8px]">
+            <div className=" text-[#14151A] font-medium  uppercase mb-[8px]">
               FEATURED
             </div>
             <div className="grid  grid-cols-1">
-              <img src="/img/image.png" className="w-full h-auto  rounded" />
+              <img src="/img/image.png" className="w-full h-auto rounded" />
             </div>
-            <div className="py-[1rem]">How to Build a Well-Balanced Crypto Portfolio</div>
-            <div className="">Jul 12, 2021 8m</div>
-            <div className="pt-[1rem]">Beginner</div>
+            <div className="pt-4 text-[#14151A] leading-7 text-xl  font-medium  ">
+              How to Build a Well-Balanced Crypto Portfolio
+            </div>
+            <div className="text-[#76808F] leading-snug font-normal py-4">
+              Jul 12, 2021 8m
+            </div>
+            <div className="w-28 bg-[#02c07633] h-9 flex justify-center items-center rounded-lg">
+              <div className="bg-[#02C076] rounded-[50%] w-2 h-2 mr-2" />
+              <div className="text-[#474D57]">Beginner</div>
+            </div>
           </animated.div>
         </div>
       </div>

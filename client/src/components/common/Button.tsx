@@ -1,48 +1,87 @@
-import * as React from "react";
+import clsx from 'clsx';
+import * as React from 'react';
 
-type ColorType =
-  | "teal"
-  | "gray"
-  | "darkGray"
-  | "lightGray"
-  | "transparent"
-  | "red";
-type ButtonSize = "medium" | "large";
-
-interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, "size"> {
-  color?: ColorType;
-  inline?: boolean;
-  size?: ButtonSize;
-  responsive?: boolean;
+interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'danger';
+  size?: 'small' | 'medium' | 'large';
+  children: React.ReactNode | React.ReactNode[];
 }
 
-const Button: React.FC<ButtonProps> = ({
+function getClassName({ className }: { className?: string }) {
+  return clsx(
+    'group relative inline-flex   font-medium focus:outline-none opacity-100 disabled:opacity-50 transition',
+    className,
+  );
+}
+
+function ButtonInner({
   children,
-  ref,
-  color = "teal",
-  inline,
-  size = "medium",
-  responsive = false,
-  ...rest
-}) => {
-  const htmlProps = rest as any;
+  variant,
+  size = 'large',
+}: Pick<ButtonProps, 'children' | 'variant' | 'size'>) {
   return (
-    <button
-      color={color}
-      inline={inline}
-      size={size}
-      responsive={responsive}
-      {...htmlProps}
-      onClick={(e) => {
-        if (htmlProps.onClick) {
-          htmlProps.onClick(e);
-        }
-        (e.target as HTMLButtonElement).blur();
-      }}
-    >
-      {children}
+    <>
+      <div
+        className={clsx(
+          'focus-ring absolute inset-0 transform rounded-full opacity-100 transition disabled:opacity-50',
+          {
+            'border-secondary bg-primary border-2 group-hover:border-[#fcd435]':
+              variant === 'secondary' || variant === 'danger',
+            danger: variant === 'danger',
+            'bg-inverse': variant === 'primary',
+          },
+        )}
+      />
+
+      <div
+        className={clsx(
+          'relative flex h-full w-full items-center justify-center whitespace-nowrap',
+          {
+            'text-primary': variant === 'secondary',
+            'text-inverse': variant === 'primary',
+            'text-red-500': variant === 'danger',
+            'space-x-5 px-11 py-6': size === 'large',
+            'space-x-3 px-8 py-4': size === 'medium',
+            'space-x-1 px-5 py-2 text-sm': size === 'small',
+          },
+        )}>
+        {children}
+      </div>
+    </>
+  );
+}
+
+function Button({
+  children,
+  variant = 'primary',
+  size = 'large',
+  className,
+  ...buttonProps
+}: ButtonProps & JSX.IntrinsicElements['button']) {
+  return (
+    <button {...buttonProps} className={getClassName({ className })}>
+      <ButtonInner variant={variant} size={size}>
+        {children}
+      </ButtonInner>
     </button>
   );
-};
+}
 
-export default Button;
+function LinkButton({
+  className,
+  underlined,
+  ...buttonProps
+}: { underlined?: boolean } & JSX.IntrinsicElements['button']) {
+  return (
+    <button
+      {...buttonProps}
+      className={clsx(
+        className,
+        underlined ? 'underlined focus:outline-none whitespace-nowrap' : 'underline',
+        'text-primary inline-block',
+      )}
+    />
+  );
+}
+
+export { Button, LinkButton };
