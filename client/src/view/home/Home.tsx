@@ -46,20 +46,39 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div className="border-2 grid  grid-cols-2 gap-8">
-          <div className="border-2 border-red-500 ">
-            <div>Earn crypto by learning about blockchain</div>
-            <div>
+        <div className="grid  grid-cols-2 gap-8 bg-[#FAFAFA] items-center py-4  ">
+          <div className="col-span-1    py-8 pl-[2.5rem] ">
+            <div className="font-medium font-Roboto leading-10 text-[2.5rem]">
+              Earn crypto by learning about blockchain
+            </div>
+            <div className="text-[1.25rem] leading-7 mt-4 ">
               Build your blockchain knowledge, complete quizzes, and earn free crypto.
             </div>
-            <Button size="medium" variant="secondary">
+            <Button size="medium" variant="secondary" className="mt-10">
               Get Start
             </Button>
           </div>
-          <Swing />
+          <div className="col-span-1 z-10 ">
+            <Swing />
+          </div>
         </div>
 
-        <Bicycle />
+        <div className="grid  grid-cols-2 gap-8 bg-[#FAFAFA] items-center py-4  ">
+          <div className="col-span-1    py-8 pl-[2.5rem] ">
+            <div className="font-medium font-Roboto leading-10 text-[2.5rem]">
+              Earn crypto by learning about blockchain
+            </div>
+            <div className="text-[1.25rem] leading-7 mt-4 ">
+              Build your blockchain knowledge, complete quizzes, and earn free crypto.
+            </div>
+            <Button size="medium" variant="secondary" className="mt-10">
+              Get Start
+            </Button>
+          </div>
+          <div className="col-span-1 z-10 ">
+            <Bicycle />
+          </div>
+        </div>
       </div>
 
       <div className="bg-[#14151A]">
@@ -69,15 +88,52 @@ const Home: NextPage = () => {
             <TagItem />
           </div>
           <div>Difficulty:</div>
-          <div className="grid  grid-cols-2 border-2">
-            <div className="border-2">d</div>
-            <div className="border-2">d</div>
-            <div className="border-2">d</div>
-            <div className="border-2">d</div>
-            <div className="border-2">d</div>
-            <div className="border-2">d</div>
-            <div className="border-2">d</div>
-            <div className="border-2">d</div>
+          <div className="grid grid-cols-4">
+            <div className="col-span-3">
+              <div
+                className="grid"
+                style={{
+                  gridTemplateColumns: 'minmax(auto,368px) 1fr',
+                }}>
+                <img className="hello" />
+                <div className="flex border-2 ">
+                  <div>What Is SKALE (SKL)?</div>
+                  <div>Jul 7, 2022 5m</div>
+                  <div>Intermediate</div>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-1 border-2">
+              <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+            </div>
+            <div className="col-span-1">d</div>
+            <div className="col-span-3">
+              <div
+                className="grid"
+                style={{
+                  gridTemplateColumns: 'minmax(auto,368px) 1fr',
+                }}>
+                <img className="hello" />
+              </div>
+            </div>
+            <div className="col-span-2">
+              <div
+                className="grid border-2"
+                style={{
+                  gridTemplateColumns: 'minmax(auto,176px) 1fr',
+                }}>
+                <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+              </div>
+            </div>
+            <div className="grid border-">
+              <div
+                className="grid border-2"
+                style={{
+                  gridTemplateColumns: 'minmax(auto,176px) 1fr',
+                }}>
+                <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

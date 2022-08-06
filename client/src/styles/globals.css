@@ -14,6 +14,23 @@ html #root {
   margin: 0;
 }
 
+.hello{
+  border:1px solid red;
+ 
+  background-image: url('https://public.bnbstatic.com/static/academy/uploads-thumbnails/46d6dad92ae74670b466962f4841f528.png');
+  background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 16px;
+    display: block;
+    height: 0;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    padding-top: 90%;
+
+}
+
 @font-face {
   font-family: "Custom1";
   src: url("/font/NewTegomin-Regular.ttf");

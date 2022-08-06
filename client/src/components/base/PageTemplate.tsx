@@ -1,3 +1,4 @@
+import Footer from '../Footer';
 import FloatingHeader from './FloatingHeader';
 import Header from './Header';
 
@@ -11,6 +12,7 @@ function PageTemplate({ children }: PageTemplateProps) {
       <Header />
       <FloatingHeader />
       {children}
+      <Footer />
     </>
   );
 }
