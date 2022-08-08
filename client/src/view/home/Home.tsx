@@ -1,34 +1,20 @@
 import type { NextPage } from 'next';
+import Header from '../../components/base/Header';
 import PageTemplate from '../../components/base/PageTemplate';
 import { Button, LinkButton } from '../../components/common/Button';
 import PostCard from '../../components/common/PostCard';
 import PostTitle from '../../components/common/PostTitle';
 import Main from '../../components/main';
+import useGetPosts from '../../components/main/hooks/usegetPosts';
 import TagItem from '../../components/tags/TagItem';
 import Bicycle from '../../static/svg/bicycle';
 import Swing from '../../static/svg/swing';
+import useGetTags from './hooks/usegetTags';
 
 const Home: NextPage = () => {
-  const a = [
-    {
-      id: 1,
-      title: 'What Is PAX Gold (PAXG)?',
-    },
-    {
-      id: 2,
-      title: '1',
-    },
-    { id: 3, title: '1' },
-    {
-      id: 4,
-      title: '1',
-    },
-    { id: 5, title: '1' },
-    { id: 6, title: '1' },
-    { id: 7, title: '1' },
-    { id: 8, title: '1' },
-    { id: 9, title: '1' },
-  ];
+  const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
+
+  if (loading) return <div>Loading</div>;
 
   return (
     <PageTemplate>
@@ -38,8 +24,8 @@ const Home: NextPage = () => {
         <div className="py-[3.5rem]">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
           <div className="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2">
-            {a?.map(e => (
-              <div data-aos="fade-down" className=" shadow-lg rounded-xl">
+            {data.findAllPost?.map(e => (
+              <div key={e.id} data-aos="fade-down" className=" shadow-lg rounded-xl">
                 <PostCard article={e} />
               </div>
             ))}

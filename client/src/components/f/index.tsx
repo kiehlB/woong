@@ -44,6 +44,7 @@ function SocialLinks() {
   return (
     <div className="flex mt-2 space-x-4">
       <div className="flex justify-center items-center">
+        {/*// @ts-ignore */}
         <Tooltip
           trigger="mouseenter"
           hideOnClick={false}

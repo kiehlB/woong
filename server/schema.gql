@@ -59,7 +59,9 @@ type ProfileResponse {
 type Query {
   findAllComments: [Comments!]!
   findAllPost: [Post!]!
+  findByIdTag(id: Int!): [Tag!]!
   findPost: [Post!]!
+  getAllTags: [Tag!]!
   getAllUser: [GetUserInfoResponse!]
   getUser(input: getUserInfo!): GetUserInfoResponse!
   whoAmI: GetUserInfoResponse!
@@ -78,7 +80,7 @@ type SigninResponse {
 type Tag {
   created_at: DateTime!
   id: Int!
-  name: [String!]!
+  name: String!
   name_filtered: String!
   updated_at: DateTime!
 }

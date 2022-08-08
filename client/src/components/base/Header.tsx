@@ -11,6 +11,7 @@ import LogoIcon from '../../static/svg/logo-icon';
 import MenuIcon from '../../static/svg/menu-icon';
 import ArrowDownIcon from '../../static/svg/arrowDown-icon';
 import useGetUser from '../auth/hooks/useWhoAmI';
+import useGetTags from '../../view/home/hooks/usegetTags';
 
 export type HeaderProps = {};
 
@@ -63,6 +64,15 @@ const HeaderTopicItems = [
 
 function Header({}: HeaderProps) {
   const { loading, error, getUser, logoutButton } = useGetUser();
+
+  const {
+    loading: getTagsLoading,
+    error: getTagsError,
+    data: getTagsData,
+  } = useGetTags();
+
+  if (getTagsLoading) return <div>Loading</div>;
+  if (loading) return <div>Loading</div>;
 
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between ">
@@ -119,7 +129,7 @@ function Header({}: HeaderProps) {
             <nav className="absolute mt-5 bg-white">
               <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
                 <ul className="grid grid-cols-3  pl-4 pr-4  pt-4 mb-2 ">
-                  {HeaderTopicItems.map(e => (
+                  {getTagsData?.getAllTags?.map(e => (
                     <li key={e.id}>
                       <HeaderTopicItem {...e} />
                     </li>
@@ -128,7 +138,7 @@ function Header({}: HeaderProps) {
               </div>
             </nav>
           </div>
-          <div className="ml-8">Glossaries</div>
+          <div className="ml-8  font-Cabin  font-medium cursor-pointer">Glossaries</div>
         </div>
       </div>
 

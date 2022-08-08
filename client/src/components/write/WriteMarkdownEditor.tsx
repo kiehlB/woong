@@ -15,7 +15,6 @@ const WriteMarkdownEditor = props => {
 
   const { createPost } = useEditor();
 
-  console.log(edtiorRef);
   const handleSubmit = async e => {
     e.preventDefault();
 

@@ -48,7 +48,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               value={inputs?.email}
               onChange={handleChange}
             />
-            <label htmlFor="email" className="form__label text-zinc-400    font-Roboto  ">
+            <label htmlFor="email" className="form__label text-zinc-400 font-Roboto">
               Email
             </label>
           </div>

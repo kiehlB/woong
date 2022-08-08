@@ -39,11 +39,11 @@ function Main() {
     },
   });
 
-  const toggleService = interpret(toggleMachine)
-    .onTransition(state => console.log(state.value))
-    .start();
+  // const toggleService = interpret(toggleMachine)
+  //   .onTransition(state => console.log(state.value))
+  //   .start();
 
-  toggleService.send('TOGGLE');
+  // toggleService.send('TOGGLE');
 
   return (
     <div className="grid grid-cols-2 font-Roboto">

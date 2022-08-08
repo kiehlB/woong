@@ -1,4 +1,4 @@
-import Footer from '../Footer';
+import Footer from '../f';
 import FloatingHeader from './FloatingHeader';
 import Header from './Header';
 
@@ -8,12 +8,22 @@ export type PageTemplateProps = {
 
 function PageTemplate({ children }: PageTemplateProps) {
   return (
-    <>
-      <Header />
-      <FloatingHeader />
-      {children}
-      <Footer />
-    </>
+    <div className="flex felx-col  min-h-screen">
+      <div className="flex flex-col flex-1">
+        <Header />
+        {/* <FloatingHeader /> */}
+        {children}
+        <div className="mt-auto">
+          <Footer />
+        </div>
+        <style global jsx>{`
+          html,
+          body {
+            height: 100%;
+          }
+        `}</style>
+      </div>
+    </div>
   );
 }
 

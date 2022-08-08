@@ -45,6 +45,11 @@ export class TagResolver {
   // }
 
   @Query(() => [Tag])
+  getAllTags() {
+    return this.tagService.getAllTags();
+  }
+
+  @Query(() => [Tag])
   findByIdTag(@Args('id', { type: () => Int }) id: number) {
     return this.tagService.findById(id);
   }

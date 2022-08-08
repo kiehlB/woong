@@ -10,6 +10,7 @@ import {
   JoinColumn,
   RelationId,
   Index,
+  DataSource,
 } from 'typeorm';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
@@ -20,7 +21,7 @@ export class Tag {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Field((type) => [String])
+  @Field((type) => String)
   @Column({ length: 200 })
   name: string;
 

@@ -7,6 +7,7 @@ import {
   CreateDateColumn,
   JoinColumn,
   ManyToOne,
+  getManager,
 } from 'typeorm';
 
 import DataLoader from 'dataloader';

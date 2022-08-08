@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Tag } from './entity/tag.entity';
 
 @Injectable()
@@ -8,12 +8,20 @@ export class TagService {
   constructor(
     @InjectRepository(Tag)
     private readonly tagRepository: Repository<Tag>,
+    private dataSource: DataSource,
   ) {}
 
   async create(tag: Partial<Tag>): Promise<Tag> {
     const newTag = await this.tagRepository.create(tag);
     await this.tagRepository.save(newTag);
     return newTag;
+  }
+
+  async getAllTags(): Promise<Tag[]> {
+    const tag = await this.tagRepository;
+    const tags = await tag.find();
+
+    return tags;
   }
 
   async getTagsByIds(ids: readonly number[]) {
@@ -32,10 +40,6 @@ export class TagService {
       .getOne();
 
     return data;
-  }
-
-  async findByIds(ids): Promise<Array<Tag>> {
-    return this.tagRepository.findByIds(ids);
   }
 
   async updateById(id, tag: Partial<Tag>): Promise<Tag> {

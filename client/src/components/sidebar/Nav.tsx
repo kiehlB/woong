@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import NavMenuItem from "./NavMenuItem";
+import { motion } from 'framer-motion';
+import NavMenuItem from './NavMenuItem';
 
 export type NavigationProps = {};
 
@@ -13,23 +13,18 @@ const variants = {
 };
 
 const Items = [
-  { id: "0", text: "Home", icon: "🏠" },
-  { id: "1", text: "About", icon: "ℹ️" },
-  { id: "2", text: "Projects", icon: "💻" },
-  { id: "3", text: "Blogs", icon: "✍️" },
-  { id: "4", text: "Contact", icon: "📧" },
+  { id: '0', text: 'Home', icon: '🏠' },
+  { id: '1', text: 'About', icon: 'ℹ️' },
+  { id: '2', text: 'Projects', icon: '💻' },
+  { id: '3', text: 'Blogs', icon: '✍️' },
+  { id: '4', text: 'Contact', icon: '📧' },
 ];
 
 function Navigation({}: NavigationProps) {
   return (
     <motion.ul variants={variants}>
-      {Items.map((item) => (
-        <NavMenuItem
-          id={item.id}
-          key={item.id}
-          text={item.text}
-          icon={item.icon}
-        />
+      {Items.map(item => (
+        <NavMenuItem id={item.id} key={item.id} text={item.text} icon={item.icon} />
       ))}
     </motion.ul>
   );

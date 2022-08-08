@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 export type NavMenuItemProps = {
-  id: number;
+  id: number | string;
   text: string;
   icon: React.ReactNode;
 };

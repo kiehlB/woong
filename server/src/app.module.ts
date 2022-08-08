@@ -25,6 +25,8 @@ import PostsTags from './modules/tag/entity/postTag.entity';
 import { Tag } from './modules/tag/entity/tag.entity';
 import PostRead from './modules/post/entitiy/postRead.entitiy';
 import { PostScore } from './modules/post/entitiy/postScore.entity';
+import { TagModule } from './modules/tag/tag.module';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -65,6 +67,7 @@ import { PostScore } from './modules/post/entitiy/postScore.entity';
         AuthModule,
         PostModule,
         CommentModule,
+        TagModule,
         // PostLikeModule,
         // TagModule,
         // ScoreModule,
@@ -95,4 +98,6 @@ import { PostScore } from './modules/post/entitiy/postScore.entity';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}
