@@ -5,18 +5,24 @@ import AuthForm from '../../components/auth/AuthForm';
 import PageTemplate from '../../components/base/PageTemplate';
 import Arrow from '../../static/svg/arrow-icon';
 import SslIcon from '../../static/svg/ssl-icon';
+import useGetTags from '../home/hooks/usegetTags';
 import useLogin from './hooks/useLogin';
 
 export type SigninProps = {};
 
 function Signin({}: SigninProps) {
   const { inputs, handleChange, login, handleSubmit, loginError } = useLogin();
+  const {
+    loading: getTagsLoading,
+    error: getTagsError,
+    data: getTagsData,
+  } = useGetTags();
 
   return (
     <>
       <NextSeo title="woong blog sign in" description="sign in page" />
 
-      <PageTemplate>
+      <PageTemplate tag={getTagsData}>
         <div className="bg-[#FEF6D8] ">
           <div className="flex justify-center items-center  h-10 shadow">
             <SslIcon />

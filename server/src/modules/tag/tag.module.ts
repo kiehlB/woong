@@ -5,9 +5,14 @@ import { TagService } from './tag.service';
 
 import { TagResolver } from './tag.resolver';
 import { Tag } from './entity/tag.entity';
+import PostsTags from './entity/postTag.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tag]), AuthModule],
+  imports: [
+    TypeOrmModule.forFeature([Tag]),
+    TypeOrmModule.forFeature([PostsTags]),
+    AuthModule,
+  ],
   exports: [TagService],
   providers: [TagService, TagResolver],
 })

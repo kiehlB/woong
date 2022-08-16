@@ -4,16 +4,22 @@ import PageTemplate from '../../components/base/PageTemplate';
 import Auth from '../../components/auth/Auth';
 import AuthForm from '../../components/auth/AuthForm';
 import useRegister from './hooks/useRegister';
+import useGetTags from '../home/hooks/usegetTags';
 
 export type SignUpProps = {};
 
 function SignUp({}: SignUpProps) {
   const { inputs, handleChange, handleSubmit, registerError } = useRegister();
+  const {
+    loading: getTagsLoading,
+    error: getTagsError,
+    data: getTagsData,
+  } = useGetTags();
 
   return (
     <>
       <NextSeo title="woong blog sign up" description="sign up page" />
-      <PageTemplate>
+      <PageTemplate tag={getTagsData}>
         <Auth
           form={
             <AuthForm

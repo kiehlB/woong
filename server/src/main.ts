@@ -8,7 +8,6 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import { ErrorsInterceptor } from './interceptors/exception.interceptor';
 import * as bodyParser from 'body-parser';
 
 const prod = process.env.NODE_ENV === 'production';

@@ -35,6 +35,12 @@ export class PostService {
     const postsRepo = await this.PostRepository;
     const posts = await postsRepo.find();
 
+    const findPost = await this.PostRepository.createQueryBuilder('post')
+      .leftJoinAndSelect('post.tags', 'tags')
+      .getMany();
+
+    console.log(findPost);
+
     return posts;
   }
   async createPost(user, post) {

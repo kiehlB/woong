@@ -14,17 +14,22 @@ import useGetTags from './hooks/usegetTags';
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
 
+  const {
+    loading: getTagsLoading,
+    error: getTagsError,
+    data: getTagsData,
+  } = useGetTags();
+
   if (loading) return <div>Loading</div>;
 
   return (
-    <PageTemplate>
+    <PageTemplate tag={getTagsData}>
       <Main />
-
       <div className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
           <div className="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2">
-            {data.findAllPost?.map(e => (
+            {data?.findAllPost?.map(e => (
               <div key={e.id} data-aos="fade-down" className=" shadow-lg rounded-xl">
                 <PostCard article={e} />
               </div>
@@ -66,12 +71,13 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
-
       <div className="bg-[#14151A]">
         <div className="w-[71rem] mx-auto  mxl:w-[80%]">
           <div className="text-white">Topics : </div>
           <div className="text-[#aeb4bc] flex flex-1 flex-wrap  gap-4">
-            <TagItem />
+            {getTagsData?.getAllTags?.map(e => (
+              <TagItem key={e.id} tag={e.name} selected={true} disabled={false} />
+            ))}
           </div>
           <div>Difficulty:</div>
           <div className="grid grid-cols-4">

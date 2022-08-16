@@ -45,10 +45,17 @@ type Post {
   created_at: DateTime!
   id: Int
   likes: Int
+  posts_tags: PostsTags
   tags: [Tag!]
   thumbnail: String
   title: String
   updated_at: DateTime!
+}
+
+type PostsTags {
+  id: Int!
+  post_id: Float
+  tag_id: Float
 }
 
 type ProfileResponse {
@@ -61,6 +68,7 @@ type Query {
   findAllPost: [Post!]!
   findByIdTag(id: Int!): [Tag!]!
   findPost: [Post!]!
+  getAllPostTags: [PostsTags!]!
   getAllTags: [Tag!]!
   getAllUser: [GetUserInfoResponse!]
   getUser(input: getUserInfo!): GetUserInfoResponse!

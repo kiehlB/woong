@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { createMachine, interpret } from 'xstate';
 import { useSpring, animated } from 'react-spring';
 import { Button } from '../common/Button';
+import Dot from '../common/dot';
+import AddTag from '../../static/svg/addtag';
 
 export type MainProps = {};
 
@@ -89,10 +91,13 @@ function Main() {
             <div className="text-[#76808F] leading-snug font-normal py-4">
               Jul 12, 2021 8m
             </div>
-            <div className="w-28 bg-[#02c07633] h-9 flex justify-center items-center rounded-lg">
-              <div className="bg-[#02C076] rounded-[50%] w-2 h-2 mr-2" />
-              <div className="text-[#474D57]">Beginner</div>
-            </div>
+
+            <Button
+              size="small"
+              className="bg-[#02c07633] h-9 flex justify-center items-center  rounded-lg text-[#474D57]">
+              <Dot bg="bg-[#02C076]" />
+              Beginner
+            </Button>
           </animated.div>
         </div>
       </div>

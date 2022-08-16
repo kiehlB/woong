@@ -20,6 +20,8 @@ import {
   Directive,
   Context,
   Int,
+  ResolveField,
+  Parent,
 } from '@nestjs/graphql';
 
 import { UserService } from '../user/users.service';
@@ -29,8 +31,11 @@ import { CreatePostRequest, CreatePostResponse } from './dto/createPost.dto';
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
 import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
 import { Post } from './entitiy/post.entity';
+import { Tag } from '../tag/entity/tag.entity';
+import DataLoader from 'dataloader';
+import PostsTags from '../tag/entity/postTag.entity';
 
-@Resolver()
+@Resolver((of) => Post)
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
@@ -53,5 +58,16 @@ export class PostResolver {
     const savePost = await this.postService.createPost(user, post);
 
     return savePost;
+  }
+
+  @ResolveField('posts_tags', (retruns) => PostsTags, { nullable: true })
+  async getPostTags(
+    @Parent() post: Post,
+    @Context('postTagLoader')
+    postTagLoader: DataLoader<number, PostsTags>,
+  ) {
+    const { id } = post;
+
+    return postTagLoader.load(id);
   }
 }

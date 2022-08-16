@@ -1,16 +1,17 @@
-import Footer from '../f';
+import Footer from '../footer';
 import FloatingHeader from './FloatingHeader';
 import Header from './Header';
 
 export type PageTemplateProps = {
   children: React.ReactNode;
+  tag: any;
 };
 
-function PageTemplate({ children }: PageTemplateProps) {
+function PageTemplate({ children, tag }: PageTemplateProps) {
   return (
     <div className="flex felx-col  min-h-screen">
       <div className="flex flex-col flex-1">
-        <Header />
+        <Header tag={tag} />
         {/* <FloatingHeader /> */}
         {children}
         <div className="mt-auto">

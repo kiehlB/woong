@@ -13,66 +13,45 @@ import ArrowDownIcon from '../../static/svg/arrowDown-icon';
 import useGetUser from '../auth/hooks/useWhoAmI';
 import useGetTags from '../../view/home/hooks/usegetTags';
 
-export type HeaderProps = {};
+export type HeaderProps = {
+  tag: any;
+};
 
 const MenuItems = [
   {
-    id: 1,
-    title: 'React',
-    subTitle: 'A JavaScript library for building user interfaces',
+    id: 10000,
+    name: 'React',
+    subName: 'A JavaScript library for building user interfaces',
     svg: <ReactIcon />,
   },
   {
-    id: 2,
-    title: 'Node Js',
-    subTitle: 'JavaScript runtime built on Chrome V8 JavaScript engine.',
+    id: 10001,
+    name: 'Node Js',
+    subName: 'JavaScript runtime built on Chrome V8 JavaScript engine.',
     svg: <NodeIcon />,
   },
   {
-    id: 3,
-    title: 'Javascript',
-    subTitle: 'just-in-time compiled programming language with first-class functions',
+    id: 10002,
+    name: 'Javascript',
+    subName: 'just-in-time compiled programming language with first-class functions',
     svg: <JavascriptIcon />,
   },
   {
-    id: 4,
-    title: 'Css',
-    subTitle:
+    id: 10004,
+    name: 'Css',
+    subName:
       'stylesheet language used to describe the presentation of a document written in HTML or XML',
     svg: <CssIcon />,
   },
 ];
 
-const HeaderTopicItems = [
-  {
-    id: 1,
-    title: 'React Js',
-  },
-  {
-    id: 2,
-    title: 'Node Js',
-  },
-  {
-    id: 3,
-    title: 'Javascript',
-  },
-  {
-    id: 4,
-    title: 'Css',
-  },
-];
-
-function Header({}: HeaderProps) {
+function Header({ tag }: HeaderProps) {
   const { loading, error, getUser, logoutButton } = useGetUser();
 
-  const {
-    loading: getTagsLoading,
-    error: getTagsError,
-    data: getTagsData,
-  } = useGetTags();
-
-  if (getTagsLoading) return <div>Loading</div>;
+  const mergeTag = MenuItems.concat(tag?.getAllTags);
   if (loading) return <div>Loading</div>;
+
+  console.log(mergeTag);
 
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between ">
@@ -100,25 +79,27 @@ function Header({}: HeaderProps) {
           </div>
 
           <div className="mr-8">
-            <div>
-              <a className="link_a">
-                <svg className="icon-arrow before">
-                  <use xlinkHref="#arrow" />
+            <Link href="/filter">
+              <div className="cursor-pointer">
+                <a className="link_a">
+                  <svg className="icon-arrow before">
+                    <use xlinkHref="#arrow" />
+                  </svg>
+                  <span className="label  font-Cabin  font-medium">See All Posts</span>
+                  <svg className="icon-arrow after">
+                    <use xlinkHref="#arrow" />
+                  </svg>
+                </a>
+                <svg style={{ display: 'none' }}>
+                  <defs>
+                    <symbol id="arrow" viewBox="0 0 35 15">
+                      <title>Arrow</title>
+                      <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z " />
+                    </symbol>
+                  </defs>
                 </svg>
-                <span className="label  font-Cabin  font-medium">See All Posts</span>
-                <svg className="icon-arrow after">
-                  <use xlinkHref="#arrow" />
-                </svg>
-              </a>
-              <svg style={{ display: 'none' }}>
-                <defs>
-                  <symbol id="arrow" viewBox="0 0 35 15">
-                    <title>Arrow</title>
-                    <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z " />
-                  </symbol>
-                </defs>
-              </svg>
-            </div>
+              </div>
+            </Link>
           </div>
 
           <div className="group">
@@ -126,11 +107,11 @@ function Header({}: HeaderProps) {
               <div className="mr-2 font-Cabin  font-medium">Tags</div>
               <ArrowDownIcon />
             </div>
-            <nav className="absolute mt-5 bg-white">
+            <nav className="absolute mt-5 bg-white  z-[99999]">
               <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
-                <ul className="grid grid-cols-3  pl-4 pr-4  pt-4 mb-2 ">
-                  {getTagsData?.getAllTags?.map(e => (
-                    <li key={e.id}>
+                <ul className="grid grid-cols-3  pl-4 pr-4  pt-4 mb-2">
+                  {mergeTag?.map(e => (
+                    <li key={e?.id}>
                       <HeaderTopicItem {...e} />
                     </li>
                   ))}

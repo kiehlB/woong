@@ -12,12 +12,13 @@ import {
 
 import DataLoader from 'dataloader';
 import { Tag } from './tag.entity';
-import { Field, Int } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Post } from '../../post/entitiy/post.entity';
 
 @Entity('posts_tags', {
   synchronize: true,
 })
+@ObjectType()
 export default class PostsTags {
   @Field(() => Int)
   @PrimaryGeneratedColumn()

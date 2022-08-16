@@ -2,21 +2,18 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { UserModule } from './modules/user/user.module';
 import { ApolloDriver } from '@nestjs/apollo';
 import { UserProfileModule } from './modules/profile/profile.module';
 import { UserProfile } from './modules/profile/profile.entity';
 import { AuthModule } from './modules/auth/auth.module';
-
 import { UserService } from './modules/user/users.service';
 import { createUsersLoader } from './modules/user/users.loader';
 import { UserProfileService } from './modules/profile/profile.service';
 import { createUserProfileLoader } from './modules/profile/profile.loader';
-
+import { createTagsLoader } from './modules/tag/tag.loaders';
 import { PostModule } from './modules/post/post.module';
 import { CommentModule } from './modules/comment/comment.module';
-
 import { Comments } from './modules/comment/comment.entity';
 import { User } from './modules/user/entitiy/user.entity';
 import { Post } from './modules/post/entitiy/post.entity';
@@ -27,6 +24,8 @@ import PostRead from './modules/post/entitiy/postRead.entitiy';
 import { PostScore } from './modules/post/entitiy/postScore.entity';
 import { TagModule } from './modules/tag/tag.module';
 import { DataSource } from 'typeorm';
+import { createPostTagsLoader } from './modules/tag/postTag.loader';
+import { TagService } from './modules/tag/tag.service';
 
 @Module({
   imports: [
@@ -68,31 +67,32 @@ import { DataSource } from 'typeorm';
         PostModule,
         CommentModule,
         TagModule,
+
         // PostLikeModule,
-        // TagModule,
+
         // ScoreModule,
       ],
       useFactory: (
         usersService: UserService,
         userProfileService: UserProfileService,
-      ) =>
-        // tagsService: TagService,
-        ({
-          autoSchemaFile: './schema.gql',
-          sortSchema: true,
-          playground: true,
-          cors: {
-            origin: 'http://localhost:3000',
-            credentials: true,
-          },
+        tagsService: TagService,
+      ) => ({
+        autoSchemaFile: './schema.gql',
+        sortSchema: true,
+        playground: true,
+        cors: {
+          origin: 'http://localhost:3000',
+          credentials: true,
+        },
 
-          context: (ctx) => ({
-            ...ctx,
-            usersLoader: createUsersLoader(usersService),
-            userProfileLoader: createUserProfileLoader(userProfileService),
-          }),
+        context: (ctx) => ({
+          ...ctx,
+          usersLoader: createUsersLoader(usersService),
+          postTagLoader: createPostTagsLoader(tagsService),
+          userProfileLoader: createUserProfileLoader(userProfileService),
         }),
-      inject: [UserService, UserProfileService],
+      }),
+      inject: [UserService, UserProfileService, TagService],
     }),
   ],
   controllers: [],

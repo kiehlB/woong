@@ -1,15 +1,21 @@
-export type TagItemProps = {};
+import type { ChangeEventHandler } from 'react';
+import { CustomCheckboxContainer, CustomCheckboxInput } from '@reach/checkbox';
+import '@reach/checkbox/styles.css';
+import clsx from 'clsx';
+import { MixedCheckbox, useMixedCheckbox } from '@reach/checkbox';
 
-function TagItem({}: TagItemProps) {
+export type TagItemProps = {
+  tag: string;
+  selected: boolean;
+  onClick?: ChangeEventHandler<HTMLInputElement>;
+  disabled?: boolean;
+};
+
+function TagItem({ tag, selected, onClick, disabled }: TagItemProps) {
   return (
-    <>
-      <div className="text-[#aeb4bc] border-[#2b2f36] border text-sm px-4 py-1 rounded-full">
-        <div>hello</div>
-      </div>
-      <div className="text-[#aeb4bc] border-[#2b2f36] border text-sm px-4 py-1 rounded-full">
-        <div>hello</div>
-      </div>
-    </>
+    <div>
+      <div>{tag}</div>
+    </div>
   );
 }
 

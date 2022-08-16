@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
+import Dot from './dot';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'danger';
@@ -9,7 +10,7 @@ interface ButtonProps {
 
 function getClassName({ className }: { className?: string }) {
   return clsx(
-    'group relative inline-flex   font-medium focus:outline-none opacity-100 disabled:opacity-50 transition',
+    'group relative inline-flex font-medium opacity-100 disabled:opacity-50 transition',
     className,
   );
 }
@@ -25,7 +26,7 @@ function ButtonInner({
         className={clsx(
           'focus-ring absolute inset-0 transform rounded-full opacity-100 transition disabled:opacity-50',
           {
-            'border-secondary bg-primary border-2 group-hover:border-[#fcd435]':
+            'border-secondary bg-primary border group-hover:border-[#fcd435]':
               variant === 'secondary' || variant === 'danger',
             danger: variant === 'danger',
             'bg-inverse': variant === 'primary',
@@ -42,7 +43,7 @@ function ButtonInner({
             'text-red-500': variant === 'danger',
             'space-x-5 px-11 py-6': size === 'large',
             'space-x-3 px-8 py-4': size === 'medium',
-            'space-x-1 px-5 py-2 text-sm': size === 'small',
+            'space-x-1 px-3 py-1 text-sm': size === 'small',
           },
         )}>
         {children}

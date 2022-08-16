@@ -24,6 +24,7 @@ import {
 import { CreateTagRequest } from './dto/createTag.dto';
 import { FindTagRequest } from './dto/findTag.dto';
 import { Tag } from './entity/tag.entity';
+import PostsTags from './entity/postTag.entity';
 
 @Resolver((of) => Tag)
 export class TagResolver {
@@ -47,6 +48,11 @@ export class TagResolver {
   @Query(() => [Tag])
   getAllTags() {
     return this.tagService.getAllTags();
+  }
+
+  @Query(() => [PostsTags])
+  getAllPostTags() {
+    return this.tagService.getAllPostTags();
   }
 
   @Query(() => [Tag])

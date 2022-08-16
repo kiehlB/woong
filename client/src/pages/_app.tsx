@@ -7,6 +7,8 @@ import { NextSeo } from 'next-seo';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import store from '../store/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
@@ -22,9 +24,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <NextSeo title="Woong blog" description="welcome to woong blog!" canonical="/" />
-      <ApolloProvider client={apolloClient}>
-        <Component {...pageProps} />
-      </ApolloProvider>
+      <Provider store={store}>
+        <ApolloProvider client={apolloClient}>
+          <Component {...pageProps} />
+        </ApolloProvider>
+      </Provider>
       <div>
         <style global jsx>{`
           html,
