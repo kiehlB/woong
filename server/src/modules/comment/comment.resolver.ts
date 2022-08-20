@@ -22,6 +22,7 @@ import { Comments } from './comment.entity';
 import { CurrentUser } from 'src/decorator/auth-user.decorator';
 import { CommentService } from './comment.service';
 import { CreateCommentRequest } from './dto/createComment.dto';
+import { User } from '../user/entitiy/user.entity';
 
 @Resolver((of) => Comments)
 export class CommentResolver {
@@ -30,17 +31,16 @@ export class CommentResolver {
   @UseInterceptors(ClassSerializerInterceptor)
   @Query(() => [Comments])
   async findAllComments(): Promise<Comments[]> {
-    const users = await this.commentService.findAll();
+    const users = await this.commentService.findAll(1);
 
     return users;
   }
 
-  //   @UseInterceptors(ClassSerializerInterceptor)
-  //   @Mutation(() => Comments)
-  //   createComment(
-  //     @CurrentUser() user: User,
-  //     @Args('input') comment: CreateCommentRequest,
-  //   ): Promise<Comments> {
-  //     return this.commentService.create(user, comment);
-  //   }
+  @Mutation(() => Comments)
+  createComment(
+    @CurrentUser() user: User,
+    @Args('input') comment: CreateCommentRequest,
+  ): Promise<Comments> {
+    return this.commentService.create(user, comment);
+  }
 }

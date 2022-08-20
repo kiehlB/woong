@@ -34,13 +34,22 @@ import { Post } from './entitiy/post.entity';
 import { Tag } from '../tag/entity/tag.entity';
 import DataLoader from 'dataloader';
 import PostsTags from '../tag/entity/postTag.entity';
+import { Comments } from '../comment/comment.entity';
+import { typeOrmConnectionDataSource } from 'src/app.module';
+import { normalize } from 'src/common/utils/normalize';
+import { CommentService } from '../comment/comment.service';
+import PostsLoaders from './post.loader';
 
 @Resolver((of) => Post)
 export class PostResolver {
-  constructor(private readonly postService: PostService) {}
+  constructor(
+    private readonly postService: PostService,
+    private readonly CommentsService: CommentService,
+    private postsLoaders: PostsLoaders,
+  ) {}
 
-  @Query(() => [Post])
-  findPost(args): Promise<Post> {
+  @Query(() => [Post], { nullable: true })
+  findPost(args) {
     return this.postService.findPost(args);
   }
 
@@ -60,14 +69,25 @@ export class PostResolver {
     return savePost;
   }
 
-  @ResolveField('posts_tags', (retruns) => PostsTags, { nullable: true })
+  @ResolveField('posts_tags', (retruns) => [PostsTags], { nullable: true })
   async getPostTags(
     @Parent() post: Post,
     @Context('postTagLoader')
-    postTagLoader: DataLoader<number, PostsTags>,
+    postTagLoader: DataLoader<number, [PostsTags]>,
   ) {
     const { id } = post;
 
     return postTagLoader.load(id);
+  }
+
+  @ResolveField('comments', (retruns) => [Comments], { nullable: true })
+  async getCommentsLoader(
+    @Parent() user: Post,
+    @Context('commentsLoader')
+    commentsLoader: DataLoader<number, [Comments]>,
+  ) {
+    const { id } = user;
+
+    return commentsLoader.load(id);
   }
 }

@@ -11,8 +11,8 @@ export class CreateCommentRequest {
   @Field()
   @IsString()
   @IsNotEmpty()
-  post_id: string;
+  post_id: number;
 
-  @Field((type) => String, { nullable: true })
-  comment_id!: string;
+  @Field((type) => Int, { nullable: true })
+  comment_id!: number;
 }

@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, In, Repository } from 'typeorm';
 import PostsTags from './entity/postTag.entity';
 import { Tag } from './entity/tag.entity';
 
@@ -25,6 +25,12 @@ export class TagService {
     const tags = await tag.find();
 
     return tags;
+  }
+
+  async getUsersByIds(ids) {
+    return this.PostTagRepository.find({
+      where: { post_id: In(ids) },
+    });
   }
 
   async getAllPostTags(): Promise<PostsTags[]> {

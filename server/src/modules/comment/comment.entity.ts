@@ -4,53 +4,45 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
-  JoinTable,
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
-
 import { User } from '../user/entitiy/user.entity';
 import { Post } from '../post/entitiy/post.entity';
 
 @ObjectType()
 @Entity()
 export class Comments {
-  @Field(() => Int, { nullable: true })
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Field((type) => String, { nullable: true })
   @Column({ type: 'text', default: null })
   text!: string;
 
-  @Field((type) => Number, { nullable: true })
-  @Column({ default: 0 })
-  likes!: number;
-
-  @Field((type) => String, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   @Column('uuid', {
     nullable: true,
   })
-  reply!: string;
+  reply!: number;
 
   @Field((type) => Boolean, { nullable: true })
-  @Column({ default: false })
-  has_replies!: boolean;
+  @Column({ default: false, nullable: true })
+  has_replies?: boolean;
 
   @Field((type) => Boolean, { nullable: true })
   @Column({ default: false })
   deleted!: boolean;
 
-  @Field((type) => String, { nullable: true })
-  @Column('uuid')
-  user_id!: string;
+  @Field((type) => Int, { nullable: true })
+  @Column()
+  user_id!: number;
 
-  @Field((type) => String, { nullable: true })
-  @Column('uuid')
-  post_id!: string;
+  @Field((type) => Int, { nullable: true })
+  @Column()
+  post_id!: number;
 
   @Field((type) => Date)
   @Column('timestampz')

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -26,7 +26,32 @@ import { TagModule } from './modules/tag/tag.module';
 import { DataSource } from 'typeorm';
 import { createPostTagsLoader } from './modules/tag/postTag.loader';
 import { TagService } from './modules/tag/tag.service';
+import { CommentService } from './modules/comment/comment.service';
+import { createCommentsLoader } from './modules/comment/comments.loader';
 
+export const typeOrmConnectionDataSource = new DataSource({
+  name: 'default',
+  type: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  username: 'postgres',
+  password: '1245',
+  database: 'woong1',
+  synchronize: false,
+  entities: [
+    User,
+    UserProfile,
+    Post,
+    Comments,
+    SocialUser,
+    PostsTags,
+    PostRead,
+    PostScore,
+    Tag,
+  ],
+});
+
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env'] }),
@@ -76,6 +101,7 @@ import { TagService } from './modules/tag/tag.service';
         usersService: UserService,
         userProfileService: UserProfileService,
         tagsService: TagService,
+        commentsService: CommentService,
       ) => ({
         autoSchemaFile: './schema.gql',
         sortSchema: true,
@@ -90,13 +116,22 @@ import { TagService } from './modules/tag/tag.service';
           usersLoader: createUsersLoader(usersService),
           postTagLoader: createPostTagsLoader(tagsService),
           userProfileLoader: createUserProfileLoader(userProfileService),
+          commentsLoader: createCommentsLoader(commentsService),
         }),
       }),
-      inject: [UserService, UserProfileService, TagService],
+      inject: [UserService, UserProfileService, TagService, CommentService],
     }),
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: DataSource,
+      useFactory: async () => {
+        await typeOrmConnectionDataSource.initialize();
+        return typeOrmConnectionDataSource;
+      },
+    },
+  ],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) {}

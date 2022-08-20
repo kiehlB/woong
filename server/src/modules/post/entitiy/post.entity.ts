@@ -51,7 +51,7 @@ export class Post {
   @JoinTable()
   tags!: Tag[];
 
-  @Field((type) => Comments)
+  @Field((type) => [Comments], { nullable: true })
   @OneToMany((type) => Comments, (comments) => comments.post)
   comments: Comments[];
 }

@@ -6,14 +6,13 @@ type Comments {
   created_at: DateTime!
   deleted: Boolean
   has_replies: Boolean
-  id: Int
-  likes: Float
-  post_id: String
-  reply: String
+  id: ID!
+  post_id: Int
+  reply: Int
   text: String
   updated_at: DateTime!
   user: User
-  user_id: String
+  user_id: Int
 }
 
 """
@@ -34,6 +33,7 @@ input InputSignin {
 
 type Mutation {
   createAndUpdateProfile(input: createProfile!): ProfileResponse!
+  createComment(input: createComment!): Comments!
   createPost(input: createPost!): Post!
   register(input: registerInput!): RegisterResponse!
   signin(input: InputSignin!): SigninResponse!
@@ -41,11 +41,11 @@ type Mutation {
 
 type Post {
   body: String
-  comments: Comments!
+  comments: [Comments!]
   created_at: DateTime!
   id: Int
   likes: Int
-  posts_tags: PostsTags
+  posts_tags: [PostsTags!]
   tags: [Tag!]
   thumbnail: String
   title: String
@@ -67,7 +67,7 @@ type Query {
   findAllComments: [Comments!]!
   findAllPost: [Post!]!
   findByIdTag(id: Int!): [Tag!]!
-  findPost: [Post!]!
+  findPost: [Post!]
   getAllPostTags: [PostsTags!]!
   getAllTags: [Tag!]!
   getAllUser: [GetUserInfoResponse!]
@@ -115,6 +115,12 @@ type UserProfile {
   updated_at: DateTime!
   user: User
   user_id: String
+}
+
+input createComment {
+  comment_id: Int
+  post_id: Float!
+  text: String!
 }
 
 input createPost {

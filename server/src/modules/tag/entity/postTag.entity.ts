@@ -15,9 +15,7 @@ import { Tag } from './tag.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Post } from '../../post/entitiy/post.entity';
 
-@Entity('posts_tags', {
-  synchronize: true,
-})
+@Entity()
 @ObjectType()
 export default class PostsTags {
   @Field(() => Int)

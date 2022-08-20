@@ -31,15 +31,13 @@ export class PostService {
 
     return findPost;
   }
-  async findAll(): Promise<Post[]> {
+  async findAll() {
     const postsRepo = await this.PostRepository;
     const posts = await postsRepo.find();
 
     const findPost = await this.PostRepository.createQueryBuilder('post')
-      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.comments', 'comment')
       .getMany();
-
-    console.log(findPost);
 
     return posts;
   }
