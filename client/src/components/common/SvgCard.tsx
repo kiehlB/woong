@@ -5,7 +5,7 @@ export type SvgCardProps = {};
 
 function SvgCard({}: SvgCardProps) {
   return (
-    <div className="grid  grid-cols-2 gap-8 bg-[#FAFAFA] items-center py-4  ">
+    <div className="grid  grid-cols-2 gap-8 bg-[#FAFAFA] items-center py-4 rounded-2xl">
       <div className="col-span-1    py-8 pl-[2.5rem] ">
         <div className="font-medium font-Roboto leading-10 text-[2.5rem]">
           Earn crypto by learning about blockchain

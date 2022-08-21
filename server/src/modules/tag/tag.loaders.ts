@@ -7,8 +7,8 @@ import { TagService } from './tag.service';
 
 export function createTagsLoader(tagsService: TagService) {
   return new DataLoader<number, PostsTags[]>(async (ids) => {
-    console.log('hello');
     const comments = await await tagsService.getUsersByIds(ids);
+
     const mappedResults = ids.map(
       (id) => comments.filter((comment) => comment.post_id === id) || null,
     );

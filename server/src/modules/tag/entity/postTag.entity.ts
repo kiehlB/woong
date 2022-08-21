@@ -22,26 +22,30 @@ export default class PostsTags {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Field((type) => Number, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   @Column()
   post_id!: number;
 
-  @Field((type) => Number, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   @Column()
   tag_id!: number;
 
+  @Field((type) => String, { nullable: true })
   @Column('timestampz')
   @CreateDateColumn()
   created_at!: Date;
 
+  @Field((type) => String, { nullable: true })
   @Column('timestamptz')
   @UpdateDateColumn()
   updated_at!: Date;
 
+  @Field((type) => Tag, { nullable: true })
   @ManyToOne((type) => Tag, { cascade: true, eager: true })
   @JoinColumn({ name: 'tag_id' })
   tag!: Tag;
 
+  @Field((type) => [Post], { nullable: true })
   @ManyToOne((type) => Post, { cascade: true })
   @JoinColumn({ name: 'post_id' })
   post!: Post;

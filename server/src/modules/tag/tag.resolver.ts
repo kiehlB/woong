@@ -50,6 +50,12 @@ export class TagResolver {
     return this.tagService.getAllTags();
   }
 
+  @Query(() => [Tag])
+  getAllTagsCount() {
+    console.log('hb');
+    return this.tagService.getAllTagsCount();
+  }
+
   @Query(() => [PostsTags])
   getAllPostTags() {
     return this.tagService.getAllPostTags();

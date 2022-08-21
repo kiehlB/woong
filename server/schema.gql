@@ -53,9 +53,13 @@ type Post {
 }
 
 type PostsTags {
+  created_at: String
   id: Int!
-  post_id: Float
-  tag_id: Float
+  post: [Post!]
+  post_id: Int
+  tag: Tag
+  tag_id: Int
+  updated_at: String
 }
 
 type ProfileResponse {
@@ -70,6 +74,7 @@ type Query {
   findPost: [Post!]
   getAllPostTags: [PostsTags!]!
   getAllTags: [Tag!]!
+  getAllTagsCount: [Tag!]!
   getAllUser: [GetUserInfoResponse!]
   getUser(input: getUserInfo!): GetUserInfoResponse!
   whoAmI: GetUserInfoResponse!

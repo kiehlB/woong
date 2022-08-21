@@ -27,10 +27,30 @@ export class TagService {
     return tags;
   }
 
+  async getAllTagsCount() {
+    const [items, totalCount] = await this.tagRepository.findAndCount({
+      order: {
+        created_at: 'DESC',
+      },
+    });
+
+    // const tags = await tag.find();
+
+    // return tags;
+
+    console.log([items, totalCount]);
+    return [items, totalCount];
+  }
+
   async getUsersByIds(ids) {
+    console.log(ids);
     return this.PostTagRepository.find({
       where: { post_id: In(ids) },
     });
+  }
+
+  async getTagByIds() {
+    return this.tagRepository.find({});
   }
 
   async getAllPostTags(): Promise<PostsTags[]> {

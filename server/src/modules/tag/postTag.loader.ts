@@ -6,12 +6,15 @@ import { TagService } from './tag.service';
 
 export function createPostTagsLoader(tagsService: TagService) {
   return new DataLoader<any, any>(async (ids) => {
-    console.log('hello');
-    const comments = await await tagsService.getUsersByIds(ids);
+    const getPostTag = await await tagsService.getUsersByIds(ids);
+
+    const getTags = await await tagsService.getTagByIds();
+
     const mappedResults = ids.map(
-      (id) => comments.filter((comment) => comment.post_id === id) || null,
+      (id) => getPostTag.filter((e) => e.post_id === id) || null,
     );
 
+    console.log(mappedResults);
     return mappedResults;
   });
 }
