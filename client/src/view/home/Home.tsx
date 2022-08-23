@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
-import Header from '../../components/base/Header';
 import PageTemplate from '../../components/base/PageTemplate';
-import { Button, LinkButton } from '../../components/common/Button';
+import { Button } from '../../components/common/Button';
+import Dot from '../../components/common/dot';
 import PostCard from '../../components/common/PostCard';
 import PostTitle from '../../components/common/PostTitle';
 import SvgCard from '../../components/common/SvgCard';
@@ -38,34 +38,37 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <SvgCard />
+        <div className="mb-7">
+          <SvgCard svg={<Swing />} />
+        </div>
 
-        <div className="grid  grid-cols-2 gap-8 bg-[#FAFAFA] items-center py-4  ">
-          <div className="col-span-1    py-8 pl-[2.5rem] ">
-            <div className="font-medium font-Roboto leading-10 text-[2.5rem]">
-              Earn crypto by learning about blockchain
-            </div>
-            <div className="text-[1.25rem] leading-7 mt-4 ">
-              Build your blockchain knowledge, complete quizzes, and earn free crypto.
-            </div>
-            <Button size="medium" variant="secondary" className="mt-10">
-              Get Start
-            </Button>
-          </div>
-          <div className="col-span-1 z-10 ">
-            <Bicycle />
-          </div>
+        <div className="py-14">
+          <SvgCard svg={<Bicycle />} />
         </div>
       </div>
       <div className="bg-[#14151A]">
         <div className="w-[71rem] mx-auto  mxl:w-[80%]">
-          <div className="text-white">Topics : </div>
-          <div className="text-[#aeb4bc] flex flex-1 flex-wrap  gap-4">
-            {getTagsData?.getAllTags?.map(e => (
-              <TagItem key={e.id} tag={e.name} selected={true} disabled={false} />
-            ))}
+          <div className="flex pt-14">
+            <div className="text-white">Topics : </div>
+            <div className="text-[#aeb4bc] flex flex-1 flex-wrap items-center gap-4 px-4">
+              {getTagsData?.getAllTags?.map(e => (
+                <TagItem key={e.id} tag={e.name} disabled={false} />
+              ))}
+            </div>
           </div>
-          <div>Difficulty:</div>
+
+          <div className="flex">
+            <div>Difficulty:</div>
+            <Button size="medium" variant="secondary" className="font-Roboto text-sm">
+              <Dot bg="bg-[#02C076]" />d
+            </Button>
+            <Button size="medium" variant="secondary" className="font-Roboto text-sm">
+              d
+            </Button>
+            <Button size="medium" variant="secondary" className="font-Roboto text-sm">
+              d
+            </Button>
+          </div>
           <div className="grid grid-cols-4">
             <div className="col-span-3">
               <div

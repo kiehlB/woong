@@ -1,20 +1,26 @@
-import type { ChangeEventHandler } from 'react';
-import { CustomCheckboxContainer, CustomCheckboxInput } from '@reach/checkbox';
+import { ChangeEventHandler, useState } from 'react';
 import '@reach/checkbox/styles.css';
-import clsx from 'clsx';
-import { MixedCheckbox, useMixedCheckbox } from '@reach/checkbox';
+
+import { Button } from '../common/Button';
 
 export type TagItemProps = {
   tag: string;
-  selected: boolean;
-  onClick?: ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
 };
 
-function TagItem({ tag, selected, onClick, disabled }: TagItemProps) {
+function TagItem({ tag, disabled }: TagItemProps) {
+  const [clickedTag, setClickedTag] = useState(false);
+
   return (
     <div>
-      <div>{tag}</div>
+      <Button
+        size="small"
+        variant="secondary"
+        className="font-Roboto text-sm"
+        selected={clickedTag}
+        setClick={setClickedTag}>
+        {tag}
+      </Button>
     </div>
   );
 }

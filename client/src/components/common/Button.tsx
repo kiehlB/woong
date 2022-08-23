@@ -6,6 +6,8 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'danger';
   size?: 'small' | 'medium' | 'large';
   children: React.ReactNode | React.ReactNode[];
+  selected?: any;
+  setClick?: any;
 }
 
 function getClassName({ className }: { className?: string }) {
@@ -18,23 +20,27 @@ function getClassName({ className }: { className?: string }) {
 function ButtonInner({
   children,
   variant,
+  selected,
+  setClick,
   size = 'large',
-}: Pick<ButtonProps, 'children' | 'variant' | 'size'>) {
+}: Pick<ButtonProps, 'children' | 'variant' | 'size' | 'selected' | 'setClick'>) {
   return (
     <>
       <div
         className={clsx(
           'focus-ring absolute inset-0 transform rounded-full opacity-100 transition disabled:opacity-50',
           {
-            'border-secondary bg-primary border group-hover:border-[#fcd435]':
+            'border-secondary bg-primary border   group-hover:border-[#fcd435]':
               variant === 'secondary' || variant === 'danger',
             danger: variant === 'danger',
             'bg-inverse': variant === 'primary',
+            'bg-slate-600': selected == true,
           },
         )}
       />
 
       <div
+        onClick={() => (setClick ? setClick(!selected) : '')}
         className={clsx(
           'relative flex h-full w-full items-center justify-center whitespace-nowrap',
           {
@@ -57,14 +63,33 @@ function Button({
   variant = 'primary',
   size = 'large',
   className,
+  selected,
+  setClick,
   ...buttonProps
 }: ButtonProps & JSX.IntrinsicElements['button']) {
   return (
     <button {...buttonProps} className={getClassName({ className })}>
-      <ButtonInner variant={variant} size={size}>
+      <ButtonInner variant={variant} size={size} selected={selected} setClick={setClick}>
         {children}
       </ButtonInner>
     </button>
+  );
+}
+
+function ClickableButton({
+  className,
+  underlined,
+  ...buttonProps
+}: { underlined?: boolean } & JSX.IntrinsicElements['button']) {
+  return (
+    <button
+      {...buttonProps}
+      className={clsx(
+        className,
+        underlined ? 'underlined focus:outline-none whitespace-nowrap' : 'underline',
+        'text-primary inline-block',
+      )}
+    />
   );
 }
 

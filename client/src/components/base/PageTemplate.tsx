@@ -4,7 +4,7 @@ import Header from './Header';
 
 export type PageTemplateProps = {
   children: React.ReactNode;
-  tag: any;
+  tag?: any;
 };
 
 function PageTemplate({ children, tag }: PageTemplateProps) {

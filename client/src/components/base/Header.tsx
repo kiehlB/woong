@@ -11,13 +11,27 @@ import LogoIcon from '../../static/svg/logo-icon';
 import MenuIcon from '../../static/svg/menu-icon';
 import ArrowDownIcon from '../../static/svg/arrowDown-icon';
 import useGetUser from '../auth/hooks/useWhoAmI';
-import useGetTags from '../../view/home/hooks/usegetTags';
 
-export type HeaderProps = {
-  tag: any;
+type Tags = {
+  id: number;
+  name: string;
+  name_filtered: string;
+  updated_at: string;
+  __typename: string;
 };
 
-const MenuItems = [
+type MainTag = {
+  id: number;
+  name: string;
+  subName: string;
+  svg?: React.ReactNode;
+};
+
+export type HeaderProps = {
+  tag: Tags[];
+};
+
+const MenuItems: MainTag[] = [
   {
     id: 10000,
     name: 'React',
@@ -48,9 +62,7 @@ const MenuItems = [
 function Header({ tag }: HeaderProps) {
   const { loading, error, getUser, logoutButton } = useGetUser();
 
-  const mergeTag = MenuItems.concat(tag?.getAllTags);
-  if (loading) return <div>Loading</div>;
- 
+  const mergeTag = MenuItems.concat((tag as any)?.getAllTags);
 
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between ">
