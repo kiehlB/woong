@@ -1,6 +1,11 @@
+import { useSelector } from 'react-redux';
+import { MenuItems } from '../../components/base/Header';
 import PageTemplate from '../../components/base/PageTemplate';
 import { Button } from '../../components/common/Button';
+import TagItem from '../../components/tags/TagItem';
+import TagList from '../../components/tags/TagList';
 import AddTag from '../../static/svg/addtag';
+import { RootState } from '../../store/rootReducer';
 import useGetTags from '../home/hooks/usegetTags';
 
 export type FilterProps = {};
@@ -12,10 +17,16 @@ function Filter({}: FilterProps) {
     data: getTagsData,
   } = useGetTags();
 
-  if (getTagsLoading) return <div>Loading</div>;
+  const globalTag = useSelector((state: RootState) => (state as any)?.tag?.tag);
+
+  const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
+
+  // if (getTagsLoading) return <div>Loading</div>;
+
+  console.log(getTagsData?.getAllTags?.filter(e => globalTag.includes(e.name)));
 
   return (
-    <PageTemplate>
+    <PageTemplate tag={getTagsData}>
       <div className="font-Cabin">
         <div className="max-w-[71rem] mx-auto pt-12 p-4">
           <div className="mb-8 text-[#14151A] font-semibold text-[2rem] leading-10">
@@ -28,15 +39,7 @@ function Filter({}: FilterProps) {
                   Topics
                 </div>
                 <div className="flex flex-wrap mx-auto">
-                  {getTagsData?.getAllTags?.map(e => (
-                    <>
-                      <div className="mb-2 mr-2 flex justify-end items-center text-[0.75rem] opacity-60 bg-[#F5F5F5] px-[0.75rem] py-[2px] rounded-full">
-                        <div className="mr-1"> {e.name}</div>
-
-                        <AddTag />
-                      </div>
-                    </>
-                  ))}
+                  <TagList tag={mergeTag} />
                 </div>
               </div>
 

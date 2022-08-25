@@ -1,13 +1,10 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import Dot from './dot';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'danger';
   size?: 'small' | 'medium' | 'large';
   children: React.ReactNode | React.ReactNode[];
-  selected?: any;
-  setClick?: any;
 }
 
 function getClassName({ className }: { className?: string }) {
@@ -20,10 +17,8 @@ function getClassName({ className }: { className?: string }) {
 function ButtonInner({
   children,
   variant,
-  selected,
-  setClick,
   size = 'large',
-}: Pick<ButtonProps, 'children' | 'variant' | 'size' | 'selected' | 'setClick'>) {
+}: Pick<ButtonProps, 'children' | 'variant' | 'size'>) {
   return (
     <>
       <div
@@ -34,13 +29,11 @@ function ButtonInner({
               variant === 'secondary' || variant === 'danger',
             danger: variant === 'danger',
             'bg-inverse': variant === 'primary',
-            'bg-slate-600': selected == true,
           },
         )}
       />
 
       <div
-        onClick={() => (setClick ? setClick(!selected) : '')}
         className={clsx(
           'relative flex h-full w-full items-center justify-center whitespace-nowrap',
           {
@@ -63,33 +56,14 @@ function Button({
   variant = 'primary',
   size = 'large',
   className,
-  selected,
-  setClick,
   ...buttonProps
 }: ButtonProps & JSX.IntrinsicElements['button']) {
   return (
     <button {...buttonProps} className={getClassName({ className })}>
-      <ButtonInner variant={variant} size={size} selected={selected} setClick={setClick}>
+      <ButtonInner variant={variant} size={size}>
         {children}
       </ButtonInner>
     </button>
-  );
-}
-
-function ClickableButton({
-  className,
-  underlined,
-  ...buttonProps
-}: { underlined?: boolean } & JSX.IntrinsicElements['button']) {
-  return (
-    <button
-      {...buttonProps}
-      className={clsx(
-        className,
-        underlined ? 'underlined focus:outline-none whitespace-nowrap' : 'underline',
-        'text-primary inline-block',
-      )}
-    />
   );
 }
 

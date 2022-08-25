@@ -1,34 +1,30 @@
+import { useState } from 'react';
+import { Tags } from '../base/Header';
 import TagItem from './TagItem';
 
-export type TagListProps = {};
+export type TagListProps = {
+  tag: any;
+};
 
-const a = [
-  {
-    id: 1,
-    title: 'What Is PAX Gold (PAXG)?',
-  },
-  {
-    id: 2,
-    title: '1',
-  },
-  { id: 3, title: '1' },
-  {
-    id: 4,
-    title: '1',
-  },
-  { id: 5, title: '1' },
-  { id: 6, title: '1' },
-  { id: 7, title: '1' },
-  { id: 8, title: '1' },
-  { id: 9, title: '1' },
-];
+function TagList({ tag }: TagListProps) {
+  const [queryValue, setQuery] = useState<string>('');
 
-function TagList({}: TagListProps) {
+  function toggleTag(tag: string) {
+    setQuery(q => {
+      // create a regexp so that we can replace multiple occurrences (`react node react`)
+      const expression = new RegExp(tag, 'ig');
+
+      const newQuery = expression.test(q) ? q.replace(expression, '') : `${q} ${tag}`;
+
+      // trim and remove subsequent spaces (`react   node ` => `react node`)
+      return newQuery.replace(/\s+/g, ' ').trim();
+    });
+  }
+
   return (
     <div>
-      {a?.map(e => (
-        // <TagItem key={e.id} />
-        <div>d</div>
+      {tag?.map(e => (
+        <TagItem key={e.id} Toogle={toggleTag} tag={e.name} />
       ))}
     </div>
   );

@@ -72,7 +72,7 @@ function FloatingHeader(props: FloatingHeaderProps) {
             }
       }
       ref={blockRef}>
-      <Header />
+      {/* <Header /> */}
     </div>
   );
 }

@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import { createMachine, interpret } from 'xstate';
 import { useSpring, animated } from 'react-spring';
 import { Button } from '../common/Button';
-import Dot from '../common/dot';
 import AddTag from '../../static/svg/addtag';
+import Dot from '../common/TagsDot';
 
 export type MainProps = {};
 

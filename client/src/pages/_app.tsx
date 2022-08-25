@@ -9,6 +9,7 @@ import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import store from '../store/store';
+import { NextUIProvider } from '@nextui-org/react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
@@ -24,11 +25,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <NextSeo title="Woong blog" description="welcome to woong blog!" canonical="/" />
-      <Provider store={store}>
-        <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
-        </ApolloProvider>
-      </Provider>
+      <NextUIProvider>
+        <Provider store={store}>
+          <ApolloProvider client={apolloClient}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </Provider>
+      </NextUIProvider>
       <div>
         <style global jsx>{`
           html,

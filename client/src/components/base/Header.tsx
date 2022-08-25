@@ -11,8 +11,11 @@ import LogoIcon from '../../static/svg/logo-icon';
 import MenuIcon from '../../static/svg/menu-icon';
 import ArrowDownIcon from '../../static/svg/arrowDown-icon';
 import useGetUser from '../auth/hooks/useWhoAmI';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/rootReducer';
+import { tagGet } from '../../store/tag';
 
-type Tags = {
+export type Tags = {
   id: number;
   name: string;
   name_filtered: string;
@@ -31,7 +34,7 @@ export type HeaderProps = {
   tag: Tags[];
 };
 
-const MenuItems: MainTag[] = [
+export const MenuItems: MainTag[] = [
   {
     id: 10000,
     name: 'React',
@@ -61,6 +64,8 @@ const MenuItems: MainTag[] = [
 
 function Header({ tag }: HeaderProps) {
   const { loading, error, getUser, logoutButton } = useGetUser();
+  const dispatch = useDispatch();
+  const globalTag = useSelector((state: RootState) => (state as any)?.tag?.tag);
 
   const mergeTag = MenuItems.concat((tag as any)?.getAllTags);
 
@@ -73,7 +78,7 @@ function Header({ tag }: HeaderProps) {
           </div>
         </Link>
 
-        <div className="flex items-center mxl:hidden">
+        <div className="flex items-center mxl:hidden z-40">
           <div className="group w-6  mr-8 ml-8">
             <MenuIcon />
             <nav className="absolute mt-5 bg-white">
@@ -81,7 +86,7 @@ function Header({ tag }: HeaderProps) {
                 <ul className="grid grid-cols-2 p-4">
                   {MenuItems.map(e => (
                     <li key={e.id}>
-                      <HeaderMenuItems {...e} />
+                      <HeaderMenuItems {...e} dispatch={dispatch} />
                     </li>
                   ))}
                 </ul>
@@ -122,7 +127,7 @@ function Header({ tag }: HeaderProps) {
               <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
                 <ul className="grid grid-cols-3  pl-4 pr-4  pt-4 mb-2">
                   {mergeTag?.map(e => (
-                    <li key={e?.id}>
+                    <li onClick={() => dispatch(tagGet(e.name))} key={e?.id}>
                       <HeaderTopicItem {...e} />
                     </li>
                   ))}

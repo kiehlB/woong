@@ -1,16 +1,19 @@
 import type { NextPage } from 'next';
+import { useSelector } from 'react-redux';
 import PageTemplate from '../../components/base/PageTemplate';
 import { Button } from '../../components/common/Button';
-import Dot from '../../components/common/dot';
 import PostCard from '../../components/common/PostCard';
 import PostTitle from '../../components/common/PostTitle';
 import SvgCard from '../../components/common/SvgCard';
+import Dot from '../../components/common/TagsDot';
 import Main from '../../components/main';
 import useGetPosts from '../../components/main/hooks/usegetPosts';
 import TagItem from '../../components/tags/TagItem';
 import Bicycle from '../../static/svg/bicycle';
 import Swing from '../../static/svg/swing';
+import { RootState } from '../../store/rootReducer';
 import useGetTags from './hooks/usegetTags';
+import { Button as NextButton } from '@nextui-org/react';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -26,16 +29,17 @@ const Home: NextPage = () => {
   return (
     <PageTemplate tag={getTagsData}>
       <Main />
+
       <div className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
-          <div className="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2">
+          {/* <div className="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2">
             {data?.findAllPost?.map(e => (
               <div key={e.id} data-aos="fade-down" className=" shadow-lg rounded-xl">
                 <PostCard article={e} />
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="mb-7">
@@ -51,9 +55,9 @@ const Home: NextPage = () => {
           <div className="flex pt-14">
             <div className="text-white">Topics : </div>
             <div className="text-[#aeb4bc] flex flex-1 flex-wrap items-center gap-4 px-4">
-              {getTagsData?.getAllTags?.map(e => (
+              {/* {getTagsData?.getAllTags?.map(e => (
                 <TagItem key={e.id} tag={e.name} disabled={false} />
-              ))}
+              ))} */}
             </div>
           </div>
 

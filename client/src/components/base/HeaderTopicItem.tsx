@@ -10,11 +10,9 @@ export type HeaderTopicItemProps = {
 function HeaderTopicItem({ name }: HeaderTopicItemProps) {
   return (
     <div className="py-0.5 mr-2 mb-1 ">
-      <Button
-        size="small"
-        className="w-32 bg-black text-white  rounded-3xl  font-Roboto text-[0.75rem]">
+      <div className="flex justify-center w-32 bg-black text-white  rounded-3xl  font-Roboto   space-x-1 px-3 py-1 text-sm">
         {capitalizeFirstLetter(name)}
-      </Button>
+      </div>
     </div>
   );
 }
