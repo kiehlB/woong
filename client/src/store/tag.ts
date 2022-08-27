@@ -8,11 +8,13 @@ interface Tags {
 
 export interface TagsState {
   tag: Tags[];
+  mainTag: Tags[];
   error: string;
 }
 
 export const initialState = {
   tag: [],
+  mainTag: [],
   error: '',
 };
 
@@ -21,25 +23,42 @@ const TagsSlice = createSlice({
   initialState,
   reducers: {
     getTagsSuccess(state: RootState, { payload }: PayloadAction<TagsState>) {
-      if (!state.tag.includes(payload)) {
-        state.tag = [...state.tag, payload];
-      }
+      state.tag = payload;
     },
     getTagsFailure(state: RootState, { payload }: PayloadAction<TagsState>) {
       state.error = payload.error;
     },
+    getMainTagsSuccess(state: RootState, { payload }) {
+      state.mainTag = payload;
+    },
+    getMainTagsFailure(state: RootState, { payload }: PayloadAction<TagsState>) {
+      state.error = payload.error;
+    },
+
     fetchtagInit(state: RootState) {
       state.tag = [];
     },
   },
 });
 
-export const { getTagsSuccess, getTagsFailure, fetchtagInit } = TagsSlice.actions;
+export const {
+  getTagsSuccess,
+  getTagsFailure,
+  fetchtagInit,
+  getMainTagsFailure,
+  getMainTagsSuccess,
+} = TagsSlice.actions;
 
 export const tagGet =
   (payload): any =>
   async (dispatch: AppDispatch) => {
     dispatch(getTagsSuccess(payload));
+  };
+
+export const getMainTag =
+  (payload): any =>
+  async (dispatch: AppDispatch) => {
+    dispatch(getMainTagsSuccess(payload));
   };
 
 export const tagInit = (): AppThunk => async (dispatch: AppDispatch) => {

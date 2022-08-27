@@ -6,6 +6,7 @@ import TagItem from '../../components/tags/TagItem';
 import TagList from '../../components/tags/TagList';
 import AddTag from '../../static/svg/addtag';
 import { RootState } from '../../store/rootReducer';
+import { tagGet } from '../../store/tag';
 import useGetTags from '../home/hooks/usegetTags';
 
 export type FilterProps = {};
@@ -21,9 +22,9 @@ function Filter({}: FilterProps) {
 
   const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
 
-  // if (getTagsLoading) return <div>Loading</div>;
+  if (getTagsLoading) return <div>Loading</div>;
 
-  console.log(getTagsData?.getAllTags?.filter(e => globalTag.includes(e.name)));
+  // console.log(getTagsData?.getAllTags?.filter(e => globalTag.includes(e.name)));
 
   return (
     <PageTemplate tag={getTagsData}>
@@ -39,7 +40,7 @@ function Filter({}: FilterProps) {
                   Topics
                 </div>
                 <div className="flex flex-wrap mx-auto">
-                  <TagList tag={mergeTag} />
+                  <TagList tag={mergeTag} globalTag={globalTag} toStore={tagGet} />
                 </div>
               </div>
 

@@ -5,14 +5,39 @@ import clsx from 'clsx';
 export type TagItemProps = {
   tag?: string;
   disabled?: boolean;
-  Toogle: any;
+  handleCheck?: any;
+  checked?: any;
+  globalTag?: any;
+  variant?;
+  children?;
 };
 
-function TagItem({ tag, disabled, Toogle }: TagItemProps) {
+function TagItem({
+  tag,
+  variant,
+  disabled,
+  checked,
+  handleCheck,
+  globalTag,
+  children,
+}: TagItemProps) {
+  console.log(variant);
   return (
-    <div className={clsx('')}>
-      <div> {tag}</div>
-    </div>
+    <label>
+      <div
+        className={clsx(
+          'flex items-center text-sm px-4 py-1 text-[#aeb4bc]  border-[#2b2f36] border rounded-full cursor-pointer',
+          {
+            'border border-[rgba(2,192,118,0.2)]': variant == 'green',
+            'border border-[rgba(240,185,11,0.2)]': variant == 'yello',
+            'border border-[rgba(217,48,78,0.2)]': variant == 'red',
+          },
+        )}>
+        {children}
+        {tag}
+      </div>
+      {/* <input value={tag} type="checkbox" onChange={handleCheck} checked={checked} /> */}
+    </label>
   );
 
   // <div onClick={Toogle(tag)}>

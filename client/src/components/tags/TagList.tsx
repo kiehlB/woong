@@ -1,32 +1,45 @@
 import { useState } from 'react';
 import { Tags } from '../base/Header';
 import TagItem from './TagItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMainTag, tagGet } from '../../store/tag';
 
 export type TagListProps = {
   tag: any;
+  globalTag: any;
+  toStore: any;
+  variant?: any;
 };
 
-function TagList({ tag }: TagListProps) {
-  const [queryValue, setQuery] = useState<string>('');
+function TagList({ tag, globalTag, toStore, variant }: TagListProps) {
+  const dispatch = useDispatch();
 
-  function toggleTag(tag: string) {
-    setQuery(q => {
-      // create a regexp so that we can replace multiple occurrences (`react node react`)
-      const expression = new RegExp(tag, 'ig');
+  const handleCheck = event => {
+    let updatedList = [...globalTag];
 
-      const newQuery = expression.test(q) ? q.replace(expression, '') : `${q} ${tag}`;
+    if (event.target.checked) {
+      updatedList = [...globalTag, event.target.value];
+    } else {
+      console.log(globalTag.indexOf(event.target.value));
+      updatedList.splice(globalTag.indexOf(event.target.value), 1);
+    }
 
-      // trim and remove subsequent spaces (`react   node ` => `react node`)
-      return newQuery.replace(/\s+/g, ' ').trim();
-    });
-  }
+    dispatch(toStore(updatedList));
+  };
 
   return (
-    <div>
+    <>
       {tag?.map(e => (
-        <TagItem key={e.id} Toogle={toggleTag} tag={e.name} />
+        <TagItem
+          key={e?.id}
+          tag={e?.name}
+          handleCheck={handleCheck}
+          globalTag={globalTag}
+          checked={globalTag?.includes(e?.name)}
+          variant={variant}
+        />
       ))}
-    </div>
+    </>
   );
 }
 

@@ -14,6 +14,7 @@ import useGetUser from '../auth/hooks/useWhoAmI';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { tagGet } from '../../store/tag';
+import clsx from 'clsx';
 
 export type Tags = {
   id: number;
@@ -69,6 +70,7 @@ function Header({ tag }: HeaderProps) {
 
   const mergeTag = MenuItems.concat((tag as any)?.getAllTags);
 
+  console.log(getUser?.whoAmI?.ok);
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between ">
       <div className="flex items-center">
@@ -125,7 +127,7 @@ function Header({ tag }: HeaderProps) {
             </div>
             <nav className="absolute mt-5 bg-white  z-[99999]">
               <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
-                <ul className="grid grid-cols-3  pl-4 pr-4  pt-4 mb-2">
+                <ul className="grid grid-cols-3  pl-4 pr-4  pt- mb-2">
                   {mergeTag?.map(e => (
                     <li onClick={() => dispatch(tagGet(e.name))} key={e?.id}>
                       <HeaderTopicItem {...e} />
@@ -149,7 +151,13 @@ function Header({ tag }: HeaderProps) {
         </div>
 
         <Link href="/signin">
-          <div className="ml-8 mxl:hidden text-sm  cursor-pointer  font-Cabin  font-medium">
+          <div
+            className={clsx(
+              'mxl:hidden text-sm  cursor-pointer  font-Cabin  font-medium',
+              {
+                'ml-8': getUser?.whoAmI?.ok == undefined,
+              },
+            )}>
             {!loading && getUser?.whoAmI?.ok ? '' : 'Login'}
           </div>
         </Link>

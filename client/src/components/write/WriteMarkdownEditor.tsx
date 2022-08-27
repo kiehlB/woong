@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 import SunEditorCore from 'suneditor/src/lib/core';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import dynamic from 'next/dynamic';
 import suneditor from 'suneditor';
 import useEditor from './hooks/useCreatePost';
+import Tags from './Tags';
+import TagsForm from './TagForm';
 
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,
@@ -12,8 +14,19 @@ const SunEditor = dynamic(() => import('suneditor-react'), {
 
 const WriteMarkdownEditor = props => {
   const edtiorRef = useRef<any>();
-
+  const [tag, setTag] = useState([]);
   const { createPost } = useEditor();
+
+  const deleteTag = index => {
+    const newTag = [...tag];
+    newTag.splice(index, 1);
+    setTag(newTag);
+  };
+
+  const addTag = text => {
+    const newTag = [...tag, { text }];
+    setTag(newTag);
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -36,14 +49,31 @@ const WriteMarkdownEditor = props => {
   };
 
   return (
-    <div>
-      <p onClick={e => handleSubmit(e)}> My Other Contents </p>
+    <div className="w-[95%] mx-auto pt-9">
+      <input
+        className="text-4xl font-bold focus:outline-none w-full "
+        name="title"
+        placeholder="제목을 입력하세요"
+      />
+
+      <hr className="border-2 w-4/12 mt-3.5 h-1" />
+
+      <div className="flex flex-wrap mt-4 items-center">
+        {tag.map((tags, index) => (
+          <Tags tags={tags} key={index} deleteTag={deleteTag} index={index} />
+        ))}
+      </div>
+
+      <div className="mb-4">
+        <TagsForm addTag={addTag} />
+      </div>
+
       <SunEditor
         getSunEditorInstance={getSunEditorInstance}
         lang="ko"
         autoFocus={true}
         setOptions={{
-          height: '800',
+          height: '500',
           buttonList: [
             ['undo', 'redo'],
             ['font', 'fontSize', 'formatBlock'],
