@@ -48,53 +48,57 @@ const WriteMarkdownEditor = props => {
     edtiorRef.current = sunEditor;
   };
 
+  console.log(edtiorRef?.current?.getContents(true));
+
   return (
-    <div className="w-[95%] mx-auto pt-9">
-      <input
-        className="text-4xl font-bold focus:outline-none w-full "
-        name="title"
-        placeholder="제목을 입력하세요"
-      />
-
-      <hr className="border-2 w-4/12 mt-3.5 h-1" />
-
-      <div className="flex flex-wrap mt-4 items-center">
-        {tag.map((tags, index) => (
-          <Tags tags={tags} key={index} deleteTag={deleteTag} index={index} />
-        ))}
+    <div className="flex h-full min-h-screen ">
+      <div className="w-[50%] pt-9 pl-12">
+        <input
+          className="text-4xl font-bold focus:outline-none w-full "
+          name="title"
+          placeholder="제목을 입력하세요"
+        />
+        <hr className="border-2 w-4/12 mt-3.5 h-1" />
+        <div className="flex flex-wrap mt-4 items-center">
+          {tag.map((tags, index) => (
+            <Tags tags={tags} key={index} deleteTag={deleteTag} index={index} />
+          ))}
+        </div>
+        <div className="mb-4">
+          <TagsForm addTag={addTag} />
+        </div>
+        <SunEditor
+          getSunEditorInstance={getSunEditorInstance}
+          lang="ko"
+          autoFocus={true}
+          setOptions={{
+            height: '1000',
+            buttonList: [
+              ['undo', 'redo'],
+              ['font', 'fontSize', 'formatBlock'],
+              ['paragraphStyle', 'blockquote'],
+              ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+              ['fontColor', 'hiliteColor', 'textStyle'],
+              ['removeFormat'],
+              '/', // Line break
+              ['outdent', 'indent'],
+              ['align', 'horizontalRule', 'list', 'lineHeight'],
+              ['table', 'link', 'image', 'video', 'audio' /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
+              /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
+              ['fullScreen', 'showBlocks', 'codeView'],
+              ['preview', 'print'],
+              ['save', 'template'],
+              /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
+            ], // Or Array of button list, eg. [['font', 'align'], ['image']]
+            // plugins: [font] set plugins, all plugins are set by default
+            // Other option
+          }}
+        />
       </div>
 
-      <div className="mb-4">
-        <TagsForm addTag={addTag} />
+      <div className="w-[50%] flex flex-1 bg-[#F8F9FA] shadow-md">
+        {/* {edtiorRef?.current?.getContents()} */}
       </div>
-
-      <SunEditor
-        getSunEditorInstance={getSunEditorInstance}
-        lang="ko"
-        autoFocus={true}
-        setOptions={{
-          height: '500',
-          buttonList: [
-            ['undo', 'redo'],
-            ['font', 'fontSize', 'formatBlock'],
-            ['paragraphStyle', 'blockquote'],
-            ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
-            ['fontColor', 'hiliteColor', 'textStyle'],
-            ['removeFormat'],
-            '/', // Line break
-            ['outdent', 'indent'],
-            ['align', 'horizontalRule', 'list', 'lineHeight'],
-            ['table', 'link', 'image', 'video', 'audio' /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
-            /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
-            ['fullScreen', 'showBlocks', 'codeView'],
-            ['preview', 'print'],
-            ['save', 'template'],
-            /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
-          ], // Or Array of button list, eg. [['font', 'align'], ['image']]
-          // plugins: [font] set plugins, all plugins are set by default
-          // Other option
-        }}
-      />
     </div>
   );
 };
