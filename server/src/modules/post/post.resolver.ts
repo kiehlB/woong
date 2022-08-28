@@ -39,6 +39,7 @@ import { typeOrmConnectionDataSource } from 'src/app.module';
 import { normalize } from 'src/common/utils/normalize';
 import { CommentService } from '../comment/comment.service';
 import PostsLoaders from './post.loader';
+import { getSinglePostRequest } from './dto/getPost.dto';
 
 @Resolver((of) => Post)
 export class PostResolver {
@@ -48,9 +49,9 @@ export class PostResolver {
     private postsLoaders: PostsLoaders,
   ) {}
 
-  @Query(() => [Post], { nullable: true })
-  findPost(args) {
-    return this.postService.findPost(args);
+  @Query(() => Post, { nullable: true })
+  findSinglePost(@Args('input') post: getSinglePostRequest) {
+    return this.postService.findPost(post);
   }
 
   @Query(() => [Post])

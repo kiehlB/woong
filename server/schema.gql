@@ -50,6 +50,7 @@ type Post {
   thumbnail: String
   title: String
   updated_at: DateTime!
+  user: User
 }
 
 type PostsTags {
@@ -71,7 +72,7 @@ type Query {
   findAllComments: [Comments!]!
   findAllPost: [Post!]!
   findByIdTag(id: Int!): [Tag!]!
-  findPost: [Post!]
+  findSinglePost(input: getPost!): Post
   getAllPostTags: [PostsTags!]!
   getAllTags: [Tag!]!
   getAllTagsCount: [Tag!]!
@@ -137,6 +138,10 @@ input createPost {
 
 input createProfile {
   bio: String!
+}
+
+input getPost {
+  id: Int
 }
 
 input getUserInfo {

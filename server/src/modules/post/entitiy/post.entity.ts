@@ -8,10 +8,12 @@ import {
   JoinTable,
   ManyToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { Tag } from '../../tag/entity/tag.entity';
 import { Comments } from '../../comment/comment.entity';
+import { User } from 'src/modules/user/entitiy/user.entity';
 
 @ObjectType()
 @Entity()
@@ -45,6 +47,11 @@ export class Post {
   @Column('timestamptz')
   @UpdateDateColumn()
   updated_at!: Date;
+
+  @Field((type) => User, { nullable: true })
+  @ManyToOne((type) => User, { cascade: true, eager: true })
+  @JoinColumn({ name: 'user_id' })
+  user!: User;
 
   @Field((type) => [Tag], { nullable: true })
   @ManyToMany(() => Tag)

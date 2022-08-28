@@ -18,3 +18,20 @@ export const GET_Posts = gql`
     }
   }
 `;
+
+export const GET_Post = gql`
+  query FindSinglePost($input: getPost!) {
+    findSinglePost(input: $input) {
+      id
+      body
+      title
+      posts_tags {
+        tag {
+          id
+          name
+          name_filtered
+        }
+      }
+    }
+  }
+`;
