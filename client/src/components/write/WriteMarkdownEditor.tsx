@@ -34,7 +34,7 @@ const WriteMarkdownEditor = props => {
     createPost({
       variables: {
         input: {
-          title: 'zzzz',
+          title: 'How to Build a Well-Balanced Crypto Portfolio',
           body: edtiorRef?.current?.getContents(false),
           thumbnail: 'asdsad',
           tags: ['dasd'],
@@ -95,7 +95,7 @@ const WriteMarkdownEditor = props => {
           }}
         />
       </div>
-
+      <div onClick={handleSubmit}>dd</div>
       <div className="w-[50%] flex flex-1 bg-[#F8F9FA] shadow-md">
         {/* {edtiorRef?.current?.getContents()} */}
       </div>
