@@ -25,7 +25,7 @@ export const ConditionTransition: React.FC<ConditionTransitionProps> = ({
             <animated.div style={{ ...style, overflow: 'hidden' }}>
               {children}
             </animated.div>
-          )
+          ),
       )}
     </>
   );

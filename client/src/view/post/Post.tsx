@@ -1,6 +1,6 @@
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import {
   motion,
   useScroll,
@@ -12,7 +12,73 @@ import PageTemplate from '../../components/base/PageTemplate';
 import useGetPosts from '../../components/main/hooks/usegetPosts';
 import useGetPost from './hooks/useGerPost';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
-import HeaderMenuItems from '../../components/base/HeaderMenuItem';
+import ReactCanvasConfetti from 'react-canvas-confetti';
+
+const canvasStyles = {
+  pointerEvents: 'none',
+  width: '100%',
+  height: '100%',
+  top: 0,
+  left: 0,
+};
+
+function Realistic() {
+  const refAnimationInstance = useRef(null);
+
+  const getInstance = useCallback(instance => {
+    refAnimationInstance.current = instance;
+  }, []);
+
+  const makeShot = useCallback((particleRatio, opts) => {
+    refAnimationInstance.current &&
+      refAnimationInstance.current({
+        ...opts,
+        origin: { y: 0.7 },
+        particleCount: Math.floor(200 * particleRatio),
+      });
+  }, []);
+
+  const fire = useCallback(() => {
+    makeShot(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    });
+
+    makeShot(0.2, {
+      spread: 60,
+    });
+
+    makeShot(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+    });
+
+    makeShot(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+    });
+
+    makeShot(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
+  }, [makeShot]);
+
+  return (
+    <>
+      {/* @ts-ignore */}
+      <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
+      <button onClick={fire} className="flex justify-center">
+        <span className="w-[100px] bg-[#404663] shadow-lg p-6 text-[1.5rem] rounded-full flex justify-center items-center">
+          🎉
+        </span>
+      </button>
+    </>
+  );
+}
 
 export type PostProps = {};
 
@@ -27,17 +93,22 @@ function Post({}: PostProps) {
   console.log(pathLength);
 
   const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
-
+  /// fixed mt-[10%] bg-[#404663] shadow-lg p-6 text-[1.5rem] rounded-full flex justify-center items-center
   return (
     <PageTemplate>
       <div className="flex">
-        <div className="sticky top-0 flex justify-center border w-[30%]">
-          <div>Like</div>
+        <div className="flex justify-center w-[30%]">
+          <div className="w-full">
+            <div className="fixed flex flex-col w-[30%]">
+              <Realistic />
+            </div>
+          </div>
+          <div className="fixed mt-[20%] text-[1.5rem]">0</div>
         </div>
-        <div className="flex flex-col w-[40%] mx-auto  justify-center items-center">
+        <div className="flex flex-col w-[40%] mx-auto  justify-center items-center mt-4">
           <div className="flex w-full">
             {singlePostData?.findSinglePost?.posts_tags?.map(e => (
-              <HeaderTopicItem name={e.tag.name_filtered} />
+              <HeaderTopicItem name={e.tag.name_filtered} size="small" />
             ))}
           </div>
           <svg className="progress-icon" viewBox="0 0 60 60">
@@ -69,7 +140,9 @@ function Post({}: PostProps) {
             dangerouslySetInnerHTML={{ __html: singlePostData?.findSinglePost?.body }}
           />
         </div>
-        <div className="border w-[30%]">dd</div>
+        <div className="flex justify-center border w-[30%]">
+          <div className="fixed mt-[10%]">dd</div>
+        </div>
       </div>
     </PageTemplate>
   );

@@ -24,6 +24,10 @@ export class CreatePostRequest {
   @Field((type) => [String], { nullable: true })
   @IsString()
   tags?: string;
+
+  @Field((type) => String, { nullable: true })
+  @IsString()
+  difficulty?: string;
 }
 
 @ObjectType()

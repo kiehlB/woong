@@ -52,6 +52,7 @@ export class PostService {
     const newPost = await postsRepo.create({
       title: post.title,
       body: post.body,
+      difficulty: post.difficulty,
     });
 
     const tags = await Promise.all(

@@ -38,6 +38,10 @@ export class Post {
   @Column({ type: 'int', default: 0 })
   likes!: number;
 
+  @Field((type) => String, { nullable: true })
+  @Column()
+  difficulty!: string;
+
   @Field((type) => Date)
   @Column('timestampz')
   @CreateDateColumn()
