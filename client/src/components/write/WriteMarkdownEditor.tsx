@@ -11,7 +11,8 @@ import Link from 'next/link';
 import useInput from '../../lib/hooks/useInput';
 import { Spinner } from 'evergreen-ui';
 import { Pane, Badge, Text } from 'evergreen-ui';
-import AnimatedMulti from '../common/reactSelect';
+import AnimatedMulti from '../common/ReactSelectInput';
+import { Button, LinkButton } from '../common/Button';
 
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,
@@ -25,7 +26,9 @@ const WriteMarkdownEditor = props => {
   const [fileInputState, setFileInputState] = useState('');
   const [readyForFile, setreadyForFile] = useState(0);
   const [previewSource, setPreviewSource] = useState('');
+  const [selectedOption, setSelectedOption] = useState(null);
 
+  console.log(selectedOption);
   const deleteTag = index => {
     const newTag = [...tag];
     newTag.splice(index, 1);
@@ -43,10 +46,11 @@ const WriteMarkdownEditor = props => {
     createPost({
       variables: {
         input: {
-          title: 'How to Build a Well-Balanced Crypto Portfolio',
+          title: title,
           body: edtiorRef?.current?.getContents(false),
           thumbnail: 'asdsad',
           tags: tag,
+          difficulty: 'zz',
         },
       },
     });
@@ -147,7 +151,7 @@ const WriteMarkdownEditor = props => {
             </div>
 
             <div className="z-[9999]">
-              <AnimatedMulti />
+              <AnimatedMulti setSelectedOption={setSelectedOption} />
             </div>
           </div>
 
@@ -179,13 +183,16 @@ const WriteMarkdownEditor = props => {
             }}
           />
 
-          <div className="flex py-4">
+          <div className="flex py-4 justify-end">
             <div style={{ marginRight: '1rem' }}>
               <Link href="/">
-                <div className="text-zinc-600 ">뒤로가기</div>
+                <LinkButton className="text-zinc-600">뒤로가기</LinkButton>
               </Link>
             </div>
-            <div>완료</div>
+
+            <div onClick={e => handleSubmit(e)}>
+              <LinkButton className="text-zinc-600">완료</LinkButton>
+            </div>
           </div>
         </div>
 

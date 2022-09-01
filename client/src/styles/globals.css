@@ -14,9 +14,7 @@ html #root {
   margin: 0;
 }
 
-.hello{
-  border:1px solid red;
- 
+.gridImg{
   background-image: url('https://public.bnbstatic.com/static/academy/uploads-thumbnails/46d6dad92ae74670b466962f4841f528.png');
   background-position: center center;
     background-repeat: no-repeat;
@@ -28,7 +26,6 @@ html #root {
     position: relative;
     width: 100%;
     padding-top: 90%;
-
 }
  
 @font-face {

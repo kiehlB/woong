@@ -15,6 +15,13 @@ export const GET_Posts = gql`
       id
       body
       title
+      posts_tags {
+        tag {
+          id
+          name
+          name_filtered
+        }
+      }
     }
   }
 `;

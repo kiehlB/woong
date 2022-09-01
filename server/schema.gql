@@ -43,6 +43,7 @@ type Post {
   body: String
   comments: [Comments!]
   created_at: DateTime!
+  difficulty: String
   id: Int
   likes: Int
   posts_tags: [PostsTags!]
@@ -131,6 +132,7 @@ input createComment {
 
 input createPost {
   body: String
+  difficulty: String
   tags: [String!]
   thumbnail: String
   title: String

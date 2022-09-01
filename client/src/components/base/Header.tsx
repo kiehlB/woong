@@ -127,10 +127,10 @@ function Header({ tag }: HeaderProps) {
             </div>
             <nav className="absolute mt-5 bg-white  z-[99999]">
               <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
-                <ul className="grid grid-cols-3  pl-4 pr-4  pt- mb-2">
+                <ul className="grid grid-cols-3  px-4 pt-2 mb-2">
                   {mergeTag?.map(e => (
                     <li onClick={() => dispatch(tagGet(e.name))} key={e?.id}>
-                      <HeaderTopicItem {...e} />
+                      <HeaderTopicItem size="big" {...e} />
                     </li>
                   ))}
                 </ul>

@@ -17,6 +17,7 @@ import { Button as NextButton } from '@nextui-org/react';
 import TagList from '../../components/tags/TagList';
 import { MenuItems } from '../../components/base/Header';
 import { getMainTag } from '../../store/tag';
+import PostList from '../../components/post/PostList';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -28,10 +29,21 @@ const Home: NextPage = () => {
   } = useGetTags();
 
   const globalTag = useSelector((state: RootState) => (state as any)?.tag?.mainTag);
+  const globalTag2 = useSelector((state: RootState) => (state as any)?.tag?.tag);
 
   const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
 
+  console.log(globalTag);
+
   if (loading) return <div>Loading</div>;
+
+  console.log(
+    data?.findAllPost.map(e =>
+      e.posts_tags.map(el => el.tag.name_filtered.includes('zzz')).includes(true),
+    ),
+  );
+
+  console.log(data?.findAllPost);
 
   return (
     <PageTemplate tag={getTagsData}>
@@ -40,12 +52,8 @@ const Home: NextPage = () => {
       <div className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
-          <div className="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2">
-            {data?.findAllPost?.map(e => (
-              <div key={e.id} data-aos="fade-down" className=" shadow-lg rounded-xl">
-                <PostCard article={e} />
-              </div>
-            ))}
+          <div className="">
+            <PostList data={data} />
           </div>
         </div>
 
@@ -66,7 +74,7 @@ const Home: NextPage = () => {
             </div>
           </div>
 
-          <div className="flex mt-8 item">
+          <div className="flex my-8 ">
             <div className="text-white">Difficulty:</div>
 
             <TagItem tag="Begnner" variant="green">
@@ -81,32 +89,53 @@ const Home: NextPage = () => {
               <Dot bg="bg-[#d9304e]" />
             </TagItem>
           </div>
-          <div className="grid grid-cols-4  ">
+          <div className="grid grid-cols-4">
             <div className="col-span-3">
               <div
-                className="grid"
+                className="grid bg-[#2b2f36]"
                 style={{
                   gridTemplateColumns: 'minmax(auto,368px) 1fr',
                 }}>
-                <img className="hello" />
-                <div className="flex border-2 text-white ">
-                  <div>What Is SKALE (SKL)?</div>
-                  <div>Jul 7, 2022 5m</div>
-                  <div>Intermediate</div>
+                <img className="gridImg " />
+                <div className="flex text-white bg-[#2b2f36] flex-col  justify-center">
+                  <div className="text-[2rem] leading-10 font-semibold">
+                    What Is SKALE (SKL)?
+                  </div>
+                  <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
+                    Jul 7, 2022 5m
+                  </div>
+                  <div className="flex items-center">
+                    <Dot bg="bg-[#F0B90B]" /> Intermediate
+                  </div>
                 </div>
               </div>
             </div>
             <div className="col-span-1 border-2">
               <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+              <div className="text-[#fff]">What Is Lisk (LSK)?</div>
+              <div className="text-[#fff]">Aug 11, 2022 5m</div>
+              <div className="text-[#fff]">Intermediate</div>
             </div>
-            <div className="col-span-1">d</div>
+
+            <div className="col-span-1">
+              <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+              <div className="text-[#fff]">What Is Lisk (LSK)?</div>
+              <div className="text-[#fff]">Aug 11, 2022 5m</div>
+              <div className="text-[#fff]">Intermediate</div>
+            </div>
+
             <div className="col-span-3">
               <div
                 className="grid"
                 style={{
                   gridTemplateColumns: 'minmax(auto,368px) 1fr',
                 }}>
-                <img className="hello" />
+                <div>
+                  <div className="text-[#fff]">What Is Lisk (LSK)?</div>
+                  <div className="text-[#fff]">Aug 11, 2022 5m</div>
+                  <div className="text-[#fff]">Intermediate</div>
+                </div>
+                <img className="gridImg" />
               </div>
             </div>
             <div className="col-span-2">
@@ -118,13 +147,15 @@ const Home: NextPage = () => {
                 <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
               </div>
             </div>
-            <div className="grid border-">
-              <div
-                className="grid border-2"
-                style={{
-                  gridTemplateColumns: 'minmax(auto,176px) 1fr',
-                }}>
-                <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+            <div className="col-span-2">
+              <div className="grid border-">
+                <div
+                  className="grid border-2"
+                  style={{
+                    gridTemplateColumns: 'minmax(auto,176px) 1fr',
+                  }}>
+                  <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+                </div>
               </div>
             </div>
           </div>

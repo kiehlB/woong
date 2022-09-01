@@ -193,24 +193,13 @@ const colourStyles: StylesConfig<ColourOption> = {
   singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
 };
 
-export default function AnimatedMulti() {
+export default function AnimatedMulti({ setSelectedOption }) {
   return (
     <Select
-      defaultValue={colourOptions[2]}
+      defaultValue={colourOptions[0]}
       options={colourOptions}
       styles={colourStyles}
+      onChange={setSelectedOption}
     />
   );
 }
-
-// export default function AnimatedMulti() {
-//   return (
-//     <Select
-//       closeMenuOnSelect={false}
-//       components={animatedComponents}
-//       defaultValue={[colourOptions[4], colourOptions[5]]}
-//       isMulti
-//       options={colourOptions}
-//     />
-//   );
-// }

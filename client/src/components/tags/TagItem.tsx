@@ -21,7 +21,6 @@ function TagItem({
   globalTag,
   children,
 }: TagItemProps) {
-  console.log(variant);
   return (
     <label>
       <div
@@ -36,7 +35,7 @@ function TagItem({
         {children}
         {tag}
       </div>
-      {/* <input value={tag} type="checkbox" onChange={handleCheck} checked={checked} /> */}
+      <input value={tag} type="checkbox" onChange={handleCheck} checked={checked} />
     </label>
   );
 
