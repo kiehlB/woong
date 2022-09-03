@@ -1,20 +1,24 @@
 import { getTagsSuccess, tagGet } from '../../store/tag';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/rootReducer';
 
 export type HeaderMenuItemsProps = {
   id?: number;
   name?: string;
   subName: string;
   svg?: React.ReactNode;
-  dispatch: any;
+  handleCheck: any;
 };
 
-function HeaderMenuItems({ name, svg, subName, dispatch }: HeaderMenuItemsProps) {
+function HeaderMenuItems({ name, svg, subName, handleCheck }: HeaderMenuItemsProps) {
+  const dispatch = useDispatch();
+
   return (
     <Link href="/filter">
       <div
         className="p-4 hover:bg-[#FAFAFA] rounded-lg"
-        onClick={() => dispatch(tagGet(name))}>
+        onClick={() => handleCheck(name)}>
         <div className="flex items-center">
           <div className="bg-[#FAFAFA] p-2 mr-4 rounded-lg">{svg}</div>
           <div className="flex flex-col ">

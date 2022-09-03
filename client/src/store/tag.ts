@@ -23,6 +23,7 @@ const TagsSlice = createSlice({
   initialState,
   reducers: {
     getTagsSuccess(state: RootState, { payload }: PayloadAction<TagsState>) {
+      console.log(payload);
       state.tag = payload;
     },
     getTagsFailure(state: RootState, { payload }: PayloadAction<TagsState>) {
@@ -52,6 +53,7 @@ export const {
 export const tagGet =
   (payload): any =>
   async (dispatch: AppDispatch) => {
+    console.log(payload);
     dispatch(getTagsSuccess(payload));
   };
 

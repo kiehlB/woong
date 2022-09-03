@@ -28,7 +28,6 @@ const WriteMarkdownEditor = props => {
   const [previewSource, setPreviewSource] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
 
-  console.log(selectedOption);
   const deleteTag = index => {
     const newTag = [...tag];
     newTag.splice(index, 1);
@@ -50,7 +49,7 @@ const WriteMarkdownEditor = props => {
           body: edtiorRef?.current?.getContents(false),
           thumbnail: 'asdsad',
           tags: tag,
-          difficulty: 'zz',
+          difficulty: selectedOption.value,
         },
       },
     });

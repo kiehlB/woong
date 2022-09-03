@@ -20,10 +20,10 @@ function TagList({ tag, globalTag, toStore, variant }: TagListProps) {
     if (event.target.checked) {
       updatedList = [...globalTag, event.target.value];
     } else {
-      console.log(globalTag.indexOf(event.target.value));
       updatedList.splice(globalTag.indexOf(event.target.value), 1);
     }
 
+    console.log(updatedList);
     dispatch(toStore(updatedList));
   };
 

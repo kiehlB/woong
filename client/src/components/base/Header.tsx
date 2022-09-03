@@ -70,7 +70,19 @@ function Header({ tag }: HeaderProps) {
 
   const mergeTag = MenuItems.concat((tag as any)?.getAllTags);
 
-  console.log(getUser?.whoAmI?.ok);
+  const handleCheck = name => {
+    let updatedList = [...globalTag];
+
+    if (name) {
+      updatedList = [...globalTag, name];
+    } else {
+      updatedList.splice(globalTag.indexOf(name), 1);
+    }
+
+    console.log(updatedList);
+    dispatch(tagGet(updatedList));
+  };
+
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between ">
       <div className="flex items-center">
@@ -84,11 +96,11 @@ function Header({ tag }: HeaderProps) {
           <div className="group w-6  mr-8 ml-8">
             <MenuIcon />
             <nav className="absolute mt-5 bg-white">
-              <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
+              <div className="group-hover:block pt-2 hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
                 <ul className="grid grid-cols-2 p-4">
                   {MenuItems.map(e => (
                     <li key={e.id}>
-                      <HeaderMenuItems {...e} dispatch={dispatch} />
+                      <HeaderMenuItems {...e} handleCheck={handleCheck} />
                     </li>
                   ))}
                 </ul>
@@ -125,12 +137,12 @@ function Header({ tag }: HeaderProps) {
               <div className="mr-2 font-Cabin  font-medium">Tags</div>
               <ArrowDownIcon />
             </div>
-            <nav className="absolute mt-5 bg-white  z-[99999]">
-              <div className="group-hover:block  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
-                <ul className="grid grid-cols-3  px-4 pt-2 mb-2">
+            <nav className="absolute mt-5 bg-white  z-[99999] w-[30rem]">
+              <div className="group-hover:block pt-1  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
+                <ul className="grid grid-cols-4  px-4 pt-2 mb-2">
                   {mergeTag?.map(e => (
-                    <li onClick={() => dispatch(tagGet(e.name))} key={e?.id}>
-                      <HeaderTopicItem size="big" {...e} />
+                    <li key={e?.id}>
+                      <HeaderTopicItem size="big" {...e} handleCheck={handleCheck} />
                     </li>
                   ))}
                 </ul>

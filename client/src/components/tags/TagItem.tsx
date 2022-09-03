@@ -35,7 +35,13 @@ function TagItem({
         {children}
         {tag}
       </div>
-      <input value={tag} type="checkbox" onChange={handleCheck} checked={checked} />
+      <input
+        value={tag}
+        type="checkbox"
+        onChange={handleCheck}
+        checked={checked}
+        className="hidden"
+      />
     </label>
   );
 

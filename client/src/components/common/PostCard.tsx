@@ -1,6 +1,8 @@
 import { ListTrail } from '../animation/Trail';
 import Link from 'next/link';
 import HeaderTopicItem from '../base/HeaderTopicItem';
+import TagItem from '../tags/TagItem';
+import Dot from './TagsDot';
 
 interface InputProps {
   id: number;
@@ -15,8 +17,8 @@ export type PostCardProps = {
 function PostCard({ article }: PostCardProps) {
   return (
     // <div data-aos="fade-down">
-    <a className="text-black" aria-label={article.title}>
-      <div className="absolute flex">
+    <a className="text-black relative w-full" aria-label={article.title}>
+      <div className="absolute flex pl-6 w-full flex-wrap pt-4">
         {article.posts_tags.map(e => (
           <HeaderTopicItem name={e.tag.name} size="small" />
         ))}
@@ -31,10 +33,12 @@ function PostCard({ article }: PostCardProps) {
           {article.title}
         </div>
       </div>
-      <div className="flex px-6 pb-6">
-        <div>asdsd</div>
-        <div>asdsd</div>
-        <div>asdsd</div>
+      <div className="flex items-center px-6 pb-6">
+        <TagItem tag="Intermediate" variant="yello">
+          <Dot bg="bg-[#f0b90b]" />
+        </TagItem>
+        <div className="text-[#76808F] leading-snug font-normal py-4">Jul 12, 2021</div>
+        <div>0</div>
       </div>
     </a>
     // </div>

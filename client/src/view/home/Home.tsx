@@ -33,22 +33,20 @@ const Home: NextPage = () => {
 
   const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
 
-  console.log(globalTag);
-
   if (loading) return <div>Loading</div>;
 
-  console.log(
-    data?.findAllPost.map(e =>
-      e.posts_tags.map(el => el.tag.name_filtered.includes('zzz')).includes(true),
-    ),
-  );
-
-  console.log(data?.findAllPost);
+  const filteredArray =
+    data?.findAllPost.filter(e =>
+      e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
+    ).length == 0
+      ? data?.findAllPost
+      : data?.findAllPost.filter(e =>
+          e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
+        );
 
   return (
     <PageTemplate tag={getTagsData}>
       <Main />
-
       <div className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
@@ -99,7 +97,7 @@ const Home: NextPage = () => {
                 <img className="gridImg " />
                 <div className="flex text-white bg-[#2b2f36] flex-col  justify-center">
                   <div className="text-[2rem] leading-10 font-semibold">
-                    What Is SKALE (SKL)?
+                    {filteredArray[0]?.title}
                   </div>
                   <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
                     Jul 7, 2022 5m
