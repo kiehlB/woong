@@ -10,6 +10,7 @@ export type TagItemProps = {
   globalTag?: any;
   variant?;
   children?;
+  size?;
 };
 
 function TagItem({
@@ -20,16 +21,21 @@ function TagItem({
   handleCheck,
   globalTag,
   children,
+  size,
 }: TagItemProps) {
   return (
     <label>
       <div
         className={clsx(
-          'flex items-center text-sm px-4 py-1 text-[#aeb4bc]  border-[#2b2f36] border rounded-full cursor-pointer',
+          'flex items-center text-sm px-4 py-1    border-[#2b2f36] border rounded-full cursor-pointer',
           {
             'border border-[rgba(2,192,118,0.2)]': variant == 'green',
-            'border border-[rgba(240,185,11,0.2)]': variant == 'yello',
+            'border border-[rgba(240,185,11,0.2)] bg-[rgba(240,185,11,0.2)]':
+              variant == 'yello',
             'border border-[rgba(217,48,78,0.2)]': variant == 'red',
+
+            'px-2 py-0 text-[#474D57] h-[1.75rem] rounded-lg text-xs font-Roboto':
+              size == 'small',
           },
         )}>
         {children}
@@ -51,3 +57,5 @@ function TagItem({
 }
 
 export default TagItem;
+
+//text-[#aeb4bc]

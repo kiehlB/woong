@@ -7,6 +7,6 @@ const rootReducer = combineReducers({
   tag: Tag_Reducer,
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<any>;
 
 export default rootReducer;

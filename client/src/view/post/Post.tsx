@@ -13,6 +13,8 @@ import useGetPosts from '../../components/main/hooks/usegetPosts';
 import useGetPost from './hooks/useGerPost';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import ReactCanvasConfetti from 'react-canvas-confetti';
+import PostToc from '../../components/post/PostToc';
+import PostViewerProvider from '../../components/post/PostTocContext';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -87,6 +89,7 @@ function Post({}: PostProps) {
   const { scrollYProgress } = useViewportScroll();
   const yRange = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
   const pathLength = useSpring(yRange, { stiffness: 400, damping: 90 });
+  const yourMarkdownText = '# test \n your markdown Content # test2\n';
 
   useEffect(() => yRange.onChange(v => setIsComplete(v >= 1)), [yRange]);
 
@@ -141,7 +144,7 @@ function Post({}: PostProps) {
           />
         </div>
         <div className="flex justify-center border w-[30%]">
-          <div className="fixed mt-[10%]">dd</div>
+          <div className="fixed mt-[10%]"></div>
         </div>
       </div>
     </PageTemplate>

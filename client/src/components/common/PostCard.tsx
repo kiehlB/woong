@@ -33,12 +33,14 @@ function PostCard({ article }: PostCardProps) {
           {article.title}
         </div>
       </div>
-      <div className="flex items-center px-6 pb-6">
-        <TagItem tag="Intermediate" variant="yello">
+      <div className="flex items-center px-6 pb-3">
+        <TagItem tag="Intermediate" variant="yello" size="small">
           <Dot bg="bg-[#f0b90b]" />
         </TagItem>
-        <div className="text-[#76808F] leading-snug font-normal py-4">Jul 12, 2021</div>
-        <div>0</div>
+        <div className="ml-4 text-[#76808F] leading-snug font-normal py-4">
+          Jul 12, 2021
+        </div>
+        <div className="ml-4 ">0</div>
       </div>
     </a>
     // </div>

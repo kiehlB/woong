@@ -19,7 +19,7 @@ function HeaderTopicItem({ name, size, handleCheck }: HeaderTopicItemProps) {
           className={clsx(' text-white  rounded-3xl  font-Roboto  text-sm', {
             'truncate  px-[12px] py-[2px] text-xs bg-[#0B0E11] shadow-md max-w-[6rem]':
               size == 'small',
-            'pl-4 space-x-1 px-1 py-1 bg-black truncate max-w-[6rem]': size == 'big',
+            'text-center  space-x-1 px-2 py-1 bg-black truncate  w-full': size == 'big',
           })}>
           {capitalizeFirstLetter(name)}
         </div>

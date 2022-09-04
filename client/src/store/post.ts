@@ -4,11 +4,13 @@ import { AppThunk, AppDispatch } from './store';
 export interface postsState {
   post: object;
   error: string;
+  search: string;
 }
 
 export const initialState = {
   post: {},
   error: '',
+  search: '',
 };
 
 const postsSlice = createSlice({
