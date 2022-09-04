@@ -114,12 +114,15 @@ a:active .icon-arrow {
 .search {
   position: relative;
   margin: 0 auto;
+  
 }
 .input:focus {
   width: 200px;
   height: 40px;
+  
   border-radius: 40px;
-  padding: 0 20px;
+  padding-left: 20px;
+  padding-right: 40px;
   line-height: 2em;
   font-weight: 100;
   font-size: 12px;
@@ -148,12 +151,14 @@ a:active .icon-arrow {
   border-radius: 2px;
   background: #fff;
   display: inline-block;
+  
 }
 
 .front {
   position: absolute;
   right: 24px;
   top: 13px;
+  
   transform: rotate(-45deg);
   opacity: 0;
   animation-delay: 2s;
@@ -163,6 +168,7 @@ a:active .icon-arrow {
 }
 
 .back {
+  
   position: absolute;
   right: -2px;
   top: 10px;

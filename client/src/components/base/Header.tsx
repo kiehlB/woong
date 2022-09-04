@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { tagGet } from '../../store/tag';
 import clsx from 'clsx';
+import { useCallback, useState } from 'react';
+import { setPostSearch } from '../../store/post';
 
 export type Tags = {
   id: number;
@@ -67,6 +69,7 @@ function Header({ tag }: HeaderProps) {
   const { loading, error, getUser, logoutButton } = useGetUser();
   const dispatch = useDispatch();
   const globalTag = useSelector((state: RootState) => (state as any)?.tag?.tag);
+  const Postsearch = useSelector((state: RootState) => (state as any)?.post?.search);
 
   const mergeTag = MenuItems.concat((tag as any)?.getAllTags);
 
@@ -82,6 +85,14 @@ function Header({ tag }: HeaderProps) {
     console.log(updatedList);
     dispatch(tagGet(updatedList));
   };
+
+  const handleChange = useCallback(
+    e => {
+      const { value } = e.target;
+      dispatch(setPostSearch(value));
+    },
+    [dispatch],
+  );
 
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between ">
@@ -155,7 +166,12 @@ function Header({ tag }: HeaderProps) {
 
       <div className="flex flex-end items-center">
         <div className="search">
-          <input type="text" className="input" />
+          <input
+            type="text"
+            className="input"
+            value={Postsearch}
+            onChange={handleChange}
+          />
           <div className="close">
             <span className="front" />
             <span className="back" />

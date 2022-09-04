@@ -5,10 +5,15 @@ import { Button } from '../common/Button';
 import AddTag from '../../static/svg/addtag';
 import Dot from '../common/TagsDot';
 
-export type MainProps = {};
+export type MainProps = {
+  post: any;
+};
 
-function Main() {
+function Main({ post }: MainProps) {
   const ref = useRef(null);
+  const singlePost = post?.findAllPost?.slice(0, 1);
+
+  console.log(singlePost[0]);
   const [xys, set] = useState([0, 0, 1]);
 
   const calc = (x, y, rect) => [
@@ -86,7 +91,7 @@ function Main() {
               <img src="/img/image.png" className="w-full h-auto rounded" />
             </div>
             <div className="pt-4 text-[#14151A] leading-7 text-xl  font-medium  ">
-              How to Build a Well-Balanced Crypto Portfolio
+              {singlePost[0]?.title}
             </div>
             <div className="text-[#76808F] leading-snug font-normal py-4">
               Jul 12, 2021 8m

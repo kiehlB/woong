@@ -23,13 +23,18 @@ const postsSlice = createSlice({
     getPostsFailure(state, { payload }: PayloadAction<postsState>) {
       state.error = payload.error;
     },
+    setPostSearch: (state, action) => {
+      state.search = action.payload;
+    },
+
     fetchPostInit(state) {
       state.post = '';
     },
   },
 });
 
-export const { getPostsSuccess, getPostsFailure, fetchPostInit } = postsSlice.actions;
+export const { getPostsSuccess, getPostsFailure, fetchPostInit, setPostSearch } =
+  postsSlice.actions;
 
 export const PostGet =
   (payload): AppThunk =>
