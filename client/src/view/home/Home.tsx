@@ -73,29 +73,33 @@ const Home: NextPage = () => {
           </div>
 
           <div className="flex my-8 ">
-            <div className="text-white">Difficulty:</div>
+            <div className="text-white  mr-4">Difficulty:</div>
 
-            <TagItem tag="Begnner" variant="green">
+            <TagItem tag="Begnner" variant="green" size="medium">
               <Dot bg="bg-[#02C076]" />
             </TagItem>
 
-            <TagItem tag="Intermediate" variant="yello">
-              <Dot bg="bg-[#f0b90b]" />
-            </TagItem>
+            <div className="ml-4">
+              <TagItem tag="Intermediate" variant="yello" size="medium">
+                <Dot bg="bg-[#f0b90b]" />
+              </TagItem>
+            </div>
 
-            <TagItem tag="Advanced" variant="red">
-              <Dot bg="bg-[#d9304e]" />
-            </TagItem>
+            <div className="ml-4">
+              <TagItem tag="Advanced" variant="red" size="medium">
+                <Dot bg="bg-[#d9304e]" />
+              </TagItem>
+            </div>
           </div>
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-4 gap-6">
             <div className="col-span-3">
               <div
-                className="grid bg-[#2b2f36]"
+                className="grid bg-[#2b2f36] rounded-lg "
                 style={{
                   gridTemplateColumns: 'minmax(auto,368px) 1fr',
                 }}>
                 <img className="gridImg " />
-                <div className="flex text-white bg-[#2b2f36] flex-col  justify-center">
+                <div className="flex text-white bg-[#2b2f36] flex-col  justify-center px-4 rounded-lg">
                   <div className="text-[2rem] leading-10 font-semibold">
                     {filteredArray[0]?.title}
                   </div>
@@ -108,14 +112,16 @@ const Home: NextPage = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-1 border-2">
+            <div className="col-span-1 rounded-lg bg-[#2b2f36] relative ">
               <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
               <div className="text-[#fff]">What Is Lisk (LSK)?</div>
-              <div className="text-[#fff]">Aug 11, 2022 5m</div>
-              <div className="text-[#fff]">Intermediate</div>
+              <div className="absolute bottom-0 p-4">
+                <div className="text-[#fff]">Aug 11, 2022 5m</div>
+                <div className="text-[#fff]">Intermediate</div>
+              </div>
             </div>
 
-            <div className="col-span-1">
+            <div className="col-span-1 bg-[#2b2f36]">
               <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
               <div className="text-[#fff]">What Is Lisk (LSK)?</div>
               <div className="text-[#fff]">Aug 11, 2022 5m</div>
@@ -124,27 +130,36 @@ const Home: NextPage = () => {
 
             <div className="col-span-3">
               <div
-                className="grid"
+                className="grid bg-[#2b2f36] rounded-lg "
                 style={{
-                  gridTemplateColumns: 'minmax(auto,368px) 1fr',
+                  gridTemplateColumns: 'minmax(auto,468px) 1fr',
                 }}>
-                <div>
-                  <div className="text-[#fff]">What Is Lisk (LSK)?</div>
-                  <div className="text-[#fff]">Aug 11, 2022 5m</div>
-                  <div className="text-[#fff]">Intermediate</div>
+                <div className="flex text-white bg-[#2b2f36] flex-col  justify-center items-end px-4 rounded-lg px-4">
+                  <div className="text-[2rem] leading-10 font-semibold">
+                    {filteredArray[0]?.title}
+                  </div>
+                  <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
+                    Jul 7, 2022 5m
+                  </div>
+                  <div className="flex items-center">
+                    <Dot bg="bg-[#F0B90B]" /> Intermediate
+                  </div>
                 </div>
-                <img className="gridImg" />
+                <img className="gridImg " />
               </div>
             </div>
             <div className="col-span-2">
-              <div
-                className="grid border-2"
-                style={{
-                  gridTemplateColumns: 'minmax(auto,176px) 1fr',
-                }}>
-                <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+              <div className="grid border-">
+                <div
+                  className="grid border-2"
+                  style={{
+                    gridTemplateColumns: 'minmax(auto,176px) 1fr',
+                  }}>
+                  <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png" />
+                </div>
               </div>
             </div>
+
             <div className="col-span-2">
               <div className="grid border-">
                 <div

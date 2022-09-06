@@ -7,7 +7,7 @@ export interface AuthProps {
 
 const Auth: React.FC<AuthProps> = ({ form, bottom }) => {
   return (
-    <div className="flex flex-1 h-full">
+    <div className="">
       <div className="w-full flex justify-center items-center ">
         <div className="flex  flex-col   h-[70%]   w-[50%]  maxw:w-[60%]  m2xl:w-[75%] mlg:items-center mlg:w-full  ">
           <div className="flex justify-between  ">

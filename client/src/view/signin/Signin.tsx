@@ -33,25 +33,27 @@ function Signin({}: SigninProps) {
             </div>
           </div>
         </div>
-        <Auth
-          form={
-            <AuthForm
-              inputs={inputs}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-              authError={loginError}
-              auth="Login"
-              isRegister="Register now"
-              linkTo=""
-            />
-          }
-          bottom={
-            <div className="flex mt-6 items-center text-[0.875rem] font-medium font-Cabin text-[#C99400] ml-1 cursor-pointer">
-              <Link href="/signup"> Register now</Link>
-              <Arrow />
-            </div>
-          }
-        />
+        <div className="flex flex-col justify-center h-full">
+          <Auth
+            form={
+              <AuthForm
+                inputs={inputs}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                authError={loginError}
+                auth="Login"
+                isRegister="Register now"
+                linkTo=""
+              />
+            }
+            bottom={
+              <div className="flex mt-6 items-center text-[0.875rem] font-medium font-Cabin text-[#C99400] ml-1 cursor-pointer">
+                <Link href="/signup"> Register now</Link>
+                <Arrow />
+              </div>
+            }
+          />
+        </div>
       </PageTemplate>
     </>
   );

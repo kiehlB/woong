@@ -9,9 +9,10 @@ export type TagListProps = {
   globalTag: any;
   toStore: any;
   variant?: any;
+  size?: any;
 };
 
-function TagList({ tag, globalTag, toStore, variant }: TagListProps) {
+function TagList({ tag, globalTag, toStore, variant, size }: TagListProps) {
   const dispatch = useDispatch();
 
   const handleCheck = event => {
@@ -37,6 +38,7 @@ function TagList({ tag, globalTag, toStore, variant }: TagListProps) {
           globalTag={globalTag}
           checked={globalTag?.includes(e?.name)}
           variant={variant}
+          size={size}
         />
       ))}
     </>
