@@ -21,13 +21,13 @@ export class PostLike {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field(() => String, { nullable: true })
-  @Column('uuid')
-  user_id!: string;
+  @Field(() => Int, { nullable: true })
+  @Column()
+  user_id!: number;
 
-  @Field(() => String, { nullable: true })
-  @Column('uuid')
-  post_id!: string;
+  @Field(() => Int, { nullable: true })
+  @Column()
+  post_id!: number;
 
   @ManyToOne((type) => Post)
   @JoinColumn({ name: 'post_id' })
@@ -37,12 +37,12 @@ export class PostLike {
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
-  @Field((type) => Date)
+  @Field((type) => Date, { nullable: true })
   @Column('timestampz')
   @CreateDateColumn()
   created_at!: Date;
 
-  @Field((type) => Date)
+  @Field((type) => Date, { nullable: true })
   @Column('timestamptz')
   @UpdateDateColumn()
   updated_at!: Date;

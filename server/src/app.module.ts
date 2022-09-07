@@ -28,6 +28,8 @@ import { createPostTagsLoader } from './modules/tag/postTag.loader';
 import { TagService } from './modules/tag/tag.service';
 import { CommentService } from './modules/comment/comment.service';
 import { createCommentsLoader } from './modules/comment/comments.loader';
+import { PostLike } from './modules/postLike/postLike.entity';
+import { PostLikeModule } from './modules/postLike/postLike.module';
 
 export const typeOrmConnectionDataSource = new DataSource({
   name: 'default',
@@ -48,6 +50,7 @@ export const typeOrmConnectionDataSource = new DataSource({
     PostRead,
     PostScore,
     Tag,
+    PostLike,
   ],
 });
 
@@ -70,6 +73,7 @@ export const typeOrmConnectionDataSource = new DataSource({
           PostRead,
           PostScore,
           Tag,
+          PostLike,
         ],
         host: configService.get('DB_HOST'),
         port: configService.get<number>('DB_PORT'),
@@ -92,6 +96,7 @@ export const typeOrmConnectionDataSource = new DataSource({
         PostModule,
         CommentModule,
         TagModule,
+        PostLikeModule,
 
         // PostLikeModule,
 

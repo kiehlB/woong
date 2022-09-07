@@ -12,6 +12,7 @@ export type TagItemProps = {
   variant?;
   children?;
   size?;
+  add?;
 };
 
 function TagItem({
@@ -23,6 +24,7 @@ function TagItem({
   globalTag,
   children,
   size,
+  add,
 }: TagItemProps) {
   console.log(size);
 
@@ -31,7 +33,7 @@ function TagItem({
     <label>
       <div
         className={clsx(
-          'flex items-center text-white text-sm px-4 py-1 border-[#2b2f36] border rounded-full cursor-pointer',
+          'flex items-center  text-sm px-4 py-1 border-[#2b2f36] border rounded-full cursor-pointer',
           {
             'border border-[rgba(2,192,118,0.2)]': variant == 'green',
             'border border-[rgba(240,185,11,0.2)]  ': variant == 'yello',
@@ -46,11 +48,7 @@ function TagItem({
         )}>
         {children}
         {tag}
-        {size == 'superSmall' || 'medium' ? (
-          <AddTag className="ml-1 w-[12px] text-[#76808F]" />
-        ) : (
-          ''
-        )}
+        {add ? <AddTag className="ml-1 w-[12px] text-[#76808F]" /> : ''}
       </div>
       <input
         value={tag}

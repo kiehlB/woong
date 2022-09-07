@@ -74,7 +74,7 @@ function Realistic() {
       {/* @ts-ignore */}
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
       <button onClick={fire} className="flex justify-center">
-        <span className="w-[100px] bg-[#404663] shadow-lg p-6 text-[1.5rem] rounded-full flex justify-center items-center">
+        <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
           🎉
         </span>
       </button>
@@ -93,52 +93,54 @@ function Post({}: PostProps) {
 
   useEffect(() => yRange.onChange(v => setIsComplete(v >= 1)), [yRange]);
 
-  console.log(pathLength);
-
   const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
   /// fixed mt-[10%] bg-[#404663] shadow-lg p-6 text-[1.5rem] rounded-full flex justify-center items-center
+
+  console.log(pathLength);
   return (
     <PageTemplate>
       <div className="flex">
         <div className="flex justify-center w-[30%]">
           <div className="w-full">
-            <div className="fixed flex flex-col w-[30%]">
+            <div className="fixed flex flex-col w-[30%] h-[20%]">
               <Realistic />
+              <div className="mt-2 text-center">0</div>
             </div>
           </div>
-          <div className="fixed mt-[20%] text-[1.5rem]">0</div>
         </div>
         <div className="flex flex-col w-[40%] mx-auto  justify-center items-center mt-4">
           <div className="flex w-full">
             {singlePostData?.findSinglePost?.posts_tags?.map(e => (
-              <HeaderTopicItem name={e.tag.name_filtered} size="small" />
+              <HeaderTopicItem name={e.tag.name_filtered} size="small" key={e.id} />
             ))}
           </div>
-          <svg className="progress-icon" viewBox="0 0 60 60">
-            <motion.path
-              fill="none"
-              strokeWidth="5"
-              stroke="red"
-              strokeDasharray="0 1"
-              d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
-              style={{
-                pathLength,
-                rotate: 90,
-                translateX: 5,
-                translateY: 5,
-                scaleX: -1, // Reverse direction of line animation
-              }}
-            />
-            <motion.path
-              fill="none"
-              strokeWidth="5"
-              stroke="white"
-              d="M14,26 L 22,33 L 35,16"
-              initial={false}
-              strokeDasharray="0 1"
-              animate={{ pathLength: isComplete ? 1 : 0 }}
-            />
-          </svg>
+          <div>
+            <svg className="progress-icon" viewBox="0 0 60 60">
+              <motion.path
+                fill="none"
+                strokeWidth="5"
+                stroke="rgb(252, 213, 53)"
+                strokeDasharray="0 1"
+                d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
+                style={{
+                  pathLength,
+                  rotate: 90,
+                  translateX: 5,
+                  translateY: 5,
+                  scaleX: -1, // Reverse direction of line animation
+                }}
+              />
+              <motion.path
+                fill="none"
+                strokeWidth="5"
+                stroke="#02C076"
+                d="M14,26 L 22,33 L 35,16"
+                initial={false}
+                strokeDasharray="0 1"
+                animate={{ pathLength: isComplete ? 1 : 0 }}
+              />
+            </svg>
+          </div>
           <div
             dangerouslySetInnerHTML={{ __html: singlePostData?.findSinglePost?.body }}
           />

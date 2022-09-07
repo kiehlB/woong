@@ -9,6 +9,10 @@ import useGetTags from '../home/hooks/usegetTags';
 import { Collapse, Text } from '@nextui-org/react';
 import PostList from '../../components/post/PostList';
 import useGetPosts from '../../components/main/hooks/usegetPosts';
+import PostTitle from '../../components/post/PostTitle';
+import { Pagination } from '@nextui-org/react';
+import TagItem from '../../components/tags/TagItem';
+import Dot from '../../components/common/TagsDot';
 
 export type FilterProps = {};
 
@@ -31,7 +35,7 @@ function Filter({}: FilterProps) {
 
   return (
     <PageTemplate tag={getTagsData}>
-      <div className="font-Cabin">
+      <div className="font-Cabin bg-[#fafafa]">
         <div className="max-w-[71rem] mx-auto pt-12 p-4">
           <div className="mb-8 text-[#14151A] font-semibold text-[2rem] leading-10">
             Topics at Post
@@ -48,23 +52,33 @@ function Filter({}: FilterProps) {
                     globalTag={globalTag}
                     toStore={tagGet}
                     size="superSmall"
+                    add={true}
                   />
                 </div>
               </div>
 
               <div className="col-span-1">
-                <div>comment</div>
+                <div className="mb-4">Difficulty</div>
 
-                <Button size="small" variant="danger" className="font-Roboto text-sm">
-                  hello
-                </Button>
-                <Button size="medium" variant="secondary" className="font-Roboto text-sm">
-                  hello
-                </Button>
-                <Button size="medium" variant="secondary" className="font-Roboto text-sm">
-                  hello
-                </Button>
+                <div className="text-black flex">
+                  <div>
+                    <TagItem tag="Begnner" variant="green" size="medium" add={true}>
+                      <Dot bg="bg-[#02C076]" />
+                    </TagItem>
+                  </div>
 
+                  <div className="ml-2">
+                    <TagItem tag="Intermediate" variant="yello" size="medium" add={true}>
+                      <Dot bg="bg-[#f0b90b]" />
+                    </TagItem>
+                  </div>
+
+                  <div className="ml-2">
+                    <TagItem tag="Advanced" variant="red" size="medium" add={true}>
+                      <Dot bg="bg-[#d9304e]" />
+                    </TagItem>
+                  </div>
+                </div>
                 <div className="text-gray-400">readingTime</div>
               </div>
             </div>
@@ -102,8 +116,17 @@ function Filter({}: FilterProps) {
             <div>Hide filters</div>
           </div>
         </div>
-        <div>Articles (412)</div>
-        <PostList data={data} />
+        <div className="w-[71rem] mx-auto  mxl:w-[80%] flex flex-col  items-center">
+          <div className="pt-[3.5rem]">
+            <div>Articles (412)</div>
+            <div className="pt-8">
+              <PostList data={data?.findAllPost.slice(0, 9)} />
+            </div>
+          </div>
+          <div className="py-16">
+            <Pagination total={20} initialPage={1} />
+          </div>
+        </div>
       </div>
     </PageTemplate>
   );

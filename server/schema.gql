@@ -35,6 +35,7 @@ type Mutation {
   createAndUpdateProfile(input: createProfile!): ProfileResponse!
   createComment(input: createComment!): Comments!
   createPost(input: createPost!): Post!
+  createPostLike(input: createPostLIke!): PostLike!
   register(input: registerInput!): RegisterResponse!
   signin(input: InputSignin!): SigninResponse!
 }
@@ -52,6 +53,14 @@ type Post {
   title: String
   updated_at: DateTime!
   user: User
+}
+
+type PostLike {
+  created_at: DateTime
+  id: Int
+  post_id: Int
+  updated_at: DateTime
+  user_id: Int
 }
 
 type PostsTags {
@@ -136,6 +145,10 @@ input createPost {
   tags: [String!]
   thumbnail: String
   title: String
+}
+
+input createPostLIke {
+  id: Int
 }
 
 input createProfile {
