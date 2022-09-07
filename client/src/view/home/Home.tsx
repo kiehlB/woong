@@ -2,8 +2,6 @@ import type { NextPage } from 'next';
 import { useSelector } from 'react-redux';
 import PageTemplate from '../../components/base/PageTemplate';
 import { Button } from '../../components/common/Button';
-import PostCard from '../../components/common/PostCard';
-import PostTitle from '../../components/common/PostTitle';
 import SvgCard from '../../components/common/SvgCard';
 import Dot from '../../components/common/TagsDot';
 import Main from '../../components/main';
@@ -18,6 +16,7 @@ import TagList from '../../components/tags/TagList';
 import { MenuItems } from '../../components/base/Header';
 import { getMainTag } from '../../store/tag';
 import PostList from '../../components/post/PostList';
+import PostTitle from '../../components/post/PostTitle';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -29,7 +28,6 @@ const Home: NextPage = () => {
   } = useGetTags();
 
   const globalTag = useSelector((state: RootState) => (state as any)?.tag?.mainTag);
-  const globalTag2 = useSelector((state: RootState) => (state as any)?.tag?.tag);
 
   const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
 
@@ -51,7 +49,7 @@ const Home: NextPage = () => {
         <div className="py-[3.5rem]">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
           <div className="">
-            <PostList data={data} />
+            <PostList data={data?.findAllPost.slice(0, 9)} />
           </div>
         </div>
 

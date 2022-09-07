@@ -25,15 +25,16 @@ function TagItem({
   size,
 }: TagItemProps) {
   console.log(size);
+
+  // bg-[rgba(240,185,11,0.2)]
   return (
     <label>
       <div
         className={clsx(
-          'flex items-center text-sm px-4 py-1 border-[#2b2f36] border rounded-full cursor-pointer',
+          'flex items-center text-white text-sm px-4 py-1 border-[#2b2f36] border rounded-full cursor-pointer',
           {
             'border border-[rgba(2,192,118,0.2)]': variant == 'green',
-            'border border-[rgba(240,185,11,0.2)] bg-[rgba(240,185,11,0.2)]':
-              variant == 'yello',
+            'border border-[rgba(240,185,11,0.2)]  ': variant == 'yello',
             'border border-[rgba(217,48,78,0.2)]': variant == 'red',
 
             'px-2 py-0 text-[#474D57] h-[1.75rem] rounded-lg text-xs font-Roboto ':
@@ -45,7 +46,11 @@ function TagItem({
         )}>
         {children}
         {tag}
-        <AddTag className="ml-1 w-[12px] text-[#76808F]" />
+        {size == 'superSmall' || 'medium' ? (
+          <AddTag className="ml-1 w-[12px] text-[#76808F]" />
+        ) : (
+          ''
+        )}
       </div>
       <input
         value={tag}

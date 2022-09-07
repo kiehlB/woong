@@ -15,6 +15,8 @@ export const GET_Posts = gql`
       id
       body
       title
+      created_at
+      difficulty
       posts_tags {
         tag {
           id
@@ -32,6 +34,7 @@ export const GET_Post = gql`
       id
       body
       title
+      difficulty
       posts_tags {
         tag {
           id

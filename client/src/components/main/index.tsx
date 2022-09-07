@@ -4,6 +4,7 @@ import { useSpring, animated } from 'react-spring';
 import { Button } from '../common/Button';
 import AddTag from '../../static/svg/addtag';
 import Dot from '../common/TagsDot';
+import { DateTime } from 'luxon';
 
 export type MainProps = {
   post: any;
@@ -52,6 +53,7 @@ function Main({ post }: MainProps) {
 
   // toggleService.send('TOGGLE');
 
+  console.log(singlePost);
   return (
     <div className="grid grid-cols-2 font-Roboto">
       <div className="pt-[6rem] max-w-[35.5rem] ml-auto pr-[2rem] pl-[1rem] ">
@@ -94,14 +96,14 @@ function Main({ post }: MainProps) {
               {singlePost[0]?.title}
             </div>
             <div className="text-[#76808F] leading-snug font-normal py-4">
-              Jul 12, 2021 8m
+              {DateTime.fromISO(singlePost[0].created_at).toLocaleString().slice(0, -1)}
             </div>
 
             <Button
               size="small"
               className="bg-[#02c07633] h-9 flex justify-center items-center  rounded-lg text-[#474D57]">
               <Dot bg="bg-[#02C076]" />
-              Beginner
+              {singlePost[0].difficulty}
             </Button>
           </animated.div>
         </div>

@@ -2,12 +2,15 @@ import { ListTrail } from '../animation/Trail';
 import Link from 'next/link';
 import HeaderTopicItem from '../base/HeaderTopicItem';
 import TagItem from '../tags/TagItem';
-import Dot from './TagsDot';
+
+import { DateTime } from 'luxon';
+import Dot from '../common/TagsDot';
 
 interface InputProps {
   id: number;
   title: string;
   posts_tags: any;
+  created_at: any;
 }
 
 export type PostCardProps = {
@@ -15,12 +18,13 @@ export type PostCardProps = {
 };
 
 function PostCard({ article }: PostCardProps) {
+  console.log(article);
   return (
     // <div data-aos="fade-down">
     <a className="text-black relative w-full" aria-label={article.title}>
       <div className="absolute flex pl-6 w-full flex-wrap pt-4">
         {article.posts_tags.map(e => (
-          <HeaderTopicItem name={e.tag.name} size="small" />
+          <HeaderTopicItem name={e.tag.name} size="small" key={e.id} />
         ))}
       </div>
       <img
@@ -38,9 +42,14 @@ function PostCard({ article }: PostCardProps) {
           <Dot bg="bg-[#f0b90b]" />
         </TagItem>
         <div className="ml-4 text-[#76808F] leading-snug font-normal py-4">
-          Jul 12, 2021
+          {DateTime.fromISO(article.created_at).toLocaleString().slice(0, -1)}
         </div>
-        <div className="ml-4 ">0</div>
+        <div className="ml-4 text-[#76808F]">
+          <svg width="14" height="14" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+          </svg>
+        </div>
+        <div className="pl-1 text-[#76808F]">0</div>
       </div>
     </a>
     // </div>
