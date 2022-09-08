@@ -22,9 +22,10 @@ import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
 import { CreatePostRequest } from '../post/dto/createPost.dto';
 import { GetUserinfoRequest } from '../user/dto/getUserInfo.dto';
+import { RegisterRequest } from '../user/dto/register.dto';
 import { CreatePostLikeRequest } from './dto/postLikeRequest.dto';
 
-import { PostLike } from './PostLike.entity';
+import { PostLike } from './postLike.entity';
 import { PostLikeService } from './postLike.service';
 
 @Resolver((of) => PostLike)
@@ -35,9 +36,8 @@ export class PostLikeResolver {
   @Mutation(() => PostLike)
   async createPostLike(
     @CurrentUser() user: TokenUser,
-    @Args('input') post: CreatePostLikeRequest,
+    @Args('input') post: RegisterRequest,
   ) {
-    console.log(user);
     return this.PostLikeService.liked(user, post);
   }
 }

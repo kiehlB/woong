@@ -95,14 +95,26 @@ function Main({ post }: MainProps) {
             <div className="pt-4 text-[#14151A] leading-7 text-xl  font-medium  ">
               {singlePost[0]?.title}
             </div>
-            <div className="text-[#76808F] leading-snug font-normal py-4">
-              {DateTime.fromISO(singlePost[0].created_at).toLocaleString().slice(0, -1)}
+
+            <div className="flex items-center">
+              <div className="text-[#76808F] leading-snug font-normal py-4">
+                {DateTime.fromISO(singlePost[0].created_at).toLocaleString().slice(0, -1)}
+              </div>
+
+              <div className="flex items-center ml-4 text-[#76808F]">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+                </svg>
+                <div className="ml-1">{singlePost[0]?.post_likes.length}</div>
+              </div>
             </div>
 
             <Button
               size="small"
               className="bg-[#02c07633] h-9 flex justify-center items-center  rounded-lg text-[#474D57]">
-              <Dot bg="bg-[#02C076]" />
+              <Dot css="bg-[#02C076]" />
               {singlePost[0].difficulty}
             </Button>
           </animated.div>

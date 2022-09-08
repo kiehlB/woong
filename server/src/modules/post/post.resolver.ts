@@ -40,6 +40,7 @@ import { normalize } from 'src/common/utils/normalize';
 import { CommentService } from '../comment/comment.service';
 import PostsLoaders from './post.loader';
 import { getSinglePostRequest } from './dto/getPost.dto';
+import { PostLike } from '../postLike/postLike.entity';
 
 @Resolver((of) => Post)
 export class PostResolver {
@@ -68,6 +69,28 @@ export class PostResolver {
     const savePost = await this.postService.createPost(user, post);
 
     return savePost;
+  }
+
+  // @ResolveField('post_likes', (retruns) => PostLike, { nullable: true })
+  // async getPostLike(
+  //   @Parent() post: Post,
+  //   @Context('postLikeLoader')
+  //   postLikeLoader: DataLoader<number, PostLike>,
+  // ) {
+  //   const { id } = post;
+
+  //   return postLikeLoader.load(id);
+  // }
+
+  @ResolveField('post_likes', (retruns) => [PostLike], { nullable: true })
+  async getPostLikes(
+    @Parent() post: Post,
+    @Context('postLikeLoader')
+    postLikeLoader: DataLoader<number, [PostLike]>,
+  ) {
+    const { id } = post;
+
+    return postLikeLoader.load(id);
   }
 
   @ResolveField('posts_tags', (retruns) => [PostsTags], { nullable: true })

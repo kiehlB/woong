@@ -17,6 +17,13 @@ export const GET_Posts = gql`
       title
       created_at
       difficulty
+
+      post_likes {
+        id
+        post_id
+        user_id
+      }
+
       posts_tags {
         tag {
           id
@@ -35,6 +42,13 @@ export const GET_Post = gql`
       body
       title
       difficulty
+
+      post_likes {
+        id
+        post_id
+        user_id
+      }
+
       posts_tags {
         tag {
           id

@@ -30,6 +30,8 @@ import { CommentService } from './modules/comment/comment.service';
 import { createCommentsLoader } from './modules/comment/comments.loader';
 import { PostLike } from './modules/postLike/postLike.entity';
 import { PostLikeModule } from './modules/postLike/postLike.module';
+import { PostLikeService } from './modules/postLike/postLike.service';
+import { createPostLikeLoader } from './modules/postLike/postLikeLoader';
 
 export const typeOrmConnectionDataSource = new DataSource({
   name: 'default',
@@ -107,6 +109,7 @@ export const typeOrmConnectionDataSource = new DataSource({
         userProfileService: UserProfileService,
         tagsService: TagService,
         commentsService: CommentService,
+        postLikeService: PostLikeService,
       ) => ({
         autoSchemaFile: './schema.gql',
         sortSchema: true,
@@ -120,11 +123,18 @@ export const typeOrmConnectionDataSource = new DataSource({
           ...ctx,
           usersLoader: createUsersLoader(usersService),
           postTagLoader: createPostTagsLoader(tagsService),
+          postLikeLoader: createPostLikeLoader(postLikeService),
           userProfileLoader: createUserProfileLoader(userProfileService),
           commentsLoader: createCommentsLoader(commentsService),
         }),
       }),
-      inject: [UserService, UserProfileService, TagService, CommentService],
+      inject: [
+        UserService,
+        UserProfileService,
+        TagService,
+        CommentService,
+        PostLikeService,
+      ],
     }),
   ],
   controllers: [],

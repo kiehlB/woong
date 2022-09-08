@@ -33,7 +33,6 @@ const Home: NextPage = () => {
 
   if (loading) return <div>Loading</div>;
 
-  console.log(data);
   const filteredArray =
     data?.findAllPost.filter(e =>
       e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
@@ -91,18 +90,18 @@ const Home: NextPage = () => {
             <div className="text-white  mr-4">Difficulty:</div>
 
             <TagItem tag="Begnner" variant="green" size="medium" add={true}>
-              <Dot bg="bg-[#02C076]" />
+              <Dot css="bg-[#02C076] w-[6px] h-[6px]" />
             </TagItem>
 
             <div className="ml-4">
               <TagItem tag="Intermediate" variant="yello" size="medium" add={true}>
-                <Dot bg="bg-[#f0b90b]" />
+                <Dot css="bg-[#f0b90b] w-[6px] h-[6px]" />
               </TagItem>
             </div>
 
             <div className="ml-4">
               <TagItem tag="Advanced" variant="red" size="medium" add={true}>
-                <Dot bg="bg-[#d9304e]" />
+                <Dot css="bg-[#d9304e] w-[6px] h-[6px]" />
               </TagItem>
             </div>
           </div>
@@ -122,12 +121,12 @@ const Home: NextPage = () => {
                     Jul 7, 2022 5m
                   </div>
                   <div className="flex items-center">
-                    <Dot bg="bg-[#F0B90B]" /> Intermediate
+                    <Dot css="bg-[#F0B90B]" /> Intermediate
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-span-1 rounded-lg bg-[#2b2f36] relative rounded-lg">
+            <div className="col-span-1 rounded-lg bg-[#2b2f36] relative">
               <img
                 src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png"
                 className="rounded-lg mb-4"
@@ -136,7 +135,7 @@ const Home: NextPage = () => {
               <div className="absolute bottom-0 p-4">
                 <div className="text-[#fff]">Aug 11, 2022</div>
                 <div className="text-[#fff] flex items-center text-sm">
-                  <Dot bg="bg-[#f0b90b]" />
+                  <Dot css="bg-[#f0b90b]" />
                   <div> Intermediate</div>
                 </div>
               </div>
@@ -151,7 +150,7 @@ const Home: NextPage = () => {
               <div className="absolute bottom-0 p-4">
                 <div className="text-[#fff]">Aug 11, 2022</div>
                 <div className="text-[#fff] flex items-center text-sm">
-                  <Dot bg="bg-[#f0b90b]" />
+                  <Dot css="bg-[#f0b90b]" />
                   <div> Intermediate</div>
                 </div>
               </div>
@@ -163,7 +162,7 @@ const Home: NextPage = () => {
                 style={{
                   gridTemplateColumns: 'minmax(auto,468px) 1fr',
                 }}>
-                <div className="flex text-white bg-[#2b2f36] flex-col justify-center items-end px-4 rounded-lg px-4">
+                <div className="flex text-white bg-[#2b2f36] flex-col justify-center items-end px-4 rounded-lg">
                   <div className="text-[2rem] leading-10 font-semibold">
                     {isFilterdArray[0]?.title}
                   </div>
@@ -171,7 +170,7 @@ const Home: NextPage = () => {
                     Jul 7, 2022 5m
                   </div>
                   <div className="flex items-center">
-                    <Dot bg="bg-[#F0B90B]" /> Intermediate
+                    <Dot css="bg-[#F0B90B]" /> Intermediate
                   </div>
                 </div>
                 <img className="gridImg" />
@@ -226,12 +225,26 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
-      {/* 
-      <img
-        src="https://bin.bnbstatic.com/image/academy/homepage/illus-getting-started.svg"
-        width={300}
-        height={300}
-      /> */}
+
+      <div
+        className="grid grid-cols-2 m-auto max-w-[71rem] w-full"
+        style={{
+          gridTemplateColumns: 'minmax(auto,568px) 1fr',
+        }}>
+        <div className="col-span-1">
+          <img src="/task.svg" className="w-full" />
+        </div>
+        <div className="col-span-1 h-full content-center">
+          <div className="grid justify-center  content-center h-full">
+            <div className="text-[2.5rem] text-[#14151A] font-semibold mb-2">
+              No idea what you just scrolled through?
+            </div>
+            <div className="text-[1.5rem] text-[#14151A] font-normal mb-2">
+              Not to worry. Our no-nonsense beginner's guide will get you up to speed.
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
           <PostTitle title="Essentials" subtitle="SEE ALL LATEST RELEASES  " />

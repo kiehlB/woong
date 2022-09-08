@@ -10,6 +10,7 @@ interface InputProps {
   title: string;
   posts_tags: any;
   created_at: any;
+  post_likes: any;
 }
 
 export type PostCardProps = {
@@ -40,7 +41,7 @@ function PostCard({ article }: PostCardProps) {
         </div>
         <div className="flex items-center px-6 pb-3">
           <TagItem tag="Intermediate" variant="yello" size="small">
-            <Dot bg="bg-[#f0b90b]" />
+            <Dot css="bg-[#f0b90b]" />
           </TagItem>
           <div className="ml-4 text-[#76808F] leading-snug font-normal py-4">
             {DateTime.fromISO(article.created_at).toLocaleString().slice(0, -1)}
@@ -50,7 +51,7 @@ function PostCard({ article }: PostCardProps) {
               <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
             </svg>
           </div>
-          <div className="pl-1 text-[#76808F]">0</div>
+          <div className="pl-1 text-[#76808F]">{article.post_likes.length}</div>
         </div>
       </a>
     </Link>

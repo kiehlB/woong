@@ -35,7 +35,7 @@ type Mutation {
   createAndUpdateProfile(input: createProfile!): ProfileResponse!
   createComment(input: createComment!): Comments!
   createPost(input: createPost!): Post!
-  createPostLike(input: createPostLIke!): PostLike!
+  createPostLike(input: registerInput!): PostLike!
   register(input: registerInput!): RegisterResponse!
   signin(input: InputSignin!): SigninResponse!
 }
@@ -47,6 +47,7 @@ type Post {
   difficulty: String
   id: Int
   likes: Int
+  post_likes: [PostLike!]
   posts_tags: [PostsTags!]
   tags: [Tag!]
   thumbnail: String
@@ -145,10 +146,6 @@ input createPost {
   tags: [String!]
   thumbnail: String
   title: String
-}
-
-input createPostLIke {
-  id: Int
 }
 
 input createProfile {

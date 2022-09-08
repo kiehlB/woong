@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Post } from '../post/entitiy/post.entity';
 import { PostLike } from './postLike.entity';
 
@@ -17,8 +17,6 @@ export class PostLikeService {
     const getPost = await this.PostRepository;
     const LikePost = await this.postLikeRepository;
 
-    console.log(args.id);
-    console.log(user.id);
     const post = await getPost.findOne({
       where: {
         id: args.id,
@@ -61,5 +59,11 @@ export class PostLikeService {
     // await getPostScore.save(score);
 
     return post;
+  }
+
+  async getUsersByIds(ids) {
+    return this.postLikeRepository.find({
+      where: { post_id: In(ids) },
+    });
   }
 }

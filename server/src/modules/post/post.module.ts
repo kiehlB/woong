@@ -4,7 +4,9 @@ import { AuthModule } from '../auth/auth.module';
 import { Comments } from '../comment/comment.entity';
 import { CommentModule } from '../comment/comment.module';
 import { CommentService } from '../comment/comment.service';
+import { PostLike } from '../postLike/postLike.entity';
 import { PostLikeModule } from '../postLike/postLike.module';
+import { PostLikeService } from '../postLike/postLike.service';
 import PostsTags from '../tag/entity/postTag.entity';
 import { Tag } from '../tag/entity/tag.entity';
 import { UserModule } from '../user/user.module';
@@ -19,7 +21,7 @@ import { PostService } from './post.service';
     TypeOrmModule.forFeature([Tag]),
     TypeOrmModule.forFeature([PostsTags]),
     TypeOrmModule.forFeature([Comments]),
-
+    TypeOrmModule.forFeature([PostLike]),
     UserModule,
     AuthModule,
   ],

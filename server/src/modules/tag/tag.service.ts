@@ -43,7 +43,6 @@ export class TagService {
   }
 
   async getUsersByIds(ids) {
-    console.log(ids);
     return this.PostTagRepository.find({
       where: { post_id: In(ids) },
     });
