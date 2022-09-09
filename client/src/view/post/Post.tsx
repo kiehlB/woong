@@ -2,6 +2,7 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import {
+  AnimatePresence,
   motion,
   useScroll,
   useSpring,
@@ -15,6 +16,9 @@ import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import PostToc from '../../components/post/PostToc';
 import PostViewerProvider from '../../components/post/PostTocContext';
+import { getScrollTop } from '../../lib/utils';
+import useClientDimensions from '../../lib/hooks/useClientDimensions';
+import { useWindowSize } from '../../lib/hooks/useWindowSize';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -85,24 +89,31 @@ function Realistic() {
 export type PostProps = {};
 
 function Post({}: PostProps) {
+  const scrollTop = getScrollTop();
   const [isComplete, setIsComplete] = useState(false);
   const { scrollYProgress } = useViewportScroll();
   const yRange = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
   const pathLength = useSpring(yRange, { stiffness: 400, damping: 90 });
-  const yourMarkdownText = '# test \n your markdown Content # test2\n';
 
-  useEffect(() => yRange.onChange(v => setIsComplete(v >= 1)), [yRange]);
+  const IsTop = scrollTop == 0 ? true : false;
+
+  useEffect(
+    () =>
+      yRange.onChange(v => {
+        setIsComplete(v >= 1);
+      }),
+    [yRange],
+  );
 
   const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
   /// fixed mt-[10%] bg-[#404663] shadow-lg p-6 text-[1.5rem] rounded-full flex justify-center items-center
 
-  console.log(pathLength);
   return (
     <PageTemplate>
       <div className="flex">
         <div className="flex justify-center w-[30%]">
           <div className="w-full">
-            <div className="fixed flex flex-col w-[30%] h-[20%]">
+            <div className="fixed flex flex-col w-[30%] h-[40%]">
               <Realistic />
               <div className="mt-2 text-center">0</div>
             </div>
@@ -135,7 +146,6 @@ function Post({}: PostProps) {
                 strokeWidth="5"
                 stroke="#02C076"
                 d="M14,26 L 22,33 L 35,16"
-                initial={false}
                 strokeDasharray="0 1"
                 animate={{ pathLength: isComplete ? 1 : 0 }}
               />

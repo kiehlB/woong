@@ -13,6 +13,7 @@ export type TagItemProps = {
   children?;
   size?;
   add?;
+  bg?;
 };
 
 function TagItem({
@@ -25,6 +26,7 @@ function TagItem({
   children,
   size,
   add,
+  bg,
 }: TagItemProps) {
   // bg-[rgba(240,185,11,0.2)]
   //text-[#474D57]
@@ -38,6 +40,9 @@ function TagItem({
             'border border-[rgba(240,185,11,0.2)]  ': variant == 'yello',
             'border border-[rgba(217,48,78,0.2)]': variant == 'red',
 
+            'bg-[rgba(2,192,118,0.2)] text-[rgb(71, 77, 87)] border-none text-[#474D57]':
+              bg == 'green',
+
             'px-4 py-1 border-[#2b2f36] h-[1.75rem] rounded-[100px] text-xs font-Roboto text-[#AEB4BC]':
               size == 'small',
 
@@ -50,7 +55,16 @@ function TagItem({
         )}>
         {children}
         {tag}
-        {add ? <AddTag className="ml-2 w-[12px] text-[#76808F]" /> : ''}
+        {add ? (
+          <AddTag
+            className={clsx('w-[12px] text-[#76808F]', {
+              'ml-1': size == 'superSmall',
+              'ml-2': size == 'medium',
+            })}
+          />
+        ) : (
+          ''
+        )}
       </div>
       <input
         value={tag}

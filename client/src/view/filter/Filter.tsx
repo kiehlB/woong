@@ -62,20 +62,25 @@ function Filter({}: FilterProps) {
 
                 <div className="text-black flex">
                   <div>
-                    <TagItem tag="Begnner" variant="green" size="medium" add={true}>
-                      <Dot bg="bg-[#02C076]" />
+                    <TagItem
+                      tag="Begnner"
+                      variant="green"
+                      size="medium"
+                      add={true}
+                      bg="green">
+                      <Dot css="bg-[#02C076]" />
                     </TagItem>
                   </div>
 
                   <div className="ml-2">
                     <TagItem tag="Intermediate" variant="yello" size="medium" add={true}>
-                      <Dot bg="bg-[#f0b90b]" />
+                      <Dot css="bg-[#f0b90b]" />
                     </TagItem>
                   </div>
 
                   <div className="ml-2">
                     <TagItem tag="Advanced" variant="red" size="medium" add={true}>
-                      <Dot bg="bg-[#d9304e]" />
+                      <Dot css="bg-[#d9304e]" />
                     </TagItem>
                   </div>
                 </div>
@@ -124,7 +129,7 @@ function Filter({}: FilterProps) {
             </div>
           </div>
           <div className="py-16">
-            <Pagination total={20} initialPage={1} />
+            <Pagination total={20} initialPage={1} color="warning" shadow />
           </div>
         </div>
       </div>

@@ -28,6 +28,7 @@ const WriteMarkdownEditor = props => {
   const [previewSource, setPreviewSource] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
 
+  console.log(selectedOption.value);
   const deleteTag = index => {
     const newTag = [...tag];
     newTag.splice(index, 1);
