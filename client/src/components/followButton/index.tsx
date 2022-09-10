@@ -9,7 +9,7 @@ export type FaceProps = {
   error?: any;
   unFollowHandleSubmit?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   unfollowError?: any;
-  BooleanIsFollowing: boolean;
+  BooleanIsFollowing?: boolean;
   height?: any;
 };
 
@@ -42,7 +42,7 @@ function Face(props: FaceProps) {
     <>
       <div>
         {props.error || props.unfollowError ? (
-          <div className={card.container}>
+          <div className={card.container2}>
             <div className={card.errorBox}>
               <div className={card.dot} />
               <div className={dotClass} />

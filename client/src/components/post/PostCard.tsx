@@ -18,7 +18,6 @@ export type PostCardProps = {
 };
 
 function PostCard({ article }: PostCardProps) {
-  console.log(article);
   return (
     // <div data-aos="fade-down">
 

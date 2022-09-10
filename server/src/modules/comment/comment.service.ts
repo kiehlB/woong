@@ -21,14 +21,9 @@ export class CommentService {
     });
   }
 
-  async findAll(id) {
+  async findAll() {
     const comment = await this.commentRepository;
-    const comments = await comment.find({
-      where: {
-        post_id: id,
-      },
-    });
-
+    const comments = await comment.find();
     return comments;
   }
 
@@ -63,5 +58,41 @@ export class CommentService {
     await getComment.save(comment);
 
     return comment;
+  }
+
+  async remove(user, commentBody) {
+    const getPost = await this.PostRepository;
+    const getComment = await this.commentRepository;
+    const comment = new Comments();
+
+    const findcomment = await getComment.findOne({
+      where: {
+        id: commentBody.id,
+      },
+    });
+
+    findcomment.deleted = true;
+
+    await getComment.remove(findcomment);
+
+    return true;
+  }
+
+  async edit(user, commentBody): Promise<Comments> {
+    const getPost = await this.PostRepository;
+    const getComment = await this.commentRepository;
+    const comment = new Comments();
+
+    const findcomment = await getComment.findOne({
+      where: {
+        id: commentBody.id,
+      },
+    });
+
+    findcomment.text = commentBody.text;
+
+    await getComment.save(findcomment);
+
+    return findcomment;
   }
 }

@@ -36,7 +36,9 @@ type Mutation {
   createComment(input: createComment!): Comments!
   createPost(input: createPost!): Post!
   createPostLike(input: registerInput!): PostLike!
+  editComment(input: createComment!): Comments!
   register(input: registerInput!): RegisterResponse!
+  removeComment(input: deleteComment!): Boolean!
   signin(input: InputSignin!): SigninResponse!
 }
 
@@ -150,6 +152,10 @@ input createPost {
 
 input createProfile {
   bio: String!
+}
+
+input deleteComment {
+  comment_id: Int
 }
 
 input getPost {

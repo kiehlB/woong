@@ -16,3 +16,9 @@ export class CreateCommentRequest {
   @Field((type) => Int, { nullable: true })
   comment_id!: number;
 }
+
+@InputType('deleteComment')
+export class DeleteCommentRequest {
+  @Field((type) => Int, { nullable: true })
+  comment_id!: number;
+}

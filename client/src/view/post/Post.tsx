@@ -19,6 +19,20 @@ import PostViewerProvider from '../../components/post/PostTocContext';
 import { getScrollTop } from '../../lib/utils';
 import useClientDimensions from '../../lib/hooks/useClientDimensions';
 import { useWindowSize } from '../../lib/hooks/useWindowSize';
+import Face from '../../components/followButton';
+import { TiHeartOutline } from 'react-icons/ti';
+import { TiHeart } from 'react-icons/ti';
+import { AiOutlineUserAdd } from 'react-icons/ai';
+import { AiOutlineUserDelete } from 'react-icons/ai';
+import useGetComments from '../../components/comment/hooks/useGetComments';
+import Comments from '../../components/comment/Comments';
+import CommentForm from '../../components/comment/CommentForm';
+import useCreateComment from '../../components/comment/hooks/useCreateComment';
+import useGetUser from '../../components/auth/hooks/useWhoAmI';
+import { toast, ToastContainer } from 'react-nextjs-toast';
+import { useRouter } from 'next/router';
+import useDeleteComment from '../../components/comment/hooks/useDeleteComment';
+import useEditComment from '../../components/comment/hooks/useEditComment';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -91,6 +105,26 @@ export type PostProps = {};
 function Post({}: PostProps) {
   const scrollTop = getScrollTop();
   const [isComplete, setIsComplete] = useState(false);
+  const { commentsLoading, commentsError, commentstData } = useGetComments();
+  const {
+    textOnChange,
+    subTextOnChange,
+    handleSubmit,
+    subHandleSubmit,
+    getText,
+    getSubText,
+    isOpen,
+    setIsopen,
+  } = useCreateComment();
+  const router = useRouter();
+  const [editComment, setEditComment] = useState(false);
+  const { DeleteCommentSubmit } = useDeleteComment();
+  const { EditCommentSubmit } = useEditComment();
+  const [editText, setEditText] = useState('');
+  const [subEditText, subSetEditText] = useState('');
+
+  const { getUser: userData, loading: userLoding } = useGetUser();
+
   const { scrollYProgress } = useViewportScroll();
   const yRange = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
   const pathLength = useSpring(yRange, { stiffness: 400, damping: 90 });
@@ -108,6 +142,40 @@ function Post({}: PostProps) {
   const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
   /// fixed mt-[10%] bg-[#404663] shadow-lg p-6 text-[1.5rem] rounded-full flex justify-center items-center
 
+  const [on, toggle] = useState(false);
+
+  const findData = singlePostData?.findSinglePost;
+  const findId = singlePostData?.findSinglePost?.id;
+
+  console.log(commentstData?.findAllComments);
+  const getComments = commentstData?.findAllComments.filter(
+    el => el.post_id == router.query.id,
+  );
+
+  const editCommentInput = e => {
+    setEditText(e.target.value);
+  };
+
+  const onClickNotify = e => {
+    e.preventDefault();
+    toast.notify(`로그인이 필요합니다`, {
+      duration: 2,
+      type: 'error',
+    });
+  };
+  const onClickNotifyCheckString = e => {
+    e.preventDefault();
+    toast.notify(`댓글이 없습니다`, {
+      duration: 2,
+      type: 'error',
+    });
+  };
+
+  const fixComment = () => {
+    setEditComment(!editComment);
+  };
+
+  console.log(getComments);
   return (
     <PageTemplate>
       <div className="flex">
@@ -156,9 +224,74 @@ function Post({}: PostProps) {
           />
         </div>
         <div className="flex justify-center border w-[30%]">
-          <div className="fixed mt-[10%]"></div>
+          <div className="fixed mt-[10%]">{/* <Face /> */}</div>
         </div>
       </div>
+
+      <div className="w-[40%] mx-auto">
+        <CommentForm
+          findId={findId}
+          handleSubmit={handleSubmit}
+          getText={getText}
+          textOnChange={textOnChange}
+          userData={userData}
+          onClickNotify={onClickNotify}
+          onClickNotifyCheckString={onClickNotifyCheckString}
+        />
+      </div>
+
+      {getComments?.map((el, id) => (
+        <>
+          <div key={id}>
+            <Comments
+              el={el}
+              editComment={editComment}
+              editText={editText}
+              editCommentInput={editCommentInput}
+              toggle={toggle}
+              on={on}
+              EditCommentSubmit={EditCommentSubmit}
+              fixComment={fixComment}
+              DeleteCommentSubmit={DeleteCommentSubmit}
+              setIsopen={setIsopen}
+              userData={userData}
+              onClickNotifyCheckString={onClickNotifyCheckString}
+            />
+          </div>{' '}
+        </>
+      ))}
+
+      {/* {el.id == isOpen && on ? (
+                  <>
+                    <SubCommentsForm
+                      userData={userData}
+                      subHandleSubmit={subHandleSubmit}
+                      findData={findData}
+                      onClickNotify={onClickNotify}
+                      isOpen={isOpen}
+                      on={on}
+                      toggle={toggle}
+                      onClickNotifyCheckString={onClickNotifyCheckString}
+                    />
+                  </>
+                ) : (
+                  ''
+                )}
+                {getComments.map((ele, id) => (
+                  <>
+                    <SubComments
+                      ele={ele}
+                      el={el}
+                      subEditText={subEditText}
+                      editSubCommentInput={editSubCommentInput}
+                      EditCommentSubmit={EditCommentSubmit}
+                      DeleteCommentSubmit={DeleteCommentSubmit}
+                      userData={userData}
+                      findData={findData}
+                      onClickNotifyCheckString={onClickNotifyCheckString}
+                    />
+                  </>
+                ))} */}
     </PageTemplate>
   );
 }

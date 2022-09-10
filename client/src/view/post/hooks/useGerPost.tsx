@@ -12,7 +12,6 @@ export default function useGetPost() {
     variables: { input: { id: parseInt(router.query.id as any) } },
   });
 
-  console.log(singlePostData);
   return {
     singlePostLoding,
     singlePostError,

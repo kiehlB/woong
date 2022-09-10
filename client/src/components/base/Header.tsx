@@ -82,7 +82,6 @@ function Header({ tag }: HeaderProps) {
       updatedList.splice(globalTag.indexOf(name), 1);
     }
 
-    console.log(updatedList);
     dispatch(tagGet(updatedList));
   };
 

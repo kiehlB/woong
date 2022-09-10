@@ -14,7 +14,6 @@ function Main({ post }: MainProps) {
   const ref = useRef(null);
   const singlePost = post?.findAllPost?.slice(0, 1);
 
-  console.log(singlePost[0]);
   const [xys, set] = useState([0, 0, 1]);
 
   const calc = (x, y, rect) => [
@@ -53,7 +52,6 @@ function Main({ post }: MainProps) {
 
   // toggleService.send('TOGGLE');
 
-  console.log(singlePost);
   return (
     <div className="grid grid-cols-2 font-Roboto">
       <div className="pt-[6rem] max-w-[35.5rem] ml-auto pr-[2rem] pl-[1rem] ">
