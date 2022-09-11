@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import PostCard from '../common/PostCard';
+import PostCard from './PostCard';
 
 export type PostItemProps = {
   data: any;
