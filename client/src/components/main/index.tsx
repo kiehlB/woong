@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { createMachine, interpret } from 'xstate';
 import { useSpring, animated } from 'react-spring';
 import { Button } from '../common/Button';
-import AddTag from '../../static/svg/addtag';
 import Dot from '../common/TagsDot';
 import { DateTime } from 'luxon';
 
@@ -58,15 +57,15 @@ function Main({ post }: MainProps) {
         <h1 className="font-medium text-[#14151A]">LEARN ALL ABOUT</h1>
 
         <div className="text-[4rem] mb-[1rem] font-medium w-[80%] text-[#14151A] leading-[4.5rem]">
-          Learn Web & Security
+          {`   Learn Web & Security`}
         </div>
 
         <div className="border border-[#14151A] w-[2.5rem] h-[2px] mb-[2rem]" />
 
         <div className="mb-[1.5rem] text-[#474D57] font-normal leading-normal  font-Roboto">
-          Your one-stop guide to all things crypto. Whether you're a rookie trying to
+          {`   Your one-stop guide to all things crypto. Whether you're a rookie trying to
           understand mining or a veteran looking to develop a trading strategy, we've got
-          you covered.
+          you covered.`}
         </div>
         <Button size="medium" variant="secondary" className="font-Roboto text-sm">
           Start here
