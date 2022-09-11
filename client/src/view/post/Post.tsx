@@ -14,8 +14,6 @@ import useGetPosts from '../../components/main/hooks/usegetPosts';
 import useGetPost from './hooks/useGerPost';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import ReactCanvasConfetti from 'react-canvas-confetti';
-import PostToc from '../../components/post/PostToc';
-import PostViewerProvider from '../../components/post/PostTocContext';
 import { getScrollTop } from '../../lib/utils';
 import useClientDimensions from '../../lib/hooks/useClientDimensions';
 import { useWindowSize } from '../../lib/hooks/useWindowSize';
