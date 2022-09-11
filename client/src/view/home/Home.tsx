@@ -19,6 +19,7 @@ import PostList from '../../components/post/PostList';
 import PostTitle from '../../components/post/PostTitle';
 import { Grid, Input } from '@nextui-org/react';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
+import { useState } from 'react';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -30,7 +31,7 @@ const Home: NextPage = () => {
   } = useGetTags();
 
   const globalTag = useSelector((state: RootState) => (state as any)?.tag?.mainTag);
-
+  const [Difficulty, setDifficulty] = useState([]);
   const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
 
   if (loading) return <div>Loading</div>;
@@ -45,6 +46,18 @@ const Home: NextPage = () => {
         );
 
   const isFilterdArray = filteredArray ? filteredArray : [];
+
+  const handleCheck = event => {
+    let updatedList = [...Difficulty];
+
+    if (event.target.checked) {
+      updatedList = [...Difficulty, event.target.value];
+    } else {
+      updatedList.splice(Difficulty.indexOf(event.target.value), 1);
+    }
+
+    setDifficulty(updatedList);
+  };
 
   return (
     <PageTemplate tag={getTagsData}>
@@ -84,6 +97,7 @@ const Home: NextPage = () => {
                 globalTag={globalTag}
                 toStore={getMainTag}
                 size="small"
+                bg="smallYello"
               />
             </div>
           </div>
@@ -91,18 +105,39 @@ const Home: NextPage = () => {
           <div className="flex my-8 ">
             <div className="text-white  mr-4">Difficulty:</div>
 
-            <TagItem tag="Begnner" variant="green" size="medium" add={true}>
+            <TagItem
+              tag="Beginner"
+              variant="green"
+              checked={Difficulty?.includes('Beginner')}
+              size="medium"
+              add={true}
+              bg="green"
+              handleCheck={handleCheck}>
               <Dot css="bg-[#02C076] w-[6px] h-[6px]" />
             </TagItem>
 
             <div className="ml-4">
-              <TagItem tag="Intermediate" variant="yello" size="medium" add={true}>
+              <TagItem
+                tag="Intermediate"
+                variant="yello"
+                size="medium"
+                add={true}
+                bg="yello"
+                handleCheck={handleCheck}
+                checked={Difficulty?.includes('Intermediate')}>
                 <Dot css="bg-[#f0b90b] w-[6px] h-[6px]" />
               </TagItem>
             </div>
 
             <div className="ml-4">
-              <TagItem tag="Advanced" variant="red" size="medium" add={true}>
+              <TagItem
+                tag="Advanced"
+                variant="red"
+                size="medium"
+                add={true}
+                bg="red"
+                handleCheck={handleCheck}
+                checked={Difficulty?.includes('Advanced')}>
                 <Dot css="bg-[#d9304e] w-[6px] h-[6px]" />
               </TagItem>
             </div>
@@ -265,34 +300,45 @@ const Home: NextPage = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4">
-        <div className="col-span-1 bg-[rgba(240,185,11,0.15)] p-8 rounded-2x1 border-2">
-          <div className="grid grid-cols-2">
-            <img src="/task.svg" className="w-full col-span-1 " />
-            <div className="col-span-1">
-              <div>Lost in all the crypto slang?</div>
-              <div>Take a closer look at our blockchain & crypto glossary.</div>
+      <div className="grid grid-cols-2 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4  mb-[3.5rem]">
+        <div className="col-span-1 bg-[rgba(240,185,11,0.15)] rounded-2xl h-full ">
+          <div className="grid grid-cols-2 justify-center content-center h-full">
+            <img src="/task.svg" className="w-full col-span-1 h-full" />
+            <div className="col-span-1 h-full grid  justify-center content-center">
+              <div className="text-[#14151A] mb-4 text-[2rem] leading-10 font-semibold">
+                Lost in all the crypto slang?
+              </div>
+              <div className="text-[#14151A] mb-6 leading-relaxed">
+                Take a closer look at our blockchain & crypto glossary.
+              </div>
             </div>
           </div>
         </div>
-        <div className="col-span-1 bg-[#2b2f36] px-[2.5rem] rounded-2x1">
-          <div className="grid grid-cols-2">
-            <img src="/task.svg" className="w-full col-span-1 " />
-            <div>
-              <div>Lost in all the crypto slang?</div>
-              <div>Take a closer look at our blockchain & crypto glossary.</div>
+
+        <div className="col-span-1 bg-[#2b2f36] rounded-2xl h-full">
+          <div className="grid grid-cols-2 h-full]">
+            <img src="/task.svg" className="col-span-1 " />
+            <div className="col-span-1 h-full grid  justify-center content-center">
+              <div className="text-[#14151A] mb-4 text-[2rem] leading-10 font-semibold">
+                Lost in all the crypto slang?
+              </div>
+              <div className="text-[#14151A] mb-6 leading-relaxed">
+                Take a closer look at our blockchain & crypto glossary.
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4">
-        <div className="flex flex-col">
-          <div className="text-[#F0B90B] text-[5rem] leading-[4.5rem] mb-6">278</div>
-          <div className="text-[1.25rem] text-[#474D57] leading-normal">
-            That's the number of terms in our glossary. How many do you know?
+      <div className="grid grid-cols-3 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4 py-[6.5rem]">
+        <div className="flex flex-col flex-1 h-full">
+          <div className="flex flex-col flex-1">
+            <div className="text-[#F0B90B] text-[5rem] leading-[4.5rem] mb-6">278</div>
+            <div className="text-[1.25rem] text-[#474D57] leading-normal">
+              That's the number of terms in our glossary. How many do you know?
+            </div>
           </div>
-          <Grid.Container gap={4}>
+          <Grid.Container>
             <Grid>
               <Input
                 clearable
@@ -317,8 +363,9 @@ const Home: NextPage = () => {
         <div className="shadow-xl p-6 rounded-2xl">
           <div>
             <HeaderTopicItem name={'Glossary'} size="small" />
-            <div>Binance Labs</div>
-            <div>
+            <div className="text-[#14151A] text-[2rem] ">Binance Labs</div>
+            <div className="bg-[#F0B90B] h-1 mt-4 w-[2rem]"></div>
+            <div className="mb-8 leading-normal text-[#14151A]">
               A social impact fund and an initiative to incubate, invest, and empower
               blockchain and cryptocurrency entre...
             </div>

@@ -53,6 +53,7 @@ function Filter({}: FilterProps) {
                     toStore={tagGet}
                     size="superSmall"
                     add={true}
+                    bg="superSmall"
                   />
                 </div>
               </div>

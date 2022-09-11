@@ -30,6 +30,7 @@ function TagItem({
 }: TagItemProps) {
   // bg-[rgba(240,185,11,0.2)]
   //text-[#474D57]
+
   return (
     <label>
       <div
@@ -40,28 +41,52 @@ function TagItem({
             'border border-[rgba(240,185,11,0.2)]  ': variant == 'yello',
             'border border-[rgba(217,48,78,0.2)]': variant == 'red',
 
-            'bg-[rgba(2,192,118,0.2)] text-[rgb(71, 77, 87)] border-none text-[#474D57]':
-              bg == 'green',
+            'bg-[#F0B90B] text-[#14151A]': bg == 'smallYello' && checked == true,
 
-            'px-4 py-1 border-[#2b2f36] h-[1.75rem] rounded-[100px] text-xs font-Roboto text-[#AEB4BC]':
+            '!text-rose-700': bg == 'superSmall' && checked == true,
+
+            'bg-[rgba(2,192,118,0.2)] border-none !text-white':
+              bg == 'green' && checked == true,
+
+            'bg-[#f0b90b33] border-none !text-white': bg == 'yello' && checked == true,
+
+            'bg-[#d9304e33] border-none !text-white': bg == 'red' && checked == true,
+
+            'px-4 py-1 border-[#2b2f36] h-[1.75rem] rounded-[100px] text-xs font-Roboto ':
               size == 'small',
 
-            'px-2 py-0 leading-normal border-[#2b2f36] h-[1.75rem] rounded-lg text-xs font-Roboto text-white':
+            'px-2 py-0 leading-normal border-[#2b2f36] h-[1.75rem] rounded-lg text-xs font-Roboto text-[#AEB4BC]':
               size == 'medium',
 
             'mb-2 mr-2 text-xs h-[22px] px-3 py-1 font-Roboto bg-[#F5F5F5] opacity-60 text-[#14151A] flex justify-center item-center border-none':
               size == 'superSmall',
+
+            // '!text-white': checked == true,
           },
         )}>
         {children}
         {tag}
+
         {add ? (
-          <AddTag
-            className={clsx('w-[12px] text-[#76808F]', {
-              'ml-1': size == 'superSmall',
-              'ml-2': size == 'medium',
-            })}
-          />
+          checked ? (
+            <svg
+              className={clsx('w-[12px]', {
+                'ml-1': size == 'superSmall',
+                'ml-2': size == 'medium',
+              })}
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor">
+              <path d="M20.5 7.42L9.41 18.5L8 17.09L3 12.09L4.41 10.67L9.41 15.67L19.08 6L20.5 7.42Z"></path>
+            </svg>
+          ) : (
+            <AddTag
+              className={clsx('w-[12px] text-[#76808F]', {
+                'ml-1': size == 'superSmall',
+                'ml-2': size == 'medium',
+              })}
+            />
+          )
         ) : (
           ''
         )}
