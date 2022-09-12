@@ -36,11 +36,11 @@ import { createPostLikeLoader } from './modules/postLike/postLikeLoader';
 export const typeOrmConnectionDataSource = new DataSource({
   name: 'default',
   type: 'postgres',
-  host: 'localhost',
+  host: process.env.DB_HOST,
   port: 5432,
-  username: 'postgres',
-  password: '1245',
-  database: 'woong1',
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWD,
+  database: process.env.DB_DATABASE,
   synchronize: false,
   entities: [
     User,

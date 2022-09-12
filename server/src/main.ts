@@ -13,6 +13,7 @@ import * as bodyParser from 'body-parser';
 const prod = process.env.NODE_ENV === 'production';
 const PORT = process.env.PORT || 4000;
 
+console.log(process.env.NODE_ENV);
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
@@ -20,7 +21,7 @@ async function bootstrap() {
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: process.env.Origin,
     credentials: true,
   }); //http://localhost:3000/ http://www.nestblog.gq
 
