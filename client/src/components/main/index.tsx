@@ -12,7 +12,7 @@ export type MainProps = {
 
 function Main({ post }: MainProps) {
   const ref = useRef(null);
-  const singlePost = post?.findAllPost?.slice(0, 1);
+  const singlePost = post ? post?.findAllPost?.slice(0, 1) : '';
 
   const [xys, set] = useState([0, 0, 1]);
 

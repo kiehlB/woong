@@ -61,7 +61,7 @@ const Home: NextPage = () => {
 
   return (
     <PageTemplate tag={getTagsData}>
-      {/* <Main post={data} /> */}
+      <Main post={data} />
       <div className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
