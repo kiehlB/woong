@@ -30,9 +30,13 @@ function TagList({ tag, globalTag, toStore, variant, size, add, bg }: TagListPro
     dispatch(toStore(updatedList));
   };
 
+  const data = tag.filter(function (element) {
+    return element !== undefined;
+  });
+
   return (
     <>
-      {tag?.map(e => (
+      {data?.map(e => (
         <TagItem
           key={e?.id}
           tag={e?.name}

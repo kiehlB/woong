@@ -93,6 +93,10 @@ function Header({ tag }: HeaderProps) {
     [dispatch],
   );
 
+  const mergeTagData = mergeTag.filter(function (element) {
+    return element !== undefined;
+  });
+
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between py-1">
       <div className="flex items-center">
@@ -150,7 +154,7 @@ function Header({ tag }: HeaderProps) {
             <nav className="absolute mt-5 bg-white  z-[99999] w-[30rem]">
               <div className="group-hover:block pt-1  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
                 <ul className="grid grid-cols-3  px-4 pt-2 mb-2">
-                  {mergeTag?.slice(0, 18).map(e => (
+                  {mergeTagData?.slice(0, 18).map(e => (
                     <li key={e?.id}>
                       <HeaderTopicItem size="big" {...e} handleCheck={handleCheck} />
                     </li>
