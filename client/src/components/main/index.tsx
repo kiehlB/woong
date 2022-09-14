@@ -4,6 +4,7 @@ import { useSpring, animated } from 'react-spring';
 import { Button } from '../common/Button';
 import Dot from '../common/TagsDot';
 import { DateTime } from 'luxon';
+import Link from 'next/link';
 
 export type MainProps = {
   post: any;
@@ -63,60 +64,68 @@ function Main({ post }: MainProps) {
         <div className="border border-[#14151A] w-[2.5rem] h-[2px] mb-[2rem]" />
 
         <div className="mb-[1.5rem] text-[#474D57] font-normal leading-normal  font-Roboto">
-          {`   Your one-stop guide to all things crypto. Whether you're a rookie trying to
-          understand mining or a veteran looking to develop a trading strategy, we've got
-          you covered.`}
+          {`is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`}
         </div>
         <Button size="medium" variant="secondary" className="font-Roboto text-sm">
           Start here
         </Button>
       </div>
 
-      <div className="bg-[#F5F5F5]">
-        <div
-          className="h-full pt-[3rem] pr-[1rem] pb-[3rem] pl-[2rem] max-w-[35.5rem] cursor-pointer"
-          ref={ref}>
-          <animated.div
-            style={{ transform: props.xys.to(trans) }}
-            onMouseLeave={() => set([0, 0, 1])}
-            onMouseMove={e => {
-              const rect = ref.current.getBoundingClientRect();
-              set(calc(e.clientX, e.clientY, rect));
-            }}>
-            <div className=" text-[#14151A] font-medium  uppercase mb-[8px]">
-              FEATURED
-            </div>
-            <div className="grid  grid-cols-1">
-              <img src="/img/image.png" className="w-full h-auto rounded" />
-            </div>
-            <div className="pt-4 text-[#14151A] leading-7 text-xl  font-medium  ">
-              {singlePost[0]?.title}
-            </div>
-
-            <div className="flex items-center">
-              <div className="text-[#76808F] leading-snug font-normal py-4">
-                {DateTime.fromISO(singlePost[0].created_at).toLocaleString().slice(0, -1)}
+      <Link href={`/post/${singlePost[0].id}`}>
+        <div className="bg-[#F5F5F5]">
+          <div
+            className="h-full pt-[3rem] pr-[1rem] pb-[3rem] pl-[2rem] max-w-[35.5rem] cursor-pointer"
+            ref={ref}>
+            <animated.div
+              style={{ transform: props.xys.to(trans) }}
+              onMouseLeave={() => set([0, 0, 1])}
+              onMouseMove={e => {
+                const rect = ref.current.getBoundingClientRect();
+                set(calc(e.clientX, e.clientY, rect));
+              }}>
+              <div className=" text-[#14151A] font-medium  uppercase mb-[8px]">
+                FEATURED
               </div>
-
-              <div className="flex items-center ml-4 text-[#76808F]">
-                <svg width="14" height="14" viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                </svg>
-                <div className="ml-1">{singlePost[0]?.post_likes.length}</div>
+              <div className="grid  grid-cols-1">
+                <img src="/img/image.png" className="w-full h-auto rounded" />
               </div>
-            </div>
+              {singlePost ? (
+                <>
+                  <div className="pt-4 text-[#14151A] leading-7 text-xl  font-medium  ">
+                    {singlePost[0]?.title}
+                  </div>
 
-            <Button
-              size="small"
-              className="bg-[#02c07633] h-9 flex justify-center items-center  rounded-lg text-[#474D57]">
-              <Dot css="bg-[#02C076]" />
-              {singlePost[0].difficulty}
-            </Button>
-          </animated.div>
+                  <div className="flex items-center">
+                    <div className="text-[#76808F] leading-snug font-normal py-4">
+                      {DateTime.fromISO(singlePost[0].created_at)
+                        .toLocaleString()
+                        .slice(0, -1)}
+                    </div>
+
+                    <div className="flex items-center ml-4 text-[#76808F]">
+                      <svg width="14" height="14" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+                      </svg>
+                      <div className="ml-1">{singlePost[0]?.post_likes.length}</div>
+                    </div>
+                  </div>
+
+                  <Button
+                    size="small"
+                    className="bg-[#02c07633] h-9 flex justify-center items-center  rounded-lg text-[#474D57]">
+                    <Dot css="bg-[#02C076]" />
+                    {singlePost[0].difficulty}
+                  </Button>
+                </>
+              ) : (
+                ''
+              )}
+            </animated.div>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

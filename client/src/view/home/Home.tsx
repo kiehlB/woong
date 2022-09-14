@@ -264,11 +264,11 @@ const Home: NextPage = () => {
       </div>
 
       <div
-        className="grid grid-cols-2 m-auto max-w-[71rem] w-full"
+        className="grid grid-cols-2 m-auto max-w-[59rem] border-2 w-full"
         style={{
           gridTemplateColumns: 'minmax(auto,568px) 1fr',
         }}>
-        <div className="col-span-1">
+        <div className="col-span-1 border-2">
           <img src="/task.svg" className="w-full" />
         </div>
         <div className="col-span-1 h-full content-center">
@@ -311,6 +311,7 @@ const Home: NextPage = () => {
               <div className="text-[#14151A] mb-6 leading-relaxed">
                 Take a closer look at our blockchain & crypto glossary.
               </div>
+              <div>Check out Glossary</div>
             </div>
           </div>
         </div>
@@ -325,6 +326,7 @@ const Home: NextPage = () => {
               <div className="text-[#14151A] mb-6 leading-relaxed">
                 Take a closer look at our blockchain & crypto glossary.
               </div>
+              <div>Check out Glossary</div>
             </div>
           </div>
         </div>

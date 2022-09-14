@@ -27,7 +27,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 console.log(process.env.NEXT_PUBLIC_URL);
 const httpLink = new HttpLink({
-  uri: 'https://api.woong.lol/graphql', // Server URL (must be absolute)
+  uri: process.env.NEXT_PUBLIC_URL, // Server URL (must be absolute)
   credentials: 'include', // Additional fetch() options like `credentials` or `headers`
 });
 

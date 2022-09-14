@@ -21,7 +21,7 @@ async function bootstrap() {
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
   app.enableCors({
-    origin: process.env.Origin,
+    origin: process.env.ORIGIN,
     credentials: true,
   }); //http://localhost:3000/ http://www.nestblog.gq
 

@@ -13,7 +13,7 @@ export type HeaderTopicItemProps = {
 function HeaderTopicItem({ name, size, handleCheck }: HeaderTopicItemProps) {
   return (
     <Link href="/filter">
-      <div className="mr-2 mt-2  ">
+      <div className="mr-2 mt-2 cursor-pointer">
         <div
           onClick={() => handleCheck(name)}
           className={clsx(' text-white  rounded-3xl  font-Roboto  text-sm', {

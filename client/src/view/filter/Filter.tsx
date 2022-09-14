@@ -13,12 +13,13 @@ import PostTitle from '../../components/post/PostTitle';
 import { Pagination } from '@nextui-org/react';
 import TagItem from '../../components/tags/TagItem';
 import Dot from '../../components/common/TagsDot';
+import { useState } from 'react';
 
 export type FilterProps = {};
 
 function Filter({}: FilterProps) {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
-
+  const [Difficulty, setDifficulty] = useState([]);
   const {
     loading: getTagsLoading,
     error: getTagsError,
@@ -30,6 +31,29 @@ function Filter({}: FilterProps) {
   const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
 
   if (getTagsLoading) return <div>Loading</div>;
+
+  const filteredArray =
+    data?.findAllPost.filter(e =>
+      e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
+    ).length == 0
+      ? data?.findAllPost
+      : data?.findAllPost.filter(e =>
+          e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
+        );
+
+  const isFilterdArray = filteredArray ? filteredArray : [];
+
+  const handleCheck = event => {
+    let updatedList = [...Difficulty];
+
+    if (event.target.checked) {
+      updatedList = [...Difficulty, event.target.value];
+    } else {
+      updatedList.splice(Difficulty.indexOf(event.target.value), 1);
+    }
+
+    setDifficulty(updatedList);
+  };
 
   // console.log(getTagsData?.getAllTags?.filter(e => globalTag.includes(e.name)));
 
@@ -64,23 +88,39 @@ function Filter({}: FilterProps) {
                 <div className="text-black flex">
                   <div>
                     <TagItem
-                      tag="Begnner"
+                      tag="Beginner"
                       variant="green"
                       size="medium"
                       add={true}
+                      checked={Difficulty?.includes('Beginner')}
+                      handleCheck={handleCheck}
                       bg="green">
                       <Dot css="bg-[#02C076]" />
                     </TagItem>
                   </div>
 
                   <div className="ml-2">
-                    <TagItem tag="Intermediate" variant="yello" size="medium" add={true}>
+                    <TagItem
+                      tag="Intermediate"
+                      variant="yello"
+                      size="medium"
+                      add={true}
+                      bg="yello"
+                      checked={Difficulty?.includes('Intermediate')}
+                      handleCheck={handleCheck}>
                       <Dot css="bg-[#f0b90b]" />
                     </TagItem>
                   </div>
 
                   <div className="ml-2">
-                    <TagItem tag="Advanced" variant="red" size="medium" add={true}>
+                    <TagItem
+                      tag="Advanced"
+                      variant="red"
+                      bg="red"
+                      checked={Difficulty?.includes('Advanced')}
+                      size="medium"
+                      add={true}
+                      handleCheck={handleCheck}>
                       <Dot css="bg-[#d9304e]" />
                     </TagItem>
                   </div>

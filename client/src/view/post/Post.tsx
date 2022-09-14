@@ -221,7 +221,7 @@ function Post({}: PostProps) {
             dangerouslySetInnerHTML={{ __html: singlePostData?.findSinglePost?.body }}
           />
         </div>
-        <div className="flex justify-center border w-[30%]">
+        <div className="flex justify-center w-[30%]">
           <div className="fixed mt-[10%]">{/* <Face /> */}</div>
         </div>
       </div>
