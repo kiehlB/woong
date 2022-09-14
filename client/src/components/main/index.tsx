@@ -71,7 +71,7 @@ function Main({ post }: MainProps) {
         </Button>
       </div>
 
-      <Link href={`/post/${singlePost[0].id}`}>
+      <Link href={singlePost ? `/post/${singlePost[0].id}` : ''}>
         <div className="bg-[#F5F5F5]">
           <div
             className="h-full pt-[3rem] pr-[1rem] pb-[3rem] pl-[2rem] max-w-[35.5rem] cursor-pointer"
