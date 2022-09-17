@@ -26,6 +26,12 @@ type GetUserInfoResponse {
   user: UserInfo
 }
 
+type GetUsersInfoResponse {
+  error: String
+  ok: Boolean!
+  users: [UserInfo!]
+}
+
 input InputSignin {
   email: String
   password: String
@@ -89,7 +95,7 @@ type Query {
   getAllPostTags: [PostsTags!]!
   getAllTags: [Tag!]!
   getAllTagsCount: [Tag!]!
-  getAllUser: [GetUserInfoResponse!]
+  getAllUser: GetUsersInfoResponse
   getUser(input: getUserInfo!): GetUserInfoResponse!
   whoAmI: GetUserInfoResponse!
 }
@@ -164,10 +170,9 @@ input getPost {
 
 input getUserInfo {
   id: Int!
-  username: String!
 }
 
 input registerInput {
-  email: String!
-  password: String!
+  email: String
+  password: String
 }

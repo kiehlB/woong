@@ -16,18 +16,18 @@ export const registerMutation = gql`
   }
 `;
 
-export const getUsersQuery = gql`
-  query Users {
-    users {
-      id
-      username
-      follower {
-        id
-        follower_id
-      }
-    }
-  }
-`;
+// export const getUsersQuery = gql`
+//   query Users {
+//     users {
+//       id
+//       username
+//       follower {
+//         id
+//         follower_id
+//       }
+//     }
+//   }
+// `;
 
 export const meQuery = gql`
   query WhoAmI {
@@ -41,26 +41,26 @@ export const meQuery = gql`
   }
 `;
 
-export const logoutMutation = gql`
-  mutation Logout {
-    logout
-  }
-`;
+// export const logoutMutation = gql`
+//   mutation Logout {
+//     logout
+//   }
+// `;
 
-export const followMutation = gql`
-  mutation FollowUser($username: String!) {
-    followUser(username: $username) {
-      id
-      user_id
-      follower_id
-    }
-  }
-`;
+// export const followMutation = gql`
+//   mutation FollowUser($username: String!) {
+//     followUser(username: $username) {
+//       id
+//       user_id
+//       follower_id
+//     }
+//   }
+// `;
 
-export const unFollowMutation = gql`
-  mutation UnFollowUser($username: String!) {
-    unFollowUser(username: $username) {
-      id
-    }
-  }
-`;
+// export const unFollowMutation = gql`
+//   mutation UnFollowUser($username: String!) {
+//     unFollowUser(username: $username) {
+//       id
+//     }
+//   }
+// `;

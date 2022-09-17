@@ -1,16 +1,14 @@
 import {
   Args,
   Context,
-  Int,
   Mutation,
   Parent,
   Query,
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { UseGuards, UseInterceptors } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { UserService } from './users.service';
-
 import { CurrentUser, TokenUser } from '../../decorator/auth-user.decorator';
 import {
   GetUserinfoRequest,
@@ -24,12 +22,9 @@ import { UserProfile } from '../profile/profile.entity';
 import DataLoader from 'dataloader';
 import { User } from './entitiy/user.entity';
 
-@Resolver((of) => User)
+@Resolver(() => User)
 export class UserResolver {
-  constructor(
-    private readonly userProfileService: UserProfileService,
-    private readonly usersService: UserService,
-  ) {}
+  constructor(private readonly usersService: UserService) {}
 
   @Query(() => GetUserInfoResponse)
   @UseGuards(JwtAuthGuard)
@@ -37,7 +32,7 @@ export class UserResolver {
     return { ok: true, user };
   }
 
-  @Query(() => [GetUserInfoResponse], { nullable: true })
+  @Query(() => GetUsersInfoResponse, { nullable: true })
   async getAllUser(): Promise<GetUsersInfoResponse> {
     const users = await this.usersService.getAllUser();
 

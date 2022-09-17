@@ -1,18 +1,9 @@
 import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
-import { InputType, Field, Int, ObjectType } from '@nestjs/graphql';
+import { InputType, Field, Int, ObjectType, PickType } from '@nestjs/graphql';
+import { User } from '../entitiy/user.entity';
 
 @InputType('registerInput')
-export class RegisterRequest {
-  @Field()
-  @IsString()
-  @IsNotEmpty()
-  password: string;
-
-  @Field()
-  @IsString()
-  @IsNotEmpty()
-  email: string;
-}
+export class RegisterRequest extends PickType(User, ['email', 'password']) {}
 
 @ObjectType()
 export class RegisterResponse {

@@ -82,7 +82,6 @@ export const typeOrmConnectionDataSource = new DataSource({
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWD'),
         database: configService.get('DB_DATABASE'),
-        // url: process.env.CLEARDB_DATABASE_URL,
         synchronize: true,
         autoLoadEntities: true,
         // autoSchemaSync: true,
@@ -99,10 +98,6 @@ export const typeOrmConnectionDataSource = new DataSource({
         CommentModule,
         TagModule,
         PostLikeModule,
-
-        // PostLikeModule,
-
-        // ScoreModule,
       ],
       useFactory: (
         usersService: UserService,
@@ -118,7 +113,6 @@ export const typeOrmConnectionDataSource = new DataSource({
           origin: process.env.ORIGIN,
           credentials: true,
         },
-
         context: (ctx) => ({
           ...ctx,
           usersLoader: createUsersLoader(usersService),

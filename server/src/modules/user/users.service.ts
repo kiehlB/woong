@@ -20,17 +20,9 @@ export class UserService {
   }
 
   async getSingleUser(input: GetUserinfoRequest): Promise<User> {
-    const { id, username } = input;
+    const { id } = input;
     const repo = await this.userRepository;
 
-    if (username) {
-      const user = await repo.findOne({
-        where: {
-          username,
-        },
-      });
-      return user;
-    }
     const user = await repo.findOne({
       where: {
         id,

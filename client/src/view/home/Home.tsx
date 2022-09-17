@@ -264,11 +264,11 @@ const Home: NextPage = () => {
       </div>
 
       <div
-        className="grid grid-cols-2 m-auto max-w-[59rem] border-2 w-full"
+        className="grid grid-cols-2 m-auto max-w-[59rem] w-full"
         style={{
           gridTemplateColumns: 'minmax(auto,568px) 1fr',
         }}>
-        <div className="col-span-1 border-2">
+        <div className="col-span-1">
           <img src="/task.svg" className="w-full" />
         </div>
         <div className="col-span-1 h-full content-center">
@@ -378,7 +378,6 @@ const Home: NextPage = () => {
           <div>dd</div>
         </div>
       </div>
-      <div>hello</div>
     </PageTemplate>
   );
 };

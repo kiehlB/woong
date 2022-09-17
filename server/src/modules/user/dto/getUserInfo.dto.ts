@@ -1,13 +1,4 @@
-import {
-  Field,
-  ID,
-  InputType,
-  Int,
-  IntersectionType,
-  ObjectType,
-  PartialType,
-  PickType,
-} from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { CoreResponse } from 'src/common/dto/coreResponse.dto';
 
@@ -34,9 +25,4 @@ export class GetUserinfoRequest extends CoreResponse {
   @Field(() => Int)
   @IsNotEmpty()
   id: number;
-
-  @Field()
-  @IsString()
-  @IsNotEmpty()
-  username: string;
 }
