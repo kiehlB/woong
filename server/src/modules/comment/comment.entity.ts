@@ -23,7 +23,7 @@ export class Comments {
   text!: string;
 
   @Field((type) => Int, { nullable: true })
-  @Column('uuid', {
+  @Column({
     nullable: true,
   })
   reply!: number;

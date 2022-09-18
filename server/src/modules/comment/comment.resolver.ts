@@ -19,13 +19,14 @@ import {
   Int,
 } from '@nestjs/graphql';
 import { Comments } from './comment.entity';
-import { CurrentUser } from 'src/decorator/auth-user.decorator';
+import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
 import { CommentService } from './comment.service';
 import {
   CreateCommentRequest,
   DeleteCommentRequest,
 } from './dto/createComment.dto';
 import { User } from '../user/entitiy/user.entity';
+import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
 
 @Resolver((of) => Comments)
 export class CommentResolver {
@@ -38,11 +39,13 @@ export class CommentResolver {
     return users;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Comments)
   createComment(
-    @CurrentUser() user: User,
+    @CurrentUser() user: TokenUser,
     @Args('input') comment: CreateCommentRequest,
   ): Promise<Comments> {
+    console.log(user);
     return this.commentService.create(user, comment);
   }
 

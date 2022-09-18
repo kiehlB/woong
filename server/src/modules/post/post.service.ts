@@ -76,9 +76,9 @@ export class PostService {
     const postagRepo = await this.PostsTagsRepository;
 
     const newPost = await postsRepo.create({
-      title: post.title,
       body: post.body,
       difficulty: post.difficulty,
+      title: post.title,
     });
 
     const tags = await Promise.all(
@@ -88,6 +88,7 @@ export class PostService {
             name_filtered: escapeForUrl(e).toLowerCase(),
           },
         });
+
         if (tag) {
           return tag;
         }
@@ -97,11 +98,13 @@ export class PostService {
           name_filtered: escapeForUrl(e).toLowerCase(),
         });
 
-        await tagRepo.save(createTags);
+        return await tagRepo.save(createTags);
       }),
     );
 
     await postsRepo.save(newPost);
+
+    console.log(tags);
 
     const uniqueTags = tags.reduce<Tag[]>((acc, current) => {
       if (!acc.find((tag) => tag?.id === current?.id)) {

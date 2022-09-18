@@ -1,5 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ApolloError, AuthenticationError } from 'apollo-server-express';
 import { In, Repository } from 'typeorm';
 import { Post } from '../post/entitiy/post.entity';
 import { Comments } from './comment.entity';
@@ -28,9 +29,38 @@ export class CommentService {
   }
 
   async create(user, commentBody: CreateCommentRequest): Promise<Comments> {
+    const { post_id, comment_id, text } = commentBody;
+
+    if (!user) {
+      throw new AuthenticationError('Not Logged In');
+    }
     const getPost = await this.PostRepository;
     const getComment = await this.commentRepository;
     const comment = new Comments();
+
+    if (comment_id) {
+      const commentTarget = await getComment.findOne({
+        where: {
+          id: comment_id,
+        },
+      });
+      if (!commentTarget) {
+        throw new ApolloError('Target comment is not found', 'NOT_FOUND');
+      }
+
+      comment.reply = comment_id;
+
+      commentTarget.has_replies = true;
+      await getComment.save(commentTarget);
+    }
+
+    const newComment = await getComment.create({
+      user_id: user.id,
+      text: text,
+      post_id: post_id,
+    });
+
+    await getComment.save(newComment);
 
     // const post = await getPost.findOne({
     //   where: {
