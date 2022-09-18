@@ -52,7 +52,6 @@ export class TagResolver {
 
   @Query(() => [Tag])
   getAllTagsCount() {
-    console.log('hb');
     return this.tagService.getAllTagsCount();
   }
 

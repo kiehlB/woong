@@ -38,10 +38,10 @@ input InputSignin {
 }
 
 type Mutation {
+  PostLike(input: createPostLike!): PostLike!
   createAndUpdateProfile(input: createProfile!): ProfileResponse!
   createComment(input: createComment!): Comments!
   createPost(input: createPost!): Post!
-  createPostLike(input: registerInput!): PostLike!
   editComment(input: createComment!): Comments!
   register(input: registerInput!): RegisterResponse!
   removeComment(input: deleteComment!): Boolean!
@@ -96,6 +96,7 @@ type Query {
   getAllTags: [Tag!]!
   getAllTagsCount: [Tag!]!
   getAllUser: GetUsersInfoResponse
+  getTrendingPosts: [Post!]!
   getUser(input: getUserInfo!): GetUserInfoResponse!
   whoAmI: GetUserInfoResponse!
 }
@@ -154,6 +155,10 @@ input createPost {
   tags: [String!]
   thumbnail: String
   title: String
+}
+
+input createPostLike {
+  id: Int
 }
 
 input createProfile {

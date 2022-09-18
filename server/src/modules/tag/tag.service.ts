@@ -38,7 +38,6 @@ export class TagService {
 
     // return tags;
 
-    console.log([items, totalCount]);
     return [items, totalCount];
   }
 

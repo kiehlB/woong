@@ -8,7 +8,6 @@ export interface TokenUser {
 export const CurrentUser = createParamDecorator(
   (data: unknown, context: ExecutionContext) => {
     const gqlContext = GqlExecutionContext.create(context);
-    console.log(gqlContext.getContext().req.user);
 
     return gqlContext.getContext().req.user;
   },

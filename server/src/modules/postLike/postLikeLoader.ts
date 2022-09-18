@@ -11,8 +11,6 @@ export function createPostLikeLoader(PostLikeService: PostLikeService) {
       (id) => PostLike.filter((like) => like.post_id === id) || null,
     );
 
-    console.log(mappedResults);
-
     return mappedResults;
   });
 }

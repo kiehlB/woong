@@ -13,7 +13,6 @@ import * as bodyParser from 'body-parser';
 const prod = process.env.NODE_ENV === 'production';
 const PORT = process.env.PORT || 4000;
 
-console.log(process.env.NODE_ENV);
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 

@@ -1,9 +1,9 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
 import { AuthenticationError } from 'apollo-server-express';
 import { escapeForUrl } from '../../common/utils/escapeForUrl';
 
-import { Repository } from 'typeorm';
+import { EntityManager, getManager, Repository } from 'typeorm';
 import PostsTags from '../tag/entity/postTag.entity';
 import { Tag } from '../tag/entity/tag.entity';
 
@@ -22,6 +22,9 @@ export class PostService {
 
     @InjectRepository(PostsTags)
     private readonly PostsTagsRepository: Repository<PostsTags>,
+
+    @InjectEntityManager()
+    private readonly entityManager: EntityManager,
   ) {}
   async findPost(args): Promise<Post> {
     const findPost = await this.PostRepository.createQueryBuilder('post')
@@ -41,6 +44,29 @@ export class PostService {
 
     return posts;
   }
+
+  async getTrendingPosts() {
+    const postsRepo = await this.PostRepository;
+    const posts = await postsRepo.find();
+
+    const rows = (await this.entityManager.getRepository(Post).query(
+      `
+    select post.id, post.title, SUM(score) as score  from post_score
+    inner join post on post_score.post_id = post.id
+    where post_score.created_at > now()
+    group by post.id
+    order by score desc, post.id desc
+    offset $1
+    limit $2
+  `,
+      [1, 10],
+    )) as { id: string; score: number }[];
+
+    console.log(rows);
+
+    return posts;
+  }
+
   async createPost(user, post) {
     if (!user.id) {
       throw new AuthenticationError('Not Logged In');

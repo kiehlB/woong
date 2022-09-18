@@ -11,6 +11,7 @@ import PostsTags from '../tag/entity/postTag.entity';
 import { Tag } from '../tag/entity/tag.entity';
 import { UserModule } from '../user/user.module';
 import { Post } from './entitiy/post.entity';
+import { PostScore } from './entitiy/postScore.entity';
 import PostsLoaders from './post.loader';
 import { PostResolver } from './post.resolver';
 import { PostService } from './post.service';
@@ -20,6 +21,7 @@ import { PostService } from './post.service';
     TypeOrmModule.forFeature([Post]),
     TypeOrmModule.forFeature([Tag]),
     TypeOrmModule.forFeature([PostsTags]),
+    TypeOrmModule.forFeature([PostScore]),
     TypeOrmModule.forFeature([Comments]),
     TypeOrmModule.forFeature([PostLike]),
     UserModule,

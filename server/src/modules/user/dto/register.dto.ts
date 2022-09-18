@@ -1,4 +1,4 @@
-import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 import { InputType, Field, Int, ObjectType, PickType } from '@nestjs/graphql';
 import { User } from '../entitiy/user.entity';
 

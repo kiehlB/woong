@@ -14,7 +14,6 @@ export function createPostTagsLoader(tagsService: TagService) {
       (id) => getPostTag.filter((e) => e.post_id === id) || null,
     );
 
-    console.log(mappedResults);
     return mappedResults;
   });
 }

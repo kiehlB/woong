@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { Post } from '../post/entitiy/post.entity';
+import { PostScore } from '../post/entitiy/postScore.entity';
 import { PostLike } from './postLike.entity';
 
 @Injectable()
@@ -11,11 +12,18 @@ export class PostLikeService {
     private readonly postLikeRepository: Repository<PostLike>,
     @InjectRepository(Post)
     private readonly PostRepository: Repository<Post>,
+
+    @InjectRepository(PostScore)
+    private readonly PostScoreRepository: Repository<PostScore>,
   ) {}
 
   async liked(user, args) {
+    if (!user) {
+      throw new Error('유저가 없습니다!');
+    }
     const getPost = await this.PostRepository;
     const LikePost = await this.postLikeRepository;
+    const PostScore = await this.PostScoreRepository;
 
     const post = await getPost.findOne({
       where: {
@@ -30,6 +38,10 @@ export class PostLikeService {
       },
     });
 
+    if (alreadyLiked) {
+      return post;
+    }
+
     const newUser = LikePost.create({
       post_id: args.id,
       user_id: user.id,
@@ -41,22 +53,24 @@ export class PostLikeService {
       return post;
     }
 
-    // const count = await getLikePost.count({
-    //   where: {
-    //     post_id: args.id,
-    //   },
-    // });
+    const count = await LikePost.count({
+      where: {
+        post_id: args.id,
+      },
+    });
 
-    // post.likes = count;
+    post.likes = count;
 
-    // await getPost.save(post);
+    await getPost.save(post);
 
-    // const score = new Score();
-    // score.type = 'LIKE';
-    // score.post_id = args.id;
-    // score.score = 5;
-    // score.user_id = user.id;
-    // await getPostScore.save(score);
+    const createPostScore = await PostScore.create({
+      type: 'LIKE',
+      post_id: args.id,
+      score: 5,
+      user_id: user.id,
+    });
+
+    PostScore.save(createPostScore);
 
     return post;
   }

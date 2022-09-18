@@ -46,7 +46,6 @@ export class AuthController {
     const jwt: string = req.user.jwt;
 
     if (jwt) {
-      console.log(jwt);
       res.cookie('auth-cookie', jwt, {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         secure: false,
@@ -68,9 +67,7 @@ export class AuthController {
   googleLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
 
-    console.log('dasdasd', jwt);
     if (jwt) {
-      console.log(jwt);
       res.cookie('auth-cookie', jwt, {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         secure: false,
