@@ -42,9 +42,11 @@ type Mutation {
   createAndUpdateProfile(input: createProfile!): ProfileResponse!
   createComment(input: createComment!): Comments!
   createPost(input: createPost!): Post!
-  editComment(input: createComment!): Comments!
+  editComment(input: editComment!): Comments!
+  editPost(input: editPost!): Post!
   register(input: registerInput!): RegisterResponse!
   removeComment(input: deleteComment!): Boolean!
+  removePost(input: removePost!): Boolean!
   signin(input: InputSignin!): SigninResponse!
 }
 
@@ -62,6 +64,7 @@ type Post {
   title: String
   updated_at: DateTime!
   user: User
+  user_id: Int
 }
 
 type PostLike {
@@ -169,6 +172,21 @@ input deleteComment {
   comment_id: Int
 }
 
+input editComment {
+  comment_id: Int
+  text: String!
+}
+
+input editPost {
+  body: String
+  difficulty: String
+  post_id: Int
+  tags: [String!]
+  thumbnail: String
+  title: String
+  user_id: Int
+}
+
 input getPost {
   id: Int
 }
@@ -180,4 +198,9 @@ input getUserInfo {
 input registerInput {
   email: String
   password: String
+}
+
+input removePost {
+  post_id: Int
+  user_id: Int
 }

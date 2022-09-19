@@ -38,6 +38,13 @@ export type GetUserInfoResponse = {
   user?: Maybe<UserInfo>;
 };
 
+export type GetUsersInfoResponse = {
+  __typename?: 'GetUsersInfoResponse';
+  error?: Maybe<Scalars['String']>;
+  ok: Scalars['Boolean'];
+  users?: Maybe<Array<UserInfo>>;
+};
+
 export type InputSignin = {
   email?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
@@ -45,14 +52,21 @@ export type InputSignin = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  PostLike: PostLike;
   createAndUpdateProfile: ProfileResponse;
   createComment: Comments;
   createPost: Post;
-  createPostLike: PostLike;
   editComment: Comments;
+  editPost: Post;
   register: RegisterResponse;
   removeComment: Scalars['Boolean'];
+  removePost: Scalars['Boolean'];
   signin: SigninResponse;
+};
+
+
+export type MutationPostLikeArgs = {
+  input: CreatePostLike;
 };
 
 
@@ -71,13 +85,13 @@ export type MutationCreatePostArgs = {
 };
 
 
-export type MutationCreatePostLikeArgs = {
-  input: RegisterInput;
+export type MutationEditCommentArgs = {
+  input: EditComment;
 };
 
 
-export type MutationEditCommentArgs = {
-  input: CreateComment;
+export type MutationEditPostArgs = {
+  input: EditPost;
 };
 
 
@@ -88,6 +102,11 @@ export type MutationRegisterArgs = {
 
 export type MutationRemoveCommentArgs = {
   input: DeleteComment;
+};
+
+
+export type MutationRemovePostArgs = {
+  input: RemovePost;
 };
 
 
@@ -110,6 +129,7 @@ export type Post = {
   title?: Maybe<Scalars['String']>;
   updated_at: Scalars['DateTime'];
   user?: Maybe<User>;
+  user_id?: Maybe<Scalars['Int']>;
 };
 
 export type PostLike = {
@@ -147,7 +167,8 @@ export type Query = {
   getAllPostTags: Array<PostsTags>;
   getAllTags: Array<Tag>;
   getAllTagsCount: Array<Tag>;
-  getAllUser?: Maybe<Array<GetUserInfoResponse>>;
+  getAllUser?: Maybe<GetUsersInfoResponse>;
+  getTrendingPosts: Array<Post>;
   getUser: GetUserInfoResponse;
   whoAmI: GetUserInfoResponse;
 };
@@ -229,6 +250,10 @@ export type CreatePost = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type CreatePostLike = {
+  id?: Maybe<Scalars['Int']>;
+};
+
 export type CreateProfile = {
   bio: Scalars['String'];
 };
@@ -237,18 +262,37 @@ export type DeleteComment = {
   comment_id?: Maybe<Scalars['Int']>;
 };
 
+export type EditComment = {
+  comment_id?: Maybe<Scalars['Int']>;
+  text: Scalars['String'];
+};
+
+export type EditPost = {
+  body?: Maybe<Scalars['String']>;
+  difficulty?: Maybe<Scalars['String']>;
+  post_id?: Maybe<Scalars['Int']>;
+  tags?: Maybe<Array<Scalars['String']>>;
+  thumbnail?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
 export type GetPost = {
   id?: Maybe<Scalars['Int']>;
 };
 
 export type GetUserInfo = {
   id: Scalars['Int'];
-  username: Scalars['String'];
 };
 
 export type RegisterInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+};
+
+export type RemovePost = {
+  post_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
 };
 
 export type FindAllCommentsQueryVariables = Exact<{ [key: string]: never; }>;

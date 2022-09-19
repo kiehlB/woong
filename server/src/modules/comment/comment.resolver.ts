@@ -28,6 +28,8 @@ import {
 import { User } from '../user/entitiy/user.entity';
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
 
+import { EditCommentRequest } from './dto/editComment.dto';
+
 @Resolver((of) => Comments)
 export class CommentResolver {
   constructor(private readonly commentService: CommentService) {}
@@ -51,15 +53,15 @@ export class CommentResolver {
 
   @Mutation(() => Comments)
   editComment(
-    @CurrentUser() user: User,
-    @Args('input') comment: CreateCommentRequest,
+    @CurrentUser() user: TokenUser,
+    @Args('input') comment: EditCommentRequest,
   ): Promise<Comments> {
     return this.commentService.edit(user, comment);
   }
 
   @Mutation(() => Boolean)
   removeComment(
-    @CurrentUser() user: User,
+    @CurrentUser() user: TokenUser,
     @Args('input') comment: DeleteCommentRequest,
   ): Promise<Boolean> {
     return this.commentService.remove(user, comment);

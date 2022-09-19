@@ -54,36 +54,35 @@ export class CommentService {
       await getComment.save(commentTarget);
     }
 
-    const newComment = await getComment.create({
-      user_id: user.id,
-      text: text,
-      post_id: post_id,
-    });
-
-    await getComment.save(newComment);
-
-    // const post = await getPost.findOne({
-    //   where: {
-    //     id: commentBody.post_id,
-    //   },
+    // const newComment = await getComment.create({
+    //   user_id: user.id,
+    //   text: text,
+    //   post_id: post_id,
     // });
 
-    // if (commentBody.comment_id) {
-    //   const commentReply = await getComment.findOne({
-    //     where: {
-    //       id: commentBody.comment_id,
-    //     },
-    //   });
+    // await getComment.save(newComment);
 
-    //   comment.reply = commentBody.comment_id;
-    //   commentReply.has_replies = true;
-    //   await getComment.save(commentReply);
-    // }
+    const post = await getPost.findOne({
+      where: {
+        id: commentBody.post_id,
+      },
+    });
 
-    comment.user_id = 1;
+    if (commentBody.comment_id) {
+      const commentReply = await getComment.findOne({
+        where: {
+          id: commentBody.comment_id,
+        },
+      });
+
+      comment.reply = commentBody.comment_id;
+      commentReply.has_replies = true;
+      await getComment.save(commentReply);
+    }
+
+    comment.user_id = user.id;
     comment.text = commentBody.text;
     comment.post_id = commentBody.post_id;
-    comment.has_replies = true;
 
     await getComment.save(comment);
 

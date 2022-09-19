@@ -18,6 +18,8 @@ import PostsTags from '../tag/entity/postTag.entity';
 import { Comments } from '../comment/comment.entity';
 import { getSinglePostRequest } from './dto/getPost.dto';
 import { PostLike } from '../postLike/postLike.entity';
+import { EditPostRequest } from './dto/editPost.dto';
+import { RemovePostRequest } from './dto/removePost.dto';
 
 @Resolver((of) => Post)
 export class PostResolver {
@@ -45,6 +47,28 @@ export class PostResolver {
     @Args('input') post: CreatePostRequest,
   ): Promise<Post> {
     const savePost = await this.postService.createPost(user, post);
+
+    return savePost;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => Post)
+  async editPost(
+    @CurrentUser() user: TokenUser,
+    @Args('input') post: EditPostRequest,
+  ): Promise<Post> {
+    const savePost = await this.postService.editPost(user, post);
+
+    return savePost;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => Boolean)
+  async removePost(
+    @CurrentUser() user: TokenUser,
+    @Args('input') post: RemovePostRequest,
+  ): Promise<any> {
+    const savePost = await this.postService.removePost(user, post);
 
     return savePost;
   }

@@ -42,6 +42,10 @@ export class Post {
   @Column()
   difficulty!: string;
 
+  @Field((type) => Int, { nullable: true })
+  @Column({ nullable: true })
+  user_id!: number;
+
   @Field((type) => Date)
   @Column('timestampz')
   @CreateDateColumn()

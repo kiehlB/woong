@@ -22,3 +22,9 @@ export const Create_Comment = gql`
     }
   }
 `;
+
+export const Remove_Comment = gql`
+  mutation RemoveComment($input: deleteComment!) {
+    removeComment(input: $input)
+  }
+`;

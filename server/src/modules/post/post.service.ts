@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
-import { AuthenticationError } from 'apollo-server-express';
+import { ApolloError, AuthenticationError } from 'apollo-server-express';
 import { escapeForUrl } from '../../common/utils/escapeForUrl';
 
 import { EntityManager, getManager, Repository } from 'typeorm';
@@ -26,6 +26,7 @@ export class PostService {
     @InjectEntityManager()
     private readonly entityManager: EntityManager,
   ) {}
+
   async findPost(args): Promise<Post> {
     const findPost = await this.PostRepository.createQueryBuilder('post')
       .where('post.id = :id', { id: args.id })
@@ -34,6 +35,7 @@ export class PostService {
 
     return findPost;
   }
+
   async findAll() {
     const postsRepo = await this.PostRepository;
     const posts = await postsRepo.find();
@@ -76,6 +78,7 @@ export class PostService {
     const postagRepo = await this.PostsTagsRepository;
 
     const newPost = await postsRepo.create({
+      user_id: user.id,
       body: post.body,
       difficulty: post.difficulty,
       title: post.title,
@@ -103,8 +106,6 @@ export class PostService {
     );
 
     await postsRepo.save(newPost);
-
-    console.log(tags);
 
     const uniqueTags = tags.reduce<Tag[]>((acc, current) => {
       if (!acc.find((tag) => tag?.id === current?.id)) {
@@ -141,5 +142,122 @@ export class PostService {
     postagRepo.save(postTags);
 
     return newPost;
+  }
+
+  async editPost(user, post) {
+    if (!user) {
+      throw new AuthenticationError('plz login');
+    }
+
+    const { post_id, title, body, thumbnail, user_id } = post;
+
+    const postsRepo = await this.PostRepository;
+    const tagRepo = await this.TagRepository;
+    const postagRepo = await this.PostsTagsRepository;
+
+    const findPost = await postsRepo.findOne({
+      where: {
+        id: post_id,
+      },
+    });
+
+    if (!findPost) {
+      throw new ApolloError('Post not found');
+    }
+
+    if (user_id !== user.id) {
+      throw new ApolloError('this is not yours');
+    }
+
+    const DoEditPost = await postsRepo.save({
+      ...findPost,
+      body: post.body,
+      difficulty: post.difficulty,
+      title: post.title,
+    });
+
+    const tags = await Promise.all(
+      post.tags.map(async (e) => {
+        const tag = await tagRepo.findOne({
+          where: {
+            name_filtered: escapeForUrl(e).toLowerCase(),
+          },
+        });
+
+        if (tag) {
+          return tag;
+        }
+
+        const createTags = await tagRepo.create({
+          name: e,
+          name_filtered: escapeForUrl(e).toLowerCase(),
+        });
+
+        return await tagRepo.save(createTags);
+      }),
+    );
+
+    /* @ts-ignore */
+    const uniqueTags = tags.reduce<Tag[]>((acc, current) => {
+      if (!acc.find((tag) => tag?.id === current?.id)) {
+        acc.push(current);
+        return acc;
+      }
+      return acc;
+    }, []);
+
+    const prevPostTags = await postagRepo.find({
+      where: {
+        post_id: findPost.id,
+      },
+    });
+
+    const normalized = {
+      prev: normalize(prevPostTags, (postTag) => postTag.tag_id),
+      current: normalize(uniqueTags),
+    };
+
+    const missing = prevPostTags.filter(
+      (postTag) => !normalized.current[postTag.tag_id],
+    );
+    missing.forEach((tag) => postagRepo.remove(tag));
+
+    const tagsToAdd = uniqueTags.filter((tag) => !normalized.prev[tag.id]);
+    const postTags = tagsToAdd.map((tag) => {
+      const postTag = new PostsTags();
+      postTag.post_id = findPost.id;
+
+      postTag.tag_id = tag.id;
+      return postTag;
+    });
+    await postagRepo.save(postTags);
+
+    return DoEditPost;
+  }
+
+  async removePost(user, post) {
+    const postsRepo = await this.PostRepository;
+
+    if (!user) {
+      throw new AuthenticationError('plz login');
+    }
+
+    const findPost = await postsRepo.findOne({
+      where: {
+        id: post.post_id,
+      },
+    });
+
+    if (!findPost) {
+      throw new ApolloError('Post not found');
+    }
+
+    if (post.user_id !== user.id) {
+      throw new ApolloError('This is not your post');
+    }
+
+    await postsRepo.remove(findPost);
+
+    return true;
   }
 }

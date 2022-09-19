@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 
 import { useState } from 'react';
-import { GET_Comments, Remove_Comment } from '../../../lib/graphql/comment';
+import { GET_Comments, Remove_Comment,   } from '../../../lib/graphql/comment';
 
 export default function useDeleteComment() {
   const [deleteComment, { error }] = useMutation(Remove_Comment);

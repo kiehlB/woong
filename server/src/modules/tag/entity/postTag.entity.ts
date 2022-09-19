@@ -46,7 +46,7 @@ export default class PostsTags {
   tag!: Tag;
 
   @Field((type) => [Post], { nullable: true })
-  @ManyToOne((type) => Post, { cascade: true })
+  @ManyToOne((type) => Post, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'post_id' })
   post!: Post;
 }
