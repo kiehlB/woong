@@ -4,6 +4,9 @@ module.exports = {
   mode: process.env.NODE_ENV ? 'jit' : undefined,
   darkMode: 'class',
   content: ['./src/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
+  corePlugins: {
+    aspectRatio: false,
+  },
 
   theme: {
     screens: {

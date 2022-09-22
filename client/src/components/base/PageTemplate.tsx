@@ -9,10 +9,10 @@ export type PageTemplateProps = {
 
 function PageTemplate({ children, tag }: PageTemplateProps) {
   return (
-    <div className="flex felx-col  min-h-screen">
+    <div className="flex felx-col min-h-screen">
       <div className="flex flex-col flex-1">
         <Header tag={tag} />
-        {/* <FloatingHeader /> */}
+        <FloatingHeader tag={tag} />
         {children}
         <div className="mt-auto">
           <Footer />

@@ -2,7 +2,9 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { getScrollTop } from '../../lib/utils';
 import Header from './Header';
 
-export type FloatingHeaderProps = {};
+export type FloatingHeaderProps = {
+  tag: any;
+};
 
 function FloatingHeader(props: FloatingHeaderProps) {
   const [visible, setVisible] = useState(false);
@@ -72,7 +74,7 @@ function FloatingHeader(props: FloatingHeaderProps) {
             }
       }
       ref={blockRef}>
-      {/* <Header /> */}
+      <Header tag={props.tag} />
     </div>
   );
 }

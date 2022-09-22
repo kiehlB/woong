@@ -28,3 +28,12 @@ export const Remove_Comment = gql`
     removeComment(input: $input)
   }
 `;
+
+export const Edit_Comment = gql`
+  mutation EditComment($input: editComment!) {
+    editComment(input: $input {
+      id
+      text
+    }
+  }
+`;

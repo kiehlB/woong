@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 import { ApolloError } from '@apollo/client';
 
-interface inputProps {
+export interface inputProps {
   password: string | number | readonly string[];
   email: string | number | readonly string[];
 }

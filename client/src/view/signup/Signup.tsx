@@ -5,6 +5,7 @@ import Auth from '../../components/auth/Auth';
 import AuthForm from '../../components/auth/AuthForm';
 import useRegister from './hooks/useRegister';
 import useGetTags from '../home/hooks/usegetTags';
+import { getNextSeo } from '../../lib/nextSeo';
 
 export type SignUpProps = {};
 
@@ -18,9 +19,11 @@ function SignUp({}: SignUpProps) {
 
   return (
     <>
-      <NextSeo title="woong blog sign up" description="sign up page" />
+      <NextSeo
+        {...getNextSeo({ title: 'woong blog sign up', description: 'sign up page' })}
+      />
       <PageTemplate tag={getTagsData}>
-        <div className="flex flex-col justify-center h-full">
+        <section className="flex flex-col justify-center h-full">
           <Auth
             form={
               <AuthForm
@@ -42,7 +45,7 @@ function SignUp({}: SignUpProps) {
               </div>
             }
           />
-        </div>
+        </section>
       </PageTemplate>
     </>
   );
