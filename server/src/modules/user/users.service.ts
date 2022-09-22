@@ -40,6 +40,7 @@ export class UserService {
   async createUser(user: Partial<User>): Promise<User> {
     const { email, password } = user;
 
+    console.log(user);
     if (!email || !password) {
       throw new Error('이메일과 비밀번호를 입력해 주세요!');
     }

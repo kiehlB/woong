@@ -2,9 +2,10 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { meQuery, registerMutation } from '../../../lib/graphql/users';
 import useForm from '../../../lib/hooks/useForm';
+import { WhoAmIQuery } from '../../../types/apolloComponent';
 
 export default function useGetUser() {
-  const { data: getUser, loading, error } = useQuery(meQuery);
+  const { data: getUser, loading, error } = useQuery<WhoAmIQuery>(meQuery);
 
   //   const [logout, { client }] = useLogoutMutation();
 

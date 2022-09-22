@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "@nestjs/apollo": "^10.0.8",
     "@nestjs/common": "^8.4.3",
     "@nestjs/config": "^2.0.0",
@@ -40,6 +41,7 @@
     "express-rate-limit": "^6.4.0",
     "graphql": "^15.7.2",
     "helmet": "^5.1.0",
+    "joi": "^17.6.0",
     "passport": "^0.5.2",
     "passport-github2": "^0.1.12",
     "passport-jwt": "^4.0.0",

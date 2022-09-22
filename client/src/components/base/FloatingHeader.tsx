@@ -4,6 +4,7 @@ import Header from './Header';
 
 export type FloatingHeaderProps = {
   tag: any;
+  loading: boolean;
 };
 
 function FloatingHeader(props: FloatingHeaderProps) {
@@ -74,7 +75,7 @@ function FloatingHeader(props: FloatingHeaderProps) {
             }
       }
       ref={blockRef}>
-      <Header tag={props.tag} />
+      <Header tag={props.tag} loading={props.loading} />
     </div>
   );
 }

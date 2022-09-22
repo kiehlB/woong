@@ -22,9 +22,9 @@ export const AppErrorFallback = ({ error, errorInfo, resetErrorBoundary }: AEFPr
       <Alert variant="danger">
         <h2>An Error Occurred</h2>
         <p>
-          The application detected an error, and it's been reported to the application
+          {` The application detected an error, and it's been reported to the application
           development team. You can try clicking "Reload the Page" to return to the page
-          you were on previously.
+          you were on previously.`}
         </p>
         <p>
           If the error keeps occurring, please file a bug report with the following

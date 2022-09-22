@@ -35,6 +35,7 @@ type MainTag = {
 
 export type HeaderProps = {
   tag: Tags[];
+  loading: boolean;
 };
 
 export const MenuItems: MainTag[] = [
@@ -65,8 +66,8 @@ export const MenuItems: MainTag[] = [
   },
 ];
 
-function Header({ tag }: HeaderProps) {
-  const { loading, error, getUser, logoutButton } = useGetUser();
+function Header({ tag, loading }: HeaderProps) {
+  const { loading: userLoading, error, getUser, logoutButton } = useGetUser();
   const dispatch = useDispatch();
   const globalTag = useSelector((state: RootState) => (state as any)?.tag?.tag);
   const Postsearch = useSelector((state: RootState) => (state as any)?.post?.search);
@@ -154,11 +155,12 @@ function Header({ tag }: HeaderProps) {
             <nav className="absolute mt-5 bg-white  z-[99999] w-[30rem]">
               <div className="group-hover:block pt-1  hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
                 <ul className="grid grid-cols-3  px-4 pt-2 mb-2">
-                  {mergeTagData?.slice(0, 18).map(e => (
-                    <li key={e?.id}>
-                      <HeaderTopicItem size="big" {...e} handleCheck={handleCheck} />
-                    </li>
-                  ))}
+                  {!loading &&
+                    mergeTagData?.slice(0, 18).map(e => (
+                      <li key={e?.id}>
+                        <HeaderTopicItem size="big" {...e} handleCheck={handleCheck} />
+                      </li>
+                    ))}
                 </ul>
               </div>
             </nav>

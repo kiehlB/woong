@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 import { InputType, Field, Int, ObjectType, PickType } from '@nestjs/graphql';
 import { User } from '../entitiy/user.entity';
 
@@ -11,6 +11,7 @@ export class RegisterResponse {
   id: number;
 
   @Field()
+  @IsEmail()
   @IsNotEmpty()
   email: string;
 

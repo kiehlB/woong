@@ -22,7 +22,7 @@ async function bootstrap() {
   app.enableCors({
     origin: process.env.ORIGIN,
     credentials: true,
-  }); //http://localhost:3000/ http://www.nestblog.gq
+  });
 
   if (prod) {
     app.use(helmet());
@@ -39,15 +39,7 @@ async function bootstrap() {
     // new ErrorsInterceptor(),
   );
 
-  // app.useGlobalPipes(
-  //   new ValidationPipe({
-  //     whitelist: true,
-  //     transform: true,
-  //     transformOptions: {
-  //       enableImplicitConversion: true,
-  //     },
-  //   }),
-  // );
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(PORT);
   Logger.log(`Server running on http://localhost:${PORT}`, 'Bootstrap');

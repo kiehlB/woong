@@ -31,7 +31,7 @@ export const Remove_Comment = gql`
 
 export const Edit_Comment = gql`
   mutation EditComment($input: editComment!) {
-    editComment(input: $input {
+    editComment(input: $input) {
       id
       text
     }

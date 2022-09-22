@@ -9,7 +9,7 @@ interface AuthSocialButtonGroupProps {
 const AuthSocialButtonGroup = ({ currentPath }: AuthSocialButtonGroupProps) => {
   return (
     <div className="px-1">
-      <Link href="http://localhost:4000/auth/github" passHref={true}>
+      <Link href={process.env.REACT_APP_API_HOST} passHref={true}>
         <a>
           <AuthSocialButton provider="github" tabIndex={4} currentPath={currentPath} />
         </a>

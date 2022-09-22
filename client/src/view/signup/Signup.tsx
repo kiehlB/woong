@@ -22,9 +22,10 @@ function SignUp({}: SignUpProps) {
       <NextSeo
         {...getNextSeo({ title: 'woong blog sign up', description: 'sign up page' })}
       />
-      <PageTemplate tag={getTagsData}>
-        <section className="flex flex-col justify-center h-full">
+      <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
+        <main className="flex flex-col justify-center h-full">
           <Auth
+            svg="register.svg"
             form={
               <AuthForm
                 inputs={inputs}
@@ -37,15 +38,15 @@ function SignUp({}: SignUpProps) {
               />
             }
             bottom={
-              <div className="mt-6 text-[#707A8A] text-[0.875rem] font-medium font-Cabin ">
+              <h2 className="mt-6 text-[#707A8A] text-[0.875rem] font-medium font-Cabin">
                 Already registered?
                 <span className="text-[#C99400] ml-1 cursor-pointer">
                   <Link href="/signin"> Log In </Link>
                 </span>
-              </div>
+              </h2>
             }
           />
-        </section>
+        </main>
       </PageTemplate>
     </>
   );

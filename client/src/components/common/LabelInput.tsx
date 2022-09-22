@@ -1,5 +1,5 @@
-import * as React from "react";
-import { MdLockOutline } from "react-icons/md";
+import * as React from 'react';
+import { MdLockOutline } from 'react-icons/md';
 
 type InputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -10,8 +10,11 @@ export interface LabelInputProps extends InputProps {
   label: string;
   placeholder?: string;
   name?: string;
-  value?: string;
+  value?: string | number | readonly string[];
   onChange?: React.ChangeEventHandler;
+  className?: string;
+  type?: string;
+  id?: string;
 }
 
 const { useState, useCallback } = React;
@@ -22,6 +25,9 @@ const LabelInput: React.FC<LabelInputProps> = ({
   placeholder,
   onChange,
   disabled,
+  className,
+  type,
+  id,
   ...rest
 }) => {
   const [focus, setFocus] = useState(false);
@@ -34,25 +40,26 @@ const LabelInput: React.FC<LabelInputProps> = ({
   }, []);
 
   return (
-    <div>
-      <label>{label}</label>
-      <div className='group'>
-        <div className='input-wrapper'>
-          <input
-            name={name}
-            onChange={onChange}
-            value={value}
-            placeholder={placeholder}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            disabled={disabled}
-            {...rest}
-          />
-          {disabled && <MdLockOutline />}
-        </div>
+    <div className="form">
+      <input
+        type={type}
+        id={id}
+        className={className}
+        name={name}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        disabled={disabled}
+        placeholder=" "
+        value={value}
+        onChange={onChange}
+        {...rest}
+      />
 
-        <div className='width-maker'>{value || `${placeholder}`}</div>
-      </div>
+      {disabled && <MdLockOutline />}
+
+      <label htmlFor={label} className="form__label text-zinc-400 font-Roboto">
+        {label}
+      </label>
     </div>
   );
 };
