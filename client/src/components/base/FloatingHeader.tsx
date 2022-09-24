@@ -1,9 +1,11 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { getScrollTop } from '../../lib/utils';
-import Header from './Header';
+import Header, { MainTag } from './Header';
 
 export type FloatingHeaderProps = {
-  tag: any;
+  tag: {
+    getAllTags: MainTag | ConcatArray<MainTag>;
+  };
   loading: boolean;
 };
 

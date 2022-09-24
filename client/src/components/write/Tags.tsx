@@ -2,9 +2,9 @@ import React from 'react';
 import { IoIosClose } from 'react-icons/io';
 
 export type TagsProps = {
-  tags: any;
-  deleteTag: (e: string) => void;
-  index: any;
+  tags: string[];
+  deleteTag: (e: number) => void;
+  index: number;
 };
 
 function Tags(props: TagsProps) {

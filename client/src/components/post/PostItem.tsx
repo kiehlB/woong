@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
+import { Post } from '../../types/apolloComponent';
 import PostCard from './PostCard';
 
 export type PostItemProps = {
-  data: any;
+  data: {
+    findAllPost: Post[];
+  };
 };
 
 function PostItem({ data }: PostItemProps) {

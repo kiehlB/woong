@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
+import { MouseEventHandler } from 'react';
 
 export type MenuToggleProps = {
-  toggle: any;
+  toggle: MouseEventHandler<HTMLButtonElement>;
 };
 
 export type VariantsProps = {

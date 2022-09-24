@@ -128,8 +128,8 @@ function Header({ tag, loading }: HeaderProps) {
 
           <div className="mr-8">
             <Link href="/filter">
-              <div className="cursor-pointer">
-                <a className="link_a">
+              <a className="cursor-pointer">
+                <div className="link_a">
                   <svg className="icon-arrow before">
                     <use xlinkHref="#arrow" />
                   </svg>
@@ -137,7 +137,7 @@ function Header({ tag, loading }: HeaderProps) {
                   <svg className="icon-arrow after">
                     <use xlinkHref="#arrow" />
                   </svg>
-                </a>
+                </div>
                 <svg style={{ display: 'none' }}>
                   <defs>
                     <symbol id="arrow" viewBox="0 0 35 15">
@@ -146,7 +146,7 @@ function Header({ tag, loading }: HeaderProps) {
                     </symbol>
                   </defs>
                 </svg>
-              </div>
+              </a>
             </Link>
           </div>
 

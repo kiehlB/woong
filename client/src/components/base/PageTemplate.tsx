@@ -1,10 +1,12 @@
 import Footer from '../footer';
 import FloatingHeader from './FloatingHeader';
-import Header from './Header';
+import Header, { MainTag } from './Header';
 
 export type PageTemplateProps = {
   children: React.ReactNode;
-  tag?: any;
+  tag: {
+    getAllTags: MainTag | ConcatArray<MainTag>;
+  };
   loading?: boolean;
 };
 

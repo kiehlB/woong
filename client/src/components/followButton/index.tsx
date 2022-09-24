@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import card from './card.module.scss';
 import useGetUser from '../auth/hooks/useWhoAmI';
+import { ApolloError } from '@apollo/client';
 
 export type FaceProps = {
   username?: string;
   followHandleSubmit?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  error?: any;
+  error?: ApolloError;
   unFollowHandleSubmit?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  unfollowError?: any;
+  unfollowError?: string;
   BooleanIsFollowing?: boolean;
-  height?: any;
+  height?: number;
 };
 
 function Face(props: FaceProps) {
