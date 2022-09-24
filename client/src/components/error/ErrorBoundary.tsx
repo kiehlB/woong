@@ -1,8 +1,5 @@
 import React from 'react';
 
-import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
-
 import { FallbackProps } from 'react-error-boundary';
 
 interface AEFProps extends FallbackProps {
@@ -19,7 +16,7 @@ const sliceErrorStack = (stackTrace = '', numLines = 10) => {
 export const AppErrorFallback = ({ error, errorInfo, resetErrorBoundary }: AEFProps) => {
   return (
     <div>
-      <Alert variant="danger">
+      <div>
         <h2>An Error Occurred</h2>
         <p>
           {` The application detected an error, and it's been reported to the application
@@ -31,7 +28,7 @@ export const AppErrorFallback = ({ error, errorInfo, resetErrorBoundary }: AEFPr
           details, and include any steps to reproduce the issue:
         </p>
 
-        <Button onClick={resetErrorBoundary}>Reload the Page</Button>
+        <div onClick={resetErrorBoundary}>Reload the Page</div>
 
         <h3>Error Details</h3>
         <h5>Message</h5>
@@ -43,7 +40,7 @@ export const AppErrorFallback = ({ error, errorInfo, resetErrorBoundary }: AEFPr
           <h4>Component Stack</h4>
           <pre>{sliceErrorStack(errorInfo?.componentStack)}</pre>
         </details>
-      </Alert>
+      </div>
     </div>
   );
 };

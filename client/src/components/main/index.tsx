@@ -14,7 +14,6 @@ export type MainProps = {
 };
 
 function Main({ post }: MainProps) {
-  console.log(post);
   const ref = useRef(null);
   const singlePost = post ? post?.findAllPost?.slice(0, 1) : '';
 

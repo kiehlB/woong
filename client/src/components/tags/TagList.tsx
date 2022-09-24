@@ -27,7 +27,6 @@ function TagList({ tag, globalTag, toStore, variant, size, add, bg }: TagListPro
       updatedList.splice(globalTag.indexOf(event.target.value), 1);
     }
 
-    console.log(updatedList);
     dispatch(toStore(updatedList));
   };
 
