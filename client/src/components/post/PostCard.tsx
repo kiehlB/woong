@@ -4,23 +4,14 @@ import TagItem from '../tags/TagItem';
 import Link from 'next/link';
 import { DateTime } from 'luxon';
 import Dot from '../common/TagsDot';
-
-interface InputProps {
-  id: number;
-  title: string;
-  posts_tags: any;
-  created_at: any;
-  post_likes: any;
-}
+import { Post } from '../../types/apolloComponent';
 
 export type PostCardProps = {
-  article: InputProps;
+  article: Post;
 };
 
 function PostCard({ article }: PostCardProps) {
   return (
-    // <div data-aos="fade-down">
-
     <Link href={`/post/${article.id}`}>
       <div className="text-black relative w-full" aria-label={article.title}>
         <div className="absolute flex pl-6 w-full flex-wrap pt-4">

@@ -32,7 +32,7 @@ function Signin({}: SigninProps) {
             <div className="flex text-xs">
               <div className="font-medium font-Roboto">URL verification:&nbsp;</div>
               <div className="text-[#0ECB81] font-Roboto"> https:// </div>
-              <div className="text-[#1E2329] font-Roboto">woongblog.io</div>
+              <div className="text-[#1E2329] font-Roboto">woong.lol</div>
             </div>
           </div>
         </section>

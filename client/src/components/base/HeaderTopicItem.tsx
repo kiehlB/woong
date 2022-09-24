@@ -7,7 +7,7 @@ export type HeaderTopicItemProps = {
   name?: string;
   svg?: React.ReactNode;
   size?: string;
-  handleCheck?: any;
+  handleCheck?: (name: string) => void;
 };
 
 function HeaderTopicItem({ name, size, handleCheck }: HeaderTopicItemProps) {

@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
+import { Post } from '../../types/apolloComponent';
 import PostCard from './PostCard';
 
 export type PostListProps = {
-  data: any;
+  data: Post[];
 };
 
 function PostList({ data }: PostListProps) {

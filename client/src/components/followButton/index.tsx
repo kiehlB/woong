@@ -80,7 +80,7 @@ function Face(props: FaceProps) {
                 <h1 className={card.alert}>Follow me!</h1>
                 <div>Author {props.username}</div>
               </div>
-              {props.BooleanIsFollowing && !loading && getUser.me ? (
+              {props.BooleanIsFollowing && !loading && getUser?.whoAmI?.user ? (
                 <button className={card.buttonBox} onClick={props.unFollowHandleSubmit}>
                   <h1 className={card.green}>
                     <span>Unfollow</span>

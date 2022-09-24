@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { Tags } from '../base/Header';
+import { MainTag, Tags } from '../base/Header';
 import TagItem from './TagItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMainTag, tagGet } from '../../store/tag';
+import { ThunkActionDispatch } from 'redux-thunk';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
 export type TagListProps = {
-  tag: any;
-  globalTag: any;
-  toStore: any;
-  variant?: any;
-  size?: any;
-  add?: any;
-  bg?: any;
+  tag: MainTag[];
+  globalTag: string[];
+  toStore: (payload: string[]) => AnyAction;
+  variant?: string;
+  size?: string;
+  add?: boolean;
+  bg?: string;
 };
 
 function TagList({ tag, globalTag, toStore, variant, size, add, bg }: TagListProps) {

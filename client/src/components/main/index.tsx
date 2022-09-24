@@ -5,12 +5,16 @@ import { Button } from '../common/Button';
 import Dot from '../common/TagsDot';
 import { DateTime } from 'luxon';
 import Link from 'next/link';
+import { Post } from '../../types/apolloComponent';
 
 export type MainProps = {
-  post: any;
+  post: {
+    findAllPost: Post[];
+  };
 };
 
 function Main({ post }: MainProps) {
+  console.log(post);
   const ref = useRef(null);
   const singlePost = post ? post?.findAllPost?.slice(0, 1) : '';
 
@@ -53,21 +57,21 @@ function Main({ post }: MainProps) {
   // toggleService.send('TOGGLE');
 
   return (
-    <div className="grid grid-cols-2 font-Roboto">
+    <section className="grid grid-cols-2 font-Roboto">
       <div className="pt-[6rem] max-w-[35.5rem] ml-auto pr-[2rem] pl-[1rem] ">
         <h1 className="font-medium text-[#14151A]">LEARN ALL ABOUT</h1>
 
         <div className="text-[4rem] mb-[1rem] font-medium w-[80%] text-[#14151A] leading-[4.5rem]">
-          {`   Learn Web & Security`}
+          {`Learn Web & Security`}
         </div>
 
         <div className="border border-[#14151A] w-[2.5rem] h-[2px] mb-[2rem]" />
 
         <div className="mb-[1.5rem] text-[#474D57] font-normal leading-normal  font-Roboto">
-          {`is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`}
+          {`My 0 blog posts (and counting) have been read 0 times by 0 people. There you'll find blogs about JavaScript, TypeScript, React, Testing, your career, and and more.`}
         </div>
         <Button size="medium" variant="secondary" className="font-Roboto text-sm">
-          Start here
+          See more
         </Button>
       </div>
 
@@ -126,7 +130,7 @@ function Main({ post }: MainProps) {
           </div>
         </div>
       </Link>
-    </div>
+    </section>
   );
 }
 

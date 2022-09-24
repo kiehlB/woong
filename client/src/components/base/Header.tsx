@@ -26,7 +26,7 @@ export type Tags = {
   __typename: string;
 };
 
-type MainTag = {
+export type MainTag = {
   id: number;
   name: string;
   subName: string;
@@ -34,7 +34,9 @@ type MainTag = {
 };
 
 export type HeaderProps = {
-  tag: Tags[];
+  tag: {
+    getAllTags: MainTag | ConcatArray<MainTag>;
+  };
   loading: boolean;
 };
 
@@ -68,11 +70,12 @@ export const MenuItems: MainTag[] = [
 
 function Header({ tag, loading }: HeaderProps) {
   const { loading: userLoading, error, getUser, logoutButton } = useGetUser();
-  const dispatch = useDispatch();
-  const globalTag = useSelector((state: RootState) => (state as any)?.tag?.tag);
-  const Postsearch = useSelector((state: RootState) => (state as any)?.post?.search);
 
-  const mergeTag = MenuItems.concat((tag as any)?.getAllTags);
+  const dispatch = useDispatch();
+  const globalTag = useSelector((state: RootState) => state?.tag?.tag);
+  const Postsearch = useSelector((state: RootState) => state?.post?.search);
+
+  const mergeTag = MenuItems.concat(tag?.getAllTags);
 
   const handleCheck = name => {
     let updatedList = [...globalTag];
@@ -165,7 +168,7 @@ function Header({ tag, loading }: HeaderProps) {
               </div>
             </nav>
           </div>
-          <div className="ml-8  font-Cabin  font-medium cursor-pointer">Glossaries</div>
+          <div className="ml-8  font-Cabin font-medium cursor-pointer">Glossaries</div>
         </div>
       </div>
 
@@ -196,7 +199,7 @@ function Header({ tag, loading }: HeaderProps) {
         </Link>
         <Link href="/signup">
           <div
-            className="flex cursor-pointer  text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
+            className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
             style={{
               backgroundImage:
                 'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',

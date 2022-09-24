@@ -6,14 +6,14 @@ import AddTag from '../../static/svg/addtag';
 export type TagItemProps = {
   tag?: string;
   disabled?: boolean;
-  handleCheck?: any;
-  checked?: any;
-  globalTag?: any;
-  variant?;
-  children?;
-  size?;
-  add?;
-  bg?;
+  handleCheck?: ChangeEventHandler<HTMLInputElement>;
+  checked?: boolean;
+  variant?: string;
+  children?: React.ReactNode;
+  size?: string;
+  add?: boolean;
+  bg?: string;
+  globalTag?: string[];
 };
 
 function TagItem({
@@ -22,15 +22,12 @@ function TagItem({
   disabled,
   checked,
   handleCheck,
-  globalTag,
+
   children,
   size,
   add,
   bg,
 }: TagItemProps) {
-  // bg-[rgba(240,185,11,0.2)]
-  //text-[#474D57]
-
   return (
     <label>
       <div
@@ -60,12 +57,10 @@ function TagItem({
 
             'mb-2 mr-2 text-xs h-[22px] px-3 py-1 font-Roboto bg-[#F5F5F5] opacity-60 text-[#14151A] flex justify-center item-center border-none':
               size == 'superSmall',
-
-            // '!text-white': checked == true,
           },
         )}>
-        {children}
-        {tag}
+        <div> {children}</div>
+        <div> {tag}</div>
 
         {add ? (
           checked ? (
@@ -100,12 +95,6 @@ function TagItem({
       />
     </label>
   );
-
-  // <div onClick={Toogle(tag)}>
-  //   <div className="font-Roboto text-sm">{tag}</div>
-  // </div>
 }
 
 export default TagItem;
-
-//text-[#aeb4bc]

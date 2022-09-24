@@ -11,7 +11,6 @@ import Bicycle from '../../static/svg/bicycle';
 import Swing from '../../static/svg/swing';
 import { RootState } from '../../store/rootReducer';
 import useGetTags from './hooks/usegetTags';
-import { Button as NextButton } from '@nextui-org/react';
 import TagList from '../../components/tags/TagList';
 import { MenuItems } from '../../components/base/Header';
 import { getMainTag } from '../../store/tag';
@@ -30,11 +29,9 @@ const Home: NextPage = () => {
     data: getTagsData,
   } = useGetTags();
 
-  const globalTag = useSelector((state: RootState) => (state as any)?.tag?.mainTag);
+  const globalTag = useSelector((state: RootState) => state?.tag?.mainTag);
   const [Difficulty, setDifficulty] = useState([]);
-  const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
-
-  if (loading) return <div>Loading</div>;
+  const mergeTag = MenuItems.concat(getTagsData?.getAllTags);
 
   const filteredArray =
     data?.findAllPost.filter(e =>
@@ -62,38 +59,50 @@ const Home: NextPage = () => {
   return (
     <PageTemplate tag={getTagsData}>
       <Main post={data} />
-      <div className="w-[71rem] mx-auto  mxl:w-[80%]">
+      <section className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
-          <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES  " />
-          <div className="">
+          <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES" />
+          <div>
             <PostList data={data?.findAllPost.slice(0, 9)} />
           </div>
         </div>
 
         <div className="mb-7">
-          <SvgCard svg={<Swing />} />
+          <SvgCard
+            svg={<Swing />}
+            text="#black"
+            title={`learning about web & Security`}
+            subtitle={`Build your web knowledge, complete quizzes`}
+            bg="#FAFAFA"
+          />
         </div>
 
         <div className="py-14">
-          <SvgCard svg={<Bicycle />} />
+          <SvgCard
+            bg="#2b2f36"
+            text="#fff"
+            svg={<Bicycle />}
+            title={`Keep an eye on Glossaries`}
+            subtitle={`Learn more about glossaries`}
+          />
         </div>
-      </div>
+      </section>
 
-      <div className="w-[71rem] mx-auto  mxl:w-[80%]">
+      <section className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
           <PostTitle title="Trading" subtitle="SEE ALL LATEST RELEASES  " />
           <div className="">
             <PostList data={data?.findAllPost.slice(0, 3)} />
           </div>
         </div>
-      </div>
+      </section>
       <div className="bg-[#14151A]">
         <div className="w-[71rem] mx-auto  mxl:w-[80%]">
           <div className="flex pt-14">
             <div className="text-white">Topics : </div>
             <div className="text-[#aeb4bc] flex flex-1 flex-wrap items-center gap-4 px-4">
               <TagList
-                tag={mergeTag}
+                tag={mergeTag.splice(0, 35)}
                 globalTag={globalTag}
                 toStore={getMainTag}
                 size="small"
@@ -264,14 +273,14 @@ const Home: NextPage = () => {
       </div>
 
       <div
-        className="grid grid-cols-2 m-auto max-w-[59rem] w-full"
+        className="grid grid-cols-2 m-auto max-w-[71rem] w-full py-[3.5rem] gap-[1rem]"
         style={{
           gridTemplateColumns: 'minmax(auto,568px) 1fr',
         }}>
-        <div className="col-span-1">
+        <div className="col-span-1 py-[1.5rem]">
           <img src="/task.svg" className="w-full" />
         </div>
-        <div className="col-span-1 h-full content-center">
+        <div className="col-span-1 h-full content-center ">
           <div className="grid justify-center  content-center h-full">
             <div className="text-[2.5rem] text-[#14151A] font-semibold mb-2">
               No idea what you just scrolled through?
@@ -383,102 +392,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-{
-  /* <div>
-<div className="bats">
-  <div className="bat">
-    <div className="bat__head">
-      <div className="bat__eye" />
-      <div className="bat__eye" />
-    </div>
-    <div className="bat__wing" />
-    <div className="bat__wing" />
-  </div>
-  <div className="bat">
-    <div className="bat__head">
-      <div className="bat__eye" />
-      <div className="bat__eye" />
-    </div>
-    <div className="bat__wing" />
-    <div className="bat__wing" />
-  </div>
-  <div className="bat">
-    <div className="bat__head">
-      <div className="bat__eye" />
-      <div className="bat__eye" />
-    </div>
-    <div className="bat__wing" />
-    <div className="bat__wing" />
-  </div>
-  <div className="bat">
-    <div className="bat__head">
-      <div className="bat__eye" />
-      <div className="bat__eye" />
-    </div>
-    <div className="bat__wing" />
-    <div className="bat__wing" />
-  </div>
-  <div className="bat">
-    <div className="bat__head">
-      <div className="bat__eye" />
-      <div className="bat__eye" />
-    </div>
-    <div className="bat__wing" />
-    <div className="bat__wing" />
-  </div>
-  <div className="bat">
-    <div className="bat__head">
-      <div className="bat__eye" />
-      <div className="bat__eye" />
-    </div>
-    <div className="bat__wing" />
-    <div className="bat__wing" />
-  </div>
-  <div className="bat">
-    <div className="bat__head">
-      <div className="bat__eye" />
-      <div className="bat__eye" />
-    </div>
-    <div className="bat__wing" />
-    <div className="bat__wing" />
-  </div>
-  <div className="bat">
-    <div className="bat__head">
-      <div className="bat__eye" />
-      <div className="bat__eye" />
-    </div>
-    <div className="bat__wing" />
-    <div className="bat__wing" />
-  </div>
-</div>
-</div> */
-}
-
-{
-  /* <ListTrail
-              css="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2 "
-              length={a.length}
-              options={{
-                opacity: 1,
-                x: 0,
-                from: { opacity: 0, x: -20 },
-              }}
-              renderItem={index => {
-                const article = a[index];
-                return (
-                  <Link
-                    href={`/article/[id]`}
-                    as={`/article/${article.id}`}
-                    scroll={false}>
-                    <Section>
-                      <div className="border-2 rounded-2xl">
-                        <img src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/76b56862bbb4490d84dc71f32f909174.png" />
-                        {article.title}
-                      </div>
-                    </Section>
-                  </Link>
-                );
-              }}
-            /> */
-}
