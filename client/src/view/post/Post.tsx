@@ -31,6 +31,7 @@ import { toast, ToastContainer } from 'react-nextjs-toast';
 import { useRouter } from 'next/router';
 import useDeleteComment from '../../components/comment/hooks/useDeleteComment';
 import useEditComment from '../../components/comment/hooks/useEditComment';
+import useGetTags from '../home/hooks/usegetTags';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -123,6 +124,12 @@ function Post({}: PostProps) {
 
   const { getUser: userData, loading: userLoding } = useGetUser();
 
+  const {
+    loading: getTagsLoading,
+    error: getTagsError,
+    data: getTagsData,
+  } = useGetTags();
+
   const { scrollYProgress } = useViewportScroll();
   const yRange = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
   const pathLength = useSpring(yRange, { stiffness: 400, damping: 90 });
@@ -175,7 +182,7 @@ function Post({}: PostProps) {
 
   console.log(getComments);
   return (
-    <PageTemplate>
+    <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
       <div className="flex">
         <div className="flex justify-center w-[30%]">
           <div className="w-full">

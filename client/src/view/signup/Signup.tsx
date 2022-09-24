@@ -22,7 +22,7 @@ function SignUp({}: SignUpProps) {
       <NextSeo
         {...getNextSeo({ title: 'woong blog sign up', description: 'sign up page' })}
       />
-      <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
+      <PageTemplate tag={getTagsData} loading={getTagsLoading}>
         <main className="flex flex-col justify-center h-full">
           <Auth
             svg="register.svg"
