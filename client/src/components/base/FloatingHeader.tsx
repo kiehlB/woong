@@ -64,7 +64,7 @@ function FloatingHeader(props: FloatingHeaderProps) {
 
   return (
     <div
-      className="fixed top-0 w-full z-10 shadow"
+      className="fixed top-0 w-full z-[999] shadow"
       style={
         visible
           ? {

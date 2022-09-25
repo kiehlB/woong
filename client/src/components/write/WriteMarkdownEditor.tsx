@@ -1,18 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react';
-
 import SunEditorCore from 'suneditor/src/lib/core';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import dynamic from 'next/dynamic';
 import suneditor from 'suneditor';
 import useEditor from './hooks/useCreatePost';
-import Tags from './Tags';
-import TagsForm from './TagForm';
 import Link from 'next/link';
 import useInput from '../../lib/hooks/useInput';
 import { Spinner } from 'evergreen-ui';
 import { Pane, Badge, Text } from 'evergreen-ui';
 import AnimatedMulti from '../common/ReactSelectInput';
 import { Button, LinkButton } from '../common/Button';
+import TagsForm from '../tags/TagForm';
+import Tags from '../tags/Tags';
 
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,

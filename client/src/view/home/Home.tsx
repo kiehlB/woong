@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { useSelector } from 'react-redux';
 import PageTemplate from '../../components/base/PageTemplate';
-import { Button } from '../../components/common/Button';
 import SvgCard from '../../components/common/SvgCard';
 import Dot from '../../components/common/TagsDot';
 import Main from '../../components/main';
@@ -34,7 +33,6 @@ const Home: NextPage = () => {
   const [Difficulty, setDifficulty] = useState([]);
   const mergeTag = MenuItems.concat(getTagsData?.getAllTags);
 
-  console.log(globalTag);
   const filteredArray =
     data?.findAllPost.filter(e =>
       e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
@@ -44,9 +42,9 @@ const Home: NextPage = () => {
           e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
         );
 
+  console.log(filteredArray);
   const isFilterdArray = filteredArray ? filteredArray : [];
 
-  console.log(filteredArray);
   const handleCheck = event => {
     let updatedList = [...Difficulty];
 
@@ -157,125 +155,151 @@ const Home: NextPage = () => {
 
           <div className="grid grid-cols-4 gap-6">
             <div className="col-span-3">
-              <div
-                className="grid bg-[#2b2f36] rounded-lg "
-                style={{
-                  gridTemplateColumns: 'minmax(auto,368px) 1fr',
-                }}>
-                <img
-                  src={isFilterdArray[0]?.thumbnail}
-                  className="max-h-[20rem] min-h-[20rem] w-full object-cover"
-                />
-                <div className="flex text-white bg-[#2b2f36] flex-col  justify-center px-4 rounded-lg">
-                  <div className="text-[2rem] leading-10 font-semibold">
-                    {isFilterdArray[0]?.title}
+              {isFilterdArray[0] ? (
+                <>
+                  <div
+                    className="grid bg-[#2b2f36] rounded-lg"
+                    style={{
+                      gridTemplateColumns: 'minmax(auto,368px) 1fr',
+                    }}>
+                    <img
+                      src={isFilterdArray[0]?.thumbnail}
+                      className="max-h-[20rem] min-h-[20rem] w-full object-cover"
+                    />
+                    <div className="flex text-white bg-[#2b2f36] flex-col  justify-center px-4 rounded-lg">
+                      <div className="text-[2rem] leading-10 font-semibold">
+                        {isFilterdArray[0]?.title}
+                      </div>
+                      <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
+                        {DateTime.fromISO(isFilterdArray[0]?.created_at)
+                          .toLocaleString()
+                          .slice(0, -1)}
+                      </div>
+                      <div className="flex items-center">
+                        <Dot css="bg-[#F0B90B]" /> Intermediate
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
-                    {DateTime.fromISO(isFilterdArray[0]?.created_at)
+                </>
+              ) : (
+                ''
+              )}
+            </div>
+            {isFilterdArray[1] ? (
+              <div className="col-span-1 rounded-lg bg-[#2b2f36] relative  h-[20rem]">
+                <img
+                  src={isFilterdArray[1]?.thumbnail}
+                  className="max-h-[20rem]  w-full object-cover"
+                />
+                <div className="text-[#fff] px-4">{isFilterdArray[1]?.title}</div>
+                <div className="absolute bottom-0 p-4">
+                  <div className="text-[#fff]">
+                    {DateTime.fromISO(isFilterdArray[1]?.created_at)
                       .toLocaleString()
                       .slice(0, -1)}
                   </div>
-                  <div className="flex items-center">
-                    <Dot css="bg-[#F0B90B]" /> Intermediate
+                  <div className="text-[#fff] flex items-center text-sm">
+                    <Dot css="bg-[#f0b90b]" />
+                    <div> Intermediate</div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-span-1 rounded-lg bg-[#2b2f36] relative">
-              <img
-                src={isFilterdArray[1]?.thumbnail}
-                className="max-h-[20rem]  w-full object-cover"
-              />
-              <div className="text-[#fff] px-4">{isFilterdArray[1]?.title}</div>
-              <div className="absolute bottom-0 p-4">
-                <div className="text-[#fff]">
-                  {DateTime.fromISO(isFilterdArray[1]?.created_at)
-                    .toLocaleString()
-                    .slice(0, -1)}
-                </div>
-                <div className="text-[#fff] flex items-center text-sm">
-                  <Dot css="bg-[#f0b90b]" />
-                  <div> Intermediate</div>
-                </div>
-              </div>
-            </div>
+            ) : (
+              ''
+            )}
 
-            <div className="col-span-1 bg-[#2b2f36] relative">
-              <img
-                src={isFilterdArray[2]?.thumbnail}
-                className="max-h-[20rem] w-full object-cover"
-              />
-              <div className="text-[#fff] px-4">{isFilterdArray[2]?.title}</div>
-              <div className="absolute bottom-0 p-4">
-                <div className="text-[#fff]">
-                  {DateTime.fromISO(isFilterdArray[2]?.created_at)
-                    .toLocaleString()
-                    .slice(0, -1)}
-                </div>
-                <div className="text-[#fff] flex items-center text-sm">
-                  <Dot css="bg-[#f0b90b]" />
-                  <div> Intermediate</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-span-3">
-              <div
-                className="grid bg-[#2b2f36] rounded-lg"
-                style={{
-                  gridTemplateColumns: 'minmax(auto,468px) 1fr',
-                }}>
-                <div className="flex text-white bg-[#2b2f36] flex-col justify-center items-end px-4 rounded-lg">
-                  <div className="text-[2rem] leading-10 font-semibold">
-                    {isFilterdArray[0]?.title}
-                  </div>
-                  <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
-                    Jul 7, 2022 5m
-                  </div>
-                  <div className="flex items-center">
-                    <Dot css="bg-[#F0B90B]" /> Intermediate
-                  </div>
-                </div>
+            {isFilterdArray[2] ? (
+              <div className="col-span-1 bg-[#2b2f36] relative  h-[20rem] ">
                 <img
-                  src={isFilterdArray[3]?.thumbnail}
-                  className="max-h-[20rem] w-full object-cover min-h-[20rem]"
+                  src={isFilterdArray[2]?.thumbnail}
+                  className="max-h-[20rem] w-full object-cover"
                 />
-              </div>
-            </div>
-            <div className="col-span-2">
-              <div className="grid bg-[#2b2f36] rounded-lg">
-                <div
-                  className="grid"
-                  style={{
-                    gridTemplateColumns: 'minmax(auto,176px) 1fr',
-                  }}>
-                  <img
-                    src={isFilterdArray[4]?.thumbnail}
-                    className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem]"
-                  />
-                  <div className="text-white flex items-center px-4">
-                    What Is Inflation?
+                <div className="text-[#fff] px-4">{isFilterdArray[2]?.title}</div>
+                <div className="absolute bottom-0 p-4">
+                  <div className="text-[#fff]">
+                    {DateTime.fromISO(isFilterdArray[2]?.created_at)
+                      .toLocaleString()
+                      .slice(0, -1)}
+                  </div>
+                  <div className="text-[#fff] flex items-center text-sm">
+                    <Dot css="bg-[#f0b90b]" />
+                    <div> Intermediate</div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-span-2">
-              <div className="grid bg-[#2b2f36] rounded-lg">
+            ) : (
+              ''
+            )}
+
+            {isFilterdArray[3] ? (
+              <div className="col-span-3">
                 <div
-                  className="grid"
+                  className="grid bg-[#2b2f36] rounded-lg"
                   style={{
-                    gridTemplateColumns: 'minmax(auto,176px) 1fr',
+                    gridTemplateColumns: 'minmax(auto,468px) 1fr',
                   }}>
+                  <div className="flex text-white bg-[#2b2f36] flex-col justify-center items-end px-4 rounded-lg">
+                    <div className="text-[2rem] leading-10 font-semibold">
+                      {isFilterdArray[0]?.title}
+                    </div>
+                    <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
+                      Jul 7, 2022 5m
+                    </div>
+                    <div className="flex items-center">
+                      <Dot css="bg-[#F0B90B]" /> Intermediate
+                    </div>
+                  </div>
                   <img
-                    src={isFilterdArray[5]?.thumbnail}
-                    className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem]"
+                    src={isFilterdArray[3]?.thumbnail}
+                    className="max-h-[20rem] w-full object-cover min-h-[20rem]"
                   />
-                  <div className="text-white flex items-center px-4">
-                    What Is Inflation?
+                </div>
+              </div>
+            ) : (
+              ''
+            )}
+            {isFilterdArray[4] ? (
+              <div className="col-span-2">
+                <div className="grid bg-[#2b2f36] rounded-lg">
+                  <div
+                    className="grid"
+                    style={{
+                      gridTemplateColumns: 'minmax(auto,176px) 1fr',
+                    }}>
+                    <img
+                      src={isFilterdArray[4]?.thumbnail}
+                      className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem]"
+                    />
+                    <div className="text-white flex items-center px-4">
+                      What Is Inflation?
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              ''
+            )}
+            {isFilterdArray[5] ? (
+              <div className="col-span-2">
+                <div className="grid bg-[#2b2f36] rounded-lg">
+                  <div
+                    className="grid"
+                    style={{
+                      gridTemplateColumns: 'minmax(auto,176px) 1fr',
+                    }}>
+                    <img
+                      src={isFilterdArray[5]?.thumbnail}
+                      className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem]"
+                    />
+                    <div className="text-white flex items-center px-4">
+                      What Is Inflation?
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
           <div className="flex w-[71rem] mx-auto  mxl:w-[80%]  justify-center px-4 py-12 items-center">
             <div className="text-white mr-2">See more content about this topic</div>

@@ -13,7 +13,7 @@ export type PageTemplateProps = {
 function PageTemplate({ children, tag, loading }: PageTemplateProps) {
   return (
     <div className="flex felx-col min-h-screen">
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 ">
         <Header tag={tag} loading={loading} />
         <FloatingHeader tag={tag} loading={loading} />
         {children}
