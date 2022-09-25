@@ -17,6 +17,7 @@ import { tagGet } from '../../store/tag';
 import clsx from 'clsx';
 import { useCallback, useState } from 'react';
 import { setPostSearch } from '../../store/post';
+import { useRouter } from 'next/router';
 
 export type Tags = {
   id: number;
@@ -70,7 +71,7 @@ export const MenuItems: MainTag[] = [
 
 function Header({ tag, loading }: HeaderProps) {
   const { loading: userLoading, error, getUser, logoutButton } = useGetUser();
-
+  const router = useRouter();
   const dispatch = useDispatch();
   const globalTag = useSelector((state: RootState) => state?.tag?.tag);
   const Postsearch = useSelector((state: RootState) => state?.post?.search);
@@ -100,6 +101,14 @@ function Header({ tag, loading }: HeaderProps) {
   const mergeTagData = mergeTag.filter(function (element) {
     return element !== undefined;
   });
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    if (Postsearch !== '') {
+      router.push('/filter');
+    }
+  };
 
   return (
     <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between py-1">
@@ -173,18 +182,19 @@ function Header({ tag, loading }: HeaderProps) {
       </div>
 
       <div className="flex flex-end items-center">
-        <div className="search">
+        <form className="search" onSubmit={handleSubmit}>
           <input
             type="text"
             className="input"
             value={Postsearch}
             onChange={handleChange}
           />
+
           <div className="close">
             <span className="front" />
             <span className="back" />
           </div>
-        </div>
+        </form>
 
         <Link href="/signin">
           <div

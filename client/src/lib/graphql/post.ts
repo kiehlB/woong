@@ -17,7 +17,7 @@ export const GET_Posts = gql`
       title
       created_at
       difficulty
-
+      thumbnail
       post_likes {
         id
         post_id
@@ -43,6 +43,32 @@ export const GET_Post = gql`
       title
       difficulty
 
+      post_likes {
+        id
+        post_id
+        user_id
+      }
+
+      posts_tags {
+        tag {
+          id
+          name
+          name_filtered
+        }
+      }
+    }
+  }
+`;
+
+export const SEARCH_Posts = gql`
+  query GetTextSearchPosts($input: searchPost!) {
+    getTextSearchPosts {
+      id
+      body
+      title
+      created_at
+      difficulty
+      thumbnail
       post_likes {
         id
         post_id

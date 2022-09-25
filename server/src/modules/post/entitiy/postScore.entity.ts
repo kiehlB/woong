@@ -41,11 +41,13 @@ export class PostScore {
   })
   score!: number;
 
+  @Field(() => User, { nullable: true })
   @ManyToOne((type) => User)
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
-  @ManyToOne((type) => Post)
+  @Field(() => Post, { nullable: true })
+  @ManyToOne((type) => Post, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'post_id' })
   post!: Post;
 

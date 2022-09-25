@@ -14,7 +14,6 @@ function HeaderTopicItem({ name, size, handleCheck }: HeaderTopicItemProps) {
   return (
     <Link href="/filter">
       <a>
-        {' '}
         <div className="mr-2 mt-2 cursor-pointer">
           <div
             onClick={() => handleCheck(name)}

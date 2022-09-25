@@ -23,7 +23,7 @@ const WriteMarkdownEditor = props => {
   const [title, onChangeTitle] = useInput('');
   const [tag, setTag] = useState([]);
   const { createPost } = useEditor();
-  const [fileInputState, setFileInputState] = useState('');
+  const [fileInputState, setFileInputState] = useState<any>();
   const [readyForFile, setreadyForFile] = useState(0);
   const [previewSource, setPreviewSource] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
@@ -47,9 +47,9 @@ const WriteMarkdownEditor = props => {
         input: {
           title: title,
           body: edtiorRef?.current?.getContents(false),
-          thumbnail: 'asdsad',
+          thumbnail: fileInputState,
           tags: tag,
-          difficulty: selectedOption.value,
+          difficulty: selectedOption?.value,
         },
       },
     });
@@ -70,12 +70,15 @@ const WriteMarkdownEditor = props => {
 
   const handleFileInputChange = e => {
     const file = e.target.files[0];
+
     setreadyForFile(1);
     previewFile(file);
-    setFileInputState(e.target.value);
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = async () => {
+      setFileInputState(reader?.result as any);
+
       setreadyForFile(2);
     };
   };
@@ -141,9 +144,8 @@ const WriteMarkdownEditor = props => {
               <input
                 id="input-file"
                 type="file"
-                name="image"
+                name="file"
                 onChange={handleFileInputChange}
-                value={fileInputState}
                 style={{ display: 'none' }}
               />
               <div style={{ marginLeft: '.5rem' }}>{WaitingFotImg(readyForFile)}</div>

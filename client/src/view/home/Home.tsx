@@ -19,6 +19,7 @@ import PostTitle from '../../components/post/PostTitle';
 import { Grid, Input } from '@nextui-org/react';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import { useState } from 'react';
+import { DateTime } from 'luxon';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -33,6 +34,7 @@ const Home: NextPage = () => {
   const [Difficulty, setDifficulty] = useState([]);
   const mergeTag = MenuItems.concat(getTagsData?.getAllTags);
 
+  console.log(globalTag);
   const filteredArray =
     data?.findAllPost.filter(e =>
       e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
@@ -44,6 +46,7 @@ const Home: NextPage = () => {
 
   const isFilterdArray = filteredArray ? filteredArray : [];
 
+  console.log(filteredArray);
   const handleCheck = event => {
     let updatedList = [...Difficulty];
 
@@ -151,6 +154,7 @@ const Home: NextPage = () => {
               </TagItem>
             </div>
           </div>
+
           <div className="grid grid-cols-4 gap-6">
             <div className="col-span-3">
               <div
@@ -158,13 +162,18 @@ const Home: NextPage = () => {
                 style={{
                   gridTemplateColumns: 'minmax(auto,368px) 1fr',
                 }}>
-                <img className="gridImg " />
+                <img
+                  src={isFilterdArray[0]?.thumbnail}
+                  className="max-h-[20rem] min-h-[20rem] w-full object-cover"
+                />
                 <div className="flex text-white bg-[#2b2f36] flex-col  justify-center px-4 rounded-lg">
                   <div className="text-[2rem] leading-10 font-semibold">
                     {isFilterdArray[0]?.title}
                   </div>
                   <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
-                    Jul 7, 2022 5m
+                    {DateTime.fromISO(isFilterdArray[0]?.created_at)
+                      .toLocaleString()
+                      .slice(0, -1)}
                   </div>
                   <div className="flex items-center">
                     <Dot css="bg-[#F0B90B]" /> Intermediate
@@ -174,12 +183,16 @@ const Home: NextPage = () => {
             </div>
             <div className="col-span-1 rounded-lg bg-[#2b2f36] relative">
               <img
-                src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png"
-                className="rounded-lg mb-4"
+                src={isFilterdArray[1]?.thumbnail}
+                className="max-h-[20rem]  w-full object-cover"
               />
-              <div className="text-[#fff] px-4">What Is Lisk (LSK)?</div>
+              <div className="text-[#fff] px-4">{isFilterdArray[1]?.title}</div>
               <div className="absolute bottom-0 p-4">
-                <div className="text-[#fff]">Aug 11, 2022</div>
+                <div className="text-[#fff]">
+                  {DateTime.fromISO(isFilterdArray[1]?.created_at)
+                    .toLocaleString()
+                    .slice(0, -1)}
+                </div>
                 <div className="text-[#fff] flex items-center text-sm">
                   <Dot css="bg-[#f0b90b]" />
                   <div> Intermediate</div>
@@ -189,12 +202,16 @@ const Home: NextPage = () => {
 
             <div className="col-span-1 bg-[#2b2f36] relative">
               <img
-                src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png"
-                className="rounded-lg mb-4"
+                src={isFilterdArray[2]?.thumbnail}
+                className="max-h-[20rem] w-full object-cover"
               />
-              <div className="text-[#fff] px-4">What Is Lisk (LSK)?</div>
+              <div className="text-[#fff] px-4">{isFilterdArray[2]?.title}</div>
               <div className="absolute bottom-0 p-4">
-                <div className="text-[#fff]">Aug 11, 2022</div>
+                <div className="text-[#fff]">
+                  {DateTime.fromISO(isFilterdArray[2]?.created_at)
+                    .toLocaleString()
+                    .slice(0, -1)}
+                </div>
                 <div className="text-[#fff] flex items-center text-sm">
                   <Dot css="bg-[#f0b90b]" />
                   <div> Intermediate</div>
@@ -219,7 +236,10 @@ const Home: NextPage = () => {
                     <Dot css="bg-[#F0B90B]" /> Intermediate
                   </div>
                 </div>
-                <img className="gridImg" />
+                <img
+                  src={isFilterdArray[3]?.thumbnail}
+                  className="max-h-[20rem] w-full object-cover min-h-[20rem]"
+                />
               </div>
             </div>
             <div className="col-span-2">
@@ -230,8 +250,8 @@ const Home: NextPage = () => {
                     gridTemplateColumns: 'minmax(auto,176px) 1fr',
                   }}>
                   <img
-                    src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png"
-                    className="rounded-lg"
+                    src={isFilterdArray[4]?.thumbnail}
+                    className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem]"
                   />
                   <div className="text-white flex items-center px-4">
                     What Is Inflation?
@@ -247,8 +267,8 @@ const Home: NextPage = () => {
                     gridTemplateColumns: 'minmax(auto,176px) 1fr',
                   }}>
                   <img
-                    src="https://public.bnbstatic.com/static/academy/uploads-thumbnails/53d32e7fc0944c3e899d0315866d67b6.png"
-                    className="rounded-lg"
+                    src={isFilterdArray[5]?.thumbnail}
+                    className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem]"
                   />
                   <div className="text-white flex items-center px-4">
                     What Is Inflation?

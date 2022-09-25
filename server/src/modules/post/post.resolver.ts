@@ -20,6 +20,7 @@ import { getSinglePostRequest } from './dto/getPost.dto';
 import { PostLike } from '../postLike/postLike.entity';
 import { EditPostRequest } from './dto/editPost.dto';
 import { RemovePostRequest } from './dto/removePost.dto';
+import { SearchPostRequest } from './dto/searchPost.dto';
 
 @Resolver((of) => Post)
 export class PostResolver {
@@ -38,6 +39,11 @@ export class PostResolver {
   @Query(() => [Post])
   getTrendingPosts(): Promise<Post[]> {
     return this.postService.getTrendingPosts();
+  }
+
+  @Query(() => [Post])
+  getTextSearchPosts(@Args('input') post: SearchPostRequest): Promise<Post[]> {
+    return this.postService.getTextSearchPosts(post);
   }
 
   @UseGuards(JwtAuthGuard)

@@ -99,6 +99,7 @@ type Query {
   getAllTags: [Tag!]!
   getAllTagsCount: [Tag!]!
   getAllUser: GetUsersInfoResponse
+  getTextSearchPosts(input: searchPost!): [Post!]!
   getTrendingPosts: [Post!]!
   getUser(input: getUserInfo!): GetUserInfoResponse!
   whoAmI: GetUserInfoResponse!
@@ -203,4 +204,8 @@ input registerInput {
 input removePost {
   post_id: Int
   user_id: Int
+}
+
+input searchPost {
+  text: String
 }

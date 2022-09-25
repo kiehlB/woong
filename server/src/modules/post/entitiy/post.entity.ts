@@ -23,7 +23,7 @@ export class Post {
   id: number;
 
   @Field((type) => String, { nullable: true })
-  @Column({ length: 255, nullable: true, type: 'varchar' })
+  @Column({ nullable: true, type: 'varchar' })
   thumbnail!: string | null;
 
   @Field((type) => String, { nullable: true })

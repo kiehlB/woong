@@ -29,7 +29,7 @@ export class PostLike {
   @Column()
   post_id!: number;
 
-  @ManyToOne((type) => Post, { cascade: true, eager: true })
+  @ManyToOne((type) => Post, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'post_id' })
   post!: Post;
 

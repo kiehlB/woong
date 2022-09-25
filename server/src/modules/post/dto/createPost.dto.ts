@@ -22,8 +22,7 @@ export class CreatePostRequest {
   thumbnail?: string;
 
   @Field((type) => [String], { nullable: true })
-  @IsString()
-  tags?: string;
+  tags?: string[];
 
   @Field((type) => String, { nullable: true })
   @IsString()

@@ -10,6 +10,7 @@ import { Tag } from '../tag/entity/tag.entity';
 import { CreatePostRequest } from './dto/createPost.dto';
 import { Post } from './entitiy/post.entity';
 import { normalize } from '../../common/utils/normalize';
+import { SearchPostRequest } from './dto/searchPost.dto';
 
 @Injectable()
 export class PostService {
@@ -69,6 +70,19 @@ export class PostService {
     return posts;
   }
 
+  async getTextSearchPosts(title: SearchPostRequest) {
+    const text = title.text;
+    const postsRepo = await this.PostRepository;
+    const posts = await postsRepo.find();
+
+    const rows = await this.PostRepository.createQueryBuilder('post')
+      .select()
+      .where('post.title ILIKE :text', { text: `%${text}%` })
+      .getMany();
+
+    return rows;
+  }
+
   async createPost(user, post) {
     if (!user.id) {
       throw new AuthenticationError('Not Logged In');
@@ -82,6 +96,7 @@ export class PostService {
       body: post.body,
       difficulty: post.difficulty,
       title: post.title,
+      thumbnail: post.thumbnail,
     });
 
     const tags = await Promise.all(

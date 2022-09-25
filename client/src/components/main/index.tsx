@@ -15,7 +15,9 @@ export type MainProps = {
 
 function Main({ post }: MainProps) {
   const ref = useRef(null);
-  const singlePost = post ? post?.findAllPost?.slice(0, 1) : '';
+  const singlePost = post ? post?.findAllPost?.slice(-1)[0] : '';
+
+  console.log(singlePost);
 
   const [xys, set] = useState([0, 0, 1]);
 
@@ -74,7 +76,7 @@ function Main({ post }: MainProps) {
         </Button>
       </div>
 
-      <Link href={singlePost ? `/post/${singlePost[0].id}` : ''}>
+      <Link href={singlePost ? `/post/${singlePost.id}` : ''}>
         <div className="bg-[#F5F5F5]">
           <div
             className="h-full pt-[3rem] pr-[1rem] pb-[3rem] pl-[2rem] max-w-[35.5rem] cursor-pointer"
@@ -90,17 +92,27 @@ function Main({ post }: MainProps) {
                 FEATURED
               </div>
               <div className="grid  grid-cols-1">
-                <img src="/img/image.png" className="w-full h-auto rounded" />
+                {(singlePost as any)?.thumbnail ? (
+                  <img
+                    src={(singlePost as any)?.thumbnail}
+                    className="w-full h-auto rounded max-h-[18.25rem] min-h-[18.25rem]"
+                  />
+                ) : (
+                  <img
+                    src="task.svg"
+                    className="w-full h-auto rounded max-h-[18.25rem] min-h-[18.25rem]"
+                  />
+                )}
               </div>
               {singlePost ? (
                 <>
                   <div className="pt-4 text-[#14151A] leading-7 text-xl  font-medium  ">
-                    {singlePost[0]?.title}
+                    {singlePost?.title}
                   </div>
 
                   <div className="flex items-center">
                     <div className="text-[#76808F] leading-snug font-normal py-4">
-                      {DateTime.fromISO(singlePost[0].created_at)
+                      {DateTime.fromISO(singlePost.created_at)
                         .toLocaleString()
                         .slice(0, -1)}
                     </div>
@@ -111,7 +123,7 @@ function Main({ post }: MainProps) {
                           fill="currentColor"
                           d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
                       </svg>
-                      <div className="ml-1">{singlePost[0]?.post_likes.length}</div>
+                      <div className="ml-1">{singlePost?.post_likes.length}</div>
                     </div>
                   </div>
 
@@ -119,7 +131,7 @@ function Main({ post }: MainProps) {
                     size="small"
                     className="bg-[#02c07633] h-9 flex justify-center items-center  rounded-lg text-[#474D57]">
                     <Dot css="bg-[#02C076]" />
-                    {singlePost[0].difficulty}
+                    {singlePost.difficulty}
                   </Button>
                 </>
               ) : (

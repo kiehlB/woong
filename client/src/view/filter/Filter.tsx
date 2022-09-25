@@ -30,8 +30,6 @@ function Filter({}: FilterProps) {
 
   const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
 
-  if (getTagsLoading) return <div>Loading</div>;
-
   const filteredArray =
     data?.findAllPost.filter(e =>
       e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
