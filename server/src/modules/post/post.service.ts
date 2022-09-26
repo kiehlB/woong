@@ -50,24 +50,22 @@ export class PostService {
 
   async getTrendingPosts() {
     const postsRepo = await this.PostRepository;
-    const posts = await postsRepo.find();
 
-    const rows = (await this.entityManager.getRepository(Post).query(
+    const rows = await this.entityManager.getRepository(Post).query(
       `
-    select post.id, post.title, SUM(score) as score  from post_score
+    select post.id, post.title, post.created_at, post.difficulty, SUM(score) as score  from post_score 
     inner join post on post_score.post_id = post.id
-    where post_score.created_at > now()
+    where post_score.created_at < now()
     group by post.id
     order by score desc, post.id desc
     offset $1
     limit $2
   `,
-      [1, 10],
-    )) as { id: string; score: number }[];
+      [0, 3],
+    );
 
     console.log(rows);
-
-    return posts;
+    return rows;
   }
 
   async getTextSearchPosts(title: SearchPostRequest) {

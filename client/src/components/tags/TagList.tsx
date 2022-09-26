@@ -6,7 +6,7 @@ import { ThunkActionDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
 export type TagListProps = {
-  tag: MainTag[];
+  tag: any;
   globalTag: string[];
   toStore: (payload: string[]) => AnyAction;
   variant?: string;
@@ -30,7 +30,7 @@ function TagList({ tag, globalTag, toStore, variant, size, add, bg }: TagListPro
     dispatch(toStore(updatedList));
   };
 
-  const data = tag.filter(function (element) {
+  const data = tag?.filter(function (element) {
     return element !== undefined;
   });
 

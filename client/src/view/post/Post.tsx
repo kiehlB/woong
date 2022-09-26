@@ -10,7 +10,6 @@ import {
   useViewportScroll,
 } from 'framer-motion';
 import PageTemplate from '../../components/base/PageTemplate';
-import useGetPosts from '../../components/main/hooks/usegetPosts';
 import useGetPost from './hooks/useGerPost';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import ReactCanvasConfetti from 'react-canvas-confetti';
@@ -31,7 +30,7 @@ import { toast, ToastContainer } from 'react-nextjs-toast';
 import { useRouter } from 'next/router';
 import useDeleteComment from '../../components/comment/hooks/useDeleteComment';
 import useEditComment from '../../components/comment/hooks/useEditComment';
-import useGetTags from '../home/hooks/usegetTags';
+import useGetTags from '../../components/tags/hooks/usegetTags';
 
 const canvasStyles = {
   pointerEvents: 'none',

@@ -85,3 +85,29 @@ export const SEARCH_Posts = gql`
     }
   }
 `;
+
+export const Trend_Posts = gql`
+  query GetTrendingPosts {
+    getTrendingPosts {
+      id
+      body
+      title
+      created_at
+      difficulty
+      thumbnail
+      post_likes {
+        id
+        post_id
+        user_id
+      }
+
+      posts_tags {
+        tag {
+          id
+          name
+          name_filtered
+        }
+      }
+    }
+  }
+`;

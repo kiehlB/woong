@@ -5,15 +5,15 @@ import { Button } from '../../components/common/Button';
 import TagList from '../../components/tags/TagList';
 import { RootState } from '../../store/rootReducer';
 import { tagGet } from '../../store/tag';
-import useGetTags from '../home/hooks/usegetTags';
 import { Collapse, Text } from '@nextui-org/react';
 import PostList from '../../components/post/PostList';
-import useGetPosts from '../../components/main/hooks/usegetPosts';
 import PostTitle from '../../components/post/PostTitle';
 import { Pagination } from '@nextui-org/react';
 import TagItem from '../../components/tags/TagItem';
 import Dot from '../../components/common/TagsDot';
 import { useState } from 'react';
+import useGetPosts from '../../components/post/hooks/usegetPosts';
+import useGetTags from '../../components/tags/hooks/usegetTags';
 
 export type FilterProps = {};
 

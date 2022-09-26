@@ -15,7 +15,7 @@ function PostCard({ article }: PostCardProps) {
     <Link href={`/post/${article.id}`}>
       <div className="text-black relative w-full" aria-label={article.title}>
         <div className="absolute flex pl-6 w-full flex-wrap pt-4">
-          {article.posts_tags.map(e => (
+          {article?.posts_tags?.map(e => (
             <HeaderTopicItem name={e.tag.name} size="small" key={e.id} />
           ))}
         </div>
@@ -42,7 +42,7 @@ function PostCard({ article }: PostCardProps) {
               <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
             </svg>
           </div>
-          <div className="pl-1 text-[#76808F]">{article.post_likes.length}</div>
+          <div className="pl-1 text-[#76808F]">{article?.post_likes?.length}</div>
         </div>
       </div>
     </Link>

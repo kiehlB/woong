@@ -3,10 +3,10 @@ import Link from 'next/link';
 import Auth from '../../components/auth/Auth';
 import AuthForm from '../../components/auth/AuthForm';
 import PageTemplate from '../../components/base/PageTemplate';
+import useGetTags from '../../components/tags/hooks/usegetTags';
 import { getNextSeo } from '../../lib/nextSeo';
 import Arrow from '../../static/svg/arrow-icon';
 import SslIcon from '../../static/svg/ssl-icon';
-import useGetTags from '../home/hooks/usegetTags';
 import useLogin from './hooks/useLogin';
 
 export type SigninProps = {};

@@ -25,15 +25,15 @@ export class PostScore {
   @Column({ length: 255 })
   type!: string;
 
-  @Field(() => String, { nullable: true })
+  @Field(() => Int, { nullable: true })
   @Index()
   @Column()
-  user_id!: string;
+  user_id!: number;
 
-  @Field(() => String, { nullable: true })
+  @Field(() => Int, { nullable: true })
   @Index()
   @Column()
-  post_id!: string;
+  post_id!: number;
 
   @Field(() => Int, { nullable: true })
   @Column({

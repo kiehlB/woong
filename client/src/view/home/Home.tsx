@@ -4,12 +4,10 @@ import PageTemplate from '../../components/base/PageTemplate';
 import SvgCard from '../../components/common/SvgCard';
 import Dot from '../../components/common/TagsDot';
 import Main from '../../components/main';
-import useGetPosts from '../../components/main/hooks/usegetPosts';
 import TagItem from '../../components/tags/TagItem';
 import Bicycle from '../../static/svg/bicycle';
 import Swing from '../../static/svg/swing';
 import { RootState } from '../../store/rootReducer';
-import useGetTags from './hooks/usegetTags';
 import TagList from '../../components/tags/TagList';
 import { MenuItems } from '../../components/base/Header';
 import { getMainTag } from '../../store/tag';
@@ -19,9 +17,17 @@ import { Grid, Input } from '@nextui-org/react';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import { useState } from 'react';
 import { DateTime } from 'luxon';
+import useGetPosts from '../../components/post/hooks/usegetPosts';
+import useGetTags from '../../components/tags/hooks/usegetTags';
+import useTrendingPosts from '../../components/post/hooks/useTrendingPosts';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
+  const {
+    loading: TrendingPostsLoading,
+    error: TrendingPostsError,
+    data: TrendingPostsData,
+  } = useTrendingPosts();
 
   const {
     loading: getTagsLoading,
@@ -31,8 +37,10 @@ const Home: NextPage = () => {
 
   const globalTag = useSelector((state: RootState) => state?.tag?.mainTag);
   const [Difficulty, setDifficulty] = useState([]);
-  const mergeTag = MenuItems.concat(getTagsData?.getAllTags);
 
+  const SearchTags = getTagsData?.getAllTags.slice(0, 35);
+
+  console.log(SearchTags);
   const filteredArray =
     data?.findAllPost.filter(e =>
       e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
@@ -42,7 +50,6 @@ const Home: NextPage = () => {
           e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
         );
 
-  console.log(filteredArray);
   const isFilterdArray = filteredArray ? filteredArray : [];
 
   const handleCheck = event => {
@@ -91,9 +98,9 @@ const Home: NextPage = () => {
 
       <section className="w-[71rem] mx-auto  mxl:w-[80%]">
         <div className="py-[3.5rem]">
-          <PostTitle title="Trading" subtitle="SEE ALL LATEST RELEASES  " />
+          <PostTitle title="Trending" subtitle="SEE ALL LATEST RELEASES  " />
           <div className="">
-            <PostList data={data?.findAllPost.slice(0, 3)} />
+            <PostList data={TrendingPostsData?.getTrendingPosts} />
           </div>
         </div>
       </section>
@@ -103,7 +110,7 @@ const Home: NextPage = () => {
             <div className="text-white">Topics : </div>
             <div className="text-[#aeb4bc] flex flex-1 flex-wrap items-center gap-4 px-4">
               <TagList
-                tag={mergeTag.splice(0, 35)}
+                tag={getTagsData?.getAllTags}
                 globalTag={globalTag}
                 toStore={getMainTag}
                 size="small"

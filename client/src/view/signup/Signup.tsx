@@ -4,8 +4,8 @@ import PageTemplate from '../../components/base/PageTemplate';
 import Auth from '../../components/auth/Auth';
 import AuthForm from '../../components/auth/AuthForm';
 import useRegister from './hooks/useRegister';
-import useGetTags from '../home/hooks/usegetTags';
 import { getNextSeo } from '../../lib/nextSeo';
+import useGetTags from '../../components/tags/hooks/usegetTags';
 
 export type SignUpProps = {};
 
