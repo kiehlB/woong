@@ -13,7 +13,9 @@ export type PostCardProps = {
 function PostCard({ article }: PostCardProps) {
   return (
     <Link href={`/post/${article.id}`}>
-      <div className="text-black relative w-full" aria-label={article.title}>
+      <div
+        className="text-black relative w-full border border-stone-100 rounded-xl"
+        aria-label={article.title}>
         <div className="absolute flex pl-6 w-full flex-wrap pt-4">
           {article?.posts_tags?.map(e => (
             <HeaderTopicItem name={e.tag.name} size="small" key={e.id} />
@@ -22,17 +24,20 @@ function PostCard({ article }: PostCardProps) {
         {article.thumbnail ? (
           <img src={article.thumbnail} className="rounded-xl mb-6  h-[12rem] w-full" />
         ) : (
-          <div className="h-[12rem] mb-6"></div>
+          <img
+            src="img/noImg.jpg"
+            className="rounded-xl mb-6  h-[12rem] w-full object-bottom"
+          />
         )}
 
-        <div className="px-6 mb-4 flex flex-1">
-          <div className="font-Cabin text-[#14151A] mb-6 text-[1.25rem] leading-6  min-h-[3.5rem]  font-semibold">
+        <div className="px-6 mb-4 flex flex-1 break-all line-clamp-3">
+          <div className="font-Cabin text-[#14151A] mb-6 text-[1.25rem] leading-7 min-h-[3.5rem] font-semibold line-clamp-2">
             {article.title}
           </div>
         </div>
         <div className="flex items-center px-6 pb-3">
-          <TagItem tag="Intermediate" variant="yello" size="small">
-            <Dot css="bg-[#f0b90b]" />
+          <TagItem tag={article?.difficulty} variant={article?.difficulty} size="small">
+            <Dot css={article?.difficulty} />
           </TagItem>
           <div className="ml-4 text-[#76808F] leading-snug font-normal py-4">
             {DateTime.fromISO(article.created_at).toLocaleString().slice(0, -1)}

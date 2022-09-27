@@ -18,7 +18,6 @@ export class CreatePostRequest {
   body?: string;
 
   @Field((type) => String, { nullable: true })
-  @IsString()
   thumbnail?: string;
 
   @Field((type) => [String], { nullable: true })

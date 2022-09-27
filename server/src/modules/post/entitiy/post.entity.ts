@@ -24,7 +24,7 @@ export class Post {
 
   @Field((type) => String, { nullable: true })
   @Column({ nullable: true, type: 'varchar' })
-  thumbnail!: string | null;
+  thumbnail?: string;
 
   @Field((type) => String, { nullable: true })
   @Column()

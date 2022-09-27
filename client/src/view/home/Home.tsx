@@ -20,6 +20,7 @@ import { DateTime } from 'luxon';
 import useGetPosts from '../../components/post/hooks/usegetPosts';
 import useGetTags from '../../components/tags/hooks/usegetTags';
 import useTrendingPosts from '../../components/post/hooks/useTrendingPosts';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -36,11 +37,9 @@ const Home: NextPage = () => {
   } = useGetTags();
 
   const globalTag = useSelector((state: RootState) => state?.tag?.mainTag);
+
   const [Difficulty, setDifficulty] = useState([]);
 
-  const SearchTags = getTagsData?.getAllTags.slice(0, 35);
-
-  console.log(SearchTags);
   const filteredArray =
     data?.findAllPost.filter(e =>
       e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
@@ -50,7 +49,12 @@ const Home: NextPage = () => {
           e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
         );
 
-  const isFilterdArray = filteredArray ? filteredArray : [];
+  const isArray = filteredArray ? filteredArray : [];
+
+  const isFilterdArray =
+    Difficulty.length !== 0
+      ? isArray.filter(e => Difficulty.includes(e?.difficulty))
+      : isArray;
 
   const handleCheck = event => {
     let updatedList = [...Difficulty];
@@ -124,38 +128,38 @@ const Home: NextPage = () => {
 
             <TagItem
               tag="Beginner"
-              variant="green"
+              variant=" Beginner"
               checked={Difficulty?.includes('Beginner')}
               size="medium"
               add={true}
               bg="green"
               handleCheck={handleCheck}>
-              <Dot css="bg-[#02C076] w-[6px] h-[6px]" />
+              <Dot css="Beginner" />
             </TagItem>
 
             <div className="ml-4">
               <TagItem
                 tag="Intermediate"
-                variant="yello"
+                variant="Intermediate"
                 size="medium"
                 add={true}
                 bg="yello"
                 handleCheck={handleCheck}
                 checked={Difficulty?.includes('Intermediate')}>
-                <Dot css="bg-[#f0b90b] w-[6px] h-[6px]" />
+                <Dot css="Intermediate" />
               </TagItem>
             </div>
 
             <div className="ml-4">
               <TagItem
                 tag="Advanced"
-                variant="red"
+                variant="Advanced"
                 size="medium"
                 add={true}
                 bg="red"
                 handleCheck={handleCheck}
                 checked={Difficulty?.includes('Advanced')}>
-                <Dot css="bg-[#d9304e] w-[6px] h-[6px]" />
+                <Dot css="Advanced" />
               </TagItem>
             </div>
           </div>
@@ -169,12 +173,20 @@ const Home: NextPage = () => {
                     style={{
                       gridTemplateColumns: 'minmax(auto,368px) 1fr',
                     }}>
-                    <img
-                      src={isFilterdArray[0]?.thumbnail}
-                      className="max-h-[20rem] min-h-[20rem] w-full object-cover"
-                    />
+                    {isFilterdArray[0].thumbnail ? (
+                      <img
+                        src={isFilterdArray[0]?.thumbnail}
+                        className="max-h-[20rem] min-h-[20rem] w-full object-cover rounded-xl"
+                      />
+                    ) : (
+                      <img
+                        src="img/noImg.jpg"
+                        className="max-h-[20rem] min-h-[20rem] w-full object-cover rounded-xl"
+                      />
+                    )}
+
                     <div className="flex text-white bg-[#2b2f36] flex-col  justify-center px-4 rounded-lg">
-                      <div className="text-[2rem] leading-10 font-semibold">
+                      <div className="text-[2rem] leading-10 font-semibold  break-all line-clamp-3">
                         {isFilterdArray[0]?.title}
                       </div>
                       <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
@@ -183,7 +195,8 @@ const Home: NextPage = () => {
                           .slice(0, -1)}
                       </div>
                       <div className="flex items-center">
-                        <Dot css="bg-[#F0B90B]" /> Intermediate
+                        <Dot css={isFilterdArray[0]?.difficulty} />{' '}
+                        {isFilterdArray[0]?.difficulty}
                       </div>
                     </div>
                   </div>
@@ -194,20 +207,32 @@ const Home: NextPage = () => {
             </div>
             {isFilterdArray[1] ? (
               <div className="col-span-1 rounded-lg bg-[#2b2f36] relative  h-[20rem]">
-                <img
-                  src={isFilterdArray[1]?.thumbnail}
-                  className="max-h-[20rem]  w-full object-cover"
-                />
-                <div className="text-[#fff] px-4">{isFilterdArray[1]?.title}</div>
+                {isFilterdArray[1].thumbnail ? (
+                  <img
+                    src={isFilterdArray[1]?.thumbnail}
+                    className="max-h-[20rem] w-full object-cover rounded-xl"
+                  />
+                ) : (
+                  <img
+                    src="img/noImg.jpg"
+                    className="h-[9.25rem] w-full object-cover rounded-xl"
+                  />
+                )}
+
+                <div className="text-[#fff] px-4 pt-2 break-all">
+                  <div className=" text-[1.3rem] leading-8 font-semibold break-all line-clamp-2">
+                    {isFilterdArray[1]?.title}
+                  </div>
+                </div>
                 <div className="absolute bottom-0 p-4">
-                  <div className="text-[#fff]">
+                  <div className="text-[#F0B90B] font-normal mt-2 mb-2 text-[1rem]">
                     {DateTime.fromISO(isFilterdArray[1]?.created_at)
                       .toLocaleString()
                       .slice(0, -1)}
                   </div>
                   <div className="text-[#fff] flex items-center text-sm">
-                    <Dot css="bg-[#f0b90b]" />
-                    <div> Intermediate</div>
+                    <Dot css={isFilterdArray[1]?.difficulty} />{' '}
+                    {isFilterdArray[1]?.difficulty}
                   </div>
                 </div>
               </div>
@@ -217,20 +242,32 @@ const Home: NextPage = () => {
 
             {isFilterdArray[2] ? (
               <div className="col-span-1 bg-[#2b2f36] relative  h-[20rem] ">
-                <img
-                  src={isFilterdArray[2]?.thumbnail}
-                  className="max-h-[20rem] w-full object-cover"
-                />
-                <div className="text-[#fff] px-4">{isFilterdArray[2]?.title}</div>
+                {isFilterdArray[2].thumbnail ? (
+                  <img
+                    src={isFilterdArray[2]?.thumbnail}
+                    className="h-[9.25rem] w-full object-cover rounded-lg"
+                  />
+                ) : (
+                  <img
+                    src="img/noImg.jpg"
+                    className="h-[9.25rem] w-full object-cover rounded-lg"
+                  />
+                )}
+
+                <div className="text-[#fff] px-4 pt-2">
+                  <div className=" text-[1.3rem] leading-8 font-semibold break-all line-clamp-2">
+                    {isFilterdArray[2]?.title}
+                  </div>
+                </div>
                 <div className="absolute bottom-0 p-4">
-                  <div className="text-[#fff]">
+                  <div className="text-[#F0B90B] font-normal mt-2 mb-2 text-[1rem]">
                     {DateTime.fromISO(isFilterdArray[2]?.created_at)
                       .toLocaleString()
                       .slice(0, -1)}
                   </div>
                   <div className="text-[#fff] flex items-center text-sm">
-                    <Dot css="bg-[#f0b90b]" />
-                    <div> Intermediate</div>
+                    <Dot css={isFilterdArray[2]?.difficulty} />{' '}
+                    {isFilterdArray[2]?.difficulty}
                   </div>
                 </div>
               </div>
@@ -247,19 +284,32 @@ const Home: NextPage = () => {
                   }}>
                   <div className="flex text-white bg-[#2b2f36] flex-col justify-center items-end px-4 rounded-lg">
                     <div className="text-[2rem] leading-10 font-semibold">
-                      {isFilterdArray[0]?.title}
+                      <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-3">
+                        {isFilterdArray[3]?.title}
+                      </div>
                     </div>
                     <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
-                      Jul 7, 2022 5m
+                      {DateTime.fromISO(isFilterdArray[2]?.created_at)
+                        .toLocaleString()
+                        .slice(0, -1)}
                     </div>
                     <div className="flex items-center">
-                      <Dot css="bg-[#F0B90B]" /> Intermediate
+                      <Dot css={isFilterdArray[3]?.difficulty} />{' '}
+                      {isFilterdArray[3]?.difficulty}
                     </div>
                   </div>
-                  <img
-                    src={isFilterdArray[3]?.thumbnail}
-                    className="max-h-[20rem] w-full object-cover min-h-[20rem]"
-                  />
+
+                  {isFilterdArray[3].thumbnail ? (
+                    <img
+                      src={isFilterdArray[3]?.thumbnail}
+                      className="max-h-[20rem] w-full object-cover min-h-[20rem] rounded-lg"
+                    />
+                  ) : (
+                    <img
+                      src="img/noImg.jpg"
+                      className="max-h-[20rem] w-full min-h-[20rem] object-cover rounded-lg"
+                    />
+                  )}
                 </div>
               </div>
             ) : (
@@ -273,12 +323,22 @@ const Home: NextPage = () => {
                     style={{
                       gridTemplateColumns: 'minmax(auto,176px) 1fr',
                     }}>
-                    <img
-                      src={isFilterdArray[4]?.thumbnail}
-                      className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem]"
-                    />
-                    <div className="text-white flex items-center px-4">
-                      What Is Inflation?
+                    {isFilterdArray[4].thumbnail ? (
+                      <img
+                        src={isFilterdArray[4]?.thumbnail}
+                        className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem] rounded-lg"
+                      />
+                    ) : (
+                      <img
+                        src="img/noImg.jpg"
+                        className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem] rounded-lg"
+                      />
+                    )}
+
+                    <div className="text-white flex items-center px-4 text-[1.3rem] font-semibold">
+                      <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-1">
+                        {isFilterdArray[4]?.title}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -294,12 +354,22 @@ const Home: NextPage = () => {
                     style={{
                       gridTemplateColumns: 'minmax(auto,176px) 1fr',
                     }}>
-                    <img
-                      src={isFilterdArray[5]?.thumbnail}
-                      className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem]"
-                    />
-                    <div className="text-white flex items-center px-4">
-                      What Is Inflation?
+                    {isFilterdArray[5].thumbnail ? (
+                      <img
+                        src={isFilterdArray[5]?.thumbnail}
+                        className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem] rounded-lg"
+                      />
+                    ) : (
+                      <img
+                        src="img/noImg.jpg"
+                        className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem] rounded-lg"
+                      />
+                    )}
+
+                    <div className="text-white flex items-center px-4 text-[1.3rem] font-semibold">
+                      <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-1">
+                        {isFilterdArray[5]?.title}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -309,7 +379,11 @@ const Home: NextPage = () => {
             )}
           </div>
           <div className="flex w-[71rem] mx-auto  mxl:w-[80%]  justify-center px-4 py-12 items-center">
-            <div className="text-white mr-2">See more content about this topic</div>
+            <Link href="/filter">
+              <div className="text-white mr-2 cursor-pointer">
+                See more content about this topic
+              </div>
+            </Link>
             <svg
               width={18}
               height={18}

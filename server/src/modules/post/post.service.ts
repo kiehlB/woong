@@ -43,9 +43,10 @@ export class PostService {
 
     const findPost = await this.PostRepository.createQueryBuilder('post')
       .leftJoinAndSelect('post.comments', 'comment')
+      .orderBy('post.created_at', 'ASC')
       .getMany();
 
-    return posts;
+    return findPost;
   }
 
   async getTrendingPosts() {
@@ -64,7 +65,6 @@ export class PostService {
       [0, 3],
     );
 
-    console.log(rows);
     return rows;
   }
 

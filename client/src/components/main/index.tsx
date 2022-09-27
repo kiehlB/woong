@@ -95,18 +95,18 @@ function Main({ post }: MainProps) {
                 {(singlePost as any)?.thumbnail ? (
                   <img
                     src={(singlePost as any)?.thumbnail}
-                    className="w-full h-auto rounded max-h-[18.25rem] min-h-[18.25rem]"
+                    className="w-full h-auto rounded-xl max-h-[18.25rem] min-h-[18.25rem]"
                   />
                 ) : (
                   <img
-                    src="task.svg"
-                    className="w-full h-auto rounded max-h-[18.25rem] min-h-[18.25rem]"
+                    src="img/noImg.jpg"
+                    className="w-full h-auto rounded-xl max-h-[18.25rem] min-h-[18.25rem] object-cover "
                   />
                 )}
               </div>
               {singlePost ? (
                 <>
-                  <div className="pt-4 text-[#14151A] leading-7 text-xl  font-medium  ">
+                  <div className="pt-4 text-[#14151A] leading-7 text-xl font-medium line-clamp-3 break-all">
                     {singlePost?.title}
                   </div>
 
@@ -129,8 +129,8 @@ function Main({ post }: MainProps) {
 
                   <Button
                     size="small"
-                    className="bg-[#02c07633] h-9 flex justify-center items-center  rounded-lg text-[#474D57]">
-                    <Dot css="bg-[#02C076]" />
+                    className="bg-[#02c07633] h-9 flex justify-center items-center rounded-lg text-[#474D57]">
+                    <Dot css={singlePost.difficulty} />
                     {singlePost.difficulty}
                   </Button>
                 </>

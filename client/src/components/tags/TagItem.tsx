@@ -34,9 +34,9 @@ function TagItem({
         className={clsx(
           'flex items-center  text-sm px-4 py-1 border-[#2b2f36] border rounded-full cursor-pointer',
           {
-            'border border-[rgba(2,192,118,0.2)]': variant == 'green',
-            'border border-[rgba(240,185,11,0.2)]  ': variant == 'yello',
-            'border border-[rgba(217,48,78,0.2)]': variant == 'red',
+            'border border-[rgba(2,192,118,0.2)]': variant == 'Beginner',
+            'border border-[rgba(240,185,11,0.2)]  ': variant == 'Intermediate',
+            'border border-[rgba(217,48,78,0.2)]': variant == 'Advanced',
 
             'bg-[#F0B90B] text-[#14151A]': bg == 'smallYello' && checked == true,
 
