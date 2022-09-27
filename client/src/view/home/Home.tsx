@@ -435,9 +435,9 @@ const Home: NextPage = () => {
       </div>
 
       <div className="grid grid-cols-2 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4  mb-[3.5rem]">
-        <div className="col-span-1 bg-[rgba(240,185,11,0.15)] rounded-2xl h-full ">
+        {/* <div className="col-span-1 bg-[rgba(240,185,11,0.15)] rounded-2xl h-full ">
           <div className="grid grid-cols-2 justify-center content-center h-full">
-            <img src="/task.svg" className="w-full col-span-1 h-full" />
+            <img src="/1.svg" className="w-full col-span-1 h-full py-12" />
             <div className="col-span-1 h-full grid  justify-center content-center">
               <div className="text-[#14151A] mb-4 text-[2rem] leading-10 font-semibold">
                 Lost in all the crypto slang?
@@ -448,11 +448,11 @@ const Home: NextPage = () => {
               <div>Check out Glossary</div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="col-span-1 bg-[#2b2f36] rounded-2xl h-full">
-          <div className="grid grid-cols-2 h-full]">
-            <img src="/task.svg" className="col-span-1 " />
+        {/* <div className="col-span-1 bg-[#2b2f36] rounded-2xl h-full">
+          <div className="grid grid-cols-2 justify-center content-center h-full">
+            <img src="/2.svg" className="w-full col-span-1 h-full" />
             <div className="col-span-1 h-full grid  justify-center content-center">
               <div className="text-[#14151A] mb-4 text-[2rem] leading-10 font-semibold">
                 Lost in all the crypto slang?
@@ -510,7 +510,7 @@ const Home: NextPage = () => {
         </div>
         <div className="shadow-xl p-6 rounded-2xl">
           <div>dd</div>
-        </div>
+        </div> */}
       </div>
     </PageTemplate>
   );

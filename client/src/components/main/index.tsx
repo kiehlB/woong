@@ -106,7 +106,7 @@ function Main({ post }: MainProps) {
               </div>
               {singlePost ? (
                 <>
-                  <div className="pt-4 text-[#14151A] leading-7 text-xl font-medium line-clamp-3 break-all">
+                  <div className="pt-4 text-[#14151A] leading-7 text-xl font-light  font-Roboto line-clamp-3 break-all">
                     {singlePost?.title}
                   </div>
 

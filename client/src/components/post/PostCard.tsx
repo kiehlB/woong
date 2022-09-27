@@ -31,7 +31,7 @@ function PostCard({ article }: PostCardProps) {
         )}
 
         <div className="px-6 mb-4 flex flex-1 break-all line-clamp-3">
-          <div className="font-Cabin text-[#14151A] mb-6 text-[1.25rem] leading-7 min-h-[3.5rem] font-semibold line-clamp-2">
+          <div className="font-Cabin text-[#14151A] mb-6 text-[1.25rem] leading-7 min-h-[3.5rem] font-medium line-clamp-2">
             {article.title}
           </div>
         </div>
@@ -51,7 +51,6 @@ function PostCard({ article }: PostCardProps) {
         </div>
       </div>
     </Link>
-    // </div>
   );
 }
 

@@ -179,25 +179,28 @@ function ArrowLink({ to, href, ...props }: ArrowLinkProps) {
 
   if (href) {
     return (
-      <motion.a
-        href={href}
-        {...getBaseProps(props)}
-        ref={ref}
-        animate={state}
-        transition={shouldReduceMotion ? { duration: 0 } : {}}>
-        <ArrowButtonContent {...props} />
-      </motion.a>
+      <Link href={href}>
+        <motion.a
+          {...getBaseProps(props)}
+          ref={ref}
+          animate={state}
+          transition={shouldReduceMotion ? { duration: 0 } : {}}>
+          <ArrowButtonContent {...props} />
+        </motion.a>
+      </Link>
     );
   } else if (to) {
     return (
-      <MotionLink
-        href={to}
-        {...getBaseProps(props)}
-        ref={ref}
-        animate={state}
-        transition={shouldReduceMotion ? { duration: 0 } : {}}>
-        <ArrowButtonContent {...props} />
-      </MotionLink>
+      <Link href={href}>
+        <MotionLink
+          href={to}
+          {...getBaseProps(props)}
+          ref={ref}
+          animate={state}
+          transition={shouldReduceMotion ? { duration: 0 } : {}}>
+          <ArrowButtonContent {...props} />
+        </MotionLink>
+      </Link>
     );
   }
   throw new Error('Must provide either to or href to ArrowLink');
