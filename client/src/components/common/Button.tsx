@@ -5,6 +5,7 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'danger';
   size?: 'small' | 'medium' | 'large';
   children: React.ReactNode | React.ReactNode[];
+  difficulty?: string;
 }
 
 function getClassName({ className }: { className?: string }) {
@@ -17,8 +18,9 @@ function getClassName({ className }: { className?: string }) {
 function ButtonInner({
   children,
   variant,
+  difficulty,
   size = 'large',
-}: Pick<ButtonProps, 'children' | 'variant' | 'size'>) {
+}: Pick<ButtonProps, 'children' | 'variant' | 'size' | 'difficulty'>) {
   return (
     <>
       <div
@@ -29,6 +31,9 @@ function ButtonInner({
               variant === 'secondary' || variant === 'danger',
             danger: variant === 'danger',
             'bg-inverse': variant === 'primary',
+            'bg-[#02c07633]': difficulty === 'Beginner',
+            'bg-[#F0b90b33]': difficulty === 'Intermediate',
+            'bg-[#D9304E33]': difficulty === 'Advanced',
           },
         )}
       />
@@ -55,12 +60,13 @@ function Button({
   children,
   variant = 'primary',
   size = 'large',
+  difficulty,
   className,
   ...buttonProps
 }: ButtonProps & JSX.IntrinsicElements['button']) {
   return (
     <button {...buttonProps} className={getClassName({ className })}>
-      <ButtonInner variant={variant} size={size}>
+      <ButtonInner variant={variant} size={size} difficulty={difficulty}>
         {children}
       </ButtonInner>
     </button>

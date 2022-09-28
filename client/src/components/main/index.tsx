@@ -17,8 +17,6 @@ function Main({ post }: MainProps) {
   const ref = useRef(null);
   const singlePost = post ? post?.findAllPost?.slice(-1)[0] : '';
 
-  console.log(singlePost);
-
   const [xys, set] = useState([0, 0, 1]);
 
   const calc = (x, y, rect) => [
@@ -129,7 +127,8 @@ function Main({ post }: MainProps) {
 
                   <Button
                     size="small"
-                    className="bg-[#02c07633] h-9 flex justify-center items-center rounded-lg text-[#474D57]">
+                    difficulty={singlePost.difficulty}
+                    className="h-9 flex justify-center items-center rounded-lg text-[#474D57]">
                     <Dot css={singlePost.difficulty} />
                     {singlePost.difficulty}
                   </Button>

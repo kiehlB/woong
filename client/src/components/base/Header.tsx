@@ -196,11 +196,15 @@ function Header({ tag, loading }: HeaderProps) {
           </div>
         </form>
 
-        <Link href="/write">
-          <div className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-white border px-4 rounded h-8 font-Cabin font-medium ">
-            <div>Write</div>
-          </div>
-        </Link>
+        {!loading && getUser?.whoAmI?.ok ? (
+          <Link href="/write">
+            <div className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-white border px-4 rounded h-8 font-Cabin font-medium ">
+              <div>Write</div>
+            </div>
+          </Link>
+        ) : (
+          ''
+        )}
 
         <Link href="/signin">
           <div
