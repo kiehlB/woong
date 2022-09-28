@@ -177,7 +177,7 @@ function Header({ tag, loading }: HeaderProps) {
               </div>
             </nav>
           </div>
-          <div className="ml-8  font-Cabin font-medium cursor-pointer">Glossaries</div>
+          <div className="ml-8 font-Cabin font-medium cursor-pointer">Glossaries</div>
         </div>
       </div>
 
@@ -198,12 +198,9 @@ function Header({ tag, loading }: HeaderProps) {
 
         <Link href="/signin">
           <div
-            className={clsx(
-              'mxl:hidden text-sm  cursor-pointer  font-Cabin  font-medium',
-              {
-                'ml-8': getUser?.whoAmI?.ok == undefined,
-              },
-            )}>
+            className={clsx('mxl:hidden text-sm cursor-pointer font-Cabin font-medium', {
+              'ml-8': getUser?.whoAmI?.ok == undefined,
+            })}>
             {!loading && getUser?.whoAmI?.ok ? '' : 'Login'}
           </div>
         </Link>

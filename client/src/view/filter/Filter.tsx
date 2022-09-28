@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { MenuItems } from '../../components/base/Header';
 import PageTemplate from '../../components/base/PageTemplate';
 import { Button } from '../../components/common/Button';
@@ -14,6 +14,7 @@ import { Children, useEffect, useState } from 'react';
 import useGetPosts from '../../components/post/hooks/usegetPosts';
 import useGetTags from '../../components/tags/hooks/usegetTags';
 import useCollapse from 'react-collapsed';
+import clsx from 'clsx';
 
 export type FilterProps = {};
 
@@ -44,11 +45,13 @@ function Filter({}: FilterProps) {
     error: getTagsError,
     data: getTagsData,
   } = useGetTags();
+
   const [isExpanded, setExpanded] = useState(true);
+  const [page, setPage] = useState(1);
+
+  const dispatch = useDispatch();
 
   const globalTag = useSelector((state: RootState) => (state as any)?.tag?.tag);
-
-  const mergeTag = MenuItems.concat((getTagsData as any)?.getAllTags);
 
   const filteredArray =
     data?.findAllPost.filter(e =>
@@ -59,7 +62,14 @@ function Filter({}: FilterProps) {
           e.posts_tags.map(el => globalTag.includes(el.tag.name)).includes(true),
         );
 
-  const isFilterdArray = filteredArray ? filteredArray : [];
+  const isArray = filteredArray ? filteredArray : [];
+
+  const isFilterdArray =
+    Difficulty.length !== 0
+      ? isArray.filter(e => Difficulty.includes(e?.difficulty))
+      : isArray;
+
+  const [resultFilter, setResultFilter] = useState(isFilterdArray);
 
   const handleCheck = event => {
     let updatedList = [...Difficulty];
@@ -74,6 +84,32 @@ function Filter({}: FilterProps) {
   };
 
   // console.log(getTagsData?.getAllTags?.filter(e => globalTag.includes(e.name)));
+
+  const ApplyFilterOnClick = () => {
+    if (Difficulty.length == 0 && globalTag.length == 0) {
+      return;
+    }
+
+    setResultFilter(isFilterdArray);
+  };
+
+  const ClearFilterOnClick = () => {
+    setDifficulty([]);
+    dispatch(tagGet([]));
+    setResultFilter(data?.findAllPost);
+    setPage(1);
+    setExpanded(true);
+  };
+
+  const isFilterTrue = Difficulty.length == 0 && globalTag.length == 0;
+
+  const restPost = resultFilter.length % 9 > 0 ? 1 : 0;
+
+  const resultPagination = resultFilter.length / 9 + restPost;
+
+  const handleChange = (value: number) => {
+    setPage(value);
+  };
 
   return (
     <PageTemplate tag={getTagsData}>
@@ -91,7 +127,7 @@ function Filter({}: FilterProps) {
                   </div>
                   <div className="flex flex-wrap mx-auto">
                     <TagList
-                      tag={mergeTag}
+                      tag={getTagsData?.getAllTags}
                       globalTag={globalTag}
                       toStore={tagGet}
                       size="superSmall"
@@ -152,8 +188,8 @@ function Filter({}: FilterProps) {
         </Collapse>
 
         <div className="bg-[#F5F5F5] flex p-4 w-full">
-          <div className="flex w-[71rem] mx-auto px-4 justify-between">
-            <div className="flex">
+          <div className="flex w-[71rem] mx-auto px-4 justify-between h-8 items-center">
+            <div className="flex h-8 items-center">
               <div className="mr-6">Layout</div>
               <svg
                 width={24}
@@ -176,11 +212,22 @@ function Filter({}: FilterProps) {
                 <path d="M6.77711 5.99666L5.36292 4.58246L3.94872 5.99666L5.36292 7.41086L6.77711 5.99666Z"></path>
                 <path d="M6.84254 18.0236L5.42834 16.6094L4.01414 18.0236L5.42834 19.4378L6.84254 18.0236Z"></path>
               </svg>
-              <div className="ml-4 px-4 text-[#aeb4bc]">Apply filters</div>
-              <div className="ml-4 px-4">Clear filters</div>
+              <div
+                className={clsx('ml-4 px-4 text-[#aeb4bc]   cursor-not-allowed', {
+                  'bg-[#2B2F36] rounded flex justify-center items-center py-1 !text-white !cursor-pointer':
+                    isFilterTrue == false,
+                })}
+                onClick={ApplyFilterOnClick}>
+                Apply filters
+              </div>
+              <div
+                className="ml-4 px-4 cursor-pointer hover:bg-[#FAFAFA] hover:py-1 hover:rounded "
+                onClick={ClearFilterOnClick}>
+                Clear filters
+              </div>
             </div>
 
-            <div className="flex">
+            <div className="flex cursor-pointer" onClick={() => setExpanded(x => !x)}>
               {isExpanded ? (
                 <svg
                   width={24}
@@ -201,19 +248,26 @@ function Filter({}: FilterProps) {
                 </svg>
               )}
 
-              <div onClick={() => setExpanded(x => !x)}>Hide filters</div>
+              <div>Hide filters</div>
             </div>
           </div>
         </div>
         <div className="w-[71rem] mx-auto  mxl:w-[80%] flex flex-col  items-center">
-          <div className="pt-[3.5rem]">
-            <div>Articles (412)</div>
-            <div className="pt-8">
-              <PostList data={data?.findAllPost.slice(0, 9)} />
+          <div className="pt-[3.5rem] w-[71rem]">
+            <div>Articles ({resultFilter.length})</div>
+            <div className="pt-8 w-full">
+              <PostList data={resultFilter.slice((page - 1) * 9, page * 9)} />
             </div>
           </div>
           <div className="py-16">
-            <Pagination total={20} initialPage={1} color="warning" shadow />
+            <Pagination
+              total={resultPagination}
+              initialPage={1}
+              onChange={handleChange}
+              page={page}
+              color="warning"
+              shadow
+            />
           </div>
         </div>
       </div>
