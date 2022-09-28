@@ -27,6 +27,14 @@ const WriteMarkdownEditor = props => {
   const [previewSource, setPreviewSource] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
 
+  console.log(selectedOption);
+
+  useEffect(() => {
+    setSelectedOption({
+      value: 'Beginner',
+    });
+  }, []);
+
   const deleteTag = index => {
     const newTag = [...tag];
     newTag.splice(index, 1);
@@ -129,7 +137,7 @@ const WriteMarkdownEditor = props => {
 
           <div className="flex w-full justify-between  z-20">
             <div className="flex">
-              <div className="text-[#868e96] font-semibold">Thumbnail</div>
+              <div className="text-[#868e96] font-semibold pr-1.5">Thumbnail</div>
               <label htmlFor="input-file">
                 <svg width="1.5rem" height="1.5rem" fill="none" viewBox="0 0 107 85">
                   <path
@@ -150,7 +158,7 @@ const WriteMarkdownEditor = props => {
               <div style={{ marginLeft: '.5rem' }}>{WaitingFotImg(readyForFile)}</div>
             </div>
 
-            <div className="z-[9999]">
+            <div className="z-[9999] pb-2 pr-2">
               <AnimatedMulti setSelectedOption={setSelectedOption} />
             </div>
           </div>
@@ -183,7 +191,7 @@ const WriteMarkdownEditor = props => {
             }}
           />
 
-          <div className="flex py-4 justify-end">
+          <div className="flex py-4 justify-end pr-2">
             <div style={{ marginRight: '1rem' }}>
               <Link href="/">
                 <LinkButton className="text-zinc-600">뒤로가기</LinkButton>

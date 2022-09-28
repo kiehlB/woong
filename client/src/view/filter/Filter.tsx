@@ -96,7 +96,7 @@ function Filter({}: FilterProps) {
   const ClearFilterOnClick = () => {
     setDifficulty([]);
     dispatch(tagGet([]));
-    setResultFilter(data?.findAllPost);
+    setResultFilter(data?.findAllPost ? data?.findAllPost : '');
     setPage(1);
     setExpanded(true);
   };
