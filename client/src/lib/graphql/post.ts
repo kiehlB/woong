@@ -42,7 +42,8 @@ export const GET_Post = gql`
       body
       title
       difficulty
-
+      thumbnail
+      created_at
       post_likes {
         id
         post_id

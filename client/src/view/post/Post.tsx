@@ -9,7 +9,7 @@ import {
   useViewportScroll,
 } from 'framer-motion';
 import PageTemplate from '../../components/base/PageTemplate';
-import useGetPost from './hooks/useGerPost';
+import useGetPost from './hooks/useGetPost';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { getScrollTop } from '../../lib/utils';
@@ -23,6 +23,9 @@ import { useRouter } from 'next/router';
 import useDeleteComment from '../../components/comment/hooks/useDeleteComment';
 import useEditComment from '../../components/comment/hooks/useEditComment';
 import useGetTags from '../../components/tags/hooks/usegetTags';
+import { DateTime } from 'luxon';
+import { Button } from '../../components/common/Button';
+import Dot from '../../components/common/TagsDot';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -137,7 +140,6 @@ function Post({}: PostProps) {
   const findData = singlePostData?.findSinglePost;
   const findId = singlePostData?.findSinglePost?.id;
 
-  console.log(commentstData?.findAllComments);
   const getComments = commentstData?.findAllComments.filter(
     el => el.post_id == router.query.id,
   );
@@ -165,6 +167,7 @@ function Post({}: PostProps) {
     setEditComment(!editComment);
   };
 
+  console.log(singlePostData?.findSinglePost);
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
       <div className="flex h-full">
@@ -176,14 +179,44 @@ function Post({}: PostProps) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-[40%] mx-auto justify-center items-center mt-4">
-          <div className="flex w-full">
+        <div className="flex flex-col w-[40%] mx-auto justify-center mt-4">
+          <div className="flex w-full mb-8">
             {singlePostData?.findSinglePost?.posts_tags?.map(e => (
-              <HeaderTopicItem name={e.tag.name_filtered} size="small" key={e.id} />
+              <HeaderTopicItem
+                name={e.tag.name_filtered}
+                size="small"
+                key={e.id}
+                disable={true}
+              />
             ))}
           </div>
 
+          <img src={singlePostData?.findSinglePost?.thumbnail} alt="thumbnail" />
+
+          <div className="text-[#474D57]  text-[1.25rem] mt-6 mb-8">
+            {`Home >  Articles >`}
+            {singlePostData?.findSinglePost?.title}
+          </div>
+          <h1 className="text-5xl text-[#14151A] font-medium font-Roboto tracking-normal mb-4">
+            {singlePostData?.findSinglePost?.title}
+          </h1>
+
+          <div className="flex items-center">
+            <Button
+              size="small"
+              difficulty={singlePostData?.findSinglePost?.difficulty}
+              className="h-9 flex justify-center items-center rounded-lg text-[#474D57]">
+              <Dot css={singlePostData?.findSinglePost.difficulty} />
+              {singlePostData?.findSinglePost.difficulty}
+            </Button>
+            <div className="text-[#76808F] ml-4 font-medium font-Roboto">
+              {DateTime.fromISO(singlePostData?.findSinglePost?.created_at)
+                .toLocaleString()
+                .slice(0, -1)}
+            </div>
+          </div>
           <div
+            className="pt-14"
             dangerouslySetInnerHTML={{ __html: singlePostData?.findSinglePost?.body }}
           />
         </div>
@@ -192,7 +225,7 @@ function Post({}: PostProps) {
         </div>
       </div>
 
-      <div className="w-[40%] mx-auto">
+      <div className="w-[40%] mx-auto mt-24 mb-12">
         <CommentForm
           findId={findId}
           handleSubmit={handleSubmit}
