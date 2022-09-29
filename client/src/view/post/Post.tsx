@@ -4,7 +4,6 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import {
   AnimatePresence,
   motion,
-  useScroll,
   useSpring,
   useTransform,
   useViewportScroll,
@@ -128,13 +127,7 @@ function Post({}: PostProps) {
 
   const IsTop = scrollTop == 0 ? true : false;
 
-  useEffect(
-    () =>
-      yRange.onChange(v => {
-        setIsComplete(v >= 1);
-      }),
-    [yRange],
-  );
+  useEffect(() => yRange.onChange(v => setIsComplete(v >= 1)), [yRange]);
 
   const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
   /// fixed mt-[10%] bg-[#404663] shadow-lg p-6 text-[1.5rem] rounded-full flex justify-center items-center
@@ -172,11 +165,10 @@ function Post({}: PostProps) {
     setEditComment(!editComment);
   };
 
-  console.log(getComments);
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
-      <div className="flex">
-        <div className="flex justify-center w-[30%]">
+      <div className="flex h-full">
+        <div className="flex justify-center w-[30%] h-full">
           <div className="w-full">
             <div className="fixed flex flex-col w-[30%] h-[40%]">
               <Realistic />
@@ -184,38 +176,13 @@ function Post({}: PostProps) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-[40%] mx-auto  justify-center items-center mt-4">
+        <div className="flex flex-col w-[40%] mx-auto justify-center items-center mt-4">
           <div className="flex w-full">
             {singlePostData?.findSinglePost?.posts_tags?.map(e => (
               <HeaderTopicItem name={e.tag.name_filtered} size="small" key={e.id} />
             ))}
           </div>
-          <div>
-            <svg className="progress-icon" viewBox="0 0 60 60">
-              <motion.path
-                fill="none"
-                strokeWidth="5"
-                stroke="rgb(252, 213, 53)"
-                strokeDasharray="0 1"
-                d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
-                style={{
-                  pathLength,
-                  rotate: 90,
-                  translateX: 5,
-                  translateY: 5,
-                  scaleX: -1, // Reverse direction of line animation
-                }}
-              />
-              <motion.path
-                fill="none"
-                strokeWidth="5"
-                stroke="#02C076"
-                d="M14,26 L 22,33 L 35,16"
-                strokeDasharray="0 1"
-                animate={{ pathLength: isComplete ? 1 : 0 }}
-              />
-            </svg>
-          </div>
+
           <div
             dangerouslySetInnerHTML={{ __html: singlePostData?.findSinglePost?.body }}
           />
@@ -254,11 +221,54 @@ function Post({}: PostProps) {
               userData={userData}
               onClickNotifyCheckString={onClickNotifyCheckString}
             />
-          </div>{' '}
+          </div>
         </>
       ))}
 
-      {/* {el.id == isOpen && on ? (
+      <div className="z-[100]">
+        <svg className="progress-icon" viewBox="0 0 60 60">
+          <motion.path
+            fill="none"
+            strokeWidth="5"
+            stroke="black"
+            strokeDasharray="0 1"
+            d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
+            style={{
+              pathLength,
+              rotate: 90,
+              translateX: 5,
+              translateY: 5,
+              scaleX: -1, // Reverse direction of line animation
+            }}
+          />
+          <motion.path
+            fill="none"
+            strokeWidth="5"
+            stroke="black"
+            d="M14,26 L 22,33 L 35,16"
+            initial={false}
+            strokeDasharray="0 1"
+            animate={{ pathLength: isComplete ? 1 : 0 }}
+          />
+        </svg>
+      </div>
+      <style global jsx>{`
+        html,
+        body,
+        body > div:first-child,
+        div#__next,
+        div#__next > div {
+          height: 100vh;
+        }
+      `}</style>
+    </PageTemplate>
+  );
+}
+
+export default Post;
+
+{
+  /* {el.id == isOpen && on ? (
                   <>
                     <SubCommentsForm
                       userData={userData}
@@ -288,9 +298,5 @@ function Post({}: PostProps) {
                       onClickNotifyCheckString={onClickNotifyCheckString}
                     />
                   </>
-                ))} */}
-    </PageTemplate>
-  );
+                ))} */
 }
-
-export default Post;
