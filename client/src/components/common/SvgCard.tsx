@@ -17,7 +17,7 @@ function SvgCard({ svg, title, subtitle, bg, text }: SvgCardProps) {
       <div className="col-span-1 py-8 pl-[2.5rem]">
         <div className={`font-medium font-Roboto leading-10 text-[2.5rem]`}>{title}</div>
         <div className="text-[1.25rem] leading-7 mt-4 ">{subtitle}</div>
-        <ArrowLink href={'/filter'} className="pt-6">
+        <ArrowLink href={'/filter'} direction="right" className="pt-6">
           See More
         </ArrowLink>
       </div>

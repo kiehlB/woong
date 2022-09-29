@@ -83,7 +83,7 @@ function getBaseProps({ textSize, className }: ArrowButtonBaseProps) {
       'text-primary inline-flex items-center text-left font-medium focus:outline-none cursor-pointer transition',
       {
         'text-xl': textSize === 'medium',
-        'text-lg': textSize === 'small',
+        'text-[0.5rem]': textSize === 'small',
       },
       className,
     ),
@@ -148,7 +148,7 @@ function ArrowButtonContent({
       </div>
 
       {children && (direction === 'left' || direction === 'down') ? (
-        <span className="ml-8 text-xl font-medium">{children}</span>
+        <span className="ml-8 text-[1rem] font-medium">{children}</span>
       ) : null}
     </>
   );

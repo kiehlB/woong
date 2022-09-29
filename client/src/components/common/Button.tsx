@@ -83,7 +83,9 @@ function LinkButton({
       {...buttonProps}
       className={clsx(
         className,
-        underlined ? 'underlined focus:outline-none whitespace-nowrap' : 'underline',
+        underlined
+          ? 'underlined focus:outline-none whitespace-nowrap '
+          : 'hover:underline  underline-offset-[6px] decoration-neutral-400 decoration-wavy',
         'text-primary inline-block',
       )}
     />

@@ -12,6 +12,7 @@ import AnimatedMulti from '../common/ReactSelectInput';
 import { Button, LinkButton } from '../common/Button';
 import TagsForm from '../tags/TagForm';
 import Tags from '../tags/Tags';
+import { ArrowButton, ArrowLink } from '../common/ArrowButton';
 
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,
@@ -115,9 +116,9 @@ const WriteMarkdownEditor = props => {
   };
 
   return (
-    <>
-      <div className="flex h-full min-h-screen">
-        <div className="w-[50%] pt-9 pl-12">
+    <div className="flex h-full min-h-screen ">
+      <div className="w-[50%] pt-9">
+        <div className="pl-4">
           <input
             value={title}
             onChange={onChangeTitle}
@@ -162,53 +163,52 @@ const WriteMarkdownEditor = props => {
               <AnimatedMulti setSelectedOption={setSelectedOption} />
             </div>
           </div>
+        </div>
+        <SunEditor
+          getSunEditorInstance={getSunEditorInstance}
+          lang="ko"
+          autoFocus={true}
+          setOptions={{
+            height: '1000',
+            buttonList: [
+              ['undo', 'redo'],
+              ['font', 'fontSize', 'formatBlock'],
+              ['paragraphStyle', 'blockquote'],
+              ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+              ['fontColor', 'hiliteColor', 'textStyle'],
+              ['removeFormat'],
+              '/', // Line break
+              ['outdent', 'indent'],
+              ['align', 'horizontalRule', 'list', 'lineHeight'],
+              ['table', 'link', 'image', 'video', 'audio' /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
+              /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
+              ['fullScreen', 'showBlocks', 'codeView'],
+              ['preview', 'print'],
+              ['save', 'template'],
+              /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
+            ], // Or Array of button list, eg. [['font', 'align'], ['image']]
+            // plugins: [font] set plugins, all plugins are set by default
+            // Other option
+          }}
+        />
 
-          <SunEditor
-            getSunEditorInstance={getSunEditorInstance}
-            lang="ko"
-            autoFocus={true}
-            setOptions={{
-              height: '1000',
-              buttonList: [
-                ['undo', 'redo'],
-                ['font', 'fontSize', 'formatBlock'],
-                ['paragraphStyle', 'blockquote'],
-                ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
-                ['fontColor', 'hiliteColor', 'textStyle'],
-                ['removeFormat'],
-                '/', // Line break
-                ['outdent', 'indent'],
-                ['align', 'horizontalRule', 'list', 'lineHeight'],
-                ['table', 'link', 'image', 'video', 'audio' /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
-                /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
-                ['fullScreen', 'showBlocks', 'codeView'],
-                ['preview', 'print'],
-                ['save', 'template'],
-                /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
-              ], // Or Array of button list, eg. [['font', 'align'], ['image']]
-              // plugins: [font] set plugins, all plugins are set by default
-              // Other option
-            }}
-          />
+        <div className="fixed flex bottom-0 z-50 w-[50%] px-4  bg-white shadow-lg shadow-slate-700  h-[4.5rem] items-center justify-between">
+          <div>
+            <ArrowLink direction="left" href={'/'} textSize="small">
+              뒤로가기
+            </ArrowLink>
+          </div>
 
-          <div className="flex py-4 justify-end pr-2">
-            <div style={{ marginRight: '1rem' }}>
-              <Link href="/">
-                <LinkButton className="text-zinc-600">뒤로가기</LinkButton>
-              </Link>
-            </div>
-
-            <div onClick={e => handleSubmit(e)}>
-              <LinkButton className="text-zinc-600">완료</LinkButton>
-            </div>
+          <div onClick={e => handleSubmit(e)}>
+            <LinkButton className="text-zinc-600  ">완료</LinkButton>
           </div>
         </div>
-
-        <div className="w-[50%] flex flex-1  bg-[#F8F9FA] shadow-md">
-          {/* {edtiorRef?.current?.getContents()} */}
-        </div>
       </div>
-    </>
+
+      <div className="w-[50%] flex flex-1  bg-[#F8F9FA] shadow-md">
+        {/* {edtiorRef?.current?.getContents()} */}
+      </div>
+    </div>
   );
 };
 export default WriteMarkdownEditor;
