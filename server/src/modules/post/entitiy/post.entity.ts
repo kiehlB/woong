@@ -38,6 +38,10 @@ export class Post {
   @Column({ type: 'int', default: 0 })
   likes!: number;
 
+  @Field((type) => Boolean, { nullable: true })
+  @Column({ nullable: true })
+  liked!: boolean;
+
   @Field((type) => String, { nullable: true })
   @Column()
   difficulty!: string;

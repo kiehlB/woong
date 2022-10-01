@@ -26,6 +26,11 @@ import useGetTags from '../../components/tags/hooks/usegetTags';
 import { DateTime } from 'luxon';
 import { Button } from '../../components/common/Button';
 import Dot from '../../components/common/TagsDot';
+import usePostLike from '../../components/post/hooks/usePostLike';
+import usePostUnLike from '../../components/post/hooks/usePostUnlike';
+import SubComments from '../../components/comment/SubComments';
+import SubCommentsForm from '../../components/comment/SubCommentsForm';
+import useIsPostLike from '../../components/post/hooks/isPostLike';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -35,7 +40,7 @@ const canvasStyles = {
   left: 0,
 };
 
-function Realistic() {
+function Realistic({ UnlikehandleSubmit, LikehandleSubmit, isLikeBoolean }) {
   const refAnimationInstance = useRef(null);
 
   const getInstance = useCallback(instance => {
@@ -84,11 +89,25 @@ function Realistic() {
     <>
       {/* @ts-ignore */}
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-      <button onClick={fire} className="flex justify-center">
-        <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
-          🎉
-        </span>
-      </button>
+
+      {isLikeBoolean ? (
+        <button onClick={UnlikehandleSubmit} className="flex justify-center">
+          <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
+            🎉
+          </span>
+        </button>
+      ) : (
+        <button
+          onClick={e => {
+            fire();
+            LikehandleSubmit(e);
+          }}
+          className="flex justify-center">
+          <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
+            🎉
+          </span>
+        </button>
+      )}
     </>
   );
 }
@@ -117,6 +136,16 @@ function Post({}: PostProps) {
   const [subEditText, subSetEditText] = useState('');
 
   const { getUser: userData, loading: userLoding } = useGetUser();
+
+  const { LikehandleSubmit, isLikeBoolean } = usePostLike();
+  const { UnlikehandleSubmit, isUnLikeBoolean } = usePostUnLike();
+  const { dataGetPost } = useIsPostLike();
+
+  console.log(dataGetPost?.isPostLike);
+
+  const editSubCommentInput = e => {
+    subSetEditText(e.target.value);
+  };
 
   const {
     loading: getTagsLoading,
@@ -167,14 +196,17 @@ function Post({}: PostProps) {
     setEditComment(!editComment);
   };
 
-  console.log(singlePostData?.findSinglePost);
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
       <div className="flex h-full">
         <div className="flex justify-center w-[30%] h-full">
           <div className="w-full">
             <div className="fixed flex flex-col w-[30%] h-[40%]">
-              <Realistic />
+              <Realistic
+                isLikeBoolean={dataGetPost?.isPostLike}
+                LikehandleSubmit={LikehandleSubmit}
+                UnlikehandleSubmit={UnlikehandleSubmit}
+              />
               <div className="mt-2 text-center">0</div>
             </div>
           </div>
@@ -235,28 +267,61 @@ function Post({}: PostProps) {
           onClickNotify={onClickNotify}
           onClickNotifyCheckString={onClickNotifyCheckString}
         />
-      </div>
 
-      {getComments?.map((el, id) => (
-        <>
-          <div key={id}>
-            <Comments
-              el={el}
-              editComment={editComment}
-              editText={editText}
-              editCommentInput={editCommentInput}
-              toggle={toggle}
-              on={on}
-              EditCommentSubmit={EditCommentSubmit}
-              fixComment={fixComment}
-              DeleteCommentSubmit={DeleteCommentSubmit}
-              setIsopen={setIsopen}
-              userData={userData}
-              onClickNotifyCheckString={onClickNotifyCheckString}
-            />
-          </div>
-        </>
-      ))}
+        {!commentsLoading &&
+          getComments.map((el, id) => (
+            <>
+              <div key={id}>
+                <Comments
+                  el={el}
+                  editComment={editComment}
+                  editText={editText}
+                  editCommentInput={editCommentInput}
+                  toggle={toggle}
+                  on={on}
+                  EditCommentSubmit={EditCommentSubmit}
+                  fixComment={fixComment}
+                  DeleteCommentSubmit={DeleteCommentSubmit}
+                  setIsopen={setIsopen}
+                  userData={userData}
+                  onClickNotifyCheckString={onClickNotifyCheckString}
+                />
+              </div>
+
+              {el.id == isOpen && on ? (
+                <>
+                  <SubCommentsForm
+                    userData={userData}
+                    subHandleSubmit={subHandleSubmit}
+                    findData={findData}
+                    onClickNotify={onClickNotify}
+                    isOpen={isOpen}
+                    on={on}
+                    toggle={toggle}
+                    onClickNotifyCheckString={onClickNotifyCheckString}
+                  />
+                </>
+              ) : (
+                ''
+              )}
+              {getComments.map((ele, id) => (
+                <>
+                  <SubComments
+                    ele={ele}
+                    el={el}
+                    subEditText={subEditText}
+                    editSubCommentInput={editSubCommentInput}
+                    EditCommentSubmit={EditCommentSubmit}
+                    DeleteCommentSubmit={DeleteCommentSubmit}
+                    userData={userData}
+                    findData={findData}
+                    onClickNotifyCheckString={onClickNotifyCheckString}
+                  />
+                </>
+              ))}
+            </>
+          ))}
+      </div>
 
       <div className="z-[100]">
         <svg className="progress-icon" viewBox="0 0 60 60">
@@ -285,51 +350,17 @@ function Post({}: PostProps) {
           />
         </svg>
       </div>
-      <style global jsx>{`
+      {/* <style global jsx>{`
         html,
         body,
         body > div:first-child,
         div#__next,
         div#__next > div {
-          height: 100vh;
+          height: 100%;
         }
-      `}</style>
+      `}</style> */}
     </PageTemplate>
   );
 }
 
 export default Post;
-
-{
-  /* {el.id == isOpen && on ? (
-                  <>
-                    <SubCommentsForm
-                      userData={userData}
-                      subHandleSubmit={subHandleSubmit}
-                      findData={findData}
-                      onClickNotify={onClickNotify}
-                      isOpen={isOpen}
-                      on={on}
-                      toggle={toggle}
-                      onClickNotifyCheckString={onClickNotifyCheckString}
-                    />
-                  </>
-                ) : (
-                  ''
-                )}
-                {getComments.map((ele, id) => (
-                  <>
-                    <SubComments
-                      ele={ele}
-                      el={el}
-                      subEditText={subEditText}
-                      editSubCommentInput={editSubCommentInput}
-                      EditCommentSubmit={EditCommentSubmit}
-                      DeleteCommentSubmit={DeleteCommentSubmit}
-                      userData={userData}
-                      findData={findData}
-                      onClickNotifyCheckString={onClickNotifyCheckString}
-                    />
-                  </>
-                ))} */
-}

@@ -26,8 +26,6 @@ function Comments(props: CommentsProps) {
   const [editSubComment, setEditSubComment] = useState(false);
   const [editText, setEditText] = useState('');
 
-  console.log(props.el);
-
   const editCommentInput = e => {
     setEditText(e.target.value);
   };

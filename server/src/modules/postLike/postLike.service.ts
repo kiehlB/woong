@@ -75,6 +75,53 @@ export class PostLikeService {
     return post;
   }
 
+  async unLiked(user, args) {
+    if (!user) {
+      throw new Error('유저가 없습니다!');
+    }
+    const getPost = await this.PostRepository;
+    const LikePost = await this.postLikeRepository;
+    const PostScore = await this.PostScoreRepository;
+
+    const post = await getPost.findOne({
+      where: {
+        id: args.id,
+      },
+    });
+
+    const alreadyLiked = await this.postLikeRepository.findOne({
+      where: {
+        post_id: args.id,
+        user_id: user.id,
+      },
+    });
+
+    if (!alreadyLiked) {
+      return post;
+    }
+
+    await LikePost.remove(alreadyLiked);
+
+    const count = await LikePost.count({
+      where: {
+        post_id: args.id,
+      },
+    });
+
+    post.likes = count;
+
+    await getPost.save(post);
+
+    await PostScore.createQueryBuilder()
+      .delete()
+      .where('post_id = :postId', { postId: args.id })
+      .andWhere('user_id = :userId', { userId: user.id })
+      .andWhere("type = 'LIKE'")
+      .execute();
+
+    return post;
+  }
+
   async getUsersByIds(ids) {
     return this.postLikeRepository.find({
       where: { post_id: In(ids) },

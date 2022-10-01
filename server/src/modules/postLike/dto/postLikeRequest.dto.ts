@@ -7,8 +7,8 @@ import {
 } from 'class-validator';
 import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 
-@InputType('createPostLike')
-export class CreatePostLikeRequest {
+@InputType('postLike')
+export class PostLikeRequest {
   @Field((type) => Int, { nullable: true })
   id?: number;
 }

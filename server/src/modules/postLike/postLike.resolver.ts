@@ -20,7 +20,7 @@ import {
 } from '@nestjs/graphql';
 import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
-import { CreatePostLikeRequest } from './dto/postLikeRequest.dto';
+import { PostLikeRequest } from './dto/postLikeRequest.dto';
 
 import { PostLike } from './postLike.entity';
 import { PostLikeService } from './postLike.service';
@@ -31,10 +31,19 @@ export class PostLikeResolver {
 
   @UseGuards(JwtAuthGuard)
   @Mutation(() => PostLike)
-  async PostLike(
+  async postLike(
     @CurrentUser() user: TokenUser,
-    @Args('input') post: CreatePostLikeRequest,
+    @Args('input') post: PostLikeRequest,
   ) {
     return this.PostLikeService.liked(user, post);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => PostLike)
+  async postUnLike(
+    @CurrentUser() user: TokenUser,
+    @Args('input') post: PostLikeRequest,
+  ) {
+    return this.PostLikeService.unLiked(user, post);
   }
 }

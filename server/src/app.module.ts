@@ -99,6 +99,7 @@ export const typeOrmConnectionDataSource = new DataSource({
         TagModule,
         PostLikeModule,
       ],
+
       useFactory: (
         usersService: UserService,
         userProfileService: UserProfileService,

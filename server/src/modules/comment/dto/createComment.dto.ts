@@ -9,7 +9,6 @@ export class CreateCommentRequest {
   text: string;
 
   @Field()
-  @IsString()
   @IsNotEmpty()
   post_id: number;
 

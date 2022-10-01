@@ -24,16 +24,17 @@ function CommentForm(props: CommentFormProps) {
     setText(e.target.value);
   };
 
+  console.log(props.userData);
   return (
     <div className="">
       <form
         className=""
         onSubmit={e => {
-          props.userData.me ? e.preventDefault() : props.onClickNotify(e);
+          props.userData.whoAmI ? e.preventDefault() : props.onClickNotify(e);
           IsTextNull(Text)
             ? props.onClickNotifyCheckString(e)
             : props.handleSubmit(e, props.findId, Text);
-          props.userData.me ? setText('') : '';
+          props.userData.whoAmI ? setText('') : '';
         }}>
         <div className="z-10">
           <TextareaAutosize

@@ -31,6 +31,15 @@ export class PostResolver {
     return this.postService.findPost(post);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Query(() => Boolean, { nullable: true })
+  isPostLike(
+    @CurrentUser() user: TokenUser,
+    @Args('input') post: getSinglePostRequest,
+  ): Promise<Boolean> {
+    return this.postService.isPostLike(post, user);
+  }
+
   @Query(() => [Post])
   findAllPost(): Promise<Post[]> {
     return this.postService.findAll();
@@ -89,6 +98,15 @@ export class PostResolver {
 
     return postLikeLoader.load(id);
   }
+
+  // @UseGuards(JwtAuthGuard)
+  // @ResolveField('liked', (retruns) => Boolean, { nullable: true })
+  // async isPostLiked(@CurrentUser() user: TokenUser, @Parent() p: Post) {
+  //   console.log(user);
+  //   const savePost = await this.postService.postLiked(p, user);
+
+  //   return savePost;
+  // }
 
   @ResolveField('posts_tags', (retruns) => [PostsTags], { nullable: true })
   async getPostTags(

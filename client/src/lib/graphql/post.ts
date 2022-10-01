@@ -9,6 +9,28 @@ export const Create_Post = gql`
   }
 `;
 
+export const IsPost_Like = gql`
+  query IsPostLike($input: getPost!) {
+    isPostLike(input: $input)
+  }
+`;
+
+export const Post_Like = gql`
+  mutation PostLike($input: postLike!) {
+    postLike(input: $input) {
+      id
+    }
+  }
+`;
+
+export const Post_unLike = gql`
+  mutation PostUnLike($input: postLike!) {
+    postUnLike(input: $input) {
+      id
+    }
+  }
+`;
+
 export const GET_Posts = gql`
   query FindAllPost {
     findAllPost {
@@ -41,6 +63,7 @@ export const GET_Post = gql`
       id
       body
       title
+      liked
       difficulty
       thumbnail
       created_at

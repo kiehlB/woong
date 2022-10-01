@@ -11,12 +11,16 @@ import { CreatePostRequest } from './dto/createPost.dto';
 import { Post } from './entitiy/post.entity';
 import { normalize } from '../../common/utils/normalize';
 import { SearchPostRequest } from './dto/searchPost.dto';
+import { PostLike } from '../postLike/postLike.entity';
 
 @Injectable()
 export class PostService {
   constructor(
     @InjectRepository(Post)
     private readonly PostRepository: Repository<Post>,
+
+    @InjectRepository(PostLike)
+    private readonly PostLikeRepository: Repository<PostLike>,
 
     @InjectRepository(Tag)
     private readonly TagRepository: Repository<Tag>,
@@ -28,13 +32,41 @@ export class PostService {
     private readonly entityManager: EntityManager,
   ) {}
 
-  async findPost(args): Promise<Post> {
+  async findPost(args) {
+    const postLikeRepo = await this.PostLikeRepository;
+
     const findPost = await this.PostRepository.createQueryBuilder('post')
       .where('post.id = :id', { id: args.id })
       .leftJoinAndSelect('post.user', 'user')
       .getOne();
 
-    return findPost;
+    // const liked = await postLikeRepo.findOne({
+    //   where: {
+    //     post_id: findPost.id,
+    //     user_id: user.id,
+    //   },
+    // });
+
+    return { ...findPost };
+  }
+
+  async isPostLike(args, user) {
+    const postLikeRepo = await this.PostLikeRepository;
+
+    const findPost = await this.PostRepository.createQueryBuilder('post')
+      .where('post.id = :id', { id: args.id })
+      .leftJoinAndSelect('post.user', 'user')
+      .getOne();
+
+    const liked = await postLikeRepo.findOne({
+      where: {
+        post_id: findPost.id,
+        user_id: user.id,
+      },
+    });
+    console.log(!!liked);
+
+    return !!liked;
   }
 
   async findAll() {
@@ -47,6 +79,21 @@ export class PostService {
       .getMany();
 
     return findPost;
+  }
+
+  async postLiked(p, user) {
+    const postLikeRepo = await this.PostLikeRepository;
+
+    if (!user) return false;
+    const liked = postLikeRepo.findOne({
+      where: {
+        post_id: p.post_id,
+        user_id: user.id,
+      },
+    });
+
+    console.log(liked);
+    return !!liked;
   }
 
   async getTrendingPosts() {

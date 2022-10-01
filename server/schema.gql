@@ -38,12 +38,13 @@ input InputSignin {
 }
 
 type Mutation {
-  PostLike(input: createPostLike!): PostLike!
   createAndUpdateProfile(input: createProfile!): ProfileResponse!
   createComment(input: createComment!): Comments!
   createPost(input: createPost!): Post!
   editComment(input: editComment!): Comments!
   editPost(input: editPost!): Post!
+  postLike(input: postLike!): PostLike!
+  postUnLike(input: postLike!): PostLike!
   register(input: registerInput!): RegisterResponse!
   removeComment(input: deleteComment!): Boolean!
   removePost(input: removePost!): Boolean!
@@ -56,6 +57,7 @@ type Post {
   created_at: DateTime!
   difficulty: String
   id: Int
+  liked: Boolean
   likes: Int
   post_likes: [PostLike!]
   posts_tags: [PostsTags!]
@@ -102,6 +104,7 @@ type Query {
   getTextSearchPosts(input: searchPost!): [Post!]!
   getTrendingPosts: [Post!]!
   getUser(input: getUserInfo!): GetUserInfoResponse!
+  isPostLike(input: getPost!): Boolean
   whoAmI: GetUserInfoResponse!
 }
 
@@ -161,10 +164,6 @@ input createPost {
   title: String
 }
 
-input createPostLike {
-  id: Int
-}
-
 input createProfile {
   bio: String!
 }
@@ -194,6 +193,10 @@ input getPost {
 
 input getUserInfo {
   id: Int!
+}
+
+input postLike {
+  id: Int
 }
 
 input registerInput {
