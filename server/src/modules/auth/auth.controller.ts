@@ -48,13 +48,13 @@ export class AuthController {
     if (jwt) {
       res.cookie('auth-cookie', jwt, {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-        secure: false,
-        httpOnly: false,
+        secure: true,
+        httpOnly: true,
       });
 
-      res.redirect(`http://localhost:3000`);
+      res.redirect(`https://www.woong.lol`);
     } else {
-      res.redirect('http://localhost:3000/signup');
+      res.redirect('https://www.woong.lol/signup');
     }
   }
 

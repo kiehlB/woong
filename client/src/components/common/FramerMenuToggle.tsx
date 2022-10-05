@@ -28,7 +28,7 @@ const Path = (props: PathProps) => (
 
 function MenuToggle({ toggle }: MenuToggleProps) {
   return (
-    <button onClick={toggle}>
+    <button className="button" onClick={toggle}>
       <svg width="23" height="23" viewBox="0 0 23 23">
         <Path
           variants={{

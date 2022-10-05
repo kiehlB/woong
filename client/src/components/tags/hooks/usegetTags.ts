@@ -1,4 +1,4 @@
-import { useQuery, gql, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { GET_Tags } from '../../../lib/graphql/tag';
 
 export default function useGetTags() {

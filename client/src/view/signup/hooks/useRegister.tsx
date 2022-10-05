@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { FormEvent } from 'react';
 import { inputProps } from '../../../components/auth/AuthForm';
 import { registerMutation } from '../../../lib/graphql/users';
 import useForm from '../../../lib/hooks/useForm';
@@ -22,12 +21,5 @@ export default function useRegister() {
     },
   );
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    signUp({
-      variables: { input: inputs },
-    });
-  };
-
-  return { inputs, handleChange, handleSubmit, registerError };
+  return { inputs, handleChange, registerError, signUp };
 }

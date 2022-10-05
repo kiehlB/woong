@@ -6,6 +6,7 @@ import Dot from '../common/TagsDot';
 import { DateTime } from 'luxon';
 import Link from 'next/link';
 import { Post } from '../../types/apolloComponent';
+import { Grid } from '../common/Grid';
 
 export type MainProps = {
   post: {
@@ -56,8 +57,8 @@ function Main({ post }: MainProps) {
   // toggleService.send('TOGGLE');
 
   return (
-    <section className="grid grid-cols-2 font-Roboto">
-      <div className="pt-[6rem] max-w-[35.5rem] ml-auto pr-[2rem] pl-[1rem] ">
+    <Grid className="mb-14">
+      <div className="pt-[6rem] max-w-[35.5rem] ml-auto pr-[2rem] pl-[1rem]">
         <h1 className="font-medium text-[#14151A]">LEARN ALL ABOUT</h1>
 
         <div className="text-[4rem] mb-[1rem] font-medium w-[80%] text-[#14151A] leading-[4.5rem]">
@@ -140,7 +141,7 @@ function Main({ post }: MainProps) {
           </div>
         </div>
       </Link>
-    </section>
+    </Grid>
   );
 }
 

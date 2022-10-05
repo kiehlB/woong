@@ -1,7 +1,6 @@
+import * as React from 'react';
 import { motion } from 'framer-motion';
-import NavMenuItem from './NavMenuItem';
-
-export type NavigationProps = {};
+import { MenuItem } from './NavMenuItem';
 
 const variants = {
   open: {
@@ -12,22 +11,12 @@ const variants = {
   },
 };
 
-const Items = [
-  { id: '0', text: 'Home', icon: '🏠' },
-  { id: '1', text: 'About', icon: 'ℹ️' },
-  { id: '2', text: 'Projects', icon: '💻' },
-  { id: '3', text: 'Blogs', icon: '✍️' },
-  { id: '4', text: 'Contact', icon: '📧' },
-];
+export const Navigation = () => (
+  <motion.ul variants={variants}>
+    {itemIds.map(i => (
+      <MenuItem i={i} key={i} />
+    ))}
+  </motion.ul>
+);
 
-function Navigation({}: NavigationProps) {
-  return (
-    <motion.ul variants={variants}>
-      {Items.map(item => (
-        <NavMenuItem id={item.id} key={item.id} text={item.text} icon={item.icon} />
-      ))}
-    </motion.ul>
-  );
-}
-
-export default Navigation;
+const itemIds = [0, 1, 2, 3, 4];

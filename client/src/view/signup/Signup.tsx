@@ -6,24 +6,28 @@ import AuthForm from '../../components/auth/AuthForm';
 import useRegister from './hooks/useRegister';
 import { getNextSeo } from '../../lib/nextSeo';
 import useGetTags from '../../components/tags/hooks/usegetTags';
+import { FormEvent } from 'react';
 
 export type SignUpProps = {};
 
 function SignUp({}: SignUpProps) {
-  const { inputs, handleChange, handleSubmit, registerError } = useRegister();
-  const {
-    loading: getTagsLoading,
-    error: getTagsError,
-    data: getTagsData,
-  } = useGetTags();
+  const { inputs, handleChange, signUp, registerError } = useRegister();
+  const { loading: getTagsLoading, data: getTagsData } = useGetTags();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    signUp({
+      variables: { input: inputs },
+    });
+  };
 
   return (
-    <>
+    <main>
       <NextSeo
         {...getNextSeo({ title: 'woong blog sign up', description: 'sign up page' })}
       />
       <PageTemplate tag={getTagsData} loading={getTagsLoading}>
-        <main className="flex flex-col justify-center h-full">
+        <section className="flex flex-col justify-center h-full">
           <Auth
             svg="register.svg"
             form={
@@ -46,9 +50,9 @@ function SignUp({}: SignUpProps) {
               </h2>
             }
           />
-        </main>
+        </section>
       </PageTemplate>
-    </>
+    </main>
   );
 }
 

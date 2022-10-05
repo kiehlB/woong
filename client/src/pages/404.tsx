@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '../components/common/Button';
+import { ArrowLink } from '../components/common/ArrowButton';
 
 export type Error404Props = {};
 
@@ -953,9 +954,9 @@ function Error404(props: Error404Props) {
         </svg>
         <Link href="/">
           <div className="flex justify-center">
-            <Button className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-bold text-white bg-regal-sky">
-              홈으로
-            </Button>
+            <ArrowLink href="/" direction="right" className="mt-14" prefetch="intent">
+              Home
+            </ArrowLink>
           </div>
         </Link>
       </div>

@@ -13,7 +13,7 @@ import { MenuItems } from '../../components/base/Header';
 import { getMainTag } from '../../store/tag';
 import PostList from '../../components/post/PostList';
 import PostTitle from '../../components/post/PostTitle';
-import { Grid, Input } from '@nextui-org/react';
+
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import { useState } from 'react';
 import { DateTime } from 'luxon';
@@ -21,6 +21,7 @@ import useGetPosts from '../../components/post/hooks/usegetPosts';
 import useGetTags from '../../components/tags/hooks/usegetTags';
 import useTrendingPosts from '../../components/post/hooks/useTrendingPosts';
 import Link from 'next/link';
+import { LayoutSection } from '../../components/sections/layout-sesction';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -71,7 +72,7 @@ const Home: NextPage = () => {
   return (
     <PageTemplate tag={getTagsData}>
       <Main post={data} />
-      <section className="w-[71rem] mx-auto  mxl:w-[80%]">
+      <LayoutSection>
         <div className="py-[3.5rem]">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES" />
           <div>
@@ -79,7 +80,7 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div className="mb-7">
+        <div className="py-14">
           <SvgCard
             svg={<Swing />}
             text="#black"
@@ -98,18 +99,18 @@ const Home: NextPage = () => {
             subtitle={`Learn more about glossaries`}
           />
         </div>
-      </section>
+      </LayoutSection>
 
-      <section className="w-[71rem] mx-auto  mxl:w-[80%]">
+      <LayoutSection>
         <div className="py-[3.5rem]">
           <PostTitle title="Trending" subtitle="SEE ALL LATEST RELEASES  " />
-          <div className="">
+          <div>
             <PostList data={TrendingPostsData?.getTrendingPosts} />
           </div>
         </div>
-      </section>
+      </LayoutSection>
       <div className="bg-[#14151A]">
-        <div className="w-[71rem] mx-auto  mxl:w-[80%]">
+        <LayoutSection>
           <div className="flex pt-14">
             <div className="text-white">Topics : </div>
             <div className="text-[#aeb4bc] flex flex-1 flex-wrap items-center gap-4 px-4">
@@ -394,7 +395,7 @@ const Home: NextPage = () => {
               <path d="M10.5 15L9.1 13.6L14.2 8.5L5.68248e-07 8.5L7.43094e-07 6.5L14.2 6.5L9.1 1.4L10.5 -6.55671e-07L18 7.5L10.5 15Z"></path>
             </svg>
           </div>
-        </div>
+        </LayoutSection>
       </div>
 
       <div

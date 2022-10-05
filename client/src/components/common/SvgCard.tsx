@@ -13,11 +13,11 @@ export type SvgCardProps = {
 function SvgCard({ svg, title, subtitle, bg, text }: SvgCardProps) {
   return (
     <div
-      className={`grid grid-cols-2 gap-8 items-center py-4 rounded-2xl bg-[${bg}] text-[${text}]`}>
+      className={`grid h-[23.75rem] grid-cols-2 gap-8 items-center py-4 rounded-2xl bg-[${bg}] text-[${text}]`}>
       <div className="col-span-1 py-8 pl-[2.5rem]">
         <div className={`font-medium font-Roboto leading-10 text-[2.5rem]`}>{title}</div>
         <div className="text-[1.25rem] leading-7 mt-4 ">{subtitle}</div>
-        <ArrowLink href={'/filter'} direction="right" className="pt-6">
+        <ArrowLink href={'/filter'} direction="right" className="pt-8">
           See More
         </ArrowLink>
       </div>

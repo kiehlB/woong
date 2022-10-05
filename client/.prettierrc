@@ -9,5 +9,9 @@
   "singleQuote": true,
   "proseWrap": "always",
   "arrowParens": "avoid",
-  "parser": "typescript"
+  "parser": "typescript",
+  "embeddedLanguageFormatting": "auto",
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity":"css",
+  "quoteProps": "as-needed"
 }

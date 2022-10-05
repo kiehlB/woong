@@ -8,12 +8,10 @@ export type HeaderMenuItemsProps = {
   name?: string;
   subName: string;
   svg?: React.ReactNode;
-  handleCheck: any;
+  handleCheck: (name: string) => void;
 };
 
 function HeaderMenuItems({ name, svg, subName, handleCheck }: HeaderMenuItemsProps) {
-  const dispatch = useDispatch();
-
   return (
     <Link href="/filter">
       <a>

@@ -16,7 +16,7 @@ function HeaderTopicItem({ name, size, handleCheck, disable }: HeaderTopicItemPr
     <div className="mr-2 mt-2 cursor-pointer">
       <div
         onClick={() => (disable ? '' : handleCheck(name))}
-        className={clsx(' text-white  rounded-3xl  font-Roboto  text-sm', {
+        className={clsx('text-white  rounded-3xl  font-Roboto  text-sm', {
           'truncate  px-[12px] py-[2px] text-xs bg-[#0B0E11] shadow-md max-w-[6rem]':
             size == 'small',
           'text-center  space-x-1 px-2 py-1 bg-black truncate  w-full': size == 'big',
@@ -30,8 +30,8 @@ function HeaderTopicItem({ name, size, handleCheck, disable }: HeaderTopicItemPr
         <div className="mr-2 mt-2 cursor-pointer">
           <div
             onClick={() => (disable ? '' : handleCheck(name))}
-            className={clsx(' text-white  rounded-3xl  font-Roboto  text-sm', {
-              'truncate  px-[12px] py-[2px] text-xs bg-[#0B0E11] shadow-md max-w-[6rem]':
+            className={clsx('text-white  rounded-3xl  font-Roboto  text-sm', {
+              'truncate px-[12px] py-[2px] text-xs bg-[#0B0E11] shadow-md max-w-[6rem]':
                 size == 'small',
               'text-center  space-x-1 px-2 py-1 bg-black truncate  w-full': size == 'big',
             })}>

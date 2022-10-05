@@ -1,10 +1,5 @@
+import * as React from 'react';
 import { motion } from 'framer-motion';
-
-export type NavMenuItemProps = {
-  id: number | string;
-  text: string;
-  icon: React.ReactNode;
-};
 
 const variants = {
   open: {
@@ -23,22 +18,14 @@ const variants = {
   },
 };
 
-const colors = ['#fef6e4', '#f582ae', '#8bd3dd', '#b8c1ec', '#ff8906'];
+const colors = ['#FF008C', '#D309E1', '#9C1AFF', '#7700FF', '#4400FF'];
 
-function NavMenuItem({ id, text, icon }: NavMenuItemProps) {
-  const style = { border: `3px solid ${colors[id]}` };
-
+export const MenuItem = ({ i }) => {
+  const style = { border: `2px solid ${colors[i]}` };
   return (
     <motion.li variants={variants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-      <div className="icon-placeholder" style={style}>
-        <span className="icon">{icon}</span>
-      </div>
-
-      <div className="text-placeholder" style={style}>
-        <span className="text">{text}</span>
-      </div>
+      <div className="icon-placeholder" style={style} />
+      <div className="text-placeholder" style={style} />
     </motion.li>
   );
-}
-
-export default NavMenuItem;
+};

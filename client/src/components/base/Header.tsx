@@ -19,6 +19,8 @@ import { useCallback, useState } from 'react';
 import { setPostSearch } from '../../store/post';
 import { useRouter } from 'next/router';
 
+import Sidebar from '../sidebar/Sidebar';
+
 export type Tags = {
   id: number;
   name: string;
@@ -123,7 +125,7 @@ function Header({ tag, loading }: HeaderProps) {
           <div className="group w-6  mr-8 ml-8">
             <MenuIcon />
             <nav className="absolute mt-5 bg-white">
-              <div className="group-hover:block pt-2 hidden  relative  shadow  border-b-2   text-black after:border-[12px]   after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
+              <div className="group-hover:block pt-2 hidden  relative  shadow  border-b-2 text-black after:border-[12px] after:border-solid after:border-transparent after:border-b-white after:-top-[20px] after:absolute after:left-1.5 ">
                 <ul className="grid grid-cols-2 p-4">
                   {MenuItems.map(e => (
                     <li key={e.id}>
@@ -182,6 +184,8 @@ function Header({ tag, loading }: HeaderProps) {
       </div>
 
       <div className="flex flex-end items-center">
+        <Sidebar />
+
         <form className="search" onSubmit={handleSubmit}>
           <input
             type="text"

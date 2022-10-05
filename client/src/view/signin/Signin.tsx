@@ -1,5 +1,6 @@
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
+import { FormEvent } from 'react';
 import Auth from '../../components/auth/Auth';
 import AuthForm from '../../components/auth/AuthForm';
 import PageTemplate from '../../components/base/PageTemplate';
@@ -12,21 +13,34 @@ import useLogin from './hooks/useLogin';
 export type SigninProps = {};
 
 function Signin({}: SigninProps) {
-  const { inputs, handleChange, login, handleSubmit, loginError } = useLogin();
+  const { inputs, handleChange, login, loginError } = useLogin();
   const {
     loading: getTagsLoading,
     error: getTagsError,
     data: getTagsData,
   } = useGetTags();
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const response = await login({
+      variables: { input: inputs },
+      update: (store, { data }) => {
+        if (!data) {
+          return null;
+        }
+      },
+    });
+  };
+
   return (
-    <>
+    <main>
       <NextSeo
         {...getNextSeo({ title: 'woong blog sign in', description: 'sign in page' })}
       />
 
       <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
-        <section className="bg-[#FEF6D8] ">
+        <section className="bg-[#FEF6D8]">
           <div className="flex justify-center items-center  h-10 shadow">
             <SslIcon />
             <div className="flex text-xs">
@@ -59,7 +73,7 @@ function Signin({}: SigninProps) {
           />
         </section>
       </PageTemplate>
-    </>
+    </main>
   );
 }
 
