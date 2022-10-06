@@ -39,22 +39,17 @@ function TagItem({
             'border border-[rgba(217,48,78,0.2)]': variant == 'Advanced',
 
             'bg-[#F0B90B] text-[#14151A]': bg == 'smallYello' && checked == true,
-
             '!text-rose-700': bg == 'superSmall' && checked == true,
-
             'bg-[rgba(2,192,118,0.2)] border-none !text-white':
               bg == 'green' && checked == true,
 
             'bg-[#f0b90b33] border-none !text-white': bg == 'yello' && checked == true,
-
             'bg-[#d9304e33] border-none !text-white': bg == 'red' && checked == true,
 
             'px-4 py-1 border-[#2b2f36] h-[1.75rem] rounded-[100px] text-xs font-Roboto ':
               size == 'small',
-
             'px-2 py-0 leading-normal border-[#2b2f36] h-[1.75rem] rounded-lg text-xs font-Roboto text-[#AEB4BC]':
               size == 'medium',
-
             'mb-2 mr-2 text-xs h-[22px] px-3 py-1 font-Roboto bg-[#F5F5F5] opacity-60 text-[#14151A] flex justify-center item-center border-none':
               size == 'superSmall',
           },

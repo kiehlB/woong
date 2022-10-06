@@ -168,40 +168,38 @@ const Home: NextPage = () => {
           <div className="grid grid-cols-4 gap-6">
             <div className="col-span-3">
               {isFilterdArray[0] ? (
-                <>
-                  <div
-                    className="grid bg-[#2b2f36] rounded-lg"
-                    style={{
-                      gridTemplateColumns: 'minmax(auto,368px) 1fr',
-                    }}>
-                    {isFilterdArray[0].thumbnail ? (
-                      <img
-                        src={isFilterdArray[0]?.thumbnail}
-                        className="max-h-[20rem] min-h-[20rem] w-full object-cover rounded-xl"
-                      />
-                    ) : (
-                      <img
-                        src="img/noImg.jpg"
-                        className="max-h-[20rem] min-h-[20rem] w-full object-cover rounded-xl"
-                      />
-                    )}
+                <div
+                  className="grid bg-[#2b2f36] rounded-lg"
+                  style={{
+                    gridTemplateColumns: 'minmax(auto,368px) 1fr',
+                  }}>
+                  {isFilterdArray[0].thumbnail ? (
+                    <img
+                      src={isFilterdArray[0]?.thumbnail}
+                      className="max-h-[20rem] min-h-[20rem] w-full object-cover rounded-xl"
+                    />
+                  ) : (
+                    <img
+                      src="img/noImg.jpg"
+                      className="max-h-[20rem] min-h-[20rem] w-full object-cover rounded-xl"
+                    />
+                  )}
 
-                    <div className="flex text-white bg-[#2b2f36] flex-col  justify-center px-4 rounded-lg">
-                      <div className="text-[2rem] leading-10 font-semibold  break-all line-clamp-3">
-                        {isFilterdArray[0]?.title}
-                      </div>
-                      <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
-                        {DateTime.fromISO(isFilterdArray[0]?.created_at)
-                          .toLocaleString()
-                          .slice(0, -1)}
-                      </div>
-                      <div className="flex items-center">
-                        <Dot css={isFilterdArray[0]?.difficulty} />{' '}
-                        {isFilterdArray[0]?.difficulty}
-                      </div>
+                  <div className="flex text-white bg-[#2b2f36] flex-col  justify-center px-4 rounded-lg">
+                    <div className="text-[2rem] leading-10 font-semibold  break-all line-clamp-3">
+                      {isFilterdArray[0]?.title}
+                    </div>
+                    <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
+                      {DateTime.fromISO(isFilterdArray[0]?.created_at)
+                        .toLocaleString()
+                        .slice(0, -1)}
+                    </div>
+                    <div className="flex items-center">
+                      <Dot css={isFilterdArray[0]?.difficulty} />{' '}
+                      {isFilterdArray[0]?.difficulty}
                     </div>
                   </div>
-                </>
+                </div>
               ) : (
                 ''
               )}
