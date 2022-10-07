@@ -21,6 +21,7 @@ import { PostLike } from '../postLike/postLike.entity';
 import { EditPostRequest } from './dto/editPost.dto';
 import { RemovePostRequest } from './dto/removePost.dto';
 import { SearchPostRequest } from './dto/searchPost.dto';
+import { User } from '../user/entitiy/user.entity';
 
 @Resolver((of) => Post)
 export class PostResolver {
@@ -128,5 +129,16 @@ export class PostResolver {
     const { id } = user;
 
     return commentsLoader.load(id);
+  }
+
+  @ResolveField('user', (retruns) => [User], { nullable: true })
+  async getUsersLoader(
+    @Parent() user: Post,
+    @Context('usersLoader')
+    usersLoader: DataLoader<number, [User]>,
+  ) {
+    const { id } = user;
+
+    return usersLoader.load(id);
   }
 }

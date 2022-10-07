@@ -65,7 +65,7 @@ type Post {
   thumbnail: String
   title: String
   updated_at: DateTime!
-  user: User
+  user: [User!]
   user_id: Int
 }
 
@@ -93,7 +93,7 @@ type ProfileResponse {
 }
 
 type Query {
-  findAllComments: [Comments!]!
+  findAllComments: [Comments!]
   findAllPost: [Post!]!
   findByIdTag(id: Int!): [Tag!]!
   findSinglePost(input: getPost!): Post

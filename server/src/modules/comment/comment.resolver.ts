@@ -17,6 +17,8 @@ import {
   Directive,
   Context,
   Int,
+  ResolveProperty,
+  Parent,
 } from '@nestjs/graphql';
 import { Comments } from './comment.entity';
 import { CurrentUser, TokenUser } from 'src/decorator/auth-user.decorator';
@@ -34,7 +36,7 @@ import { EditCommentRequest } from './dto/editComment.dto';
 export class CommentResolver {
   constructor(private readonly commentService: CommentService) {}
 
-  @Query(() => [Comments])
+  @Query(() => [Comments], { nullable: true })
   async findAllComments(): Promise<Comments[]> {
     const users = await this.commentService.findAll();
 

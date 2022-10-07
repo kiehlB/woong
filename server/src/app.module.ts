@@ -84,6 +84,7 @@ export const typeOrmConnectionDataSource = new DataSource({
         database: configService.get('DB_DATABASE'),
         synchronize: true,
         autoLoadEntities: true,
+        logging: true,
         // autoSchemaSync: true,
         // dropSchema: true,
       }),
@@ -110,6 +111,7 @@ export const typeOrmConnectionDataSource = new DataSource({
         autoSchemaFile: './schema.gql',
         sortSchema: true,
         playground: true,
+
         cors: {
           origin: process.env.ORIGIN,
           credentials: true,

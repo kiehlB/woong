@@ -29,6 +29,7 @@ function SubComments(props: SubCommentsProps) {
     subSetEditText(props.ele.text);
   };
 
+  console.log(props.ele);
   return (
     <>
       <div>
@@ -72,7 +73,7 @@ function SubComments(props: SubCommentsProps) {
                   <div className="ml-4" style={{ whiteSpace: 'pre-line' }}>
                     {props.ele.text}
                   </div>
-                  {props.userData?.me?.id == props.ele.user.id ? (
+                  {props.userData?.whoAmI?.id == props.ele.user.id ? (
                     <div className="comments-edit-wrapper">
                       <div onClick={fixSubComment} className="sub-color">
                         수정

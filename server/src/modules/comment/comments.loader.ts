@@ -5,7 +5,7 @@ import { CommentService } from './comment.service';
 
 export function createCommentsLoader(userProfileService: CommentService) {
   return new DataLoader<number, Comments[]>(async (ids) => {
-    const comments = await await userProfileService.getUsersByIds(ids);
+    const comments = await userProfileService.getUsersByIds(ids);
     const mappedResults = ids.map(
       (id) => comments.filter((comment) => comment.post_id === id) || null,
     );

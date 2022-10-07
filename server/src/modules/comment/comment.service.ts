@@ -24,8 +24,15 @@ export class CommentService {
 
   async findAll() {
     const comment = await this.commentRepository;
-    const comments = await comment.find();
-    return comments;
+
+    const findComments = await this.commentRepository
+      .createQueryBuilder('comments')
+      .leftJoinAndSelect('comments.user', 'user')
+      .getMany();
+
+    console.log(findComments);
+
+    return findComments;
   }
 
   async create(user, commentBody: CreateCommentRequest): Promise<Comments> {

@@ -7,6 +7,7 @@ import {
   useSpring,
   useTransform,
   useViewportScroll,
+  useIsPresent,
 } from 'framer-motion';
 import PageTemplate from '../../components/base/PageTemplate';
 import useGetPost from './hooks/useGetPost';
@@ -141,8 +142,9 @@ function Post({}: PostProps) {
   const { UnlikehandleSubmit, isUnLikeBoolean } = usePostUnLike();
   const { dataGetPost } = useIsPostLike();
 
-  console.log(dataGetPost?.isPostLike);
+  const getCcrollTop = getScrollTop();
 
+  console.log(getCcrollTop);
   const editSubCommentInput = e => {
     subSetEditText(e.target.value);
   };
@@ -322,34 +324,42 @@ function Post({}: PostProps) {
             </>
           ))}
       </div>
+      {getCcrollTop > 0 ? (
+        <div className="z-[100] h-full">
+          <AnimatePresence initial={false}>
+            <svg className="progress-icon" viewBox="0 0 60 60">
+              <motion.path
+                fill="none"
+                strokeWidth="5"
+                stroke="blue"
+                initial={{ opacity: 0 }}
+                strokeDasharray="0 1"
+                d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
+                animate={{ opacity: 1 }}
+                style={{
+                  pathLength,
+                  rotate: 90,
+                  translateX: 3,
+                  translateY: 3,
+                  scaleX: -1, // Reverse direction of line animation
+                }}
+              />
+              <motion.path
+                fill="none"
+                strokeWidth="5"
+                stroke="black"
+                d="M14,26 L 22,33 L 35,16"
+                initial={{ opacity: 0 }}
+                strokeDasharray="0 1"
+                animate={{ pathLength: isComplete ? 1 : 0 }}
+              />
+            </svg>
+          </AnimatePresence>
+        </div>
+      ) : (
+        ''
+      )}
 
-      <div className="z-[100]">
-        <svg className="progress-icon" viewBox="0 0 60 60">
-          <motion.path
-            fill="none"
-            strokeWidth="5"
-            stroke="black"
-            strokeDasharray="0 1"
-            d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
-            style={{
-              pathLength,
-              rotate: 90,
-              translateX: 5,
-              translateY: 5,
-              scaleX: -1, // Reverse direction of line animation
-            }}
-          />
-          <motion.path
-            fill="none"
-            strokeWidth="5"
-            stroke="black"
-            d="M14,26 L 22,33 L 35,16"
-            initial={false}
-            strokeDasharray="0 1"
-            animate={{ pathLength: isComplete ? 1 : 0 }}
-          />
-        </svg>
-      </div>
       {/* <style global jsx>{`
         html,
         body,

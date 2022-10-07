@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { GetUserinfoRequest } from './dto/getUserInfo.dto';
 import { User } from './entitiy/user.entity';
 
@@ -30,17 +30,15 @@ export class UserService {
     return user;
   }
 
-  async getUsersByIds(ids: readonly number[]) {
-    const user = await this.userRepository;
-    const users = await user.find();
-
-    return users.filter((u) => ids.includes(u.id));
+  async getUsersByIds(ids) {
+    return await this.userRepository.find({
+      where: { id: In(ids) },
+    });
   }
 
   async createUser(user: Partial<User>): Promise<User> {
     const { email, password } = user;
 
-    console.log(user);
     if (!email || !password) {
       throw new Error('이메일과 비밀번호를 입력해 주세요!');
     }

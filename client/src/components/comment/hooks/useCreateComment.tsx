@@ -48,7 +48,7 @@ export default function useCreateComment() {
 
     createComment({
       variables: {
-        input: { post_id: findId, text: subText, comment_id: isOpen },
+        input: { post_id: parseInt(findId), text: subText, comment_id: parseInt(isOpen) },
       },
 
       update: async (proxy, { data: createComment }) => {

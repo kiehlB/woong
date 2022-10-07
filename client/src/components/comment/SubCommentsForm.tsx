@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+import { checkEmpty } from '../../lib/utils';
+import { Button } from '../common/Button';
 
 export type SubCommentsFormProps = {
   userData: any;
@@ -23,9 +25,17 @@ function SubCommentsForm(props: SubCommentsFormProps) {
     setSubText(e.target.value);
   };
 
+  console.log(props.userData.whoAmI);
   return (
     <div>
-      <form>
+      <form
+        onSubmit={e => {
+          props.userData.whoAmI ? e.preventDefault() : props.onClickNotify(e);
+          checkEmpty(SubText)
+            ? props.onClickNotifyCheckString(e)
+            : props.subHandleSubmit(e, props.findData.id, SubText);
+          props.userData.whoAmI ? setSubText('') : '';
+        }}>
         <TextareaAutosize
           rows={4}
           className="commentsInput"
@@ -34,7 +44,9 @@ function SubCommentsForm(props: SubCommentsFormProps) {
           value={SubText}
           onChange={subTextOnChange}
         />
-        <div className="button-flex"></div>
+        <div className="button-flex">
+          <Button className=" text-white bg-regal-sky">댓글 작성</Button>
+        </div>
       </form>
     </div>
   );

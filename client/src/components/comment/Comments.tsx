@@ -69,8 +69,8 @@ function Comments(props: CommentsProps) {
               )}
             </div>
 
-            <div className="comment-write-button">
-              <div className="edit-button">
+            <div className="flex">
+              <div className="flex items-center">
                 <IoIosAddCircleOutline
                   style={{ marginRight: '.2rem' }}
                   onClick={() => {

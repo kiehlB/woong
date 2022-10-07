@@ -10,6 +10,11 @@ export const GET_Comments = gql`
       deleted
       text
       user_id
+      user {
+        id
+        email
+        username
+      }
     }
   }
 `;
