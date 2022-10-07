@@ -3,12 +3,7 @@ export type BicycleProps = {};
 function Bicycle({}: BicycleProps) {
   return (
     <div>
-      <svg
-        width="548px"
-        height="308px"
-        viewBox="0 0 1058 785"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 1058 785" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect />
         <g id="undraw_Ride_a_Bicycle_2yok 1">
           <g clipPath="url(#clip0)">

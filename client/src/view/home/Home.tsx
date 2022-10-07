@@ -73,7 +73,7 @@ const Home: NextPage = () => {
     <PageTemplate tag={getTagsData}>
       <Main post={data} />
       <LayoutSection>
-        <div className="py-[3.5rem]">
+        <div className="py-[3.5rem] px-4">
           <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES" />
           <div>
             <PostList data={data?.findAllPost.slice(0, 9)} />
@@ -433,8 +433,8 @@ const Home: NextPage = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4  mb-[3.5rem]">
-        {/* <div className="col-span-1 bg-[rgba(240,185,11,0.15)] rounded-2xl h-full ">
+      {/* <div className="grid grid-cols-2 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4  mb-[3.5rem]"> */}
+      {/* <div className="col-span-1 bg-[rgba(240,185,11,0.15)] rounded-2xl h-full ">
           <div className="grid grid-cols-2 justify-center content-center h-full">
             <img src="/1.svg" className="w-full col-span-1 h-full py-12" />
             <div className="col-span-1 h-full grid  justify-center content-center">
@@ -449,7 +449,7 @@ const Home: NextPage = () => {
           </div>
         </div> */}
 
-        {/* <div className="col-span-1 bg-[#2b2f36] rounded-2xl h-full">
+      {/* <div className="col-span-1 bg-[#2b2f36] rounded-2xl h-full">
           <div className="grid grid-cols-2 justify-center content-center h-full">
             <img src="/2.svg" className="w-full col-span-1 h-full" />
             <div className="col-span-1 h-full grid  justify-center content-center">
@@ -510,7 +510,7 @@ const Home: NextPage = () => {
         <div className="shadow-xl p-6 rounded-2xl">
           <div>dd</div>
         </div> */}
-      </div>
+      {/* </div> */}
     </PageTemplate>
   );
 };

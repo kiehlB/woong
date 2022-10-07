@@ -8,11 +8,11 @@ export type PostListProps = {
 
 function PostList({ data }: PostListProps) {
   return (
-    <div className="grid grid-cols-3 auto-rows-auto gap-6 mxl:grid-cols-2 w-full">
+    <div className="grid gap-9 grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1 auto-rows-fr">
       {data?.map(e => (
         <div
           key={e.id}
-          className="transform  hover:translate-y-[-15px] transition duration-500 ease-in-out w-full">
+          className="auto-rows-auto transform  hover:translate-y-[-15px] transition duration-500 ease-in-out w-full">
           <div data-aos="fade-down" className="shadow-lg rounded-xl w-full">
             <PostCard article={e} />
           </div>

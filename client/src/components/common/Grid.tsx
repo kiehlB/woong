@@ -31,7 +31,7 @@ const Grid = React.forwardRef<HTMLElement, GridProps>(function Grid(
 
       <div
         className={clsx(
-          'relative grid grid-cols-2 gap-x-4',
+          'relative grid grid-cols-2 gap-x-4 mmd:grid-cols-1',
           {
             '': !nested,
             'gap-y-4 lg:gap-y-6': rowGap,

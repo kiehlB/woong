@@ -4,12 +4,7 @@ function Swing({}: SwingProps) {
   return (
     <div className="col-md-offset-3 col-sm-10 col-md-8 text-center mauto">
       <div className="bg-svg">
-        <svg
-          width="548px"
-          height="308px"
-          viewBox="0 0 1006 830"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 1006 830" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="undraw_Tree_swing_646s 1" clipPath="url(#clip0)">
             <path
               id="Vector"

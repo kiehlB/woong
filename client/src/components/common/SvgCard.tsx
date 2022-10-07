@@ -13,7 +13,7 @@ export type SvgCardProps = {
 function SvgCard({ svg, title, subtitle, bg, text }: SvgCardProps) {
   return (
     <div
-      className={`grid h-[23.75rem] grid-cols-2 gap-8 items-center py-4 rounded-2xl bg-[${bg}] text-[${text}]`}>
+      className={`grid grid-cols-2 gap-8 items-center py-4 rounded-2xl bg-[${bg}] text-[${text}]  mmd:grid-cols-1`}>
       <div className="col-span-1 py-8 pl-[2.5rem]">
         <div className={`font-medium font-Roboto leading-10 text-[2.5rem]`}>{title}</div>
         <div className="text-[1.25rem] leading-7 mt-4 ">{subtitle}</div>
@@ -21,7 +21,7 @@ function SvgCard({ svg, title, subtitle, bg, text }: SvgCardProps) {
           See More
         </ArrowLink>
       </div>
-      <div className="col-span-1 z-10">{svg}</div>
+      <div className="col-span-1 z-10 w-[400px] ml-auto mr-8">{svg}</div>
     </div>
   );
 }
