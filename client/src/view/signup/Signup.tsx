@@ -27,7 +27,7 @@ function SignUp({}: SignUpProps) {
         {...getNextSeo({ title: 'woong blog sign up', description: 'sign up page' })}
       />
       <PageTemplate tag={getTagsData} loading={getTagsLoading}>
-        <section className="flex flex-col justify-center h-full">
+        <section className="flex flex-col justify-center h-full mt-12 mmd:mb-12">
           <Auth
             svg="register.svg"
             form={
