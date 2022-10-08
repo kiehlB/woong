@@ -21,7 +21,7 @@ function SvgCard({ svg, title, subtitle, bg, text }: SvgCardProps) {
           See More
         </ArrowLink>
       </div>
-      <div className="col-span-1 z-10 w-[400px] ml-auto mr-8">{svg}</div>
+      <div className="col-span-1 z-10 w-[400px] ml-auto mr-8 mxl:w-[300px]">{svg}</div>
     </div>
   );
 }

@@ -13,7 +13,7 @@ import { MenuItems } from '../../components/base/Header';
 import { getMainTag } from '../../store/tag';
 import PostList from '../../components/post/PostList';
 import PostTitle from '../../components/post/PostTitle';
-
+import styled from 'styled-components';
 import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import { useState } from 'react';
 import { DateTime } from 'luxon';
@@ -22,6 +22,7 @@ import useGetTags from '../../components/tags/hooks/usegetTags';
 import useTrendingPosts from '../../components/post/hooks/useTrendingPosts';
 import Link from 'next/link';
 import { LayoutSection } from '../../components/sections/layout-sesction';
+import media from '../../lib/styles/media';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -80,7 +81,7 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div className="py-14">
+        <div className="py-14 px-4">
           <SvgCard
             svg={<Swing />}
             text="#black"
@@ -90,7 +91,7 @@ const Home: NextPage = () => {
           />
         </div>
 
-        <div className="py-14">
+        <div className="py-14 px-4">
           <SvgCard
             bg="#2b2f36"
             text="#fff"
@@ -102,17 +103,17 @@ const Home: NextPage = () => {
       </LayoutSection>
 
       <LayoutSection>
-        <div className="py-[3.5rem]">
+        <div className="py-[3.5rem] px-4">
           <PostTitle title="Trending" subtitle="SEE ALL LATEST RELEASES  " />
           <div>
             <PostList data={TrendingPostsData?.getTrendingPosts} />
           </div>
         </div>
       </LayoutSection>
-      <div className="bg-[#14151A]">
+      <div className="bg-[#14151A] px-4">
         <LayoutSection>
           <div className="flex pt-14">
-            <div className="text-white">Topics : </div>
+            <div className="text-white px-4">Topics : </div>
             <div className="text-[#aeb4bc] flex flex-1 flex-wrap items-center gap-4 px-4">
               <TagList
                 tag={getTagsData?.getAllTags}
@@ -124,8 +125,8 @@ const Home: NextPage = () => {
             </div>
           </div>
 
-          <div className="flex my-8 ">
-            <div className="text-white  mr-4">Difficulty:</div>
+          <div className="flex my-8">
+            <div className="text-white mr-4 px-4">Difficulty:</div>
 
             <TagItem
               tag="Beginner"
@@ -166,22 +167,18 @@ const Home: NextPage = () => {
           </div>
 
           <div className="grid grid-cols-4 gap-6">
-            <div className="col-span-3">
+            <div className="col-span-3 mxl:col-span-4">
               {isFilterdArray[0] ? (
-                <div
-                  className="grid bg-[#2b2f36] rounded-lg"
-                  style={{
-                    gridTemplateColumns: 'minmax(auto,368px) 1fr',
-                  }}>
+                <PostGridStyled className="grid bg-[#2b2f36] rounded-lg h-full">
                   {isFilterdArray[0].thumbnail ? (
                     <img
                       src={isFilterdArray[0]?.thumbnail}
-                      className="max-h-[20rem] min-h-[20rem] w-full object-cover rounded-xl"
+                      className="w-full object-cover rounded-xl"
                     />
                   ) : (
                     <img
                       src="img/noImg.jpg"
-                      className="max-h-[20rem] min-h-[20rem] w-full object-cover rounded-xl"
+                      className="w-full object-cover rounded-xl h-full"
                     />
                   )}
 
@@ -199,26 +196,23 @@ const Home: NextPage = () => {
                       {isFilterdArray[0]?.difficulty}
                     </div>
                   </div>
-                </div>
+                </PostGridStyled>
               ) : (
                 ''
               )}
             </div>
             {isFilterdArray[1] ? (
-              <div className="col-span-1 rounded-lg bg-[#2b2f36] relative  h-[20rem]">
+              <div className="col-span-1 rounded-lg bg-[#2b2f36] relative mxl:col-span-2 mmd:col-span-4">
                 {isFilterdArray[1].thumbnail ? (
                   <img
                     src={isFilterdArray[1]?.thumbnail}
-                    className="max-h-[20rem] w-full object-cover rounded-xl"
+                    className=" w-full object-cover rounded-xl"
                   />
                 ) : (
-                  <img
-                    src="img/noImg.jpg"
-                    className="h-[9.25rem] w-full object-cover rounded-xl"
-                  />
+                  <img src="img/noImg.jpg" className="w-full object-cover rounded-xl" />
                 )}
 
-                <div className="text-[#fff] px-4 pt-2 break-all">
+                <div className="text-[#fff] px-4 pt-2 break-all py-24">
                   <div className=" text-[1.3rem] leading-8 font-semibold break-all line-clamp-2">
                     {isFilterdArray[1]?.title}
                   </div>
@@ -240,21 +234,18 @@ const Home: NextPage = () => {
             )}
 
             {isFilterdArray[2] ? (
-              <div className="col-span-1 bg-[#2b2f36] relative  h-[20rem] ">
+              <div className="col-span-1 bg-[#2b2f36] relative mxl:col-span-2 mmd:col-span-4">
                 {isFilterdArray[2].thumbnail ? (
                   <img
                     src={isFilterdArray[2]?.thumbnail}
-                    className="h-[9.25rem] w-full object-cover rounded-lg"
+                    className="w-full object-cover rounded-lg"
                   />
                 ) : (
-                  <img
-                    src="img/noImg.jpg"
-                    className="h-[9.25rem] w-full object-cover rounded-lg"
-                  />
+                  <img src="img/noImg.jpg" className="w-full object-cover rounded-lg" />
                 )}
 
                 <div className="text-[#fff] px-4 pt-2">
-                  <div className=" text-[1.3rem] leading-8 font-semibold break-all line-clamp-2">
+                  <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-2">
                     {isFilterdArray[2]?.title}
                   </div>
                 </div>
@@ -275,12 +266,8 @@ const Home: NextPage = () => {
             )}
 
             {isFilterdArray[3] ? (
-              <div className="col-span-3">
-                <div
-                  className="grid bg-[#2b2f36] rounded-lg"
-                  style={{
-                    gridTemplateColumns: 'minmax(auto,468px) 1fr',
-                  }}>
+              <div className="col-span-3 mxl:col-span-4">
+                <PostGridStyled className="grid bg-[#2b2f36] rounded-lg">
                   <div className="flex text-white bg-[#2b2f36] flex-col justify-center items-end px-4 rounded-lg">
                     <div className="text-[2rem] leading-10 font-semibold">
                       <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-3">
@@ -288,7 +275,7 @@ const Home: NextPage = () => {
                       </div>
                     </div>
                     <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
-                      {DateTime.fromISO(isFilterdArray[2]?.created_at)
+                      {DateTime.fromISO(isFilterdArray[3]?.created_at)
                         .toLocaleString()
                         .slice(0, -1)}
                     </div>
@@ -301,36 +288,32 @@ const Home: NextPage = () => {
                   {isFilterdArray[3].thumbnail ? (
                     <img
                       src={isFilterdArray[3]?.thumbnail}
-                      className="max-h-[20rem] w-full object-cover min-h-[20rem] rounded-lg"
+                      className="w-full object-cover min-h-[20rem] rounded-lg"
                     />
                   ) : (
                     <img
                       src="img/noImg.jpg"
-                      className="max-h-[20rem] w-full min-h-[20rem] object-cover rounded-lg"
+                      className="w-full min-h-[20rem] object-cover rounded-lg"
                     />
                   )}
-                </div>
+                </PostGridStyled>
               </div>
             ) : (
               ''
             )}
             {isFilterdArray[4] ? (
-              <div className="col-span-2">
+              <div className="col-span-2 mxl:col-span-4">
                 <div className="grid bg-[#2b2f36] rounded-lg">
-                  <div
-                    className="grid"
-                    style={{
-                      gridTemplateColumns: 'minmax(auto,176px) 1fr',
-                    }}>
+                  <PostSmallGridStyled className="grid">
                     {isFilterdArray[4].thumbnail ? (
                       <img
                         src={isFilterdArray[4]?.thumbnail}
-                        className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem] rounded-lg"
+                        className=" w-full object-cover min-h-[6.1875rem] rounded-lg"
                       />
                     ) : (
                       <img
                         src="img/noImg.jpg"
-                        className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem] rounded-lg"
+                        className="w-full object-cover min-h-[6.1875rem] rounded-lg"
                       />
                     )}
 
@@ -339,29 +322,25 @@ const Home: NextPage = () => {
                         {isFilterdArray[4]?.title}
                       </div>
                     </div>
-                  </div>
+                  </PostSmallGridStyled>
                 </div>
               </div>
             ) : (
               ''
             )}
             {isFilterdArray[5] ? (
-              <div className="col-span-2">
+              <div className="col-span-2 mxl:col-span-4">
                 <div className="grid bg-[#2b2f36] rounded-lg">
-                  <div
-                    className="grid"
-                    style={{
-                      gridTemplateColumns: 'minmax(auto,176px) 1fr',
-                    }}>
+                  <PostSmallGridStyled className="grid">
                     {isFilterdArray[5].thumbnail ? (
                       <img
                         src={isFilterdArray[5]?.thumbnail}
-                        className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem] rounded-lg"
+                        className="w-full object-cover min-h-[6.1875rem] rounded-lg"
                       />
                     ) : (
                       <img
                         src="img/noImg.jpg"
-                        className="max-h-[6.1875rem] w-full object-cover min-h-[6.1875rem] rounded-lg"
+                        className="w-full object-cover min-h-[6.1875rem] rounded-lg"
                       />
                     )}
 
@@ -370,7 +349,7 @@ const Home: NextPage = () => {
                         {isFilterdArray[5]?.title}
                       </div>
                     </div>
-                  </div>
+                  </PostSmallGridStyled>
                 </div>
               </div>
             ) : (
@@ -396,11 +375,7 @@ const Home: NextPage = () => {
         </LayoutSection>
       </div>
 
-      <div
-        className="grid grid-cols-2 m-auto max-w-[71rem] w-full py-[3.5rem] gap-[1rem]"
-        style={{
-          gridTemplateColumns: 'minmax(auto,568px) 1fr',
-        }}>
+      <BigPostGridStyled className="grid grid-cols-2 m-auto max-w-7xl mx-auto w-full py-[3.5rem] gap-[1rem] px-4 mmd:grid-cols-1">
         <div className="col-span-1 py-[1.5rem]">
           <img src="/task.svg" className="w-full" />
         </div>
@@ -414,24 +389,24 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="w-[71rem] mx-auto  mxl:w-[80%]">
-        <div className="py-[3.5rem]">
+      </BigPostGridStyled>
+      <LayoutSection>
+        <div className="py-[3.5rem] px-4">
           <PostTitle title="Essentials" subtitle="SEE ALL LATEST RELEASES  " />
           <div className="">
             <PostList data={data?.findAllPost.slice(0, 3)} />
           </div>
         </div>
-      </div>
+      </LayoutSection>
 
-      <div className="w-[71rem] mx-auto  mxl:w-[80%]">
-        <div className="py-[3.5rem]">
+      <LayoutSection>
+        <div className="py-[3.5rem] px-4">
           <PostTitle title="React" subtitle="SEE ALL LATEST RELEASES  " />
           <div className="">
             <PostList data={data?.findAllPost.slice(0, 3)} />
           </div>
         </div>
-      </div>
+      </LayoutSection>
 
       {/* <div className="grid grid-cols-2 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4  mb-[3.5rem]"> */}
       {/* <div className="col-span-1 bg-[rgba(240,185,11,0.15)] rounded-2xl h-full ">
@@ -516,3 +491,27 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+const PostGridStyled = styled.div`
+  grid-template-columns: minmax(auto, 468px) 1fr;
+
+  ${media.custom(768)} {
+    grid-template-columns: none;
+  }
+`;
+
+const BigPostGridStyled = styled.div`
+  grid-template-columns: minmax(auto, 568px) 1fr;
+
+  ${media.custom(768)} {
+    grid-template-columns: none;
+  }
+`;
+
+const PostSmallGridStyled = styled.div`
+  grid-template-columns: minmax(auto, 176px) 1fr;
+
+  ${media.custom(768)} {
+    grid-template-columns: none;
+  }
+`;
