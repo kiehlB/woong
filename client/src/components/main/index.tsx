@@ -58,7 +58,7 @@ function Main({ post }: MainProps) {
 
   return (
     <Grid className="mb-14">
-      <div className="pt-[6rem] max-w-[41.5rem] ml-auto pr-[2rem] pl-[1rem] mmd:max-w-full mmd:pb-8">
+      <div className="pt-[6rem] max-w-[35.6rem] ml-auto pr-[2rem] pl-[1rem] mmd:max-w-full mmd:pb-8">
         <h1 className="font-medium text-[#14151A]">LEARN ALL ABOUT</h1>
 
         <div className="text-[4rem] mb-[1rem] font-medium w-[80%] text-[#14151A] leading-[4.5rem]">

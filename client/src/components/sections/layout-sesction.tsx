@@ -6,7 +6,7 @@ interface LayoutSectionProps {
 }
 
 function LayoutSection({ children }: LayoutSectionProps) {
-  return <section className="max-w-9xl mx-auto w-full">{children}</section>;
+  return <section className="max-w-6xl mx-auto w-full">{children}</section>;
 }
 
 export { LayoutSection };

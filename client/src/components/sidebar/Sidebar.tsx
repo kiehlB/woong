@@ -28,7 +28,7 @@ const sidebar = {
     },
   }),
   closed: {
-    clipPath: 'circle(30px at 40px 40px)',
+    clipPath: 'circle(0px at 0px 40px)',
     transition: {
       delay: 0.5,
       type: 'spring',
@@ -45,13 +45,12 @@ function Sidebar({}: SidebarProps) {
 
   // const [containerRef, { height: containerHeight }] = useClientDimensions();
 
-  console.log(height);
   return (
     <motion.nav
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
       custom={height}
-      className={clsx(' ', {
+      className={clsx('nav', {
         fixed: isOpen == true,
       })}
       ref={containerRef}>

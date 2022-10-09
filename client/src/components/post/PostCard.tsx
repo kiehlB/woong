@@ -22,9 +22,15 @@ function PostCard({ article }: PostCardProps) {
           ))}
         </div>
         {article.thumbnail ? (
-          <img src={article.thumbnail} className="rounded-xl mb-6 w-full" />
+          <img
+            src={article.thumbnail}
+            className="rounded-xl mb-6 h-[12.375rem] w-full mxl:h-auto"
+          />
         ) : (
-          <img src="img/noImg.jpg" className="rounded-xl mb-6 w-full object-bottom" />
+          <img
+            src="img/noImg.jpg"
+            className="rounded-xl mb-6 h-[12.375rem] w-full mxl:h-auto"
+          />
         )}
 
         <div className="px-6 mb-4 flex flex-1 break-all line-clamp-3">

@@ -9,12 +9,10 @@ import Bicycle from '../../static/svg/bicycle';
 import Swing from '../../static/svg/swing';
 import { RootState } from '../../store/rootReducer';
 import TagList from '../../components/tags/TagList';
-import { MenuItems } from '../../components/base/Header';
 import { getMainTag } from '../../store/tag';
 import PostList from '../../components/post/PostList';
 import PostTitle from '../../components/post/PostTitle';
 import styled from 'styled-components';
-import HeaderTopicItem from '../../components/base/HeaderTopicItem';
 import { useState } from 'react';
 import { DateTime } from 'luxon';
 import useGetPosts from '../../components/post/hooks/usegetPosts';
@@ -173,7 +171,7 @@ const Home: NextPage = () => {
                   {isFilterdArray[0].thumbnail ? (
                     <img
                       src={isFilterdArray[0]?.thumbnail}
-                      className="w-full object-cover rounded-xl"
+                      className="w-full object-cover rounded-xl h-full"
                     />
                   ) : (
                     <img
@@ -182,7 +180,7 @@ const Home: NextPage = () => {
                     />
                   )}
 
-                  <div className="flex text-white bg-[#2b2f36] flex-col  justify-center px-4 rounded-lg">
+                  <div className="flex text-white bg-[#2b2f36] flex-col justify-center px-4 rounded-lg mmd:py-8">
                     <div className="text-[2rem] leading-10 font-semibold  break-all line-clamp-3">
                       {isFilterdArray[0]?.title}
                     </div>
@@ -244,7 +242,7 @@ const Home: NextPage = () => {
                   <img src="img/noImg.jpg" className="w-full object-cover rounded-lg" />
                 )}
 
-                <div className="text-[#fff] px-4 pt-2">
+                <div className="text-[#fff] px-4 pt-2  py-24">
                   <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-2">
                     {isFilterdArray[2]?.title}
                   </div>
@@ -267,7 +265,7 @@ const Home: NextPage = () => {
 
             {isFilterdArray[3] ? (
               <div className="col-span-3 mxl:col-span-4">
-                <PostGridStyled className="grid bg-[#2b2f36] rounded-lg">
+                <PostGridStyled className="grid bg-[#2b2f36] rounded-lg h-full">
                   <div className="flex text-white bg-[#2b2f36] flex-col justify-center items-end px-4 rounded-lg">
                     <div className="text-[2rem] leading-10 font-semibold">
                       <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-3">
@@ -288,12 +286,12 @@ const Home: NextPage = () => {
                   {isFilterdArray[3].thumbnail ? (
                     <img
                       src={isFilterdArray[3]?.thumbnail}
-                      className="w-full object-cover min-h-[20rem] rounded-lg"
+                      className="w-full object-cover rounded-xl h-full"
                     />
                   ) : (
                     <img
                       src="img/noImg.jpg"
-                      className="w-full min-h-[20rem] object-cover rounded-lg"
+                      className="w-full object-cover rounded-xl h-full"
                     />
                   )}
                 </PostGridStyled>

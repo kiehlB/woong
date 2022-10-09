@@ -18,9 +18,9 @@ export type PathProps = {
 
 const Path = (props: PathProps) => (
   <motion.path
-    fill="transparent"
+    fill="white"
     strokeWidth="3"
-    stroke="hsl(0, 0%, 18%)"
+    stroke="#fff"
     strokeLinecap="round"
     {...props}
   />
@@ -28,8 +28,8 @@ const Path = (props: PathProps) => (
 
 function MenuToggle({ toggle }: MenuToggleProps) {
   return (
-    <button className="button" onClick={toggle}>
-      <svg width="23" height="23" viewBox="0 0 23 23">
+    <button className="button ml-4" onClick={toggle}>
+      <svg width="23" height="23" viewBox="0 0 23 23" fill="#fff">
         <Path
           variants={{
             closed: { d: 'M 2 2.5 L 20 2.5' },
