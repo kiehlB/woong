@@ -21,6 +21,12 @@ import useTrendingPosts from '../../components/post/hooks/useTrendingPosts';
 import Link from 'next/link';
 import { LayoutSection } from '../../components/sections/layout-sesction';
 import media from '../../lib/styles/media';
+import {
+  BigPostGridItem,
+  MediumPostGridItem,
+  SecondBigPostGridItem,
+  SmallPostGridItem,
+} from '../../components/common/PostGirdItem';
 
 const Home: NextPage = () => {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
@@ -165,194 +171,46 @@ const Home: NextPage = () => {
           </div>
 
           <div className="grid grid-cols-4 gap-6">
-            <div className="col-span-3 mxl:col-span-4">
-              {isFilterdArray[0] ? (
-                <PostGridStyled className="grid bg-[#2b2f36] rounded-lg h-full">
-                  {isFilterdArray[0].thumbnail ? (
-                    <img
-                      src={isFilterdArray[0]?.thumbnail}
-                      className="w-full object-cover rounded-xl h-full"
-                    />
-                  ) : (
-                    <img
-                      src="img/noImg.jpg"
-                      className="w-full object-cover rounded-xl h-full"
-                    />
-                  )}
+            <BigPostGridItem
+              thumbnail={isFilterdArray[0]?.thumbnail}
+              title={isFilterdArray[0]?.title}
+              createAt={isFilterdArray[0]?.created_at}
+              difficulty={isFilterdArray[0]?.difficulty}
+            />
 
-                  <div className="flex text-white bg-[#2b2f36] flex-col justify-center px-4 rounded-lg mmd:py-8">
-                    <div className="text-[2rem] leading-10 font-semibold  break-all line-clamp-3">
-                      {isFilterdArray[0]?.title}
-                    </div>
-                    <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
-                      {DateTime.fromISO(isFilterdArray[0]?.created_at)
-                        .toLocaleString()
-                        .slice(0, -1)}
-                    </div>
-                    <div className="flex items-center">
-                      <Dot css={isFilterdArray[0]?.difficulty} />{' '}
-                      {isFilterdArray[0]?.difficulty}
-                    </div>
-                  </div>
-                </PostGridStyled>
-              ) : (
-                ''
-              )}
-            </div>
-            {isFilterdArray[1] ? (
-              <div className="col-span-1 rounded-lg bg-[#2b2f36] relative mxl:col-span-2 mmd:col-span-4">
-                {isFilterdArray[1].thumbnail ? (
-                  <img
-                    src={isFilterdArray[1]?.thumbnail}
-                    className=" w-full object-cover rounded-xl"
-                  />
-                ) : (
-                  <img src="img/noImg.jpg" className="w-full object-cover rounded-xl" />
-                )}
+            <MediumPostGridItem
+              thumbnail={isFilterdArray[1]?.thumbnail}
+              title={isFilterdArray[1]?.title}
+              createAt={isFilterdArray[1]?.created_at}
+              difficulty={isFilterdArray[1]?.difficulty}
+            />
 
-                <div className="text-[#fff] px-4 pt-2 break-all py-24">
-                  <div className=" text-[1.3rem] leading-8 font-semibold break-all line-clamp-2">
-                    {isFilterdArray[1]?.title}
-                  </div>
-                </div>
-                <div className="absolute bottom-0 p-4">
-                  <div className="text-[#F0B90B] font-normal mt-2 mb-2 text-[1rem]">
-                    {DateTime.fromISO(isFilterdArray[1]?.created_at)
-                      .toLocaleString()
-                      .slice(0, -1)}
-                  </div>
-                  <div className="text-[#fff] flex items-center text-sm">
-                    <Dot css={isFilterdArray[1]?.difficulty} />{' '}
-                    {isFilterdArray[1]?.difficulty}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              ''
-            )}
+            <MediumPostGridItem
+              thumbnail={isFilterdArray[2]?.thumbnail}
+              title={isFilterdArray[2]?.title}
+              createAt={isFilterdArray[2]?.created_at}
+              difficulty={isFilterdArray[2]?.difficulty}
+            />
 
-            {isFilterdArray[2] ? (
-              <div className="col-span-1 bg-[#2b2f36] relative mxl:col-span-2 mmd:col-span-4">
-                {isFilterdArray[2].thumbnail ? (
-                  <img
-                    src={isFilterdArray[2]?.thumbnail}
-                    className="w-full object-cover rounded-lg"
-                  />
-                ) : (
-                  <img src="img/noImg.jpg" className="w-full object-cover rounded-lg" />
-                )}
+            <SecondBigPostGridItem
+              thumbnail={isFilterdArray[3]?.thumbnail}
+              title={isFilterdArray[3]?.title}
+              createAt={isFilterdArray[3]?.created_at}
+              difficulty={isFilterdArray[3]?.difficulty}
+            />
 
-                <div className="text-[#fff] px-4 pt-2  py-24">
-                  <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-2">
-                    {isFilterdArray[2]?.title}
-                  </div>
-                </div>
-                <div className="absolute bottom-0 p-4">
-                  <div className="text-[#F0B90B] font-normal mt-2 mb-2 text-[1rem]">
-                    {DateTime.fromISO(isFilterdArray[2]?.created_at)
-                      .toLocaleString()
-                      .slice(0, -1)}
-                  </div>
-                  <div className="text-[#fff] flex items-center text-sm">
-                    <Dot css={isFilterdArray[2]?.difficulty} />{' '}
-                    {isFilterdArray[2]?.difficulty}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              ''
-            )}
-
-            {isFilterdArray[3] ? (
-              <div className="col-span-3 mxl:col-span-4">
-                <PostGridStyled className="grid bg-[#2b2f36] rounded-lg h-full">
-                  <div className="flex text-white bg-[#2b2f36] flex-col justify-center items-end px-4 rounded-lg">
-                    <div className="text-[2rem] leading-10 font-semibold">
-                      <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-3">
-                        {isFilterdArray[3]?.title}
-                      </div>
-                    </div>
-                    <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
-                      {DateTime.fromISO(isFilterdArray[3]?.created_at)
-                        .toLocaleString()
-                        .slice(0, -1)}
-                    </div>
-                    <div className="flex items-center">
-                      <Dot css={isFilterdArray[3]?.difficulty} />{' '}
-                      {isFilterdArray[3]?.difficulty}
-                    </div>
-                  </div>
-
-                  {isFilterdArray[3].thumbnail ? (
-                    <img
-                      src={isFilterdArray[3]?.thumbnail}
-                      className="w-full object-cover rounded-xl h-full"
-                    />
-                  ) : (
-                    <img
-                      src="img/noImg.jpg"
-                      className="w-full object-cover rounded-xl h-full"
-                    />
-                  )}
-                </PostGridStyled>
-              </div>
-            ) : (
-              ''
-            )}
-            {isFilterdArray[4] ? (
-              <div className="col-span-2 mxl:col-span-4">
-                <div className="grid bg-[#2b2f36] rounded-lg">
-                  <PostSmallGridStyled className="grid">
-                    {isFilterdArray[4].thumbnail ? (
-                      <img
-                        src={isFilterdArray[4]?.thumbnail}
-                        className=" w-full object-cover min-h-[6.1875rem] rounded-lg"
-                      />
-                    ) : (
-                      <img
-                        src="img/noImg.jpg"
-                        className="w-full object-cover min-h-[6.1875rem] rounded-lg"
-                      />
-                    )}
-
-                    <div className="text-white flex items-center px-4 text-[1.3rem] font-semibold">
-                      <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-1">
-                        {isFilterdArray[4]?.title}
-                      </div>
-                    </div>
-                  </PostSmallGridStyled>
-                </div>
-              </div>
-            ) : (
-              ''
-            )}
-            {isFilterdArray[5] ? (
-              <div className="col-span-2 mxl:col-span-4">
-                <div className="grid bg-[#2b2f36] rounded-lg">
-                  <PostSmallGridStyled className="grid">
-                    {isFilterdArray[5].thumbnail ? (
-                      <img
-                        src={isFilterdArray[5]?.thumbnail}
-                        className="w-full object-cover min-h-[6.1875rem] rounded-lg"
-                      />
-                    ) : (
-                      <img
-                        src="img/noImg.jpg"
-                        className="w-full object-cover min-h-[6.1875rem] rounded-lg"
-                      />
-                    )}
-
-                    <div className="text-white flex items-center px-4 text-[1.3rem] font-semibold">
-                      <div className="text-[1.3rem] leading-8 font-semibold break-all line-clamp-1">
-                        {isFilterdArray[5]?.title}
-                      </div>
-                    </div>
-                  </PostSmallGridStyled>
-                </div>
-              </div>
-            ) : (
-              ''
-            )}
+            <SmallPostGridItem
+              thumbnail={isFilterdArray[4]?.thumbnail}
+              title={isFilterdArray[4]?.title}
+              createAt={isFilterdArray[4]?.created_at}
+              difficulty={isFilterdArray[4]?.difficulty}
+            />
+            <SmallPostGridItem
+              thumbnail={isFilterdArray[5]?.thumbnail}
+              title={isFilterdArray[5]?.title}
+              createAt={isFilterdArray[5]?.created_at}
+              difficulty={isFilterdArray[5]?.difficulty}
+            />
           </div>
           <div className="flex w-[71rem] mx-auto  mxl:w-[80%]  justify-center px-4 py-12 items-center">
             <Link href="/filter">
@@ -373,21 +231,21 @@ const Home: NextPage = () => {
         </LayoutSection>
       </div>
 
-      <BigPostGridStyled className="grid grid-cols-2 m-auto max-w-7xl mx-auto w-full py-[3.5rem] gap-[1rem] px-4 mmd:grid-cols-1">
+      <div className="grid grid-cols-2 m-auto max-w-7xl mx-auto w-full py-[3.5rem] gap-[1rem] px-4 mmd:grid-cols-1">
         <div className="col-span-1 py-[1.5rem]">
           <img src="/task.svg" className="w-full" />
         </div>
         <div className="col-span-1 h-full content-center ">
           <div className="grid justify-center  content-center h-full">
-            <div className="text-[2.5rem] text-[#14151A] font-semibold mb-2">
+            <div className="text-[2.5rem] text-[#14151A] font-semibold mb-2 mxl:text-[1.5rem]">
               No idea what you just scrolled through?
             </div>
-            <div className="text-[1.5rem] text-[#14151A] font-normal mb-2">
+            <div className="text-[1.5rem] text-[#14151A] font-normal mb-2 mxl:text-[1.2rem]">
               Not to worry. Our no-nonsense beginner's guide will get you up to speed.
             </div>
           </div>
         </div>
-      </BigPostGridStyled>
+      </div>
       <LayoutSection>
         <div className="py-[3.5rem] px-4">
           <PostTitle title="Essentials" subtitle="SEE ALL LATEST RELEASES  " />

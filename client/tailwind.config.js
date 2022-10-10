@@ -12,7 +12,7 @@ module.exports = {
     screens: {
       si: '769px',
       md: '900px',
-      lg: '1025px',
+      lg: '1201px',
       xxl: '1341px',
       xl: '1500px', // this is the "design resolution",
       max: '1919px',

@@ -12,11 +12,37 @@ const variants = {
 };
 
 export const Navigation = () => (
-  <motion.ul variants={variants}>
+  <motion.ul variants={variants} className="set">
     {itemIds.map(i => (
-      <MenuItem i={i} key={i} />
+      <MenuItem i={i} key={i.id} />
     ))}
   </motion.ul>
 );
 
-const itemIds = [0, 1, 2, 3, 4];
+const itemIds = [
+  {
+    id: 1,
+    text: 'Home',
+    link: '/',
+  },
+  {
+    id: 2,
+    text: 'See All Post',
+    link: '/filter',
+  },
+  {
+    id: 3,
+    text: 'Glossaries',
+    link: '/',
+  },
+  {
+    id: 4,
+    text: 'Regsiter',
+    link: '/signup',
+  },
+  {
+    id: 5,
+    text: 'Login',
+    link: '/signin',
+  },
+];

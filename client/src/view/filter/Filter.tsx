@@ -15,6 +15,7 @@ import useGetPosts from '../../components/post/hooks/usegetPosts';
 import useGetTags from '../../components/tags/hooks/usegetTags';
 import useCollapse from 'react-collapsed';
 import clsx from 'clsx';
+import { LayoutSection } from '../../components/sections/layout-sesction';
 
 export type FilterProps = {};
 
@@ -115,13 +116,13 @@ function Filter({}: FilterProps) {
     <PageTemplate tag={getTagsData}>
       <div className="font-Cabin bg-[#fafafa]">
         <Collapse isActive={isExpanded}>
-          <div className="max-w-[71rem] mx-auto pt-12 p-4 mb-6">
+          <LayoutSection cn="pt-12 p-4 mb-6 mxl:pb-12 relative">
             <div className="mb-8 text-[#14151A] font-semibold text-[2rem] leading-10">
               Topics at Post
             </div>
             <div>
               <div className="grid grid-cols-2">
-                <div className="col-span-1">
+                <div className="col-span-1 mxl:col-span-2">
                   <div className="text-[#14151A] mb-4  font-normal leading-normal">
                     Topics
                   </div>
@@ -137,7 +138,7 @@ function Filter({}: FilterProps) {
                   </div>
                 </div>
 
-                <div className="col-span-1">
+                <div className="col-span-1 mxl:col-span-2 mxl:mt-8">
                   <div className="mb-4">Difficulty</div>
 
                   <div className="text-black flex">
@@ -184,50 +185,49 @@ function Filter({}: FilterProps) {
                 </div>
               </div>
             </div>
-          </div>
+          </LayoutSection>
         </Collapse>
 
-        <div className="bg-[#F5F5F5] flex p-4 w-full">
-          <div className="flex w-[71rem] mx-auto px-4 justify-between h-8 items-center">
-            <div className="flex h-8 items-center">
-              <div className="mr-6">Layout</div>
-              <svg
-                width={24}
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                className="css-18puooo e3ftz9k0">
-                <path d="M14.048 9.952H9.952V14.048H14.048V9.952ZM14.048 4H9.952V8.085H14.048V4ZM14.048 15.915H9.952V20H14.048V15.915ZM8.085 9.952H4V14.048H8.085V9.952ZM20 4H15.915V8.085H20V4ZM20 15.915H15.915V20H20V15.915ZM8.085 15.915H4V20H8.085V15.915ZM20 9.952H15.915V14.048H20V9.952ZM8.085 4H4V8.085H8.085V4Z"></path>
-              </svg>
-              <svg
-                width={24}
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="rgb(174, 180, 188)"
-                className="ml-2">
-                <path d="M19.5 5H8.40002V7H19.5V5Z"></path>
-                <path d="M19.5 17H8.40002V19H19.5V17Z"></path>
-                <path d="M19.5 11H8.40002V13H19.5V11Z"></path>
-                <path d="M6.81007 12.0101L5.39587 10.5959L3.98167 12.0101L5.39587 13.4243L6.81007 12.0101Z"></path>
-                <path d="M6.77711 5.99666L5.36292 4.58246L3.94872 5.99666L5.36292 7.41086L6.77711 5.99666Z"></path>
-                <path d="M6.84254 18.0236L5.42834 16.6094L4.01414 18.0236L5.42834 19.4378L6.84254 18.0236Z"></path>
-              </svg>
-              <div
-                className={clsx('ml-4 px-4 text-[#aeb4bc]   cursor-not-allowed', {
-                  'bg-[#2B2F36] rounded flex justify-center items-center py-1 !text-white !cursor-pointer':
-                    isFilterTrue == false,
-                })}
-                onClick={ApplyFilterOnClick}>
-                Apply filters
-              </div>
-              <div
-                className="ml-4 px-4 cursor-pointer hover:bg-[#FAFAFA] hover:py-1 hover:rounded "
-                onClick={ClearFilterOnClick}>
-                Clear filters
-              </div>
+        <div className="bg-[#F5F5F5] flex p-4 w-full mmd:text-[0.8rem]">
+          <LayoutSection cn="flex px-4 justify-between items-center mmd:flex-wrap">
+            <div className="mr-6 leading-10">Layout</div>
+            <svg
+              width={24}
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              className="css-18puooo e3ftz9k0">
+              <path d="M14.048 9.952H9.952V14.048H14.048V9.952ZM14.048 4H9.952V8.085H14.048V4ZM14.048 15.915H9.952V20H14.048V15.915ZM8.085 9.952H4V14.048H8.085V9.952ZM20 4H15.915V8.085H20V4ZM20 15.915H15.915V20H20V15.915ZM8.085 15.915H4V20H8.085V15.915ZM20 9.952H15.915V14.048H20V9.952ZM8.085 4H4V8.085H8.085V4Z"></path>
+            </svg>
+            <svg
+              width={24}
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="rgb(174, 180, 188)"
+              className="ml-2">
+              <path d="M19.5 5H8.40002V7H19.5V5Z"></path>
+              <path d="M19.5 17H8.40002V19H19.5V17Z"></path>
+              <path d="M19.5 11H8.40002V13H19.5V11Z"></path>
+              <path d="M6.81007 12.0101L5.39587 10.5959L3.98167 12.0101L5.39587 13.4243L6.81007 12.0101Z"></path>
+              <path d="M6.77711 5.99666L5.36292 4.58246L3.94872 5.99666L5.36292 7.41086L6.77711 5.99666Z"></path>
+              <path d="M6.84254 18.0236L5.42834 16.6094L4.01414 18.0236L5.42834 19.4378L6.84254 18.0236Z"></path>
+            </svg>
+            <div
+              className={clsx('ml-4 px-4 text-[#aeb4bc]   cursor-not-allowed', {
+                'bg-[#2B2F36] rounded flex justify-center items-center py-1 !text-white !cursor-pointer':
+                  isFilterTrue == false,
+              })}
+              onClick={ApplyFilterOnClick}>
+              Apply filters
             </div>
-
-            <div className="flex cursor-pointer" onClick={() => setExpanded(x => !x)}>
+            <div
+              className="ml-4 px-4 cursor-pointer hover:bg-[#FAFAFA] hover:py-1 hover:rounded "
+              onClick={ClearFilterOnClick}>
+              Clear filters
+            </div>
+            <div
+              className="flex cursor-pointer ml-auto flex-none mmd:ml-0"
+              onClick={() => setExpanded(x => !x)}>
               {isExpanded ? (
                 <svg
                   width={24}
@@ -250,16 +250,16 @@ function Filter({}: FilterProps) {
 
               <div>Hide filters</div>
             </div>
-          </div>
+          </LayoutSection>
         </div>
-        <div className="w-[71rem] mx-auto  mxl:w-[80%] flex flex-col  items-center">
-          <div className="pt-[3.5rem] w-[71rem]">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="pt-[3.5rem]">
             <div>Articles ({resultFilter.length})</div>
             <div className="pt-8 w-full">
               <PostList data={resultFilter.slice((page - 1) * 9, page * 9)} />
             </div>
           </div>
-          <div className="py-16">
+          <div className="py-16 flex justify-center">
             <Pagination
               total={resultPagination}
               initialPage={1}

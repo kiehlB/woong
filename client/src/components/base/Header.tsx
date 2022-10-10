@@ -113,7 +113,7 @@ function Header({ tag, loading }: HeaderProps) {
   };
 
   return (
-    <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between py-3">
+    <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between py-3 ">
       <div className="flex items-center">
         <Link href="/">
           <div className="cursor-pointer flex items-center mxl:hidden">
@@ -184,7 +184,9 @@ function Header({ tag, loading }: HeaderProps) {
       </div>
 
       <div className="flex flex-end items-center">
-        <Sidebar />
+        <div className="lg:hidden">
+          <Sidebar />
+        </div>
 
         <form className="search" onSubmit={handleSubmit}>
           <input

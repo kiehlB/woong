@@ -117,12 +117,12 @@ const WriteMarkdownEditor = props => {
 
   return (
     <div className="flex h-full min-h-screen ">
-      <div className="w-[50%] pt-9">
+      <div className="w-[50%] pt-9 mxl:w-full">
         <div className="pl-4">
           <input
             value={title}
             onChange={onChangeTitle}
-            className="text-4xl font-bold focus:outline-none w-full "
+            className="text-4xl font-bold focus:outline-none w-full mmd:text-[2rem]"
             name="title"
             placeholder="제목을 입력하세요"
           />
@@ -136,7 +136,7 @@ const WriteMarkdownEditor = props => {
             <TagsForm addTag={addTag} />
           </div>
 
-          <div className="flex w-full justify-between  z-20">
+          <div className="flex w-full justify-between z-20 mmd:flex-wrap">
             <div className="flex">
               <div className="text-[#868e96] font-semibold pr-1.5">Thumbnail</div>
               <label htmlFor="input-file">
@@ -159,7 +159,7 @@ const WriteMarkdownEditor = props => {
               <div style={{ marginLeft: '.5rem' }}>{WaitingFotImg(readyForFile)}</div>
             </div>
 
-            <div className="z-[9999] pb-2 pr-2">
+            <div className="z-[9999] pb-2 pr-2 mmd:text-[0.7rem] mmd:py-2">
               <AnimatedMulti setSelectedOption={setSelectedOption} />
             </div>
           </div>
@@ -192,7 +192,7 @@ const WriteMarkdownEditor = props => {
           }}
         />
 
-        <div className="fixed flex bottom-0 z-50 w-[50%] px-4  bg-white shadow-lg shadow-slate-700  h-[4.5rem] items-center justify-between">
+        <div className="fixed flex bottom-0 z-50 w-[50%] px-4  bg-white shadow-lg shadow-slate-700  h-[4.5rem] items-center justify-between mxl:w-full">
           <div>
             <ArrowLink direction="left" href={'/'} textSize="small">
               뒤로가기
