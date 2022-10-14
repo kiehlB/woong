@@ -200,7 +200,7 @@ function Post({}: PostProps) {
 
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
-      <div className="flex h-full">
+      <div className="flex">
         <div className="flex justify-center w-[30%] h-full">
           <div className="w-full">
             <div className="fixed flex flex-col w-[30%] h-[40%]">
@@ -225,7 +225,11 @@ function Post({}: PostProps) {
             ))}
           </div>
 
-          <img src={singlePostData?.findSinglePost?.thumbnail} alt="thumbnail" />
+          {singlePostData?.findSinglePost?.thumbnail ? (
+            <img src={singlePostData?.findSinglePost?.thumbnail} alt="thumbnail" />
+          ) : (
+            ''
+          )}
 
           <div className="text-[#474D57]  text-[1.25rem] mt-6 mb-8">
             {`Home >  Articles >`}

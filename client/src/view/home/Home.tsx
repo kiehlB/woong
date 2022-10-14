@@ -29,6 +29,8 @@ import {
 } from '../../components/common/PostGirdItem';
 
 const Home: NextPage = () => {
+  const [Difficulty, setDifficulty] = useState([]);
+
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
   const {
     loading: TrendingPostsLoading,
@@ -43,8 +45,6 @@ const Home: NextPage = () => {
   } = useGetTags();
 
   const globalTag = useSelector((state: RootState) => state?.tag?.mainTag);
-
-  const [Difficulty, setDifficulty] = useState([]);
 
   const filteredArray =
     data?.findAllPost.filter(e =>
@@ -171,46 +171,71 @@ const Home: NextPage = () => {
           </div>
 
           <div className="grid grid-cols-4 gap-6">
-            <BigPostGridItem
-              thumbnail={isFilterdArray[0]?.thumbnail}
-              title={isFilterdArray[0]?.title}
-              createAt={isFilterdArray[0]?.created_at}
-              difficulty={isFilterdArray[0]?.difficulty}
-            />
+            {isFilterdArray[0] ? (
+              <BigPostGridItem
+                thumbnail={isFilterdArray[0]?.thumbnail}
+                title={isFilterdArray[0]?.title}
+                createAt={isFilterdArray[0]?.created_at}
+                difficulty={isFilterdArray[0]?.difficulty}
+              />
+            ) : (
+              ''
+            )}
 
-            <MediumPostGridItem
-              thumbnail={isFilterdArray[1]?.thumbnail}
-              title={isFilterdArray[1]?.title}
-              createAt={isFilterdArray[1]?.created_at}
-              difficulty={isFilterdArray[1]?.difficulty}
-            />
+            {isFilterdArray[1] ? (
+              <MediumPostGridItem
+                thumbnail={isFilterdArray[1]?.thumbnail}
+                title={isFilterdArray[1]?.title}
+                createAt={isFilterdArray[1]?.created_at}
+                difficulty={isFilterdArray[1]?.difficulty}
+              />
+            ) : (
+              ''
+            )}
 
-            <MediumPostGridItem
-              thumbnail={isFilterdArray[2]?.thumbnail}
-              title={isFilterdArray[2]?.title}
-              createAt={isFilterdArray[2]?.created_at}
-              difficulty={isFilterdArray[2]?.difficulty}
-            />
+            {isFilterdArray[2] ? (
+              <MediumPostGridItem
+                thumbnail={isFilterdArray[2]?.thumbnail}
+                title={isFilterdArray[2]?.title}
+                createAt={isFilterdArray[2]?.created_at}
+                difficulty={isFilterdArray[2]?.difficulty}
+              />
+            ) : (
+              ''
+            )}
 
-            <SecondBigPostGridItem
-              thumbnail={isFilterdArray[3]?.thumbnail}
-              title={isFilterdArray[3]?.title}
-              createAt={isFilterdArray[3]?.created_at}
-              difficulty={isFilterdArray[3]?.difficulty}
-            />
+            {isFilterdArray[3] ? (
+              <SecondBigPostGridItem
+                thumbnail={isFilterdArray[3]?.thumbnail}
+                title={isFilterdArray[3]?.title}
+                createAt={isFilterdArray[3]?.created_at}
+                difficulty={isFilterdArray[3]?.difficulty}
+              />
+            ) : (
+              ''
+            )}
 
-            <SmallPostGridItem
-              thumbnail={isFilterdArray[4]?.thumbnail}
-              title={isFilterdArray[4]?.title}
-              createAt={isFilterdArray[4]?.created_at}
-              difficulty={isFilterdArray[4]?.difficulty}
-            />
-            <SmallPostGridItem
-              thumbnail={isFilterdArray[5]?.thumbnail}
-              title={isFilterdArray[5]?.title}
-              createAt={isFilterdArray[5]?.created_at}
-              difficulty={isFilterdArray[5]?.difficulty}
-            />
+            {isFilterdArray[4] ? (
+              <SmallPostGridItem
+                thumbnail={isFilterdArray[4]?.thumbnail}
+                title={isFilterdArray[4]?.title}
+                createAt={isFilterdArray[4]?.created_at}
+                difficulty={isFilterdArray[4]?.difficulty}
+              />
+            ) : (
+              ''
+            )}
+
+            {isFilterdArray[5] ? (
+              <SmallPostGridItem
+                thumbnail={isFilterdArray[5]?.thumbnail}
+                title={isFilterdArray[5]?.title}
+                createAt={isFilterdArray[5]?.created_at}
+                difficulty={isFilterdArray[5]?.difficulty}
+              />
+            ) : (
+              ''
+            )}
           </div>
           <div className="flex w-[71rem] mx-auto  mxl:w-[80%]  justify-center px-4 py-12 items-center">
             <Link href="/filter">

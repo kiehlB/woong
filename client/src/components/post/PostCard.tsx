@@ -18,7 +18,12 @@ function PostCard({ article }: PostCardProps) {
         aria-label={article.title}>
         <div className="absolute flex pl-6 w-full flex-wrap pt-4">
           {article?.posts_tags?.map(e => (
-            <HeaderTopicItem name={e.tag.name} size="small" key={e.id} disable={true} />
+            <HeaderTopicItem
+              name={e.tag.name}
+              size="small"
+              key={e?.tag?.id}
+              disable={true}
+            />
           ))}
         </div>
         {article.thumbnail ? (

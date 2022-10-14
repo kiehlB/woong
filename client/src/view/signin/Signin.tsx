@@ -50,7 +50,7 @@ function Signin({}: SigninProps) {
             </div>
           </div>
         </section>
-        <section className="flex flex-col justify-center h-full mt-12 mmd:mb-12">
+        <section className="flex flex-col justify-centermt-24 mb-12 mt-24 mxl:mt-20 mxl:mb-20">
           <Auth
             svg="login.svg"
             form={

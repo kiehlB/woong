@@ -16,16 +16,15 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) console.log(graphQLErrors);
-  graphQLErrors.forEach(({ message, locations, path }) =>
-    console.log(
-      `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-    ),
-  );
+  if (graphQLErrors)
+    graphQLErrors?.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
-console.log(process.env.NEXT_PUBLIC_URL);
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_URL, // Server URL (must be absolute)
   credentials: 'include', // Additional fetch() options like `credentials` or `headers`
@@ -34,7 +33,7 @@ const httpLink = new HttpLink({
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: from([errorLink, httpLink]),
+    link: from([httpLink]),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {

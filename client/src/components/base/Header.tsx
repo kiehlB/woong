@@ -73,6 +73,7 @@ export const MenuItems: MainTag[] = [
 
 function Header({ tag, loading }: HeaderProps) {
   const { loading: userLoading, error, getUser, logoutButton } = useGetUser();
+
   const router = useRouter();
   const dispatch = useDispatch();
   const globalTag = useSelector((state: RootState) => state?.tag?.tag);
@@ -113,7 +114,7 @@ function Header({ tag, loading }: HeaderProps) {
   };
 
   return (
-    <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between py-3 ">
+    <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between py-3">
       <div className="flex items-center">
         <Link href="/">
           <div className="cursor-pointer flex items-center mxl:hidden">
@@ -213,12 +214,17 @@ function Header({ tag, loading }: HeaderProps) {
         )}
 
         <Link href="/signin">
-          <div
-            className={clsx('mxl:hidden text-sm cursor-pointer font-Cabin font-medium', {
-              'ml-8': getUser?.whoAmI?.ok == undefined,
-            })}>
-            {!loading && getUser?.whoAmI?.ok ? '' : 'Login'}
-          </div>
+          <a>
+            <div
+              className={clsx(
+                'mxl:hidden text-sm cursor-pointer font-Cabin font-medium',
+                {
+                  'ml-8': getUser?.whoAmI?.ok == undefined,
+                },
+              )}>
+              {!loading && getUser?.whoAmI?.ok ? '' : 'Login'}
+            </div>
+          </a>
         </Link>
         <Link href="/signup">
           <div

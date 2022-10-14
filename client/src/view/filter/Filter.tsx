@@ -254,9 +254,18 @@ function Filter({}: FilterProps) {
         </div>
         <div className="max-w-6xl mx-auto px-4">
           <div className="pt-[3.5rem]">
-            <div>Articles ({resultFilter.length})</div>
+            <div>
+              Articles (
+              {resultFilter.length == 0 ? isFilterdArray.length : resultFilter.length})
+            </div>
             <div className="pt-8 w-full">
-              <PostList data={resultFilter.slice((page - 1) * 9, page * 9)} />
+              <PostList
+                data={
+                  resultFilter.length == 0
+                    ? isFilterdArray.slice((page - 1) * 9, page * 9)
+                    : resultFilter.slice((page - 1) * 9, page * 9)
+                }
+              />
             </div>
           </div>
           <div className="py-16 flex justify-center">
