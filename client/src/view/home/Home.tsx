@@ -240,7 +240,7 @@ const Home: NextPage = () => {
               )}
             </div>
             <div className="flex w-[71rem] mx-auto mxl:w-[80%] justify-center px-4 py-12 items-center">
-              <Link href="/filter">
+              <Link href={'/filter'}>
                 <h1 className="text-white mr-2 cursor-pointer">
                   See more content about this topic
                 </h1>

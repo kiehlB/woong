@@ -85,7 +85,7 @@ function LinkButton({
   ...buttonProps
 }: ButtonProps & JSX.IntrinsicElements['button']) {
   return (
-    <Link href={href}>
+    <Link href={href ? href : '/'}>
       <button {...buttonProps} className={getClassName({ className })}>
         <ButtonInner variant={variant} size={size} difficulty={difficulty}>
           {children}
