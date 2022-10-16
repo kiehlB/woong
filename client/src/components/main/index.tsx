@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { createMachine, interpret } from 'xstate';
 import { useSpring, animated } from 'react-spring';
-import { Button } from '../common/Button';
+import { Button, LinkButton } from '../common/Button';
 import Dot from '../common/TagsDot';
 import { DateTime } from 'luxon';
 import Link from 'next/link';
@@ -50,12 +50,6 @@ function Main({ post }: MainProps) {
     },
   });
 
-  // const toggleService = interpret(toggleMachine)
-  //   .onTransition(state => console.log(state.value))
-  //   .start();
-
-  // toggleService.send('TOGGLE');
-
   return (
     <Grid className="mb-14">
       <div className="pt-[6rem] max-w-[35.6rem] ml-auto pr-[2rem] pl-[1rem] mmd:max-w-full mmd:pb-8">
@@ -70,13 +64,17 @@ function Main({ post }: MainProps) {
         <div className="mb-[1.5rem] text-[#474D57] font-normal leading-normal  font-Roboto">
           {`My 0 blog posts (and counting) have been read 0 times by 0 people. There you'll find blogs about JavaScript, TypeScript, React, Testing, your career, and and more.`}
         </div>
-        <Button size="medium" variant="secondary" className="font-Roboto text-sm">
+        <LinkButton
+          href="/filter"
+          size="medium"
+          variant="secondary"
+          className="font-Roboto text-sm">
           See more
-        </Button>
+        </LinkButton>
       </div>
 
       <Link href={singlePost ? `/post/${singlePost.id}` : ''}>
-        <div className="bg-[#F5F5F5]">
+        <div className="bg-[#F5F5F5] px-4">
           <div
             className="h-full pt-[3rem] pr-[1rem] pb-[3rem] pl-[2rem] max-w-[35.5rem] cursor-pointer mmd:mx-auto mmd:pl-[0rem] mmd:pr-[0rem]"
             ref={ref}>

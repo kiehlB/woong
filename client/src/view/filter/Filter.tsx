@@ -139,9 +139,9 @@ function Filter({}: FilterProps) {
                 </div>
 
                 <div className="col-span-1 mxl:col-span-2 mxl:mt-8">
-                  <div className="mb-4">Difficulty</div>
+                  <div className="mb-4 ">Difficulty</div>
 
-                  <div className="text-black flex">
+                  <div className="flex flex-wrap h-20 text-black">
                     <div>
                       <TagItem
                         tag="Beginner"

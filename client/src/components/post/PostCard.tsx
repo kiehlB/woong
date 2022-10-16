@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { DateTime } from 'luxon';
 import Dot from '../common/TagsDot';
 import { Post } from '../../types/apolloComponent';
+import RatioImage from '../common/RatioImage';
 
 export type PostCardProps = {
   article: Post;
@@ -14,9 +15,9 @@ function PostCard({ article }: PostCardProps) {
   return (
     <Link href={`/post/${article.id}`}>
       <div
-        className="text-black relative w-full border border-stone-100 rounded-xl"
+        className="text-black relative w-full border border-stone-100 rounded-xl cursor-pointer"
         aria-label={article.title}>
-        <div className="absolute flex pl-6 w-full flex-wrap pt-4">
+        <div className="absolute flex pl-6 w-full flex-wrap pt-4 z-40">
           {article?.posts_tags?.map(e => (
             <HeaderTopicItem
               name={e.tag.name}
@@ -27,14 +28,18 @@ function PostCard({ article }: PostCardProps) {
           ))}
         </div>
         {article.thumbnail ? (
-          <img
+          <RatioImage
+            widthRatio={1.916}
+            heightRatio={1.2}
             src={article.thumbnail}
-            className="rounded-xl mb-6 h-[12.375rem] w-full mxl:h-auto"
+            className="rounded-xl mb-6 h-[12.375rem] w-full object-cover"
           />
         ) : (
-          <img
+          <RatioImage
+            widthRatio={1.916}
+            heightRatio={1.2}
             src="img/noImg.jpg"
-            className="rounded-xl mb-6 h-[12.375rem] w-full mxl:h-auto"
+            className="rounded-xl mb-6 h-[12.375rem] w-full object-cover "
           />
         )}
 

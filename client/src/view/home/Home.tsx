@@ -27,6 +27,8 @@ import {
   SecondBigPostGridItem,
   SmallPostGridItem,
 } from '../../components/common/PostGirdItem';
+import { NextSeo } from 'next-seo';
+import { getNextSeo } from '../../lib/nextSeo';
 
 const Home: NextPage = () => {
   const [Difficulty, setDifficulty] = useState([]);
@@ -75,222 +77,219 @@ const Home: NextPage = () => {
   };
 
   return (
-    <PageTemplate tag={getTagsData}>
-      <Main post={data} />
-      <LayoutSection>
-        <div className="py-[3.5rem] px-4">
-          <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES" />
-          <div>
-            <PostList data={data?.findAllPost.slice(0, 9)} />
-          </div>
-        </div>
-
-        <div className="py-14 px-4">
-          <SvgCard
-            svg={<Swing />}
-            text="#black"
-            title={`learning about web & Security`}
-            subtitle={`Build your web knowledge, complete quizzes`}
-            bg="#FAFAFA"
-          />
-        </div>
-
-        <div className="py-14 px-4">
-          <SvgCard
-            bg="#2b2f36"
-            text="#fff"
-            svg={<Bicycle />}
-            title={`Keep an eye on Glossaries`}
-            subtitle={`Learn more about glossaries`}
-          />
-        </div>
-      </LayoutSection>
-
-      <LayoutSection>
-        <div className="py-[3.5rem] px-4">
-          <PostTitle title="Trending" subtitle="SEE ALL LATEST RELEASES  " />
-          <div>
-            <PostList data={TrendingPostsData?.getTrendingPosts} />
-          </div>
-        </div>
-      </LayoutSection>
-      <div className="bg-[#14151A] px-4">
+    <main>
+      <NextSeo
+        {...getNextSeo({ title: 'woong blog MainPage', description: 'mainPage' })}
+      />
+      <PageTemplate tag={getTagsData}>
+        <Main post={data} />
         <LayoutSection>
-          <div className="flex pt-14">
-            <div className="text-white px-4">Topics : </div>
-            <div className="text-[#aeb4bc] flex flex-1 flex-wrap items-center gap-4 px-4">
-              <TagList
-                tag={getTagsData?.getAllTags}
-                globalTag={globalTag}
-                toStore={getMainTag}
-                size="small"
-                bg="smallYello"
-              />
-            </div>
+          <article className="py-[3.5rem] px-4">
+            <PostTitle title="Latest Releases" subtitle="SEE ALL LATEST RELEASES" />
+            <PostList data={data?.findAllPost.slice(0, 9)} />
+          </article>
+
+          <div className="py-14 px-4">
+            <SvgCard
+              svg={<Swing />}
+              text="#black"
+              title={`learning about web & Security`}
+              subtitle={`Build your web knowledge, complete quizzes`}
+              bg="#FAFAFA"
+            />
           </div>
 
-          <div className="flex my-8">
-            <div className="text-white mr-4 px-4">Difficulty:</div>
-
-            <TagItem
-              tag="Beginner"
-              variant=" Beginner"
-              checked={Difficulty?.includes('Beginner')}
-              size="medium"
-              add={true}
-              bg="green"
-              handleCheck={handleCheck}>
-              <Dot css="Beginner" />
-            </TagItem>
-
-            <div className="ml-4">
-              <TagItem
-                tag="Intermediate"
-                variant="Intermediate"
-                size="medium"
-                add={true}
-                bg="yello"
-                handleCheck={handleCheck}
-                checked={Difficulty?.includes('Intermediate')}>
-                <Dot css="Intermediate" />
-              </TagItem>
-            </div>
-
-            <div className="ml-4">
-              <TagItem
-                tag="Advanced"
-                variant="Advanced"
-                size="medium"
-                add={true}
-                bg="red"
-                handleCheck={handleCheck}
-                checked={Difficulty?.includes('Advanced')}>
-                <Dot css="Advanced" />
-              </TagItem>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-4 gap-6">
-            {isFilterdArray[0] ? (
-              <BigPostGridItem
-                thumbnail={isFilterdArray[0]?.thumbnail}
-                title={isFilterdArray[0]?.title}
-                createAt={isFilterdArray[0]?.created_at}
-                difficulty={isFilterdArray[0]?.difficulty}
-              />
-            ) : (
-              ''
-            )}
-
-            {isFilterdArray[1] ? (
-              <MediumPostGridItem
-                thumbnail={isFilterdArray[1]?.thumbnail}
-                title={isFilterdArray[1]?.title}
-                createAt={isFilterdArray[1]?.created_at}
-                difficulty={isFilterdArray[1]?.difficulty}
-              />
-            ) : (
-              ''
-            )}
-
-            {isFilterdArray[2] ? (
-              <MediumPostGridItem
-                thumbnail={isFilterdArray[2]?.thumbnail}
-                title={isFilterdArray[2]?.title}
-                createAt={isFilterdArray[2]?.created_at}
-                difficulty={isFilterdArray[2]?.difficulty}
-              />
-            ) : (
-              ''
-            )}
-
-            {isFilterdArray[3] ? (
-              <SecondBigPostGridItem
-                thumbnail={isFilterdArray[3]?.thumbnail}
-                title={isFilterdArray[3]?.title}
-                createAt={isFilterdArray[3]?.created_at}
-                difficulty={isFilterdArray[3]?.difficulty}
-              />
-            ) : (
-              ''
-            )}
-
-            {isFilterdArray[4] ? (
-              <SmallPostGridItem
-                thumbnail={isFilterdArray[4]?.thumbnail}
-                title={isFilterdArray[4]?.title}
-                createAt={isFilterdArray[4]?.created_at}
-                difficulty={isFilterdArray[4]?.difficulty}
-              />
-            ) : (
-              ''
-            )}
-
-            {isFilterdArray[5] ? (
-              <SmallPostGridItem
-                thumbnail={isFilterdArray[5]?.thumbnail}
-                title={isFilterdArray[5]?.title}
-                createAt={isFilterdArray[5]?.created_at}
-                difficulty={isFilterdArray[5]?.difficulty}
-              />
-            ) : (
-              ''
-            )}
-          </div>
-          <div className="flex w-[71rem] mx-auto  mxl:w-[80%]  justify-center px-4 py-12 items-center">
-            <Link href="/filter">
-              <div className="text-white mr-2 cursor-pointer">
-                See more content about this topic
-              </div>
-            </Link>
-            <svg
-              width={18}
-              height={18}
-              viewBox="0 0 18 15"
-              className="bidi-element css-1q915qx e3ftz9k0"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#F0B90B">
-              <path d="M10.5 15L9.1 13.6L14.2 8.5L5.68248e-07 8.5L7.43094e-07 6.5L14.2 6.5L9.1 1.4L10.5 -6.55671e-07L18 7.5L10.5 15Z"></path>
-            </svg>
+          <div className="py-14 px-4">
+            <SvgCard
+              bg="#2b2f36"
+              text="#fff"
+              svg={<Bicycle />}
+              title={`Keep an eye on Glossaries`}
+              subtitle={`Learn more about glossaries`}
+            />
           </div>
         </LayoutSection>
-      </div>
 
-      <div className="grid grid-cols-2 m-auto max-w-7xl mx-auto w-full py-[3.5rem] gap-[1rem] px-4 mmd:grid-cols-1">
-        <div className="col-span-1 py-[1.5rem]">
-          <img src="/task.svg" className="w-full" />
-        </div>
-        <div className="col-span-1 h-full content-center ">
-          <div className="grid justify-center  content-center h-full">
-            <div className="text-[2.5rem] text-[#14151A] font-semibold mb-2 mxl:text-[1.5rem]">
-              No idea what you just scrolled through?
+        <LayoutSection>
+          <article className="py-[3.5rem] px-4">
+            <PostTitle title="Trending" subtitle="SEE ALL LATEST RELEASES  " />
+            <PostList data={TrendingPostsData?.getTrendingPosts} />
+          </article>
+        </LayoutSection>
+        <div className="bg-[#14151A] px-4">
+          <LayoutSection>
+            <div className="flex pt-14">
+              <h2 className="text-white px-4">Topics : </h2>
+              <div className="text-[#aeb4bc] flex flex-1 flex-wrap items-center gap-4 px-4">
+                <TagList
+                  tag={getTagsData?.getAllTags}
+                  globalTag={globalTag}
+                  toStore={getMainTag}
+                  size="small"
+                  bg="smallYello"
+                />
+              </div>
             </div>
-            <div className="text-[1.5rem] text-[#14151A] font-normal mb-2 mxl:text-[1.2rem]">
-              Not to worry. Our no-nonsense beginner's guide will get you up to speed.
+
+            <div className="flex my-8">
+              <h2 className="text-white mr-4 px-4">Difficulty:</h2>
+
+              <TagItem
+                tag="Beginner"
+                variant=" Beginner"
+                checked={Difficulty?.includes('Beginner')}
+                size="medium"
+                add={true}
+                bg="green"
+                handleCheck={handleCheck}>
+                <Dot css="Beginner" />
+              </TagItem>
+
+              <div className="ml-4">
+                <TagItem
+                  tag="Intermediate"
+                  variant="Intermediate"
+                  size="medium"
+                  add={true}
+                  bg="yello"
+                  handleCheck={handleCheck}
+                  checked={Difficulty?.includes('Intermediate')}>
+                  <Dot css="Intermediate" />
+                </TagItem>
+              </div>
+
+              <div className="ml-4">
+                <TagItem
+                  tag="Advanced"
+                  variant="Advanced"
+                  size="medium"
+                  add={true}
+                  bg="red"
+                  handleCheck={handleCheck}
+                  checked={Difficulty?.includes('Advanced')}>
+                  <Dot css="Advanced" />
+                </TagItem>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-4 gap-6">
+              {isFilterdArray[0] ? (
+                <BigPostGridItem
+                  thumbnail={isFilterdArray[0]?.thumbnail}
+                  title={isFilterdArray[0]?.title}
+                  createAt={isFilterdArray[0]?.created_at}
+                  difficulty={isFilterdArray[0]?.difficulty}
+                />
+              ) : (
+                ''
+              )}
+
+              {isFilterdArray[1] ? (
+                <MediumPostGridItem
+                  thumbnail={isFilterdArray[1]?.thumbnail}
+                  title={isFilterdArray[1]?.title}
+                  createAt={isFilterdArray[1]?.created_at}
+                  difficulty={isFilterdArray[1]?.difficulty}
+                />
+              ) : (
+                ''
+              )}
+
+              {isFilterdArray[2] ? (
+                <MediumPostGridItem
+                  thumbnail={isFilterdArray[2]?.thumbnail}
+                  title={isFilterdArray[2]?.title}
+                  createAt={isFilterdArray[2]?.created_at}
+                  difficulty={isFilterdArray[2]?.difficulty}
+                />
+              ) : (
+                ''
+              )}
+
+              {isFilterdArray[3] ? (
+                <SecondBigPostGridItem
+                  thumbnail={isFilterdArray[3]?.thumbnail}
+                  title={isFilterdArray[3]?.title}
+                  createAt={isFilterdArray[3]?.created_at}
+                  difficulty={isFilterdArray[3]?.difficulty}
+                />
+              ) : (
+                ''
+              )}
+
+              {isFilterdArray[4] ? (
+                <SmallPostGridItem
+                  thumbnail={isFilterdArray[4]?.thumbnail}
+                  title={isFilterdArray[4]?.title}
+                  createAt={isFilterdArray[4]?.created_at}
+                  difficulty={isFilterdArray[4]?.difficulty}
+                />
+              ) : (
+                ''
+              )}
+
+              {isFilterdArray[5] ? (
+                <SmallPostGridItem
+                  thumbnail={isFilterdArray[5]?.thumbnail}
+                  title={isFilterdArray[5]?.title}
+                  createAt={isFilterdArray[5]?.created_at}
+                  difficulty={isFilterdArray[5]?.difficulty}
+                />
+              ) : (
+                ''
+              )}
+            </div>
+            <div className="flex w-[71rem] mx-auto mxl:w-[80%] justify-center px-4 py-12 items-center">
+              <Link href="/filter">
+                <h1 className="text-white mr-2 cursor-pointer">
+                  See more content about this topic
+                </h1>
+              </Link>
+              <svg
+                width={18}
+                height={18}
+                viewBox="0 0 18 15"
+                className="bidi-element css-1q915qx e3ftz9k0"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#F0B90B">
+                <path d="M10.5 15L9.1 13.6L14.2 8.5L5.68248e-07 8.5L7.43094e-07 6.5L14.2 6.5L9.1 1.4L10.5 -6.55671e-07L18 7.5L10.5 15Z"></path>
+              </svg>
+            </div>
+          </LayoutSection>
+        </div>
+
+        <section className="grid grid-cols-2 m-auto max-w-7xl mx-auto w-full py-[3.5rem] gap-[1rem] px-4 mmd:grid-cols-1">
+          <div className="col-span-1 py-[1.5rem]">
+            <img src="/task.svg" className="w-full" />
+          </div>
+          <div className="col-span-1 h-full content-center ">
+            <div className="grid justify-center  content-center h-full">
+              <div className="text-[2.5rem] text-[#14151A] font-semibold mb-2 mxl:text-[1.5rem]">
+                No idea what you just scrolled through?
+              </div>
+              <div className="text-[1.5rem] text-[#14151A] font-normal mb-2 mxl:text-[1.2rem]">
+                Not to worry. Our no-nonsense beginner's guide will get you up to speed.
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <LayoutSection>
-        <div className="py-[3.5rem] px-4">
-          <PostTitle title="Essentials" subtitle="SEE ALL LATEST RELEASES  " />
-          <div className="">
-            <PostList data={data?.findAllPost.slice(0, 3)} />
-          </div>
-        </div>
-      </LayoutSection>
+        </section>
 
-      <LayoutSection>
-        <div className="py-[3.5rem] px-4">
-          <PostTitle title="React" subtitle="SEE ALL LATEST RELEASES  " />
-          <div className="">
+        <LayoutSection>
+          <article className="py-[3.5rem] px-4">
+            <PostTitle title="Essentials" subtitle="SEE ALL LATEST RELEASES  " />
             <PostList data={data?.findAllPost.slice(0, 3)} />
-          </div>
-        </div>
-      </LayoutSection>
+          </article>
+        </LayoutSection>
 
-      {/* <div className="grid grid-cols-2 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4  mb-[3.5rem]"> */}
-      {/* <div className="col-span-1 bg-[rgba(240,185,11,0.15)] rounded-2xl h-full ">
+        <LayoutSection>
+          <article className="py-[3.5rem] px-4">
+            <PostTitle title="React" subtitle="SEE ALL LATEST RELEASES  " />
+            <PostList data={data?.findAllPost.slice(0, 3)} />
+          </article>
+        </LayoutSection>
+
+        {/* <div className="grid grid-cols-2 m-auto max-w-[71rem] w-full min-h-[15.625rem] gap-4  mb-[3.5rem]"> */}
+        {/* <div className="col-span-1 bg-[rgba(240,185,11,0.15)] rounded-2xl h-full ">
           <div className="grid grid-cols-2 justify-center content-center h-full">
             <img src="/1.svg" className="w-full col-span-1 h-full py-12" />
             <div className="col-span-1 h-full grid  justify-center content-center">
@@ -305,7 +304,7 @@ const Home: NextPage = () => {
           </div>
         </div> */}
 
-      {/* <div className="col-span-1 bg-[#2b2f36] rounded-2xl h-full">
+        {/* <div className="col-span-1 bg-[#2b2f36] rounded-2xl h-full">
           <div className="grid grid-cols-2 justify-center content-center h-full">
             <img src="/2.svg" className="w-full col-span-1 h-full" />
             <div className="col-span-1 h-full grid  justify-center content-center">
@@ -366,33 +365,10 @@ const Home: NextPage = () => {
         <div className="shadow-xl p-6 rounded-2xl">
           <div>dd</div>
         </div> */}
-      {/* </div> */}
-    </PageTemplate>
+        {/* </div> */}
+      </PageTemplate>
+    </main>
   );
 };
 
 export default Home;
-
-const PostGridStyled = styled.div`
-  grid-template-columns: minmax(auto, 468px) 1fr;
-
-  ${media.custom(768)} {
-    grid-template-columns: none;
-  }
-`;
-
-const BigPostGridStyled = styled.div`
-  grid-template-columns: minmax(auto, 568px) 1fr;
-
-  ${media.custom(768)} {
-    grid-template-columns: none;
-  }
-`;
-
-const PostSmallGridStyled = styled.div`
-  grid-template-columns: minmax(auto, 176px) 1fr;
-
-  ${media.custom(768)} {
-    grid-template-columns: none;
-  }
-`;

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import * as React from 'react';
 
 interface ButtonProps {
@@ -6,6 +7,7 @@ interface ButtonProps {
   size?: 'small' | 'medium' | 'large';
   children: React.ReactNode | React.ReactNode[];
   difficulty?: string;
+  href?: string;
 }
 
 function getClassName({ className }: { className?: string }) {
@@ -74,21 +76,22 @@ function Button({
 }
 
 function LinkButton({
+  children,
+  variant = 'primary',
+  size = 'large',
+  difficulty,
   className,
-  underlined,
+  href,
   ...buttonProps
-}: { underlined?: boolean } & JSX.IntrinsicElements['button']) {
+}: ButtonProps & JSX.IntrinsicElements['button']) {
   return (
-    <button
-      {...buttonProps}
-      className={clsx(
-        className,
-        underlined
-          ? 'underlined focus:outline-none whitespace-nowrap '
-          : 'hover:underline  underline-offset-[6px] decoration-neutral-400 decoration-wavy',
-        'text-primary inline-block',
-      )}
-    />
+    <Link href={href}>
+      <button {...buttonProps} className={getClassName({ className })}>
+        <ButtonInner variant={variant} size={size} difficulty={difficulty}>
+          {children}
+        </ButtonInner>
+      </button>
+    </Link>
   );
 }
 

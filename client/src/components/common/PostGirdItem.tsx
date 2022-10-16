@@ -4,15 +4,26 @@ import Dot from './TagsDot';
 import { DateTime } from 'luxon';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
+import RatioImage from './RatioImage';
 
 function BigPostGridItem({ thumbnail, title, createAt, difficulty }) {
   return (
-    <div className="col-span-3 mxl:col-span-4">
+    <div className="col-span-3 mxl:col-span-4 auto-rows-fr">
       <PostGridStyled className="grid bg-[#2b2f36] rounded-lg h-full">
         {thumbnail ? (
-          <img src={thumbnail} className="w-full object-cover rounded-xl h-full" />
+          <RatioImage
+            widthRatio={1.916}
+            heightRatio={1.2}
+            src={thumbnail}
+            className="w-full object-cover rounded-xl h-full"
+          />
         ) : (
-          <img src="img/noImg.jpg" className="w-full object-cover rounded-xl h-full" />
+          <RatioImage
+            widthRatio={1.916}
+            heightRatio={1.2}
+            src="img/noImg.jpg"
+            className="w-full object-cover rounded-xl h-full"
+          />
         )}
 
         <div className="flex text-white bg-[#2b2f36] flex-col justify-center px-4 rounded-lg mmd:py-8">
@@ -48,9 +59,19 @@ function SecondBigPostGridItem({ thumbnail, title, createAt, difficulty }) {
         </div>
 
         {thumbnail ? (
-          <img src={thumbnail} className="w-full object-cover rounded-xl h-full" />
+          <RatioImage
+            widthRatio={1.916}
+            heightRatio={1.2}
+            src={thumbnail}
+            className="w-full object-cover rounded-xl h-full"
+          />
         ) : (
-          <img src="img/noImg.jpg" className="w-full object-cover rounded-xl h-full" />
+          <RatioImage
+            widthRatio={1.916}
+            heightRatio={1.2}
+            src="img/noImg.jpg"
+            className="w-full object-cover rounded-xl h-full"
+          />
         )}
       </PostGridStyled>
     </div>
@@ -61,9 +82,19 @@ function MediumPostGridItem({ thumbnail, title, createAt, difficulty }) {
   return (
     <div className="col-span-1 rounded-lg bg-[#2b2f36] relative mxl:col-span-2 mmd:col-span-4">
       {thumbnail ? (
-        <img src={thumbnail} className=" w-full object-cover rounded-xl" />
+        <RatioImage
+          widthRatio={1.916}
+          heightRatio={1.2}
+          src={thumbnail}
+          className=" w-full object-cover rounded-xl"
+        />
       ) : (
-        <img src="img/noImg.jpg" className="w-full object-cover rounded-xl" />
+        <RatioImage
+          widthRatio={1.916}
+          heightRatio={1.2}
+          src="img/noImg.jpg"
+          className="w-full object-cover rounded-xl"
+        />
       )}
 
       <div className="text-[#fff] px-4 pt-2 break-all py-24">
