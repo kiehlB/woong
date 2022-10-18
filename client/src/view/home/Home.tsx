@@ -29,10 +29,6 @@ import {
 } from '../../components/common/PostGirdItem';
 import { NextSeo } from 'next-seo';
 import { getNextSeo } from '../../lib/nextSeo';
-import useGetPosts from '../../components/post/hooks/useGetPosts';
-import { initializeApollo } from '../../lib/apolloClient';
-import { GET_Posts } from '../../lib/graphql/post';
-import { FindAllPostQuery } from '../../types/apolloComponent';
 
 const Home: NextPage = ({ data }: any) => {
   const [Difficulty, setDifficulty] = useState([]);

@@ -16,7 +16,7 @@ import useGetTags from '../../components/tags/hooks/usegetTags';
 import useCollapse from 'react-collapsed';
 import clsx from 'clsx';
 import { LayoutSection } from '../../components/sections/layout-sesction';
-import useGetPosts from '../../components/post/hooks/useGetPosts';
+import useGetPosts from '../../components/post/hooks/useAllPosts';
 
 export type FilterProps = {
   data: any;
