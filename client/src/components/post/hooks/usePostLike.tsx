@@ -6,8 +6,6 @@ import { GET_Post, Post_Like } from '../../../lib/graphql/post';
 export default function usePostLike() {
   const router = useRouter();
 
-  console.log(parseInt(router.query.id as any));
-
   const [postLike, { error }] = useMutation(Post_Like);
   const {
     loading: loadingGetPost,
@@ -28,12 +26,15 @@ export default function usePostLike() {
           variables: { input: { id: parseInt(router.query.id as any) } },
         });
 
+        console.log(postLike);
         proxy.writeQuery({
           query: GET_Post,
-          variables: { id: router.query.id },
+          variables: { input: { id: parseInt(router.query.id as any) } },
           data: {
             ...(data as any),
-            variables: { input: { id: parseInt(router.query.id as any) } },
+            findSinglePost: {
+              post_likes: [postLike, ...(data as any)?.findSinglePost.post_likes],
+            },
           },
         });
       },

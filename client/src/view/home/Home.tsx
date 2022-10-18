@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import { useSelector } from 'react-redux';
 import PageTemplate from '../../components/base/PageTemplate';
 import SvgCard from '../../components/common/SvgCard';
@@ -15,7 +15,7 @@ import PostTitle from '../../components/post/PostTitle';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { DateTime } from 'luxon';
-import useGetPosts from '../../components/post/hooks/usegetPosts';
+
 import useGetTags from '../../components/tags/hooks/usegetTags';
 import useTrendingPosts from '../../components/post/hooks/useTrendingPosts';
 import Link from 'next/link';
@@ -29,11 +29,14 @@ import {
 } from '../../components/common/PostGirdItem';
 import { NextSeo } from 'next-seo';
 import { getNextSeo } from '../../lib/nextSeo';
+import useGetPosts from '../../components/post/hooks/useGetPosts';
+import { initializeApollo } from '../../lib/apolloClient';
+import { GET_Posts } from '../../lib/graphql/post';
+import { FindAllPostQuery } from '../../types/apolloComponent';
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ data }: any) => {
   const [Difficulty, setDifficulty] = useState([]);
 
-  const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
   const {
     loading: TrendingPostsLoading,
     error: TrendingPostsError,

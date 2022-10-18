@@ -64,7 +64,6 @@ export class PostService {
         user_id: user.id,
       },
     });
-    console.log(!!liked);
 
     return !!liked;
   }
@@ -75,7 +74,7 @@ export class PostService {
 
     const findPost = await this.PostRepository.createQueryBuilder('post')
       .leftJoinAndSelect('post.comments', 'comment')
-      .orderBy('post.created_at', 'ASC')
+      .orderBy('post.created_at', 'DESC')
       .getMany();
 
     return findPost;

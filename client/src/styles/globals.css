@@ -449,7 +449,9 @@ ul {
  align-items: center;
 height:64px; 
 z-index: 999;
-position: absolute;
+top:4px;
+position: relative;
+ 
 }
 
  

@@ -50,18 +50,16 @@ function Sidebar({}: SidebarProps) {
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
       custom={height}
-      className={clsx(
-        'flex flex-1 overflow-auto w-[300px] top-0 left-0 bottom-0 z-[999]',
-        {
-          'fixed flex': isOpen == true,
-          'absolute flex': isOpen == false,
-        },
-      )}
+      className={clsx('flex flex-1 w-[300px] top-1 left-0 bottom-0', {
+        'fixed flex z-[1]': isOpen == true,
+        'flex z[-1]': isOpen == false,
+      })}
       ref={containerRef}>
-      <motion.div variants={sidebar} className="background" />
-      <Navigation />
-
-      <MenuToggle toggle={() => toggleOpen()} />
+      <div className={isOpen ? '' : 'hidden'}>
+        <motion.div variants={sidebar} className="background" />
+        <Navigation />
+      </div>
+      <MenuToggle isOpen={isOpen} toggle={() => toggleOpen()} />
     </motion.nav>
   );
 }

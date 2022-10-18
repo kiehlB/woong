@@ -84,7 +84,7 @@ export const typeOrmConnectionDataSource = new DataSource({
         database: configService.get('DB_DATABASE'),
         synchronize: true,
         autoLoadEntities: true,
-        logging: true,
+
         // autoSchemaSync: true,
         // dropSchema: true,
       }),

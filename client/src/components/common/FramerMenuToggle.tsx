@@ -3,6 +3,7 @@ import { MouseEventHandler } from 'react';
 
 export type MenuToggleProps = {
   toggle: MouseEventHandler<HTMLButtonElement>;
+  isOpen?: boolean;
 };
 
 export type VariantsProps = {
@@ -26,9 +27,11 @@ const Path = (props: PathProps) => (
   />
 );
 
-function MenuToggle({ toggle }: MenuToggleProps) {
+function MenuToggle({ toggle, isOpen }: MenuToggleProps) {
   return (
-    <button className="button ml-4" onClick={toggle}>
+    <button
+      className={`button ${isOpen == false ? '' : 'ml-[1.5rem]'} `}
+      onClick={toggle}>
       <svg width="23" height="23" viewBox="0 0 23 23" fill="#fff">
         <Path
           variants={{

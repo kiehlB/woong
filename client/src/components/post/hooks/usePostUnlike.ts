@@ -30,7 +30,9 @@ export default function usePostUnLike() {
           variables: { input: { id: parseInt(router.query.id as any) } },
           data: {
             ...(data as any),
-            post: [UnpostLike.unLikePost, data],
+            findSinglePost: {
+              post_likes: [UnpostLike, ...(data as any)?.findSinglePost.post_likes],
+            },
           },
         });
       },

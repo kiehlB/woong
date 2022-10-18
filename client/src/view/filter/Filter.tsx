@@ -11,13 +11,16 @@ import { Pagination } from '@nextui-org/react';
 import TagItem from '../../components/tags/TagItem';
 import Dot from '../../components/common/TagsDot';
 import { Children, useEffect, useState } from 'react';
-import useGetPosts from '../../components/post/hooks/usegetPosts';
+
 import useGetTags from '../../components/tags/hooks/usegetTags';
 import useCollapse from 'react-collapsed';
 import clsx from 'clsx';
 import { LayoutSection } from '../../components/sections/layout-sesction';
+import useGetPosts from '../../components/post/hooks/useGetPosts';
 
-export type FilterProps = {};
+export type FilterProps = {
+  data: any;
+};
 
 function Collapse({ isActive, children }) {
   const [isExpanded, setExpanded] = useState(isActive);
@@ -38,8 +41,17 @@ function Collapse({ isActive, children }) {
   );
 }
 
-function Filter({}: FilterProps) {
+export function getAllData() {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
+
+  return <Filter data={data} />;
+}
+
+function Filter({ data }: FilterProps) {
   const [Difficulty, setDifficulty] = useState([]);
   const {
     loading: getTagsLoading,
@@ -84,8 +96,6 @@ function Filter({}: FilterProps) {
     setDifficulty(updatedList);
   };
 
-  // console.log(getTagsData?.getAllTags?.filter(e => globalTag.includes(e.name)));
-
   const ApplyFilterOnClick = () => {
     if (Difficulty.length == 0 && globalTag.length == 0) {
       return;
@@ -112,6 +122,8 @@ function Filter({}: FilterProps) {
     setPage(value);
   };
 
+  console.log(resultFilter.length);
+
   return (
     <PageTemplate tag={getTagsData}>
       <div className="font-Cabin bg-[#fafafa]">
@@ -123,9 +135,9 @@ function Filter({}: FilterProps) {
             <div>
               <div className="grid grid-cols-2">
                 <div className="col-span-1 mxl:col-span-2">
-                  <div className="text-[#14151A] mb-4  font-normal leading-normal">
+                  <h2 className="text-[#14151A] mb-4  font-normal leading-normal">
                     Topics
-                  </div>
+                  </h2>
                   <div className="flex flex-wrap mx-auto">
                     <TagList
                       tag={getTagsData?.getAllTags}
@@ -138,8 +150,8 @@ function Filter({}: FilterProps) {
                   </div>
                 </div>
 
-                <div className="col-span-1 mxl:col-span-2 mxl:mt-8">
-                  <div className="mb-4 ">Difficulty</div>
+                <section className="col-span-1 mxl:col-span-2 mxl:mt-8">
+                  <h2 className="mb-4 ">Difficulty</h2>
 
                   <div className="flex flex-wrap h-20 text-black">
                     <div>
@@ -181,8 +193,8 @@ function Filter({}: FilterProps) {
                       </TagItem>
                     </div>
                   </div>
-                  <div className="text-black pt-6 font-normal">readingTime</div>
-                </div>
+                  <h2 className="text-black pt-6 font-normal">readingTime</h2>
+                </section>
               </div>
             </div>
           </LayoutSection>
@@ -284,4 +296,4 @@ function Filter({}: FilterProps) {
   );
 }
 
-export default Filter;
+export default getAllData;

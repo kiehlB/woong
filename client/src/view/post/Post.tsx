@@ -31,7 +31,7 @@ import usePostLike from '../../components/post/hooks/usePostLike';
 import usePostUnLike from '../../components/post/hooks/usePostUnlike';
 import SubComments from '../../components/comment/SubComments';
 import SubCommentsForm from '../../components/comment/SubCommentsForm';
-import useIsPostLike from '../../components/post/hooks/isPostLike';
+import useIsPostLike from '../../components/post/hooks/useIsPostLike';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -41,7 +41,13 @@ const canvasStyles = {
   left: 0,
 };
 
-function Realistic({ UnlikehandleSubmit, LikehandleSubmit, isLikeBoolean }) {
+function Realistic({
+  UnlikehandleSubmit,
+  LikehandleSubmit,
+  isLikeBoolean,
+  onClickNotify,
+  userData,
+}) {
   const refAnimationInstance = useRef(null);
 
   const getInstance = useCallback(instance => {
@@ -88,26 +94,40 @@ function Realistic({ UnlikehandleSubmit, LikehandleSubmit, isLikeBoolean }) {
 
   return (
     <>
-      {/* @ts-ignore */}
-      <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-
-      {isLikeBoolean ? (
-        <button onClick={UnlikehandleSubmit} className="flex justify-center">
-          <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
-            🎉
-          </span>
-        </button>
+      {userData == undefined ? (
+        <>
+          {/* @ts-ignore */}
+          <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
+          <button onClick={e => onClickNotify(e)} className="flex justify-center">
+            <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
+              🎉
+            </span>
+          </button>
+        </>
       ) : (
-        <button
-          onClick={e => {
-            fire();
-            LikehandleSubmit(e);
-          }}
-          className="flex justify-center">
-          <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
-            🎉
-          </span>
-        </button>
+        <>
+          {/* @ts-ignore */}
+          <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
+
+          {isLikeBoolean ? (
+            <button onClick={UnlikehandleSubmit} className="flex justify-center">
+              <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
+                🎉
+              </span>
+            </button>
+          ) : (
+            <button
+              onClick={e => {
+                fire();
+                LikehandleSubmit(e);
+              }}
+              className="flex justify-center">
+              <span className="w-[100px] shadow-xl bg-[#fcd535] p-6 shadow-slate-100 text-[1.5rem] rounded-full flex justify-center items-center">
+                🎉
+              </span>
+            </button>
+          )}
+        </>
       )}
     </>
   );
@@ -144,7 +164,6 @@ function Post({}: PostProps) {
 
   const getCcrollTop = getScrollTop();
 
-  console.log(getCcrollTop);
   const editSubCommentInput = e => {
     subSetEditText(e.target.value);
   };
@@ -198,18 +217,29 @@ function Post({}: PostProps) {
     setEditComment(!editComment);
   };
 
+  const is_post_like = Boolean(
+    singlePostData?.findSinglePost?.post_likes?.find(
+      e => e.user_id == userData?.whoAmI?.user?.id,
+    ),
+  );
+
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
       <div className="flex">
         <div className="flex justify-center w-[30%] h-full">
           <div className="w-full">
             <div className="fixed flex flex-col w-[30%] h-[40%]">
+              <ToastContainer align={'right'} />
               <Realistic
-                isLikeBoolean={dataGetPost?.isPostLike}
+                isLikeBoolean={is_post_like}
                 LikehandleSubmit={LikehandleSubmit}
                 UnlikehandleSubmit={UnlikehandleSubmit}
+                onClickNotify={onClickNotify}
+                userData={userData}
               />
-              <div className="mt-2 text-center">0</div>
+              <div className="mt-2 text-center">
+                {singlePostData?.findSinglePost?.post_likes.length}
+              </div>
             </div>
           </div>
         </div>
@@ -226,7 +256,11 @@ function Post({}: PostProps) {
           </div>
 
           {singlePostData?.findSinglePost?.thumbnail ? (
-            <img src={singlePostData?.findSinglePost?.thumbnail} alt="thumbnail" />
+            <img
+              src={singlePostData?.findSinglePost?.thumbnail}
+              alt="thumbnail"
+              className="rounded-lg"
+            />
           ) : (
             ''
           )}

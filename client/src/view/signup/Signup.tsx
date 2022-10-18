@@ -22,7 +22,7 @@ function SignUp({}: SignUpProps) {
   };
 
   return (
-    <main>
+    <main className="z-[200]">
       <NextSeo
         {...getNextSeo({ title: 'woong blog sign up', description: 'sign up page' })}
       />
@@ -42,7 +42,7 @@ function SignUp({}: SignUpProps) {
               />
             }
             bottom={
-              <h2 className="mt-6 text-[#707A8A] text-[0.875rem] font-medium font-Cabin">
+              <h2 className="mt-6 text-[#707A8A] text-[0.875rem] font-medium font-Cabin z-[200]">
                 Already registered?
                 <span className="text-[#C99400] ml-1 cursor-pointer">
                   <Link href="/signin"> Log In </Link>

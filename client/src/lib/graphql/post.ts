@@ -19,6 +19,7 @@ export const Post_Like = gql`
   mutation PostLike($input: postLike!) {
     postLike(input: $input) {
       id
+      user_id
     }
   }
 `;
@@ -27,6 +28,7 @@ export const Post_unLike = gql`
   mutation PostUnLike($input: postLike!) {
     postUnLike(input: $input) {
       id
+      user_id
     }
   }
 `;

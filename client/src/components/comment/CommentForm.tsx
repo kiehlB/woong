@@ -24,7 +24,6 @@ function CommentForm(props: CommentFormProps) {
     setText(e.target.value);
   };
 
-  console.log(props.userData);
   return (
     <div className="">
       <form

@@ -13,6 +13,8 @@ import { Button, LinkButton } from '../common/Button';
 import TagsForm from '../tags/TagForm';
 import Tags from '../tags/Tags';
 import { ArrowButton, ArrowLink } from '../common/ArrowButton';
+import { GET_Posts } from '../../lib/graphql/post';
+import { useQuery } from '@apollo/client';
 
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,
@@ -27,9 +29,9 @@ const WriteMarkdownEditor = props => {
   const [readyForFile, setreadyForFile] = useState(0);
   const [previewSource, setPreviewSource] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
+  const { loading, error, data, fetchMore, networkStatus } = useQuery(GET_Posts, {});
 
-  console.log(selectedOption);
-
+  let d = data;
   useEffect(() => {
     setSelectedOption({
       value: 'Beginner',
@@ -59,6 +61,20 @@ const WriteMarkdownEditor = props => {
           tags: tag,
           difficulty: selectedOption?.value,
         },
+      },
+
+      update: async (proxy, { data: createPost }) => {
+        const data = proxy?.readQuery({
+          query: GET_Posts,
+        });
+
+        proxy?.writeQuery({
+          query: GET_Posts,
+          data: {
+            ...(d as any),
+            findAllPost: [createPost.createPost, ...(d as any)?.findAllPost],
+          },
+        });
       },
     });
   };

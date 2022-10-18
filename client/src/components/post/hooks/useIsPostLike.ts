@@ -14,7 +14,5 @@ export default function useIsPostLike() {
     variables: { input: { id: parseInt(router.query.id as any) } },
   });
 
-  console.log(dataGetPost);
-
   return { dataGetPost };
 }
