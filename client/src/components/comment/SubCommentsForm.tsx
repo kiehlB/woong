@@ -25,7 +25,6 @@ function SubCommentsForm(props: SubCommentsFormProps) {
     setSubText(e.target.value);
   };
 
-  console.log(props.userData.whoAmI);
   return (
     <div>
       <form

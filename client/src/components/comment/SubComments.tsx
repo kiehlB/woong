@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { IoIosAddCircleOutline } from 'react-icons/io';
 import TextareaAutosize from 'react-textarea-autosize';
 
 export type SubCommentsProps = {
@@ -29,7 +30,6 @@ function SubComments(props: SubCommentsProps) {
     subSetEditText(props.ele.text);
   };
 
-  console.log(props.ele);
   return (
     <>
       <div>
@@ -41,11 +41,12 @@ function SubComments(props: SubCommentsProps) {
                   src="https://secure.gravatar.com/avatar/ceb84f6559c4206c1a588e0e31c0a048?s=22&d=mm&r=g"
                   style={{ borderRadius: '50%', marginRight: '.5rem' }}
                 />
-                {props.el.user?.username}
-                <div className="color-base-30 px-2 m:pl-0" role="presentation">
+                {props.el.user?.email}
+                {/* <div className="color-base-30 px-2 m:pl-0" role="presentation">
                   •
-                </div>
+                </div> */}
               </div>
+
               {editSubComment ? (
                 <div>
                   <form>
@@ -59,6 +60,7 @@ function SubComments(props: SubCommentsProps) {
                       />
                     </div>
                   </form>
+
                   <div className="comments-edit-wrapper">
                     <div className="sub-color" style={{ paddingBottom: '.5rem' }}>
                       수정
@@ -73,6 +75,7 @@ function SubComments(props: SubCommentsProps) {
                   <div className="ml-4" style={{ whiteSpace: 'pre-line' }}>
                     {props.ele.text}
                   </div>
+
                   {props.userData?.whoAmI?.id == props.ele.user.id ? (
                     <div className="comments-edit-wrapper">
                       <div onClick={fixSubComment} className="sub-color">

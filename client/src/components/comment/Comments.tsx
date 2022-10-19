@@ -4,21 +4,21 @@ import { RiArrowDropDownLine } from 'react-icons/ri';
 import TextareaAutosize from 'react-textarea-autosize';
 
 export type CommentsProps = {
-  el: any;
-  editComment: boolean;
-  editText: string;
-  editCommentInput: (e: React.FormEvent<HTMLFormElement>) => void;
-  setIsopen: React.Dispatch<React.SetStateAction<string>>;
-  toggle: React.Dispatch<React.SetStateAction<boolean>>;
-  on: boolean;
-  EditCommentSubmit: (e: any, commentId: string, text: string) => Promise<void>;
-  fixComment: () => void;
-  DeleteCommentSubmit: (
+  el?: any;
+  editComment?: boolean;
+  editText?: string;
+  editCommentInput?: (e: React.FormEvent<HTMLFormElement>) => void;
+  setIsopen?: React.Dispatch<React.SetStateAction<string>>;
+  toggle?: React.Dispatch<React.SetStateAction<boolean>>;
+  on?: boolean;
+  EditCommentSubmit?: (e: any, commentId: string, text: string) => Promise<void>;
+  fixComment?: () => void;
+  DeleteCommentSubmit?: (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     commentId: string,
   ) => Promise<void>;
-  userData: any;
-  onClickNotifyCheckString: (e: any) => void;
+  userData?: any;
+  onClickNotifyCheckString: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 function Comments(props: CommentsProps) {
@@ -39,21 +39,22 @@ function Comments(props: CommentsProps) {
     setEditSubComment(!editSubComment);
   };
 
+  console.log(props.el);
   return (
     <>
       {props.el.reply ? (
         ''
       ) : (
         <div>
-          <div className="comments-layout">
-            <div className="flex items-center">
+          <div className="border-2">
+            <div className="flex items-center mb-2">
               <img
                 src="https://secure.gravatar.com/avatar/ceb84f6559c4206c1a588e0e31c0a048?s=22&d=mm&r=g"
                 style={{ borderRadius: '50%', marginRight: '.5rem' }}
               />
-              <div>{props.el.user?.username}</div>
+              <div>{props.el.user?.email}</div>
             </div>
-            <div className="comments-text z-10">
+            <div className="comments-text z-10 mb-2">
               {editComment ? (
                 <form>
                   <TextareaAutosize

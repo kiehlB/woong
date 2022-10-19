@@ -29,10 +29,11 @@ import {
 } from '../../components/common/PostGirdItem';
 import { NextSeo } from 'next-seo';
 import { getNextSeo } from '../../lib/nextSeo';
+import useGetPosts from '../../components/post/hooks/useAllPosts';
 
-const Home: NextPage = ({ data }: any) => {
+const Home: NextPage = () => {
   const [Difficulty, setDifficulty] = useState([]);
-
+  const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
   const {
     loading: TrendingPostsLoading,
     error: TrendingPostsError,

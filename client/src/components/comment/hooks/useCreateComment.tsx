@@ -27,19 +27,23 @@ export default function useCreateComment() {
       variables: {
         input: { post_id: findId, text: Text },
       },
-      // update: (proxy, { data: createComment }) => {
-      //   const data = proxy.readQuery({
-      //     query: GET_Comments,
-      //   });
 
-      //   proxy.writeQuery({
-      //     query: GET_Comments,
-      //     data: {
-      //       ...(data as any),
-      //       comment: [createComment.createComment, ...(data as any).comment],
-      //     },
-      //   });
-      // },
+      update: (proxy, { data: createComment }) => {
+        const data = proxy.readQuery({
+          query: GET_Comments,
+        });
+
+        proxy.writeQuery({
+          query: GET_Comments,
+          data: {
+            ...(data as any),
+            findAllComments: [
+              createComment.createComment,
+              ...(data as any).findAllComments,
+            ],
+          },
+        });
+      },
     });
   };
 
@@ -56,13 +60,13 @@ export default function useCreateComment() {
           query: GET_Comments,
         });
 
-        const findData = (data as any).comment.filter(el => el.id == isOpen);
+        const findData = (data as any).findAllComments.filter(el => el.id == isOpen);
 
         proxy.writeQuery({
           query: GET_Comments,
           data: {
             ...(data as any),
-            comment: [createComment.createComment, ...findData[0].replies],
+            findAllComments: [createComment.createComment, findData[0]],
           },
         });
       },

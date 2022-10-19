@@ -5,12 +5,12 @@ import { FindAllPostQuery } from '../types/apolloComponent';
 
 export { default } from '../view/home';
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const { id } = context.query;
+// export const getServerSideProps: GetServerSideProps = async context => {
+//   const { id } = context.query;
 
-  const apolloClient = initializeApollo();
-  const postData = await apolloClient.query<FindAllPostQuery>({
-    query: GET_Posts,
-  });
-  return { props: { data: postData?.data } };
-};
+//   const apolloClient = initializeApollo();
+//   const postData = await apolloClient.query<FindAllPostQuery>({
+//     query: GET_Posts,
+//   });
+//   return { props: { data: postData?.data } };
+// };

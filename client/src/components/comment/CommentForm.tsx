@@ -24,16 +24,23 @@ function CommentForm(props: CommentFormProps) {
     setText(e.target.value);
   };
 
+  const WithoutAuthCick = e => {
+    e.preventDefault();
+    props.onClickNotify(e);
+  };
+
+  console.log(props?.userData?.whoAmI);
   return (
-    <div className="">
+    <div>
       <form
-        className=""
         onSubmit={e => {
-          props.userData.whoAmI ? e.preventDefault() : props.onClickNotify(e);
-          IsTextNull(Text)
-            ? props.onClickNotifyCheckString(e)
-            : props.handleSubmit(e, props.findId, Text);
-          props.userData.whoAmI ? setText('') : '';
+          props?.userData?.whoAmI
+            ? IsTextNull(Text)
+              ? props.onClickNotifyCheckString(e)
+              : props.handleSubmit(e, props.findId, Text)
+            : WithoutAuthCick(e);
+
+          props?.userData?.whoAmI ? setText('') : '';
         }}>
         <div className="z-10">
           <TextareaAutosize
