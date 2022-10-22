@@ -1,12 +1,18 @@
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 
 import { useState } from 'react';
-import { Create_Comment, GET_Comments } from '../../../lib/graphql/comment';
+import {
+  Create_Comment,
+  GET_Comments,
+  GET_CommentsById,
+} from '../../../lib/graphql/comment';
 
 export default function useCreateComment() {
   const [getText, setText] = useState('');
   const [getSubText, setSubText] = useState('');
   const [isOpen, setIsopen] = useState('');
+  const router = useRouter();
 
   const textOnChange = e => {
     setText(e.target.value);
@@ -30,16 +36,18 @@ export default function useCreateComment() {
 
       update: (proxy, { data: createComment }) => {
         const data = proxy.readQuery({
-          query: GET_Comments,
+          query: GET_CommentsById,
+          variables: { input: { post_id: parseInt(router.query.id as any) } },
         });
 
         proxy.writeQuery({
-          query: GET_Comments,
+          query: GET_CommentsById,
+          variables: { input: { post_id: parseInt(router.query.id as any) } },
           data: {
             ...(data as any),
-            findAllComments: [
+            getCommentsById: [
               createComment.createComment,
-              ...(data as any).findAllComments,
+              ...(data as any).getCommentsById,
             ],
           },
         });
@@ -57,16 +65,18 @@ export default function useCreateComment() {
 
       update: async (proxy, { data: createComment }) => {
         const data = proxy.readQuery({
-          query: GET_Comments,
+          query: GET_CommentsById,
+          variables: { input: { post_id: parseInt(router.query.id as any) } },
         });
 
-        const findData = (data as any).findAllComments.filter(el => el.id == isOpen);
+        const findData = (data as any).getCommentsById.filter(el => el.id == isOpen);
 
         proxy.writeQuery({
-          query: GET_Comments,
+          query: GET_CommentsById,
+          variables: { input: { post_id: parseInt(router.query.id as any) } },
           data: {
             ...(data as any),
-            findAllComments: [createComment.createComment, findData[0]],
+            getCommentsById: [createComment.createComment, findData[0]],
           },
         });
       },

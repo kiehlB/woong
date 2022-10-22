@@ -7,7 +7,7 @@ export default class PostsLoaders {
   constructor(private usersService: CommentService) {}
 
   public readonly batchAuthors = new DataLoader(async (authorIds: number[]) => {
-    const users = await this.usersService.getUsersByIds(authorIds);
+    const users = await this.usersService.getCommentsByIds(authorIds);
 
     const usersMap = new Map(users.map((user) => [user.post_id, user]));
 

@@ -32,6 +32,7 @@ import usePostUnLike from '../../components/post/hooks/usePostUnlike';
 import SubComments from '../../components/comment/SubComments';
 import SubCommentsForm from '../../components/comment/SubCommentsForm';
 import useIsPostLike from '../../components/post/hooks/useIsPostLike';
+import useGetCommentsById from './hooks/useGetCommentsById';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -138,7 +139,7 @@ export type PostProps = {};
 function Post({}: PostProps) {
   const scrollTop = getScrollTop();
   const [isComplete, setIsComplete] = useState(false);
-  const { commentsLoading, commentsError, commentstData } = useGetComments();
+
   const {
     textOnChange,
     subTextOnChange,
@@ -157,6 +158,11 @@ function Post({}: PostProps) {
   const [subEditText, subSetEditText] = useState('');
 
   const { getUser: userData, loading: userLoding } = useGetUser();
+
+  const { getcommentByIdLoding, getcommentByIdError, getcommentByIdData } =
+    useGetCommentsById();
+
+  console.log(getcommentByIdData);
 
   const { LikehandleSubmit, isLikeBoolean } = usePostLike();
   const { UnlikehandleSubmit, isUnLikeBoolean } = usePostUnLike();
@@ -190,10 +196,6 @@ function Post({}: PostProps) {
   const findData = singlePostData?.findSinglePost;
   const findId = singlePostData?.findSinglePost?.id;
 
-  const getComments = commentstData?.findAllComments.filter(
-    el => el.post_id == router.query.id,
-  );
-
   const editCommentInput = e => {
     setEditText(e.target.value);
   };
@@ -222,6 +224,10 @@ function Post({}: PostProps) {
       e => e.user_id == userData?.whoAmI?.user?.id,
     ),
   );
+
+  const comments = getcommentByIdData?.getCommentsById;
+
+  console.log(getcommentByIdData);
 
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
@@ -308,59 +314,58 @@ function Post({}: PostProps) {
           onClickNotifyCheckString={onClickNotifyCheckString}
         />
 
-        {!commentsLoading &&
-          getComments.map((el, id) => (
-            <>
-              <div key={id}>
-                <Comments
-                  el={el}
-                  editComment={editComment}
-                  editText={editText}
-                  editCommentInput={editCommentInput}
-                  toggle={toggle}
-                  on={on}
-                  EditCommentSubmit={EditCommentSubmit}
-                  fixComment={fixComment}
-                  DeleteCommentSubmit={DeleteCommentSubmit}
-                  setIsopen={setIsopen}
+        {comments?.map((el, id) => (
+          <>
+            <div key={id}>
+              <Comments
+                el={el}
+                editComment={editComment}
+                editText={editText}
+                editCommentInput={editCommentInput}
+                toggle={toggle}
+                on={on}
+                EditCommentSubmit={EditCommentSubmit}
+                fixComment={fixComment}
+                DeleteCommentSubmit={DeleteCommentSubmit}
+                setIsopen={setIsopen}
+                userData={userData}
+                onClickNotifyCheckString={onClickNotifyCheckString}
+              />
+            </div>
+
+            {el.id == isOpen && on ? (
+              <>
+                <SubCommentsForm
                   userData={userData}
+                  subHandleSubmit={subHandleSubmit}
+                  findData={findData}
+                  onClickNotify={onClickNotify}
+                  isOpen={isOpen}
+                  on={on}
+                  toggle={toggle}
                   onClickNotifyCheckString={onClickNotifyCheckString}
                 />
-              </div>
-
-              {el.id == isOpen && on ? (
-                <>
-                  <SubCommentsForm
-                    userData={userData}
-                    subHandleSubmit={subHandleSubmit}
-                    findData={findData}
-                    onClickNotify={onClickNotify}
-                    isOpen={isOpen}
-                    on={on}
-                    toggle={toggle}
-                    onClickNotifyCheckString={onClickNotifyCheckString}
-                  />
-                </>
-              ) : (
-                ''
-              )}
-              {getComments.map((ele, id) => (
-                <>
-                  <SubComments
-                    ele={ele}
-                    el={el}
-                    subEditText={subEditText}
-                    editSubCommentInput={editSubCommentInput}
-                    EditCommentSubmit={EditCommentSubmit}
-                    DeleteCommentSubmit={DeleteCommentSubmit}
-                    userData={userData}
-                    findData={findData}
-                    onClickNotifyCheckString={onClickNotifyCheckString}
-                  />
-                </>
-              ))}
-            </>
-          ))}
+              </>
+            ) : (
+              ''
+            )}
+            {comments?.map((ele, id) => (
+              <>
+                <SubComments
+                  ele={ele}
+                  el={el}
+                  subEditText={subEditText}
+                  editSubCommentInput={editSubCommentInput}
+                  EditCommentSubmit={EditCommentSubmit}
+                  DeleteCommentSubmit={DeleteCommentSubmit}
+                  userData={userData}
+                  findData={findData}
+                  onClickNotifyCheckString={onClickNotifyCheckString}
+                />
+              </>
+            ))}
+          </>
+        ))}
       </div>
       {getCcrollTop > 0 ? (
         <div className="z-[100] h-full">

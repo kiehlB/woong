@@ -34,7 +34,7 @@ function SubComments(props: SubCommentsProps) {
     <>
       <div>
         {props.ele.reply && props.el.id == props.ele.reply ? (
-          <div className="subcomments-wrapper ">
+          <div className="border  border-[#F1F3F5] w-[95%] ml-auto mb-4">
             <div>
               <div className="flex mt-4  ml-4">
                 <img

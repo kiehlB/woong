@@ -21,3 +21,9 @@ export class DeleteCommentRequest {
   @Field((type) => Int, { nullable: true })
   comment_id!: number;
 }
+
+@InputType('getCommentId')
+export class GetCommentId {
+  @Field((type) => Int, { nullable: true })
+  post_id!: number;
+}

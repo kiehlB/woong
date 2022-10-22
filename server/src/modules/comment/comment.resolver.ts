@@ -26,6 +26,7 @@ import { CommentService } from './comment.service';
 import {
   CreateCommentRequest,
   DeleteCommentRequest,
+  GetCommentId,
 } from './dto/createComment.dto';
 import { User } from '../user/entitiy/user.entity';
 import { JwtAuthGuard } from '../auth/guards/graphql-passport-auth.guard';
@@ -43,13 +44,21 @@ export class CommentResolver {
     return users;
   }
 
+  @Query(() => [Comments], { nullable: true })
+  async getCommentsById(
+    @Args('input') comment: GetCommentId,
+  ): Promise<Comments[]> {
+    const users = await this.commentService.getCommentsByIds(comment);
+
+    return users;
+  }
+
   @UseGuards(JwtAuthGuard)
   @Mutation(() => Comments)
   createComment(
     @CurrentUser() user: TokenUser,
     @Args('input') comment: CreateCommentRequest,
   ): Promise<Comments> {
-    console.log(user);
     return this.commentService.create(user, comment);
   }
 

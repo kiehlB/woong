@@ -42,53 +42,54 @@ function Comments(props: CommentsProps) {
   console.log(props.el);
   return (
     <>
-      {props.el.reply ? (
-        ''
-      ) : (
-        <div>
-          <div className="border-2">
-            <div className="flex items-center mb-2">
-              <img
-                src="https://secure.gravatar.com/avatar/ceb84f6559c4206c1a588e0e31c0a048?s=22&d=mm&r=g"
-                style={{ borderRadius: '50%', marginRight: '.5rem' }}
-              />
-              <div>{props.el.user?.email}</div>
-            </div>
-            <div className="comments-text z-10 mb-2">
-              {editComment ? (
-                <form>
-                  <TextareaAutosize
-                    className="w-full z-10"
-                    rows={4}
-                    name="text"
-                    value={editText}
-                    onChange={editCommentInput}
-                  />
-                </form>
-              ) : (
-                props.el.text
-              )}
-            </div>
-
-            <div className="flex">
-              <div className="flex items-center">
-                <IoIosAddCircleOutline
-                  style={{ marginRight: '.2rem' }}
-                  onClick={() => {
-                    props.setIsopen(props.el.id);
-                    props.toggle(!props.on);
-                  }}
+      <div className="mt-8">
+        {props.el.reply ? (
+          ''
+        ) : (
+          <div>
+            <div className="border  border-[#F1F3F5] p-[0.75rem]">
+              <div className="flex items-center mb-2">
+                <img
+                  src="https://secure.gravatar.com/avatar/ceb84f6559c4206c1a588e0e31c0a048?s=22&d=mm&r=g"
+                  style={{ borderRadius: '50%', marginRight: '.5rem' }}
                 />
-                <div
-                  onClick={() => {
-                    props.setIsopen(props.el.id);
-                    props.toggle(!props.on);
-                  }}>
-                  댓글 작성
-                </div>
+                <div>{props.el.user?.email}</div>
+              </div>
+              <div className="comments-text z-10 mb-2">
+                {editComment ? (
+                  <form>
+                    <TextareaAutosize
+                      className="w-full z-10"
+                      rows={4}
+                      name="text"
+                      value={editText}
+                      onChange={editCommentInput}
+                    />
+                  </form>
+                ) : (
+                  props.el.text
+                )}
               </div>
 
-              {/* {props.userData?.me?.id == props.el.user.id ? (
+              <div className="flex">
+                <div className="flex items-center">
+                  <IoIosAddCircleOutline
+                    style={{ marginRight: '.2rem' }}
+                    onClick={() => {
+                      props.setIsopen(props.el.id);
+                      props.toggle(!props.on);
+                    }}
+                  />
+                  <div
+                    onClick={() => {
+                      props.setIsopen(props.el.id);
+                      props.toggle(!props.on);
+                    }}>
+                    댓글 작성
+                  </div>
+                </div>
+
+                {/* {props.userData?.me?.id == props.el.user.id ? (
                 <div className="edit-button">
                   {editComment ? (
                     <>
@@ -113,11 +114,12 @@ function Comments(props: CommentsProps) {
               ) : (
                 ''
               )} */}
+              </div>
             </div>
+            {props.el.has_replies ? <RiArrowDropDownLine /> : ''}
           </div>
-          <RiArrowDropDownLine />
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }

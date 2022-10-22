@@ -12,6 +12,7 @@ import { Post } from './entitiy/post.entity';
 import { normalize } from '../../common/utils/normalize';
 import { SearchPostRequest } from './dto/searchPost.dto';
 import { PostLike } from '../postLike/postLike.entity';
+import { getSinglePostRequest } from './dto/getPost.dto';
 
 @Injectable()
 export class PostService {
@@ -32,7 +33,7 @@ export class PostService {
     private readonly entityManager: EntityManager,
   ) {}
 
-  async findPost(args) {
+  async findPost(args: getSinglePostRequest) {
     const postLikeRepo = await this.PostLikeRepository;
 
     const findPost = await this.PostRepository.createQueryBuilder('post')

@@ -101,6 +101,7 @@ type Query {
   getAllTags: [Tag!]!
   getAllTagsCount: [Tag!]!
   getAllUser: GetUsersInfoResponse
+  getCommentsById(input: getCommentId!): [Comments!]
   getTextSearchPosts(input: searchPost!): [Post!]!
   getTrendingPosts: [Post!]!
   getUser(input: getUserInfo!): GetUserInfoResponse!
@@ -185,6 +186,10 @@ input editPost {
   thumbnail: String
   title: String
   user_id: Int
+}
+
+input getCommentId {
+  post_id: Int
 }
 
 input getPost {

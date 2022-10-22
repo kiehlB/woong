@@ -4,6 +4,7 @@ import { GET_Post } from '../../../lib/graphql/post';
 
 export default function useGetPost() {
   const router = useRouter();
+
   const {
     loading: singlePostLoding,
     error: singlePostError,

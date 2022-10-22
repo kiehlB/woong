@@ -13,7 +13,7 @@ export type CommentFormProps = {
   textOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   findId: React.FormEvent<HTMLFormElement>;
   userData: any;
-  onClickNotify: (e: any) => void;
+  onClickNotify: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClickNotifyCheckString: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
@@ -29,9 +29,8 @@ function CommentForm(props: CommentFormProps) {
     props.onClickNotify(e);
   };
 
-  console.log(props?.userData?.whoAmI);
   return (
-    <div>
+    <div className="pb-4">
       <form
         onSubmit={e => {
           props?.userData?.whoAmI

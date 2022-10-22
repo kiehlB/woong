@@ -26,7 +26,7 @@ function SubCommentsForm(props: SubCommentsFormProps) {
   };
 
   return (
-    <div>
+    <div className="mb-8">
       <form
         onSubmit={e => {
           props.userData.whoAmI ? e.preventDefault() : props.onClickNotify(e);
@@ -37,14 +37,16 @@ function SubCommentsForm(props: SubCommentsFormProps) {
         }}>
         <TextareaAutosize
           rows={4}
-          className="commentsInput"
+          className="border border-[#F1F3F5] min-h-[6.125rem] text-[#212529] leading-relaxed  w-full px-[1.5rem] pt-[1rem] mb-[1.5rem] rounded"
           placeholder="댓글을 입력하세요"
           name="text"
           value={SubText}
           onChange={subTextOnChange}
         />
-        <div className="button-flex">
-          <Button className=" text-white bg-regal-sky">댓글 작성</Button>
+        <div className="flex justify-end">
+          <button className="ml-8 cursor-pointer whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-bold text-white bg-regal-sky">
+            댓글 작성
+          </button>
         </div>
       </form>
     </div>

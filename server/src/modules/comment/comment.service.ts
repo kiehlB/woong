@@ -16,10 +16,18 @@ export class CommentService {
     private readonly commentRepository: Repository<Comments>,
   ) {}
 
-  async getUsersByIds(ids) {
-    return this.commentRepository.find({
-      where: { post_id: In(ids) },
-    });
+  async getCommentsByIds(ids) {
+    const findComments = await this.commentRepository
+      .createQueryBuilder('comments')
+      .where('comments.post_id = :post_id', {
+        post_id: parseInt(ids.post_id),
+      })
+      .leftJoinAndSelect('comments.user', 'user')
+
+      .orderBy('comments.created_at', 'ASC')
+      .getMany();
+
+    return findComments;
   }
 
   async findAll() {
@@ -29,8 +37,6 @@ export class CommentService {
       .createQueryBuilder('comments')
       .leftJoinAndSelect('comments.user', 'user')
       .getMany();
-
-    console.log(findComments);
 
     return findComments;
   }
