@@ -15,12 +15,10 @@ import PostTitle from '../../components/post/PostTitle';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { DateTime } from 'luxon';
-
 import useGetTags from '../../components/tags/hooks/usegetTags';
 import useTrendingPosts from '../../components/post/hooks/useTrendingPosts';
 import Link from 'next/link';
 import { LayoutSection } from '../../components/sections/layout-sesction';
-import media from '../../lib/styles/media';
 import {
   BigPostGridItem,
   MediumPostGridItem,

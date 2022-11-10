@@ -1,6 +1,4 @@
 import * as React from 'react';
-import useInputs from '../../lib/hooks/useInputs';
-import EyeIcon from '../../static/svg/eye-icon';
 import AuthSocialButtonGroup from './AuthSocialButtonGroup';
 import { motion } from 'framer-motion';
 import { ApolloError } from '@apollo/client';

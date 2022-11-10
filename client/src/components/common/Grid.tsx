@@ -43,7 +43,7 @@ const Grid = React.forwardRef<HTMLElement, GridProps>(function Grid(
     </Tag>
   );
 });
-// md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6
+
 function GridLines() {
   return (
     <div className="pointer-events-none fixed inset-0 z-10 select-none">

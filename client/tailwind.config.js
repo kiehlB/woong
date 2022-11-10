@@ -21,6 +21,7 @@ module.exports = {
       mxl: { max: '1200px' },
       mlg: { max: '1024px' },
       mmd: { max: '768px' },
+      mml: { max: '468px' },
       msm: { max: '375px' },
       mmax: { max: '1919px' },
     },

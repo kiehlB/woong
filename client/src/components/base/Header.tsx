@@ -114,7 +114,7 @@ function Header({ tag, loading }: HeaderProps) {
   };
 
   return (
-    <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between py-3">
+    <div className="flex items-center h-16 bg-[#0B0E11] text-white pr-6 pl-6 justify-between py-3 w-full">
       <div className="flex items-center">
         <div className="lg:hidden ">
           <Sidebar />
@@ -192,7 +192,7 @@ function Header({ tag, loading }: HeaderProps) {
         <form className="search" onSubmit={handleSubmit}>
           <input
             type="text"
-            className="input"
+            className="input border-2 focus:w-[12rem] mmd:focus:w-[8rem]"
             value={Postsearch}
             onChange={handleChange}
           />

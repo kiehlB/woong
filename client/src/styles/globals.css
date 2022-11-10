@@ -12,6 +12,7 @@ body,
 html #root {
   padding: 0;
   margin: 0;
+  
 }
 
 .gridImg{
@@ -114,12 +115,13 @@ a:active .icon-arrow {
 .search {
   position: relative;
   margin: 0 auto;
+   
   
 }
 .input:focus {
-  width: 200px;
-  height: 40px;
   
+  height: 40px;
+ 
   border-radius: 40px;
   padding-left: 20px;
   padding-right: 40px;
