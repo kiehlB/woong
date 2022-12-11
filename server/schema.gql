@@ -15,6 +15,11 @@ type Comments {
   user_id: Int
 }
 
+type CoreResponse {
+  error: String
+  ok: Boolean!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -43,6 +48,7 @@ type Mutation {
   createPost(input: createPost!): Post!
   editComment(input: editComment!): Comments!
   editPost(input: editPost!): Post!
+  logout: CoreResponse!
   postLike(input: postLike!): PostLike!
   postUnLike(input: postLike!): PostLike!
   register(input: registerInput!): RegisterResponse!

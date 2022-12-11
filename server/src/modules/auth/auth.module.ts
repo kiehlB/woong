@@ -7,7 +7,7 @@ import { GithubStrategy } from './strategies/github.strategy';
 import { AuthController } from './auth.controller';
 import { AuthResolver } from './auth.resolver';
 import { LocalStrategy } from './strategies/local.strategy';
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { ExpriedJwtStrategy, JwtStrategy } from './strategies/jwt.strategy';
 import { AuthService } from './auth.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -35,6 +35,7 @@ const jwtModule = JwtModule.register({
     AuthService,
     GithubStrategy,
     AuthResolver,
+    ExpriedJwtStrategy,
     LocalStrategy,
     JwtStrategy,
   ],

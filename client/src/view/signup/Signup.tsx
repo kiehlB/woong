@@ -28,7 +28,7 @@ function SignUp({}: SignUpProps) {
       />
 
       <PageTemplate tag={getTagsData} loading={getTagsLoading}>
-        <main className="flex flex-col justify-center mt-24 mb-12 mxl:mt-20 mxl:mb-20 ">
+        <main className="flex flex-col justify-center mt-24 mb-12 mxl:mt-20 mxl:mb-20">
           <Auth
             svg="register.svg"
             form={

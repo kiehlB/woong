@@ -6,7 +6,6 @@ import { GET_Post } from '../../../lib/graphql/post';
 export default function useGetCommentsById() {
   const router = useRouter();
 
-  console.log(parseInt(router.query.id as any));
   const {
     loading: getcommentByIdLoding,
     error: getcommentByIdError,

@@ -85,4 +85,11 @@ export class AuthService {
     };
     return this.jwtService.sign(payload);
   }
+
+  async logout(user: TokenUser) {
+    const payload = {
+      ...user,
+    };
+    return this.jwtService.sign(payload);
+  }
 }

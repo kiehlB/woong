@@ -40,8 +40,8 @@ export function parseHeadings(html: string) {
   const headings = elements.filter(el => el.tagName.match(/H([1-3])/));
 
   const headingsInfo = headings.map(heading => ({
-    id: heading.id,
-    text: heading.textContent,
+    id: heading.textContent,
+    title: heading.textContent,
     level: parseInt(heading.tagName.replace('H', ''), 10),
   }));
 

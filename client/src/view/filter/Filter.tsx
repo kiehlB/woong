@@ -122,16 +122,17 @@ function Filter({ data }: FilterProps) {
     setPage(value);
   };
 
-  console.log(resultFilter.length);
-
   return (
     <PageTemplate tag={getTagsData}>
       <div className="font-Cabin bg-[#fafafa]">
+        <div className="pt-12 max-w-6xl mx-auto w-full">
+          <div className="text-[#14151A] font-semibold text-[2rem] leading-10">
+            Topics at Post
+          </div>
+        </div>
+
         <Collapse isActive={isExpanded}>
           <LayoutSection cn="pt-12 p-4 mb-6 mxl:pb-12 relative">
-            <div className="mb-8 text-[#14151A] font-semibold text-[2rem] leading-10">
-              Topics at Post
-            </div>
             <div>
               <div className="grid grid-cols-2">
                 <div className="col-span-1 mxl:col-span-2">
@@ -200,7 +201,10 @@ function Filter({ data }: FilterProps) {
           </LayoutSection>
         </Collapse>
 
-        <div className="bg-[#F5F5F5] flex p-4 w-full mmd:text-[0.8rem]">
+        <div
+          className={clsx('bg-[#F5F5F5] flex p-4 w-full mmd:text-[0.8rem] mt-8', {
+            'mt-12': isExpanded == false,
+          })}>
           <LayoutSection cn="flex px-4 justify-between items-center mmd:flex-wrap">
             <div className="mr-6 leading-10">Layout</div>
             <svg

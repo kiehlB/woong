@@ -39,7 +39,6 @@ function Comments(props: CommentsProps) {
     setEditSubComment(!editSubComment);
   };
 
-  console.log(props.el);
   return (
     <>
       <div className="mt-8">

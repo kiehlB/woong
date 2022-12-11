@@ -26,7 +26,6 @@ export default function usePostLike() {
           variables: { input: { id: parseInt(router.query.id as any) } },
         });
 
-        console.log(postLike);
         proxy.writeQuery({
           query: GET_Post,
           variables: { input: { id: parseInt(router.query.id as any) } },

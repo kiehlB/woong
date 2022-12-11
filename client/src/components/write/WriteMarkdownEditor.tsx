@@ -185,6 +185,9 @@ const WriteMarkdownEditor = props => {
           lang="ko"
           autoFocus={true}
           setOptions={{
+            attributesWhitelist: {
+              all: 'style|data-.+', // Apply to all tags
+            },
             height: '1000',
             buttonList: [
               ['undo', 'redo'],

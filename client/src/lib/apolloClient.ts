@@ -25,6 +25,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
+console.log(process.env.NEXT_PUBLIC_URL);
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_URL, // Server URL (must be absolute)
   credentials: 'include', // Additional fetch() options like `credentials` or `headers`
