@@ -33,10 +33,6 @@ import SubComments from '../../components/comment/SubComments';
 import SubCommentsForm from '../../components/comment/SubCommentsForm';
 import useIsPostLike from '../../components/post/hooks/useIsPostLike';
 import useGetCommentsById from './hooks/useGetCommentsById';
-import PostViewerProvider, {
-  usePostViewerDispatch,
-} from '../../components/post/PostViewerContext';
-import PostToc from '../../components/post/PostToc';
 import { parseHeadings } from '../../lib/heading';
 import PostContent from '../../components/post/PostContent';
 
@@ -162,7 +158,7 @@ function Post({}: PostProps) {
   const { EditCommentSubmit } = useEditComment();
   const [editText, setEditText] = useState('');
   const [subEditText, subSetEditText] = useState('');
-  const dispatch = usePostViewerDispatch();
+ 
 
   const { getUser: userData, loading: userLoding , error } = useGetUser();
 

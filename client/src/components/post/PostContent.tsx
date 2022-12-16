@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { parseHeadings } from '../../lib/heading';
-import { usePostViewerDispatch } from './PostViewerContext';
-
+ 
 export interface PostContentProps {
   body: string;
 }
 
 const PostContent: React.FC<PostContentProps> = ({ body }) => {
-  const dispatch = usePostViewerDispatch();
-
+ 
  
 
   return (
