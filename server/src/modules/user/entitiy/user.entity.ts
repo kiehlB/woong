@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
-
+import jwt from 'jsonwebtoken';
 import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcryptjs';
 import { UserProfile } from 'src/modules/profile/profile.entity';
@@ -57,6 +57,10 @@ export class User {
   @UpdateDateColumn()
   updated_at!: Date;
 
+  @Field((type) => String, { nullable: true })
+  @Column({ length: 200, nullable: true })
+  refreshToken: string;
+
   static async comparePassword(PreEncryptionPassword, EncryptedPassword) {
     return bcrypt.compareSync(PreEncryptionPassword, EncryptedPassword);
   }
@@ -76,3 +80,5 @@ export class User {
     return await bcrypt.compare(plainPassword, this.password);
   }
 }
+
+ 

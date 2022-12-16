@@ -164,7 +164,12 @@ function Post({}: PostProps) {
   const [subEditText, subSetEditText] = useState('');
   const dispatch = usePostViewerDispatch();
 
-  const { getUser: userData, loading: userLoding } = useGetUser();
+  const { getUser: userData, loading: userLoding , error } = useGetUser();
+
+  if(!userData){
+  return    console.log(error)
+  }
+  
 
   const { getcommentByIdLoding, getcommentByIdError, getcommentByIdData } =
     useGetCommentsById();
@@ -235,7 +240,6 @@ function Post({}: PostProps) {
   const prefetched = useRef(false);
 
   return (
-    <PostViewerProvider>
       <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
         <div className="flex">
           <div className="flex justify-center w-[30%] h-full">
@@ -417,7 +421,6 @@ function Post({}: PostProps) {
         }
       `}</style> */}
       </PageTemplate>
-    </PostViewerProvider>
   );
 }
 

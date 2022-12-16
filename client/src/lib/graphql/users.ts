@@ -41,11 +41,23 @@ export const meQuery = gql`
   }
 `;
 
-// export const logoutMutation = gql`
-//   mutation Logout {
-//     logout
-//   }
-// `;
+export const logoutMutation = gql`
+  mutation Logout {
+    logout{
+      ok
+    }
+  }
+`;
+
+
+export const refreshMutation = gql`
+  mutation Refresh {
+    refresh{
+      ok
+    }
+  }
+`;
+
 
 // export const followMutation = gql`
 //   mutation FollowUser($username: String!) {

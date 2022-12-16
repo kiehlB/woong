@@ -9,7 +9,7 @@ import authConfig from './auth-config.development.template';
 import { UserService } from '../user/users.service';
 import { TokenUser } from 'src/decorator/auth-user.decorator';
 import { Repository } from 'typeorm';
-
+import * as jwt from 'jsonwebtoken'
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../user/entitiy/user.entity';
 import SocialUser from './entitiy/socialUser.entity';
@@ -80,10 +80,13 @@ export class AuthService {
   }
 
   async signin(user: TokenUser) {
-    const payload = {
-      ...user,
-    };
-    return this.jwtService.sign(payload);
+
+    const accessToken =  this.jwtService.sign( {"id": user.id}, { expiresIn: '2h' });
+    const refreshToken = this.jwtService.sign(user, { expiresIn: '15d' });
+
+    await this.userService.updateRefreshToken(user.id, refreshToken);
+
+    return  accessToken;
   }
 
   async logout(user: TokenUser) {
@@ -92,4 +95,21 @@ export class AuthService {
     };
     return this.jwtService.sign(payload);
   }
+  async verifyRefresh(id: number) {
+    const user = await this.userService.findById(id);
+
+    if (!user) return false;
+    const result = jwt.verify(user.refreshToken ,  process.env.jwtSecretKey)
+
+
+    return Boolean(result);
+  }
+  
 }
+
+
+
+ 
+
+ 
+

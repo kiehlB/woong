@@ -90,6 +90,14 @@ export class UserService {
     });
   }
 
+  async updateRefreshToken(id: number, refreshToken: string | null) {
+    return await this.userRepository.update(id, {
+     refreshToken
+    });
+  }
+
+  
+
   async updateById(id, user): Promise<User> {
     const oldUser = await this.userRepository.findOne(id);
     delete user.password;
@@ -120,4 +128,5 @@ export class UserService {
 
     return user;
   }
+  
 }

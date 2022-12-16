@@ -1,20 +1,23 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { meQuery, registerMutation } from '../../../lib/graphql/users';
+import { logoutMutation, meQuery, registerMutation } from '../../../lib/graphql/users';
 import useForm from '../../../lib/hooks/useForm';
 import { WhoAmIQuery } from '../../../types/apolloComponent';
+import Router from 'next/router'
 
 export default function useGetUser() {
   const { data: getUser, loading, error } = useQuery<WhoAmIQuery>(meQuery);
+  const router = useRouter();
+    const [logout, { client }] =  useMutation(logoutMutation);
 
-  //   const [logout, { client }] = useLogoutMutation();
 
   const logoutButton = async () => {
-    // if (!loading && getUser.me) {
-    //   await logout();
-    //   setAccessToken('');
-    //   await client!.resetStore();
-    // }
+    if (!loading && getUser?.whoAmI?.ok) {
+      await logout();
+      Router.reload();
+      
+      // await client!.resetStore();
+    }
   };
 
   return {

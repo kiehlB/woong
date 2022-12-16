@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 export interface PostTocProps {}
 
 const Headings = ({ headings, activeId }) => {
-  console.log(headings);
+  
   return (
     <ul>
       {headings?.map(heading => (
@@ -133,8 +133,7 @@ const TableOfContents = () => {
   const { toc } = usePostViewerState();
   useIntersectionObserver(setActiveId);
 
-  console.log(nestedHeadings);
-  console.log(toc?.slice);
+ 
   return (
     <nav aria-label="Table of contents">
       <Headings headings={toc?.slice(1)} activeId={activeId} />
@@ -157,7 +156,7 @@ const PostToc: React.FC<PostTocProps> = () => {
   // >(null);
 
   // const updateTocPositions = useCallback(() => {
-  //   console.log('hello');
+ 
   //   if (!toc) return;
 
   //   const scrollTop = getScrollTop();

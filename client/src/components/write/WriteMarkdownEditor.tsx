@@ -15,6 +15,7 @@ import Tags from '../tags/Tags';
 import { ArrowButton, ArrowLink } from '../common/ArrowButton';
 import { GET_Posts } from '../../lib/graphql/post';
 import { useQuery } from '@apollo/client';
+import useGetUser from '../auth/hooks/useWhoAmI';
 
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,
@@ -30,6 +31,9 @@ const WriteMarkdownEditor = props => {
   const [previewSource, setPreviewSource] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
   const { loading, error, data, fetchMore, networkStatus } = useQuery(GET_Posts, {});
+  const { getUser: userData, loading: userLoding , error: getUserError } = useGetUser();
+
+  console.log(userData)
 
   let d = data;
   useEffect(() => {
@@ -219,7 +223,7 @@ const WriteMarkdownEditor = props => {
           </div>
 
           <div onClick={e => handleSubmit(e)}>
-            <LinkButton className="text-zinc-600  ">완료</LinkButton>
+            <LinkButton className="text-zinc-600">완료</LinkButton>
           </div>
         </div>
       </div>

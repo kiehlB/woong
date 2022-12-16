@@ -20,6 +20,7 @@ import { setPostSearch } from '../../store/post';
 import { useRouter } from 'next/router';
 
 import Sidebar from '../sidebar/Sidebar';
+import useLogout from './hooks/useLogout';
 
 export type Tags = {
   id: number;
@@ -72,7 +73,8 @@ export const MenuItems: MainTag[] = [
 ];
 
 function Header({ tag, loading }: HeaderProps) {
-  const { loading: userLoading, error, getUser, logoutButton } = useGetUser();
+  const { loading: userLoading, error, getUser , logoutButton} = useGetUser();
+  // const { logoutButton} =  useLogout();
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -226,16 +228,33 @@ function Header({ tag, loading }: HeaderProps) {
             </div>
           </a>
         </Link>
-        <Link href="/signup">
+
+        
+        {!loading && getUser?.whoAmI?.ok ?  ''  : <Link href="/signup">
           <div
             className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
             style={{
               backgroundImage:
                 'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',
             }}>
-            {!loading && getUser?.whoAmI?.ok ? 'Logout' : 'Register'}
+             Register
           </div>
-        </Link>
+        </Link> }
+       
+
+
+    {!loading && !getUser?.whoAmI?.ok ? '' : <div
+            className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
+            style={{
+              backgroundImage:
+                'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',
+            }}>
+       <div onClick={logoutButton}>Logout</div>
+          </div>
+         }
+         
+ 
+
         <div className="ml-8 mxl:hidden">
           <MdOutlineDarkMode size="25" />
         </div>

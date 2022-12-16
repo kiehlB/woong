@@ -9,11 +9,7 @@ export interface PostContentProps {
 const PostContent: React.FC<PostContentProps> = ({ body }) => {
   const dispatch = usePostViewerDispatch();
 
-  useEffect(() => {
-    if (!body) return;
-    const toc = parseHeadings(body);
-    dispatch({ type: 'SET_TOC', payload: toc });
-  }, [dispatch, body]);
+ 
 
   return (
     <div>

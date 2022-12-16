@@ -51,6 +51,7 @@ type Mutation {
   logout: CoreResponse!
   postLike(input: postLike!): PostLike!
   postUnLike(input: postLike!): PostLike!
+  refresh: CoreResponse!
   register(input: registerInput!): RegisterResponse!
   removeComment(input: deleteComment!): Boolean!
   removePost(input: removePost!): Boolean!
@@ -140,6 +141,7 @@ type User {
   id: ID!
   password: String
   profile: UserProfile
+  refreshToken: String
   updated_at: DateTime
   username: String
 }

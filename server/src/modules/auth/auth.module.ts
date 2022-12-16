@@ -17,16 +17,15 @@ import SocialUser from './entitiy/socialUser.entity';
 
 dotenv.config();
 
-const passModule = PassportModule.register({ defaultStrategy: 'jwt' });
+ 
 const jwtModule = JwtModule.register({
-  secret: process.env.jwtSecretKey,
-  signOptions: { expiresIn: '4h' },
+  secret: process.env.jwtSecretKey
 });
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([SocialUser, User]),
-    passModule,
+    
     jwtModule,
     forwardRef(() => UserModule),
   ],
@@ -37,8 +36,8 @@ const jwtModule = JwtModule.register({
     AuthResolver,
     ExpriedJwtStrategy,
     LocalStrategy,
-    JwtStrategy,
+    JwtStrategy
   ],
-  exports: [passModule, jwtModule],
+  exports: [jwtModule],
 })
 export class AuthModule {}

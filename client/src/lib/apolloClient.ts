@@ -5,27 +5,42 @@ import {
   InMemoryCache,
   from,
   NormalizedCacheObject,
+  fromPromise
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { concatPagination } from '@apollo/client/utilities';
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
+import { refreshMutation } from './graphql/users';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors?.forEach(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-      ),
+const TOKEN_EXPIRED = 'jwt expired';
+const NO_AUTH_TOKEN = 'No auth token' 
+
+
+const linkOnError = onError(({ graphQLErrors, operation, forward, response }) => {
+  if (!apolloClient) return;
+  console.log(graphQLErrors?.[0].message)
+  if (graphQLErrors?.[0].message === TOKEN_EXPIRED) {
+    const refresh = fromPromise(
+      apolloClient
+        .mutate({ mutation: refreshMutation })
+        .then(({ data }) => {
+          console.log(data)
+          return data.refresh.ok;
+        }),
     );
-  if (networkError) console.log(`[Network error]: ${networkError}`);
+
+    return refresh.filter((result) => result).flatMap(() => forward(operation));
+  }
+  if (graphQLErrors?.[0].message === NO_AUTH_TOKEN) {
+    response.errors = null;
+  }
 });
 
-console.log(process.env.NEXT_PUBLIC_URL);
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_URL, // Server URL (must be absolute)
   credentials: 'include', // Additional fetch() options like `credentials` or `headers`
@@ -34,7 +49,7 @@ const httpLink = new HttpLink({
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: from([httpLink]),
+    link: from([linkOnError,httpLink]),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {

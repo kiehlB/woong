@@ -8,6 +8,8 @@ import { AuthService } from './auth.service';
 import { ExpriedJwtAuthGuard } from './guards/graphql-passport-auth.guard';
 import { CoreResponse } from 'src/common/dto/coreResponse.dto';
 
+const EXPIRED = 1000 * 60 * 60 * 24 * 7;
+
 @Resolver()
 export class AuthResolver {
   constructor(private authService: AuthService) {}
@@ -21,13 +23,39 @@ export class AuthResolver {
   ) {
     const token = await this.authService.signin({ id: user.id });
 
+    console.log(token)
+
     res.cookie('auth-cookie', token, {
-      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      maxAge: EXPIRED,
       secure: false,
       httpOnly: false,
     });
 
     return { token };
+  }
+
+
+  @UseGuards(ExpriedJwtAuthGuard)
+  @Mutation((returns) => CoreResponse)
+  async refresh(
+    @CurrentUser() user: TokenUser,
+    @Context() { res }: { res: Response },
+  ): Promise<CoreResponse> {
+    
+    if (!user) return { ok: false };
+
+    const isVerifiedToken = await this.authService.verifyRefresh(user.id);
+
+    if (!isVerifiedToken) return { ok: false, error: 'expried refresh token' };
+
+    const accessToken = await this.authService.signin({ id: user.id });
+    res.cookie('auth-cookie', accessToken, {
+      httpOnly: false,
+      secure: false,
+      maxAge:EXPIRED
+    });
+
+    return { ok: true };
   }
 
   @UseGuards(ExpriedJwtAuthGuard)
