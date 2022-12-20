@@ -73,7 +73,7 @@ export const MenuItems: MainTag[] = [
 ];
 
 function Header({ tag, loading }: HeaderProps) {
-  const { loading: userLoading, error, getUser , logoutButton} = useGetUser();
+  const { loading: userLoading, error, getUser, logoutButton } = useGetUser();
   // const { logoutButton} =  useLogout();
 
   const router = useRouter();
@@ -206,11 +206,22 @@ function Header({ tag, loading }: HeaderProps) {
         </form>
 
         {!loading && getUser?.whoAmI?.ok ? (
-          <Link href="/write">
-            <div className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-white border px-4 rounded h-8 font-Cabin font-medium ">
-              <div>Write</div>
+          <>
+            <Link href="/write">
+              <div className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-white border px-4 rounded h-8 font-Cabin font-medium ">
+                <div>Write</div>
+              </div>
+            </Link>
+
+            <div
+              className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
+              style={{
+                backgroundImage:
+                  'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',
+              }}>
+              <div onClick={logoutButton}>Logout</div>
             </div>
-          </Link>
+          </>
         ) : (
           ''
         )}
@@ -229,31 +240,20 @@ function Header({ tag, loading }: HeaderProps) {
           </a>
         </Link>
 
-        
-        {!loading && getUser?.whoAmI?.ok ?  ''  : <Link href="/signup">
-          <div
-            className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
-            style={{
-              backgroundImage:
-                'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',
-            }}>
-             Register
-          </div>
-        </Link> }
-       
-
-
-    {!loading && !getUser?.whoAmI?.ok ? '' : <div
-            className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
-            style={{
-              backgroundImage:
-                'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',
-            }}>
-       <div onClick={logoutButton}>Logout</div>
-          </div>
-         }
-         
- 
+        {!loading && getUser?.whoAmI?.ok ? (
+          ''
+        ) : (
+          <Link href="/signup">
+            <div
+              className="flex cursor-pointer text-sm items-center ml-8 mxl:hidden text-black px-4  rounded h-8  font-Cabin  font-medium "
+              style={{
+                backgroundImage:
+                  'linear-gradient(rgb(248, 209, 47) 0%, rgb(240, 185, 11) 100%)',
+              }}>
+              Register
+            </div>
+          </Link>
+        )}
 
         <div className="ml-8 mxl:hidden">
           <MdOutlineDarkMode size="25" />
