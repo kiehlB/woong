@@ -31,9 +31,7 @@ const WriteMarkdownEditor = props => {
   const [previewSource, setPreviewSource] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
   const { loading, error, data, fetchMore, networkStatus } = useQuery(GET_Posts, {});
-  const { getUser: userData, loading: userLoding , error: getUserError } = useGetUser();
-
-  console.log(userData)
+  const { getUser: userData, loading: userLoding, error: getUserError } = useGetUser();
 
   let d = data;
   useEffect(() => {

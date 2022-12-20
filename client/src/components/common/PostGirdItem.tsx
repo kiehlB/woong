@@ -97,16 +97,14 @@ function MediumPostGridItem({ thumbnail, title, createAt, difficulty }) {
         />
       )}
 
-      <div className="text-[#fff] px-4 pt-2 break-all py-24">
-        <div className=" text-[1.3rem] leading-8 font-semibold break-all line-clamp-2 mmd:text-[2rem]">
+      <div className="flex text-white bg-[#2b2f36] flex-col justify-center px-4 rounded-lg py-4 mmd:py-8">
+        <div className="text-[1.5rem] mmd:text-[2rem] leading-10 font-semibold  break-all line-clamp-3">
           {title}
         </div>
-      </div>
-      <div className="absolute bottom-0 p-4">
-        <div className="text-[#F0B90B] font-normal mt-2 mb-2 text-[1rem] mmd:text-[1.25rem]">
+        <div className="text-[#F0B90B] font-normal mt-2 mb-4 text-[1.25rem]">
           {DateTime.fromISO(createAt).toLocaleString().slice(0, -1)}
         </div>
-        <div className="text-[#fff] flex items-center text-sm">
+        <div className="flex items-center">
           <Dot css={difficulty} /> {difficulty}
         </div>
       </div>

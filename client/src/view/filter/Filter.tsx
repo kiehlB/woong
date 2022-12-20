@@ -17,6 +17,7 @@ import useCollapse from 'react-collapsed';
 import clsx from 'clsx';
 import { LayoutSection } from '../../components/sections/layout-sesction';
 import useGetPosts from '../../components/post/hooks/useAllPosts';
+import PostFilterList from '../../components/post/PostFilterList';
 
 export type FilterProps = {
   data: any;
@@ -44,10 +45,6 @@ function Collapse({ isActive, children }) {
 export function getAllData() {
   const { loading, error, data, fetchMore, networkStatus } = useGetPosts();
 
-  if (loading) {
-    return <div>Loading</div>;
-  }
-
   return <Filter data={data} />;
 }
 
@@ -65,6 +62,10 @@ function Filter({ data }: FilterProps) {
   const dispatch = useDispatch();
 
   const globalTag = useSelector((state: RootState) => (state as any)?.tag?.tag);
+
+  const search = useSelector((state: RootState) => (state as any)?.post?.search);
+
+  console.log(search);
 
   const filteredArray =
     data?.findAllPost.filter(e =>
@@ -121,6 +122,10 @@ function Filter({ data }: FilterProps) {
   const handleChange = (value: number) => {
     setPage(value);
   };
+
+  const filterData = isFilterdArray?.filter(e =>
+    e?.title?.toLowerCase().includes(search),
+  );
 
   return (
     <PageTemplate tag={getTagsData}>
@@ -272,10 +277,16 @@ function Filter({ data }: FilterProps) {
           <div className="pt-[3.5rem]">
             <div>
               Articles (
-              {resultFilter.length == 0 ? isFilterdArray.length : resultFilter.length})
+              {filterData
+                ? filterData.length
+                : resultFilter.length == 0
+                ? isFilterdArray.length
+                : resultFilter.length}
+              )
             </div>
             <div className="pt-8 w-full">
-              <PostList
+              <PostFilterList
+                filter={search}
                 data={
                   resultFilter.length == 0
                     ? isFilterdArray.slice((page - 1) * 9, page * 9)
