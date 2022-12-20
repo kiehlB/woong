@@ -39,14 +39,14 @@ function SignUp({}: SignUpProps) {
                 authError={registerError}
                 auth="Register"
                 isRegister="Sign up for an entity account?"
-                linkTo="Log In"
+                linkTo="/signin"
               />
             }
             bottom={
               <h2 className="mt-6 text-[#707A8A] text-[0.875rem] font-medium font-Cabin">
                 Already registered?
                 <span className="text-[#C99400] ml-1 cursor-pointer">
-                  <Link href="/signin"> Log In </Link>
+                  <Link href="/signin"> Log In</Link>
                 </span>
               </h2>
             }

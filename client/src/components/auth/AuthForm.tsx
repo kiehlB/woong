@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ApolloError } from '@apollo/client';
 import LabelInput from '../common/LabelInput';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 export interface inputProps {
   password: string | number | readonly string[];

@@ -23,8 +23,6 @@ export class AuthResolver {
   ) {
     const token = await this.authService.signin({ id: user.id });
 
-    console.log(token)
-
     res.cookie('auth-cookie', token, {
       maxAge: EXPIRED,
       secure: false,
@@ -34,14 +32,12 @@ export class AuthResolver {
     return { token };
   }
 
-
   @UseGuards(ExpriedJwtAuthGuard)
   @Mutation((returns) => CoreResponse)
   async refresh(
     @CurrentUser() user: TokenUser,
     @Context() { res }: { res: Response },
   ): Promise<CoreResponse> {
-    
     if (!user) return { ok: false };
 
     const isVerifiedToken = await this.authService.verifyRefresh(user.id);
@@ -52,7 +48,7 @@ export class AuthResolver {
     res.cookie('auth-cookie', accessToken, {
       httpOnly: false,
       secure: false,
-      maxAge:EXPIRED
+      maxAge: EXPIRED,
     });
 
     return { ok: true };

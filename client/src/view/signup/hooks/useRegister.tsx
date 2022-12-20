@@ -16,7 +16,7 @@ export default function useRegister() {
     registerMutation,
     {
       onCompleted() {
-        router.push('/');
+        router.push('/signin');
       },
     },
   );

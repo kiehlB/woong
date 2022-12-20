@@ -61,7 +61,7 @@ function Signin({}: SigninProps) {
                 authError={loginError}
                 auth="Login"
                 isRegister="Register now"
-                linkTo=""
+                linkTo="/"
               />
             }
             bottom={
