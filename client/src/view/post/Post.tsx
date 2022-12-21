@@ -158,14 +158,8 @@ function Post({}: PostProps) {
   const { EditCommentSubmit } = useEditComment();
   const [editText, setEditText] = useState('');
   const [subEditText, subSetEditText] = useState('');
- 
 
-  const { getUser: userData, loading: userLoding , error } = useGetUser();
-
-  if(!userData){
-  return    console.log(error)
-  }
-  
+  const { getUser: userData, loading: userLoding, error } = useGetUser();
 
   const { getcommentByIdLoding, getcommentByIdError, getcommentByIdData } =
     useGetCommentsById();
@@ -236,178 +230,178 @@ function Post({}: PostProps) {
   const prefetched = useRef(false);
 
   return (
-      <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
-        <div className="flex">
-          <div className="flex justify-center w-[30%] h-full">
-            <div className="w-full">
-              <div className="fixed flex flex-col w-[30%] h-[40%]">
-                <ToastContainer align={'right'} />
-                <Realistic
-                  isLikeBoolean={is_post_like}
-                  LikehandleSubmit={LikehandleSubmit}
-                  UnlikehandleSubmit={UnlikehandleSubmit}
-                  onClickNotify={onClickNotify}
-                  userData={userData}
-                />
-                <div className="mt-2 text-center">
-                  {singlePostData?.findSinglePost?.post_likes.length}
-                </div>
+    <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
+      <div className="flex">
+        <div className="flex justify-center w-[30%] h-full">
+          <div className="w-full">
+            <div className="fixed flex flex-col w-[30%] h-[40%]">
+              <ToastContainer align={'right'} />
+              <Realistic
+                isLikeBoolean={is_post_like}
+                LikehandleSubmit={LikehandleSubmit}
+                UnlikehandleSubmit={UnlikehandleSubmit}
+                onClickNotify={onClickNotify}
+                userData={userData}
+              />
+              <div className="mt-2 text-center">
+                {singlePostData?.findSinglePost?.post_likes.length}
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-[40%] mx-auto justify-center mt-4">
-            <div className="flex w-full mb-8">
-              {singlePostData?.findSinglePost?.posts_tags?.map(e => (
-                <HeaderTopicItem
-                  name={e.tag.name_filtered}
-                  size="small"
-                  key={e.id}
-                  disable={true}
-                />
-              ))}
+        </div>
+        <div className="flex flex-col w-[40%] mx-auto justify-center mt-4">
+          <div className="flex w-full mb-8">
+            {singlePostData?.findSinglePost?.posts_tags?.map(e => (
+              <HeaderTopicItem
+                name={e.tag.name_filtered}
+                size="small"
+                key={e.id}
+                disable={true}
+              />
+            ))}
+          </div>
+
+          {singlePostData?.findSinglePost?.thumbnail ? (
+            <img
+              src={singlePostData?.findSinglePost?.thumbnail}
+              alt="thumbnail"
+              className="rounded-lg"
+            />
+          ) : (
+            ''
+          )}
+
+          <div className="text-[#474D57]  text-[1.25rem] mt-6 mb-8">
+            {`Home >  Articles >`}
+            {singlePostData?.findSinglePost?.title}
+          </div>
+          <h1 className="text-5xl text-[#14151A] font-medium font-Roboto tracking-normal mb-4">
+            {singlePostData?.findSinglePost?.title}
+          </h1>
+
+          <div className="flex items-center">
+            <Button
+              size="small"
+              difficulty={singlePostData?.findSinglePost?.difficulty}
+              className="h-9 flex justify-center items-center rounded-lg text-[#474D57]">
+              <Dot css={singlePostData?.findSinglePost.difficulty} />
+              {singlePostData?.findSinglePost.difficulty}
+            </Button>
+            <div className="text-[#76808F] ml-4 font-medium font-Roboto">
+              {DateTime.fromISO(singlePostData?.findSinglePost?.created_at)
+                .toLocaleString()
+                .slice(0, -1)}
+            </div>
+          </div>
+          <PostContent body={singlePostData?.findSinglePost?.body} />
+        </div>
+
+        <div className="flex justify-center w-[30%]">
+          <div className="fixed mt-[10%]">{/* <Face /> */}</div>
+        </div>
+      </div>
+
+      <div className="w-[40%] mx-auto mt-24 mb-12">
+        <CommentForm
+          findId={findId}
+          handleSubmit={handleSubmit}
+          getText={getText}
+          textOnChange={textOnChange}
+          userData={userData}
+          onClickNotify={onClickNotify}
+          onClickNotifyCheckString={onClickNotifyCheckString}
+        />
+
+        {comments?.map((el, id) => (
+          <>
+            <div key={id}>
+              <Comments
+                el={el}
+                editComment={editComment}
+                editText={editText}
+                editCommentInput={editCommentInput}
+                toggle={toggle}
+                on={on}
+                EditCommentSubmit={EditCommentSubmit}
+                fixComment={fixComment}
+                DeleteCommentSubmit={DeleteCommentSubmit}
+                setIsopen={setIsopen}
+                userData={userData}
+                onClickNotifyCheckString={onClickNotifyCheckString}
+              />
             </div>
 
-            {singlePostData?.findSinglePost?.thumbnail ? (
-              <img
-                src={singlePostData?.findSinglePost?.thumbnail}
-                alt="thumbnail"
-                className="rounded-lg"
-              />
+            {el.id == isOpen && on ? (
+              <>
+                <SubCommentsForm
+                  userData={userData}
+                  subHandleSubmit={subHandleSubmit}
+                  findData={findData}
+                  onClickNotify={onClickNotify}
+                  isOpen={isOpen}
+                  on={on}
+                  toggle={toggle}
+                  onClickNotifyCheckString={onClickNotifyCheckString}
+                />
+              </>
             ) : (
               ''
             )}
-
-            <div className="text-[#474D57]  text-[1.25rem] mt-6 mb-8">
-              {`Home >  Articles >`}
-              {singlePostData?.findSinglePost?.title}
-            </div>
-            <h1 className="text-5xl text-[#14151A] font-medium font-Roboto tracking-normal mb-4">
-              {singlePostData?.findSinglePost?.title}
-            </h1>
-
-            <div className="flex items-center">
-              <Button
-                size="small"
-                difficulty={singlePostData?.findSinglePost?.difficulty}
-                className="h-9 flex justify-center items-center rounded-lg text-[#474D57]">
-                <Dot css={singlePostData?.findSinglePost.difficulty} />
-                {singlePostData?.findSinglePost.difficulty}
-              </Button>
-              <div className="text-[#76808F] ml-4 font-medium font-Roboto">
-                {DateTime.fromISO(singlePostData?.findSinglePost?.created_at)
-                  .toLocaleString()
-                  .slice(0, -1)}
-              </div>
-            </div>
-            <PostContent body={singlePostData?.findSinglePost?.body} />
-          </div>
-
-          <div className="flex justify-center w-[30%]">
-            <div className="fixed mt-[10%]">{/* <Face /> */}</div>
-          </div>
-        </div>
-
-        <div className="w-[40%] mx-auto mt-24 mb-12">
-          <CommentForm
-            findId={findId}
-            handleSubmit={handleSubmit}
-            getText={getText}
-            textOnChange={textOnChange}
-            userData={userData}
-            onClickNotify={onClickNotify}
-            onClickNotifyCheckString={onClickNotifyCheckString}
-          />
-
-          {comments?.map((el, id) => (
-            <>
-              <div key={id}>
-                <Comments
+            {comments?.map((ele, id) => (
+              <>
+                <SubComments
+                  ele={ele}
                   el={el}
-                  editComment={editComment}
-                  editText={editText}
-                  editCommentInput={editCommentInput}
-                  toggle={toggle}
-                  on={on}
+                  subEditText={subEditText}
+                  editSubCommentInput={editSubCommentInput}
                   EditCommentSubmit={EditCommentSubmit}
-                  fixComment={fixComment}
                   DeleteCommentSubmit={DeleteCommentSubmit}
-                  setIsopen={setIsopen}
                   userData={userData}
+                  findData={findData}
                   onClickNotifyCheckString={onClickNotifyCheckString}
                 />
-              </div>
-
-              {el.id == isOpen && on ? (
-                <>
-                  <SubCommentsForm
-                    userData={userData}
-                    subHandleSubmit={subHandleSubmit}
-                    findData={findData}
-                    onClickNotify={onClickNotify}
-                    isOpen={isOpen}
-                    on={on}
-                    toggle={toggle}
-                    onClickNotifyCheckString={onClickNotifyCheckString}
-                  />
-                </>
-              ) : (
-                ''
-              )}
-              {comments?.map((ele, id) => (
-                <>
-                  <SubComments
-                    ele={ele}
-                    el={el}
-                    subEditText={subEditText}
-                    editSubCommentInput={editSubCommentInput}
-                    EditCommentSubmit={EditCommentSubmit}
-                    DeleteCommentSubmit={DeleteCommentSubmit}
-                    userData={userData}
-                    findData={findData}
-                    onClickNotifyCheckString={onClickNotifyCheckString}
-                  />
-                </>
-              ))}
-            </>
-          ))}
+              </>
+            ))}
+          </>
+        ))}
+      </div>
+      {getCcrollTop > 0 ? (
+        <div className="z-[100] h-full">
+          <AnimatePresence initial={false}>
+            <svg className="progress-icon" viewBox="0 0 60 60">
+              <motion.path
+                fill="none"
+                strokeWidth="5"
+                stroke="blue"
+                initial={{ opacity: 0 }}
+                strokeDasharray="0 1"
+                d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
+                animate={{ opacity: 1 }}
+                style={{
+                  pathLength,
+                  rotate: 90,
+                  translateX: 3,
+                  translateY: 3,
+                  scaleX: -1, // Reverse direction of line animation
+                }}
+              />
+              <motion.path
+                fill="none"
+                strokeWidth="5"
+                stroke="black"
+                d="M14,26 L 22,33 L 35,16"
+                initial={{ opacity: 0 }}
+                strokeDasharray="0 1"
+                animate={{ pathLength: isComplete ? 1 : 0 }}
+              />
+            </svg>
+          </AnimatePresence>
         </div>
-        {getCcrollTop > 0 ? (
-          <div className="z-[100] h-full">
-            <AnimatePresence initial={false}>
-              <svg className="progress-icon" viewBox="0 0 60 60">
-                <motion.path
-                  fill="none"
-                  strokeWidth="5"
-                  stroke="blue"
-                  initial={{ opacity: 0 }}
-                  strokeDasharray="0 1"
-                  d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
-                  animate={{ opacity: 1 }}
-                  style={{
-                    pathLength,
-                    rotate: 90,
-                    translateX: 3,
-                    translateY: 3,
-                    scaleX: -1, // Reverse direction of line animation
-                  }}
-                />
-                <motion.path
-                  fill="none"
-                  strokeWidth="5"
-                  stroke="black"
-                  d="M14,26 L 22,33 L 35,16"
-                  initial={{ opacity: 0 }}
-                  strokeDasharray="0 1"
-                  animate={{ pathLength: isComplete ? 1 : 0 }}
-                />
-              </svg>
-            </AnimatePresence>
-          </div>
-        ) : (
-          ''
-        )}
+      ) : (
+        ''
+      )}
 
-        {/* <style global jsx>{`
+      {/* <style global jsx>{`
         html,
         body,
         body > div:first-child,
@@ -416,7 +410,7 @@ function Post({}: PostProps) {
           height: 100%;
         }
       `}</style> */}
-      </PageTemplate>
+    </PageTemplate>
   );
 }
 

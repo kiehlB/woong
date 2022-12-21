@@ -56,6 +56,15 @@ function Filter({ data }: FilterProps) {
     data: getTagsData,
   } = useGetTags();
 
+  const setTag = getTagsData?.getAllTags.reduce(function (acc, current) {
+    if (
+      acc.findIndex(({ name_filtered }) => name_filtered === current.name_filtered) === -1
+    ) {
+      acc.push(current);
+    }
+    return acc;
+  }, []);
+
   const [isExpanded, setExpanded] = useState(true);
   const [page, setPage] = useState(1);
 
@@ -146,7 +155,7 @@ function Filter({ data }: FilterProps) {
                   </h2>
                   <div className="flex flex-wrap mx-auto">
                     <TagList
-                      tag={getTagsData?.getAllTags}
+                      tag={setTag}
                       globalTag={globalTag}
                       toStore={tagGet}
                       size="superSmall"
