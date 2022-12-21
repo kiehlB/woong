@@ -232,7 +232,7 @@ function Post({}: PostProps) {
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
       <div className="flex">
-        <div className="flex justify-center w-[30%] h-full mxl:w-[20%] mmd:w-[10%]">
+        <div className="flex justify-center w-[30%] h-full g20%] mmd:w-[10%]">
           <div className="w-full mxl:hidden">
             <div className="fixed flex flex-col w-[30%] h-[40%]">
               <ToastContainer align={'right'} />
@@ -249,8 +249,8 @@ function Post({}: PostProps) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-[40%] mx-auto justify-center mt-4 mxl:w-[60%] mmd:w-[80%]">
-          <div className="flex w-full mb-8">
+        <div className="flex flex-col w-[40%] mx-auto justify-center mt-4 mxl:w-[60%] mmd:w-[80%] flex-wrap">
+          <div className="flex w-full mb-8 flex-wrap">
             {singlePostData?.findSinglePost?.posts_tags?.map(e => (
               <HeaderTopicItem
                 name={e.tag.name_filtered}

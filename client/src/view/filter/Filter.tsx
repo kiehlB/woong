@@ -140,7 +140,7 @@ function Filter({ data }: FilterProps) {
     <PageTemplate tag={getTagsData}>
       <div className="font-Cabin bg-[#fafafa]">
         <div className="pt-12 max-w-6xl mx-auto w-full">
-          <div className="text-[#14151A] font-semibold text-[2rem] leading-10">
+          <div className="text-[#14151A] font-semibold text-[2rem] leading-10 px-5">
             Topics at Post
           </div>
         </div>
@@ -166,7 +166,7 @@ function Filter({ data }: FilterProps) {
                 </div>
 
                 <section className="col-span-1 mxl:col-span-2 mxl:mt-8">
-                  <h2 className="mb-4 ">Difficulty</h2>
+                  <h2 className="mb-4">Difficulty</h2>
 
                   <div className="flex flex-wrap h-20 text-black">
                     <div>

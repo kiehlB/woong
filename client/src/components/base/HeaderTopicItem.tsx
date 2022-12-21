@@ -41,7 +41,7 @@ function HeaderTopicItem({ name, size, handleCheck, disable }: HeaderTopicItemPr
       </a>
     </Link>
   );
-  return <>{r}</>;
+  return <div>{r}</div>;
 }
 
 export default HeaderTopicItem;
