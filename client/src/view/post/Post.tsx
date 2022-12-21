@@ -232,8 +232,8 @@ function Post({}: PostProps) {
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
       <div className="flex">
-        <div className="flex justify-center w-[30%] h-full">
-          <div className="w-full">
+        <div className="flex justify-center w-[30%] h-full mxl:w-[20%] mmd:w-[10%]">
+          <div className="w-full mxl:hidden">
             <div className="fixed flex flex-col w-[30%] h-[40%]">
               <ToastContainer align={'right'} />
               <Realistic
@@ -249,7 +249,7 @@ function Post({}: PostProps) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-[40%] mx-auto justify-center mt-4">
+        <div className="flex flex-col w-[40%] mx-auto justify-center mt-4 mxl:w-[60%] mmd:w-[80%]">
           <div className="flex w-full mb-8">
             {singlePostData?.findSinglePost?.posts_tags?.map(e => (
               <HeaderTopicItem
@@ -296,12 +296,12 @@ function Post({}: PostProps) {
           <PostContent body={singlePostData?.findSinglePost?.body} />
         </div>
 
-        <div className="flex justify-center w-[30%]">
+        <div className="flex justify-center w-[30%] mxl:w-[20%] mmd:w-[10%]">
           <div className="fixed mt-[10%]">{/* <Face /> */}</div>
         </div>
       </div>
 
-      <div className="w-[40%] mx-auto mt-24 mb-12">
+      <div className="w-[40%] mx-auto mt-24 mb-12 mxl:w-[60%] mmd:w-[80%]">
         <CommentForm
           findId={findId}
           handleSubmit={handleSubmit}
