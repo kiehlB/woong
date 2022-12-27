@@ -231,6 +231,7 @@ function Post({}: PostProps) {
 
   const prefetched = useRef(false);
 
+  console.log(findData);
   return (
     <PageTemplate tag={getTagsData} loading={!getTagsData || getTagsLoading}>
       <div className="flex">
@@ -276,9 +277,13 @@ function Post({}: PostProps) {
           <div className="text-[#474D57]  text-[1.25rem] mt-6 mb-8 flex">
             {`Home >  Articles >`}
             {singlePostData?.findSinglePost?.title}
-            <div className="flex ml-auto text-lg">
-              <div onClick={e => DeletePostSubmit(e, findId)}>삭제</div>
-            </div>
+            {userData?.whoAmI?.user?.id === findData?.user_id ? (
+              <div className="flex ml-auto text-lg">
+                <div onClick={e => DeletePostSubmit(e, findId)}>삭제</div>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
           <h1 className="text-5xl text-[#14151A] font-medium font-Roboto tracking-normal mb-4">
             {singlePostData?.findSinglePost?.title}

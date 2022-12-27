@@ -73,12 +73,16 @@ export const GET_Post = gql`
       title
       liked
       difficulty
+      user_id
       thumbnail
       created_at
       post_likes {
         id
         post_id
         user_id
+      }
+      user {
+        id
       }
 
       posts_tags {
