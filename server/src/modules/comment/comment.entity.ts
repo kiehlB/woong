@@ -14,7 +14,7 @@ import { Post } from '../post/entitiy/post.entity';
 @ObjectType()
 @Entity()
 export class Comments {
-  @Field(() => ID)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -59,7 +59,7 @@ export class Comments {
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
-  @ManyToOne((type) => Post, (post) => post.comments)
+  @ManyToOne((type) => Post, (post) => post.comments, { onDelete: 'CASCADE' })
   post: Post;
 
   subcomments!: Comments[];

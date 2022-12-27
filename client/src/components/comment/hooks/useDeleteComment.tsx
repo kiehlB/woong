@@ -1,30 +1,41 @@
 import { useMutation } from '@apollo/client';
-
+import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { GET_Comments, Remove_Comment,   } from '../../../lib/graphql/comment';
+import {
+  GET_Comments,
+  GET_CommentsById,
+  Remove_Comment,
+} from '../../../lib/graphql/comment';
 
 export default function useDeleteComment() {
+  const router = useRouter();
   const [deleteComment, { error }] = useMutation(Remove_Comment);
   const DeleteCommentSubmit = async (e, commentId) => {
     e.preventDefault();
 
     deleteComment({
       variables: {
-        id: commentId,
+        input: {
+          comment_id: parseInt(commentId),
+        },
       },
       update: (proxy, { data: deleteComment }) => {
         const data = proxy.readQuery({
-          query: GET_Comments,
+          query: GET_CommentsById,
+          variables: { input: { post_id: parseInt(router.query.id as any) } },
         });
 
-        const findData = (data as any).comment.find(el => el.id == commentId);
-        const findIndex = (data as any).comment.indexOf(findData);
+        console.log(data);
+        console.log(commentId);
 
         proxy.writeQuery({
-          query: GET_Comments,
+          query: GET_CommentsById,
+          variables: { input: { post_id: parseInt(router.query.id as any) } },
           data: {
             ...(data as any),
-            comment: [...(data as any).comment.filter(el => el.id !== commentId)],
+            getCommentsById: [
+              ...(data as any).getCommentsById.filter(el => el.id !== commentId),
+            ],
           },
         });
       },

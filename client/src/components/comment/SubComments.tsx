@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import TextareaAutosize from 'react-textarea-autosize';
+import { checkEmpty } from '../../lib/utils';
 
 export type SubCommentsProps = {
   ele: any;
@@ -36,7 +37,7 @@ function SubComments(props: SubCommentsProps) {
         {props.ele.reply && props.el.id == props.ele.reply ? (
           <div className="border  border-[#F1F3F5] w-[95%] ml-auto mb-4">
             <div>
-              <div className="flex mt-4  ml-4">
+              <div className="flex mt-4 ml-4">
                 <img
                   src="https://secure.gravatar.com/avatar/ceb84f6559c4206c1a588e0e31c0a048?s=22&d=mm&r=g"
                   style={{ borderRadius: '50%', marginRight: '.5rem' }}
@@ -48,9 +49,16 @@ function SubComments(props: SubCommentsProps) {
               </div>
 
               {editSubComment ? (
-                <div>
-                  <form>
-                    <div className=" pt-4">
+                <div className="">
+                  <form
+                    onSubmit={e => {
+                      checkEmpty(subEditText)
+                        ? props.onClickNotifyCheckString(e)
+                        : props.EditCommentSubmit(e, props.ele.id, subEditText);
+
+                      checkEmpty(subEditText) ? e.preventDefault() : fixSubComment();
+                    }}>
+                    <div className="pt-4">
                       <TextareaAutosize
                         rows={4}
                         name="text"
@@ -60,12 +68,20 @@ function SubComments(props: SubCommentsProps) {
                       />
                     </div>
                   </form>
+                  <div className="flex">
+                    <div
+                      onClick={e => {
+                        checkEmpty(subEditText)
+                          ? props.onClickNotifyCheckString(e)
+                          : props.EditCommentSubmit(e, props.ele.id, subEditText);
 
-                  <div className="comments-edit-wrapper">
-                    <div className="sub-color" style={{ paddingBottom: '.5rem' }}>
+                        checkEmpty(subEditText) ? e.preventDefault() : fixSubComment();
+                      }}
+                      className="flex ml-auto"
+                      style={{ paddingBottom: '.5rem' }}>
                       수정
                     </div>
-                    <div className="sub-color" onClick={fixSubComment}>
+                    <div className="mr-2 ml-2" onClick={fixSubComment}>
                       취소
                     </div>
                   </div>
@@ -75,14 +91,13 @@ function SubComments(props: SubCommentsProps) {
                   <div className="ml-4" style={{ whiteSpace: 'pre-line' }}>
                     {props.ele.text}
                   </div>
-
-                  {props.userData?.whoAmI?.id == props.ele.user.id ? (
-                    <div className="comments-edit-wrapper">
-                      <div onClick={fixSubComment} className="sub-color">
+                  {props.userData?.whoAmI?.user?.id == props.ele.user.id ? (
+                    <div className="flex w-full">
+                      <div onClick={fixSubComment} className="ml-auto">
                         수정
                       </div>
                       <div
-                        className="sub-color"
+                        className="mr-2 ml-2"
                         onClick={e => props.DeleteCommentSubmit(e, props.ele.id)}>
                         삭제
                       </div>

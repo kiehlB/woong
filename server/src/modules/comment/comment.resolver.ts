@@ -67,6 +67,7 @@ export class CommentResolver {
     @CurrentUser() user: TokenUser,
     @Args('input') comment: EditCommentRequest,
   ): Promise<Comments> {
+    console.log(comment);
     return this.commentService.edit(user, comment);
   }
 

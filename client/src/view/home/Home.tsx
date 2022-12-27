@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { useSelector } from 'react-redux';
 import PageTemplate from '../../components/base/PageTemplate';
 import SvgCard from '../../components/common/SvgCard';
@@ -12,9 +12,7 @@ import TagList from '../../components/tags/TagList';
 import { getMainTag } from '../../store/tag';
 import PostList from '../../components/post/PostList';
 import PostTitle from '../../components/post/PostTitle';
-import styled from 'styled-components';
 import { useState } from 'react';
-import { DateTime } from 'luxon';
 import useGetTags from '../../components/tags/hooks/usegetTags';
 import useTrendingPosts from '../../components/post/hooks/useTrendingPosts';
 import Link from 'next/link';
@@ -90,17 +88,15 @@ const Home: NextPage = () => {
           <div className="py-14 px-4">
             <SvgCard
               svg={<Swing />}
-              text="#black"
+              css="bg-[#FAFAFA] text-black"
               title={`learning about web & Security`}
               subtitle={`Build your web knowledge, complete quizzes`}
-              bg="#FAFAFA"
             />
           </div>
 
           <div className="py-14 px-4">
             <SvgCard
-              bg="#2b2f36"
-              text="#fff"
+              css="bg-[#2b2f36] text-white"
               svg={<Bicycle />}
               title={`Keep an eye on Glossaries`}
               subtitle={`Learn more about glossaries`}

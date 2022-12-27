@@ -6,14 +6,13 @@ export type SvgCardProps = {
   svg: React.ReactNode;
   title: string;
   subtitle: string;
-  bg: string;
-  text: string;
+  css: string;
 };
 
-function SvgCard({ svg, title, subtitle, bg, text }: SvgCardProps) {
+function SvgCard({ svg, title, subtitle, css }: SvgCardProps) {
   return (
     <div
-      className={`grid grid-cols-2 gap-8 items-center py-4 rounded-2xl bg-[${bg}] text-[${text}]  mmd:grid-cols-1`}>
+      className={`grid grid-cols-2 gap-8 items-center py-4 rounded-2xl mmd:grid-cols-1 ${css}`}>
       <div className="col-span-1 py-8 pl-[2.5rem]">
         <div className={`font-medium font-Roboto leading-10 text-[2.5rem]`}>{title}</div>
         <div className="text-[1.25rem] leading-7 mt-4 ">{subtitle}</div>

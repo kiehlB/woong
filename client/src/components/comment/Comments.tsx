@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import TextareaAutosize from 'react-textarea-autosize';
+import { checkEmpty } from '../../lib/utils';
 
 export type CommentsProps = {
   el?: any;
@@ -53,8 +54,42 @@ function Comments(props: CommentsProps) {
                   style={{ borderRadius: '50%', marginRight: '.5rem' }}
                 />
                 <div>{props.el.user?.email}</div>
+                {props.userData?.whoAmI?.user?.id == props.el.user.id ? (
+                  <div className="flex ml-auto">
+                    {editComment ? (
+                      <>
+                        <div
+                          className="z-10"
+                          onClick={e => {
+                            checkEmpty(editText)
+                              ? props.onClickNotifyCheckString(e as any)
+                              : props.EditCommentSubmit(e, props.el.id, editText);
+                            checkEmpty(editText) ? e.preventDefault() : fixComment();
+                          }}>
+                          수정
+                        </div>
+                        <div onClick={fixComment} className="z-10">
+                          취소
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex">
+                        <div onClick={fixComment} className="z-10 pr-2">
+                          수정
+                        </div>
+                        <div
+                          className="z-10"
+                          onClick={e => props.DeleteCommentSubmit(e, props.el.id)}>
+                          삭제
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
-              <div className="comments-text z-10 mb-2">
+              <div className="comments-text z-10 mb-2 py-1">
                 {editComment ? (
                   <form>
                     <TextareaAutosize
@@ -87,32 +122,6 @@ function Comments(props: CommentsProps) {
                     댓글 작성
                   </div>
                 </div>
-
-                {/* {props.userData?.me?.id == props.el.user.id ? (
-                <div className="edit-button">
-                  {editComment ? (
-                    <>
-                      <div className="z-10">수정</div>
-                      <div onClick={fixComment} className="z-10">
-                        취소
-                      </div>
-                    </>
-                  ) : (
-                    <div className="edit-button">
-                      <div onClick={fixComment} className="z-10">
-                        수정
-                      </div>
-                      <div
-                        className="z-10"
-                        onClick={e => props.DeleteCommentSubmit(e, props.el.id)}>
-                        삭제
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                ''
-              )} */}
               </div>
             </div>
             {props.el.has_replies ? <RiArrowDropDownLine /> : ''}

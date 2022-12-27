@@ -26,7 +26,7 @@ function SubCommentsForm(props: SubCommentsFormProps) {
   };
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 mt-4">
       <form
         onSubmit={e => {
           props.userData.whoAmI ? e.preventDefault() : props.onClickNotify(e);

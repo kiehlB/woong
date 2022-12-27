@@ -6,7 +6,7 @@ type Comments {
   created_at: DateTime!
   deleted: Boolean
   has_replies: Boolean
-  id: ID!
+  id: Int!
   post_id: Int
   reply: Int
   text: String
@@ -219,7 +219,6 @@ input registerInput {
 
 input removePost {
   post_id: Int
-  user_id: Int
 }
 
 input searchPost {

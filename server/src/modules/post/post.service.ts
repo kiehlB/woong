@@ -312,7 +312,7 @@ export class PostService {
       throw new ApolloError('Post not found');
     }
 
-    if (post.user_id !== user.id) {
+    if (findPost.user_id !== user.id) {
       throw new ApolloError('This is not your post');
     }
 

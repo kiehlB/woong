@@ -15,6 +15,12 @@ export const IsPost_Like = gql`
   }
 `;
 
+export const Remove_Post = gql`
+  mutation RemovePost($input: removePost!) {
+    removePost(input: $input)
+  }
+`;
+
 export const Post_Like = gql`
   mutation PostLike($input: postLike!) {
     postLike(input: $input) {

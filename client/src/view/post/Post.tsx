@@ -35,6 +35,7 @@ import useIsPostLike from '../../components/post/hooks/useIsPostLike';
 import useGetCommentsById from './hooks/useGetCommentsById';
 import { parseHeadings } from '../../lib/heading';
 import PostContent from '../../components/post/PostContent';
+import useDeletePost from '../../components/post/hooks/useDeletePost';
 
 const canvasStyles = {
   pointerEvents: 'none',
@@ -158,6 +159,7 @@ function Post({}: PostProps) {
   const { EditCommentSubmit } = useEditComment();
   const [editText, setEditText] = useState('');
   const [subEditText, subSetEditText] = useState('');
+  const { DeletePostSubmit } = useDeletePost();
 
   const { getUser: userData, loading: userLoding, error } = useGetUser();
 
@@ -271,9 +273,12 @@ function Post({}: PostProps) {
             ''
           )}
 
-          <div className="text-[#474D57]  text-[1.25rem] mt-6 mb-8">
+          <div className="text-[#474D57]  text-[1.25rem] mt-6 mb-8 flex">
             {`Home >  Articles >`}
             {singlePostData?.findSinglePost?.title}
+            <div className="flex ml-auto text-lg">
+              <div onClick={e => DeletePostSubmit(e, findId)}>삭제</div>
+            </div>
           </div>
           <h1 className="text-5xl text-[#14151A] font-medium font-Roboto tracking-normal mb-4">
             {singlePostData?.findSinglePost?.title}

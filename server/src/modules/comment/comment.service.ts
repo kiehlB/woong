@@ -23,8 +23,7 @@ export class CommentService {
         post_id: parseInt(ids.post_id),
       })
       .leftJoinAndSelect('comments.user', 'user')
-
-      .orderBy('comments.created_at', 'ASC')
+      .orderBy('comments.id', 'ASC')
       .getMany();
 
     return findComments;
@@ -36,6 +35,7 @@ export class CommentService {
     const findComments = await this.commentRepository
       .createQueryBuilder('comments')
       .leftJoinAndSelect('comments.user', 'user')
+      .orderBy('comments.id', 'ASC')
       .getMany();
 
     return findComments;
@@ -109,7 +109,7 @@ export class CommentService {
 
     const findcomment = await getComment.findOne({
       where: {
-        id: commentBody.id,
+        id: commentBody.comment_id,
       },
     });
 
@@ -127,7 +127,7 @@ export class CommentService {
 
     const findcomment = await getComment.findOne({
       where: {
-        id: commentBody.id,
+        id: commentBody.comment_id,
       },
     });
 
